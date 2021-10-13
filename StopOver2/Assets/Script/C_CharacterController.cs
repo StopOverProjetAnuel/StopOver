@@ -129,7 +129,7 @@ public class C_CharacterController : MonoBehaviour
                 if (Input.GetAxis("Vertical") > 0)
                 {
                     rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * Input.GetAxis("Vertical") * speedForward, transform.position);
-
+                    arrayPropulsPoint[0].transform.eulerAngles = new Vector3(15f, 0f, 0f);
                 }
                 if (Input.GetAxis("Vertical") < 0)
                 {
