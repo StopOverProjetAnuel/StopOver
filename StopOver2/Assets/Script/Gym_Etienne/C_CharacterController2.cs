@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class C_CharacterController2 : MonoBehaviour
 {
+
     public float length;
     public float strengthRight;
     public float strengthLeft;
-    public float dampening;
+    
     public GameObject groundCheck;
     public GameObject centerOfMass;
     public float distanceNoControl;
-
+    public float dampening;
+    public float dampeningRotate;
     public float firstAccelerationForward;
     public float speedForward;
     public float speedBoost;
@@ -43,6 +46,8 @@ public class C_CharacterController2 : MonoBehaviour
     private float currentStrengthRight;
     private float currentStrengthLeft;
 
+    private float currentDampening;
+
     private float t1;
     private float currentSpeedForward;
     private bool firstAccelerationDone;
@@ -53,8 +58,11 @@ public class C_CharacterController2 : MonoBehaviour
     private bool accelerationBoostDone;
     private bool canBoost = true;
     private float t3;
+    private float t4;
 
     private GameObject currentFaceHit;
+
+    private bool isRotate;
     // Start is called before the first frame update
     void Start()
     {
@@ -85,7 +93,12 @@ public class C_CharacterController2 : MonoBehaviour
         else
         {
             Debug.Log("c'est pas ok");
-            rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotationZ;
+            rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            SceneManager.LoadScene("S_Gym_Etienne");
         }
     }
 
@@ -93,8 +106,8 @@ public class C_CharacterController2 : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && canBoost)
         {
-            boostActiv = true;
             boost.Play();
+            boostActiv = true;            
             Boost();
         }
         else if(!canBoost || Input.GetKeyUp(KeyCode.Space))
@@ -117,13 +130,14 @@ public class C_CharacterController2 : MonoBehaviour
             t3 += Time.deltaTime / durasionBoost;
         }else if (!boostActiv)
         {
-            if (t3 >= 1f)
+            
+            if (t4 >= 1f)
             {
                 //Debug.Log("Boost Regen");
-                t3 = 0;
+                t4 = 0;
                 canBoost = true;
             }
-            t3 += Time.deltaTime / cooldownBoost;
+            t4 += Time.deltaTime / cooldownBoost;
         }
 
         RaycastHit groundHit;
@@ -177,13 +191,25 @@ public class C_CharacterController2 : MonoBehaviour
         {
             currentStrengthLeft = strengthLeft / divisionStrength;
             currentStrengthRight = strengthRight;
+            if (isRotate)
+            {
+                currentDampening = dampeningRotate;
+                isRotate = false;
+            }
         }else if(Input.GetAxis("Horizontal") > 0)
         {
             currentStrengthRight = strengthRight /divisionStrength;
             currentStrengthLeft = strengthLeft;
+            if (isRotate)
+            {
+                currentDampening = dampeningRotate;
+                isRotate = false;
+            }
         }
         else
         {
+            currentDampening = dampening;
+            isRotate = true;
             currentStrengthRight = strengthRight;
             currentStrengthLeft = strengthLeft;
         }
@@ -195,7 +221,7 @@ public class C_CharacterController2 : MonoBehaviour
             {             
 
                 float forceAmount = 0;
-                forceAmount = currentStrengthRight * (length - hit.distance) / length + (dampening *(lastHitDistRight * hit.distance));
+                forceAmount = currentStrengthRight * (length - hit.distance) / length + (currentDampening *(lastHitDistRight * hit.distance));
                 rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointRight.transform.position);
 
                 lastHitDistRight = hit.distance;
@@ -214,7 +240,7 @@ public class C_CharacterController2 : MonoBehaviour
             {
 
                 float forceAmount = 0;
-                forceAmount = currentStrengthLeft * (length - hit.distance) / length + (dampening * (lastHitDistLeft * hit.distance));
+                forceAmount = currentStrengthLeft * (length - hit.distance) / length + (currentDampening * (lastHitDistLeft * hit.distance));
                 rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointLeft.transform.position);
 
                 lastHitDistLeft = hit.distance;
@@ -231,6 +257,7 @@ public class C_CharacterController2 : MonoBehaviour
 
     private void Boost()
     {
+       
         //Debug.Log("Boooooost!!!");
         if (!firstImpulsBoostDone)
         {
