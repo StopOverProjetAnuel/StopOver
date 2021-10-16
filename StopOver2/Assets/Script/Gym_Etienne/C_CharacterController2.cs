@@ -5,63 +5,98 @@ using UnityEngine.SceneManagement;
 
 public class C_CharacterController2 : MonoBehaviour
 {
-
+    [Header("Gameobject")]
+    [Space]
+    public GameObject groundCheck;
+    public GameObject centerOfMass;
+    [Space]
+    [Header("Parametre Propulseur")]
+    [Space]
+    public GameObject[] arrayPropulseurPointRight;
+    public GameObject[] arrayPropulseurPointLeft;
+    [Space]
     public float length;
     public float strengthRight;
     public float strengthLeft;
-    
-    public GameObject groundCheck;
-    public GameObject centerOfMass;
-    public float distanceNoControl;
+    public float divisionStrength;
+    [Space]
+    [Header("Parametre Dampening")]
+    [Space]
     public float dampening;
     public float dampeningRotate;
+    [Space]
+    [Header("Parametre General")]
+    [Space]
+    public float distanceNoControl;
+    [Space]
+    [Header("Parametre Forward")]
+    [Space]
     public float firstAccelerationForward;
-    public float speedForward;
-    public float speedBoost;
-    public float speedBackward;
-    public float speedSize;
     public float timeFirstAcceleration;
+    public float speedForward;
+    [Space]
+    [Header("Parametre Backward")]
+    [Space]
+    public float speedBackward;
+    [Space]
+    [Header("Parametre Size")]
+    [Space]
+    public float speedSize;
+    [Space]
+    [Header("Parametre Boost")]
+    [Space]
+    public float boostForce;
+    public float speedBoost;
     public float timeAccelerationBoost;
     public float durasionBoost;
-    public float cooldownBoost;
-
-    public float boostForce;
-
-    public float divisionStrength;
-
-    public GameObject[] arrayPropulseurPointRight;
-    public GameObject[] arrayPropulseurPointLeft;
-
+    public float maxCooldownBoost;
+    public float minCooldownBoost;
+    public float surchaufeCooldownBoost;
+    public ParticleSystem fxBoost;
+    public ParticleSystem fxBoostColdownDone;
+    public ParticleSystem fxBoostSurchaufe;
+    public Material matSurchaufeMoteur;
+    [Space]
+    [Header("Check Ground")]
+    [Space]
     public float radiuSpherecast;
     public float maxDistanceSphereCast;
     public LayerMask layerGround;
 
-    public ParticleSystem boost;
 
     private Rigidbody rb;
     private float lastHitDistRight;
     private float lastHitDistLeft;
-    private float distanceGroundChara;
 
     private float currentStrengthRight;
     private float currentStrengthLeft;
 
+    private float distanceGroundChara;
+
     private float currentDampening;
 
-    private float t1;
     private float currentSpeedForward;
     private bool firstAccelerationDone;
+    private float t1;
 
+    private float currentColdownBoost;
+    private float timeUsBoost;
     private bool boostActiv;
     private bool firstImpulsBoostDone;
-    private float t2;
     private bool accelerationBoostDone;
     private bool canBoost = true;
+    private bool boostColdown;
+    private bool surchaufe;
+    private bool transitionBoostToCooldown;
+    private bool surchaufeMax;
+    private Vector4 matMoteurCurrentSurchaufe;
+
+    private float t2;
     private float t3;
     private float t4;
+    
 
     private GameObject currentFaceHit;
-
     private bool isRotate;
     // Start is called before the first frame update
     void Start()
@@ -73,73 +108,126 @@ public class C_CharacterController2 : MonoBehaviour
         rb.centerOfMass = centerOfMass.transform.localPosition;
 
         Cursor.lockState = CursorLockMode.Locked;
+        matSurchaufeMoteur.color = Color.white;
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("speed =" + currentSpeedForward);
-        //Debug.Log("firstAccel = " + firstAccelerationDone);
-        //Debug.Log("t = " + t);
-
+        #region Check Ground + Constraint RB
         RaycastHit faceHit;
         if(Physics.SphereCast(centerOfMass.transform.position, radiuSpherecast , transform.TransformDirection(-Vector3.up),out faceHit, maxDistanceSphereCast, layerGround))
         {
             currentFaceHit = faceHit.transform.gameObject;
-            rb.constraints = RigidbodyConstraints.None;
-            Debug.Log(currentFaceHit.name);
-            Debug.Log("C'est ok");
+            rb.constraints = RigidbodyConstraints.None;            
         }
         else
         {
-            Debug.Log("c'est pas ok");
             rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
+        #endregion
 
+        #region Reset Scene
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SceneManager.LoadScene("S_Gym_Etienne");
         }
+        #endregion
     }
 
     public void FixedUpdate()
     {
+        #region Lunch / Stop Boost
+        
         if (Input.GetKey(KeyCode.Space) && canBoost)
         {
-            boost.Play();
-            boostActiv = true;            
-            Boost();
+            fxBoost.Play();
+            boostActiv = true;
+            transitionBoostToCooldown = true;
+            Boost(true);
+            timeUsBoost += Time.deltaTime / durasionBoost;
         }
-        else if(!canBoost || Input.GetKeyUp(KeyCode.Space))
+        else //if(!canBoost)
         {
-            boost.Stop();
-            //Debug.Log("Boost over");
-            canBoost = false;
-            boostActiv = false;
+            Boost(false);
+            fxBoost.Stop();
             firstImpulsBoostDone = false;
             accelerationBoostDone = false;
+            boostActiv = false;
         }
+        #endregion
 
+        #region Boost duration Acceleration / Cooldown Boost
         if (boostActiv)
         {
             if(t3 >= 1f)
             {
                 t3 = 0;
+                surchaufe = true;
+                surchaufeMax = true;
+                fxBoostSurchaufe.Play();
+                boostColdown = true;
+                matMoteurCurrentSurchaufe = matSurchaufeMoteur.color;
                 canBoost = false;
+                boostActiv = false;
             }
             t3 += Time.deltaTime / durasionBoost;
-        }else if (!boostActiv)
+            if (!surchaufe)
+            {
+                matSurchaufeMoteur.color = Color.Lerp(Color.white, Color.red, timeUsBoost);
+                matMoteurCurrentSurchaufe = matSurchaufeMoteur.color;
+            }
+        }
+        else if(!boostActiv && transitionBoostToCooldown)
+        {
+            t3 = 0;
+            surchaufe = true;
+            boostColdown = true;
+            matMoteurCurrentSurchaufe = matSurchaufeMoteur.color;
+            canBoost = false;
+            transitionBoostToCooldown = false;
+        }         
+        
+        
+        if (boostColdown)
         {
             
             if (t4 >= 1f)
             {
-                //Debug.Log("Boost Regen");
                 t4 = 0;
+                surchaufe = false;
+                surchaufeMax = false;
+                fxBoostColdownDone.Play();
+                timeUsBoost = 0;
                 canBoost = true;
+                boostColdown = false;
+                
             }
-            t4 += Time.deltaTime / cooldownBoost;
-        }
+            if (!surchaufeMax)
+            {
+             
+                currentColdownBoost = Mathf.Lerp(0.5f, maxCooldownBoost, timeUsBoost);
+            }else if (surchaufeMax)
+            {
+                currentColdownBoost = surchaufeCooldownBoost;
+            }
 
+            Debug.Log(currentColdownBoost);
+            t4 += Time.deltaTime / currentColdownBoost;
+
+            if (surchaufe)
+            {
+                matSurchaufeMoteur.color = Color.Lerp(matMoteurCurrentSurchaufe, Color.white, t4);
+
+            }
+        }
+        #endregion
+
+
+
+        #region Acceleration Forward / Forward / Backward 
         RaycastHit groundHit;
         if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, 10f))
         {
@@ -183,11 +271,14 @@ public class C_CharacterController2 : MonoBehaviour
 
             }
         }
+        #endregion
 
-
+        #region Size
         rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * speedSize);
+        #endregion
 
-        if(Input.GetAxis("Horizontal") < 0)
+        #region Gestion Dampening Virage / Strength Division Virage
+        if (Input.GetAxis("Horizontal") < 0)
         {
             currentStrengthLeft = strengthLeft / divisionStrength;
             currentStrengthRight = strengthRight;
@@ -213,7 +304,9 @@ public class C_CharacterController2 : MonoBehaviour
             currentStrengthRight = strengthRight;
             currentStrengthLeft = strengthLeft;
         }
+        #endregion
 
+        #region Gestion Propulseur Left / Right
         foreach (GameObject propulsPointRight in arrayPropulseurPointRight)
         {
             RaycastHit hit;
@@ -251,32 +344,34 @@ public class C_CharacterController2 : MonoBehaviour
             }
 
         }
+        #endregion
     }
 
 
 
-    private void Boost()
+    private void Boost(bool caBombarde)
     {
-       
-        //Debug.Log("Boooooost!!!");
-        if (!firstImpulsBoostDone)
+        if (caBombarde)
         {
-            rb.AddForce(transform.TransformDirection(Vector3.forward) * boostForce, ForceMode.Impulse);
-            firstImpulsBoostDone = true;
-        }
+            if (!firstImpulsBoostDone)
+            {
+                rb.AddForce(transform.TransformDirection(Vector3.forward) * boostForce, ForceMode.Impulse);
+                firstImpulsBoostDone = true;
+            }
 
-        if(t2 >= 1f)
-        {
-            accelerationBoostDone = true;
-            t2 = 0;
-        }
-        if (!accelerationBoostDone)
-        {
-            t2 += Time.deltaTime / timeAccelerationBoost;
-            currentSpeedForward = Mathf.SmoothStep(speedForward, speedBoost, t2);
-        }else if (accelerationBoostDone)
-        {
-            currentSpeedForward = speedBoost;
+            if(t2 >= 1f)
+            {
+                accelerationBoostDone = true;
+                t2 = 0;
+            }
+            if (!accelerationBoostDone)
+            {
+                t2 += Time.deltaTime / timeAccelerationBoost;
+                currentSpeedForward = Mathf.SmoothStep(speedForward, speedBoost, t2);
+            }else if (accelerationBoostDone)
+            {
+                currentSpeedForward = speedBoost;
+            }
         }
 
         
