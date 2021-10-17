@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class C_CharacterController2 : MonoBehaviour
+public class C_CharacterController3 : MonoBehaviour
 {
     [Header("Gameobject")]
     [Space]
     public GameObject groundCheck;
     public GameObject centerOfMass;
+    public GameObject capsule;
+    public float distanceCapsule;
     [Space]
     [Header("Parametre Propulseur")]
     [Space]
-    public GameObject[] arrayPropulseurPointRight;
-    public GameObject[] arrayPropulseurPointLeft;
+    public GameObject[] arrayPropulseurPointRightDown;
+    public GameObject[] arrayPropulseurPointLeftDown;
+    public GameObject[] arrayPropulseurPointRightUp;
+    public GameObject[] arrayPropulseurPointLeftUp;
     [Space]
     public float length;
     public float strengthRight;
@@ -64,14 +68,20 @@ public class C_CharacterController2 : MonoBehaviour
     public float maxDistanceSphereCast;
     public LayerMask layerGround;
     [Space]
-    [Header("")]
+    [Header("Parametre Calculate Angle Character / Ground")]
     [Space]
     public float distanceCalculAngleGround;
     public float angleGround;
     public GameObject pointCalculeAngleCharacter;
     public float angleCharacter;
     public float maxAngleCharacter;
-   
+    [Space]
+    [Header("")]
+    [Space]
+    public GameObject pointCheckUp;
+    public GameObject pointCheckDown;
+    public float maxDistanceToCheck;
+
 
 
 
@@ -105,14 +115,19 @@ public class C_CharacterController2 : MonoBehaviour
     private float t2;
     private float t3;
     private float t4;
-    
+
 
     private GameObject currentFaceHit;
     private bool isRotate;
 
     private RaycastHit angleGroundHit;
     private RaycastHit angleCharacterHit;
-    [SerializeField]private bool toMushAngleOnCharacter;
+    [SerializeField] private bool toMushAngleOnCharacter;
+
+    private RaycastHit checkUpHit;
+    private RaycastHit checkDownHit;
+    [SerializeField] private bool isUp;
+    [SerializeField] private bool isDown;
 
     // Start is called before the first frame update
     void Start()
@@ -125,8 +140,9 @@ public class C_CharacterController2 : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         matSurchaufeMoteur.color = Color.white;
-        
-        
+
+        CheckUp();
+        CheckDown();
     }
 
     // Update is called once per frame
@@ -153,6 +169,12 @@ public class C_CharacterController2 : MonoBehaviour
         #endregion
 
         CalculateAngle();
+        CheckDown();
+        CheckUp();
+
+        //capsule.transform.position = new Vector3(transform.position.x , transform.position.y, transform.position.z + distanceCapsule);
+        //capsule.transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.y, 0));
+        //capsule.transform.rotation = Quaternion.EulerRotation(new Vector3(0f, transform.rotation.y - 90f, 0f));
     }
 
     public void FixedUpdate()
@@ -232,7 +254,6 @@ public class C_CharacterController2 : MonoBehaviour
                 currentColdownBoost = surchaufeCooldownBoost;
             }
 
-            Debug.Log(currentColdownBoost);
             t4 += Time.deltaTime / currentColdownBoost;
 
             if (surchaufe)
@@ -324,50 +345,98 @@ public class C_CharacterController2 : MonoBehaviour
         }
         #endregion
 
+        #region Gestion Strength Propulseur en fonction de l'angle du véhicule
         if (toMushAngleOnCharacter)
         {
             currentStrengthLeft = strengthLeft / divisionStrengthAngle;
             currentStrengthRight = strengthRight / divisionStrengthAngle;
         }
+        #endregion
 
         #region Gestion Propulseur Left / Right
-        foreach (GameObject propulsPointRight in arrayPropulseurPointRight)
+        if (isDown)
         {
-            RaycastHit hit;
-            if (Physics.Raycast(propulsPointRight.transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
-            {             
-
-                float forceAmount = 0;
-                forceAmount = currentStrengthRight * (length - hit.distance) / length + (currentDampening *(lastHitDistRight * hit.distance));
-                rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointRight.transform.position);
-
-                lastHitDistRight = hit.distance;
-            }
-            else
+            Debug.Log("Propulseur Down");
+            foreach (GameObject propulsPointRightDown in arrayPropulseurPointRightDown)
             {
-                lastHitDistRight = length;
+                RaycastHit hit;
+                if (Physics.Raycast(propulsPointRightDown.transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
+                {             
+
+                    float forceAmount = 0;
+                    forceAmount = currentStrengthRight * (length - hit.distance) / length + (currentDampening *(lastHitDistRight * hit.distance));
+                    rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointRightDown.transform.position);
+
+                    lastHitDistRight = hit.distance;
+                }
+                else
+                {
+                    lastHitDistRight = length;
+                }
+
             }
 
+            foreach (GameObject propulsPointLeftDown in arrayPropulseurPointLeftDown)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(propulsPointLeftDown.transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
+                {
+
+                    float forceAmount = 0;
+                    forceAmount = currentStrengthLeft * (length - hit.distance) / length + (currentDampening * (lastHitDistLeft * hit.distance));
+                    rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointLeftDown.transform.position);
+
+                    lastHitDistLeft = hit.distance;
+                }
+                else
+                {
+                    lastHitDistLeft = length;
+                }
+
+            }
+        }else if (isUp)
+        {
+            
+            foreach (GameObject propulsPointLeftUp in arrayPropulseurPointLeftUp)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(propulsPointLeftUp.transform.position, transform.TransformDirection(Vector3.up), out hit, length))
+                {
+                    Debug.Log("hit1");
+                    float forceAmount = 0;
+                    forceAmount = currentStrengthLeft * (length - hit.distance) / length + (currentDampening * (lastHitDistLeft * hit.distance));
+                    rb.AddForceAtPosition(-transform.up * forceAmount * rb.mass, propulsPointLeftUp.transform.position);
+
+                    lastHitDistLeft = hit.distance;
+                }
+                else
+                {
+                    lastHitDistLeft = length;
+                }
+
+            }
+
+            foreach (GameObject propulsPointRighttUp in arrayPropulseurPointRightUp)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(propulsPointRighttUp.transform.position, transform.TransformDirection(Vector3.up), out hit, length))
+                {
+                    Debug.Log("hit2");
+
+                    float forceAmount = 0;
+                    forceAmount = currentStrengthRight * (length - hit.distance) / length + (currentDampening * (lastHitDistRight * hit.distance));
+                    rb.AddForceAtPosition(-transform.up * forceAmount * rb.mass, propulsPointRighttUp.transform.position);
+
+                    lastHitDistRight = hit.distance;
+                }
+                else
+                {
+                    lastHitDistRight = length;
+                }
+
+            }
         }
 
-        foreach (GameObject propulsPointLeft in arrayPropulseurPointLeft)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(propulsPointLeft.transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
-            {
-
-                float forceAmount = 0;
-                forceAmount = currentStrengthLeft * (length - hit.distance) / length + (currentDampening * (lastHitDistLeft * hit.distance));
-                rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointLeft.transform.position);
-
-                lastHitDistLeft = hit.distance;
-            }
-            else
-            {
-                lastHitDistLeft = length;
-            }
-
-        }
         #endregion
     }
 
@@ -430,5 +499,32 @@ public class C_CharacterController2 : MonoBehaviour
                 toMushAngleOnCharacter = false;
             }
         }
+    }
+
+    private bool CheckUp()
+    {
+        if (Physics.Raycast(pointCheckUp.transform.position, Vector3.up, out checkUpHit, maxDistanceToCheck, layerGround))
+        {
+            isUp = true;
+            isDown = false;
+            return true;
+        }
+        return false;
+    }
+
+    private bool CheckDown()
+    {
+        if (Physics.Raycast(pointCheckDown.transform.position, -Vector3.up, out checkDownHit, maxDistanceToCheck, layerGround))
+        {
+            isDown = true;
+            isUp = false;
+            return true;
+        }
+        else
+        {
+            isUp = true;
+            isDown = false;
+        }
+        return false;
     }
 }
