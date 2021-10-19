@@ -68,19 +68,10 @@ public class C_CharacterController3 : MonoBehaviour
     public float maxDistanceSphereCast;
     public LayerMask layerGround;
     [Space]
-    [Header("Parametre Calculate Angle Character / Ground")]
+    [Header("Other Script")]
     [Space]
-    public float distanceCalculAngleGround;
-    public float angleGround;
-    public GameObject pointCalculeAngleCharacter;
-    public float angleCharacter;
-    public float maxAngleCharacter;
-    [Space]
-    [Header("")]
-    [Space]
-    public GameObject pointCheckUp;
-    public GameObject pointCheckDown;
-    public float maxDistanceToCheck;
+    public C_CheckAngle _CheckAngle;
+
 
 
 
@@ -120,14 +111,9 @@ public class C_CharacterController3 : MonoBehaviour
     private GameObject currentFaceHit;
     private bool isRotate;
 
-    private RaycastHit angleGroundHit;
-    private RaycastHit angleCharacterHit;
-    [SerializeField] private bool toMushAngleOnCharacter;
 
-    private RaycastHit checkUpHit;
-    private RaycastHit checkDownHit;
-    [SerializeField] private bool isUp;
-    [SerializeField] private bool isDown;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -136,13 +122,11 @@ public class C_CharacterController3 : MonoBehaviour
         currentStrengthLeft = strengthLeft;
         currentStrengthRight = strengthRight;
 
+        //centerOfMass.transform.position = new Vector3(0, 0, 0);
         rb.centerOfMass = centerOfMass.transform.localPosition;
 
         Cursor.lockState = CursorLockMode.Locked;
         matSurchaufeMoteur.color = Color.white;
-
-        CheckUp();
-        CheckDown();
     }
 
     // Update is called once per frame
@@ -168,9 +152,7 @@ public class C_CharacterController3 : MonoBehaviour
         }
         #endregion
 
-        CalculateAngle();
-        CheckDown();
-        CheckUp();
+
 
         //capsule.transform.position = new Vector3(transform.position.x , transform.position.y, transform.position.z + distanceCapsule);
         //capsule.transform.rotation = Quaternion.Euler(new Vector3(0, transform.rotation.y, 0));
@@ -317,7 +299,7 @@ public class C_CharacterController3 : MonoBehaviour
         #endregion
 
         #region Gestion Dampening Virage / Strength Division Virage
-        if (Input.GetAxis("Horizontal") < 0 && !toMushAngleOnCharacter)
+        if (Input.GetAxis("Horizontal") < 0 && !_CheckAngle.toMushAngleOnCharacter)
         {
             currentStrengthLeft = strengthLeft / divisionStrength;
             currentStrengthRight = strengthRight;
@@ -326,7 +308,7 @@ public class C_CharacterController3 : MonoBehaviour
                 currentDampening = dampeningRotate;
                 isRotate = false;
             }
-        }else if(Input.GetAxis("Horizontal") > 0 && !toMushAngleOnCharacter)
+        }else if(Input.GetAxis("Horizontal") > 0 && !_CheckAngle.toMushAngleOnCharacter)
         {
             currentStrengthRight = strengthRight /divisionStrength;
             currentStrengthLeft = strengthLeft;
@@ -346,7 +328,7 @@ public class C_CharacterController3 : MonoBehaviour
         #endregion
 
         #region Gestion Strength Propulseur en fonction de l'angle du véhicule
-        if (toMushAngleOnCharacter)
+        if (_CheckAngle.toMushAngleOnCharacter)
         {
             currentStrengthLeft = strengthLeft / divisionStrengthAngle;
             currentStrengthRight = strengthRight / divisionStrengthAngle;
@@ -354,7 +336,7 @@ public class C_CharacterController3 : MonoBehaviour
         #endregion
 
         #region Gestion Propulseur Left / Right
-        if (isDown)
+        if (_CheckAngle.isDown)
         {
             Debug.Log("Propulseur Down");
             foreach (GameObject propulsPointRightDown in arrayPropulseurPointRightDown)
@@ -394,15 +376,15 @@ public class C_CharacterController3 : MonoBehaviour
                 }
 
             }
-        }else if (isUp)
+        }else if (_CheckAngle.isUp)
         {
-            
+            Debug.Log("Propulseur Up");
             foreach (GameObject propulsPointLeftUp in arrayPropulseurPointLeftUp)
             {
                 RaycastHit hit;
                 if (Physics.Raycast(propulsPointLeftUp.transform.position, transform.TransformDirection(Vector3.up), out hit, length))
                 {
-                    Debug.Log("hit1");
+                    
                     float forceAmount = 0;
                     forceAmount = currentStrengthLeft * (length - hit.distance) / length + (currentDampening * (lastHitDistLeft * hit.distance));
                     rb.AddForceAtPosition(-transform.up * forceAmount * rb.mass, propulsPointLeftUp.transform.position);
@@ -470,61 +452,7 @@ public class C_CharacterController3 : MonoBehaviour
         
     }
 
-    private void CalculateAngle()
-    {
-        if(Physics.Raycast(transform.position, Vector3.down, out angleGroundHit, distanceCalculAngleGround))
-        {
-            angleGround = Vector3.Angle(angleGroundHit.normal, Vector3.up);
-        }
 
-        pointCalculeAngleCharacter.transform.position = new Vector3(transform.position.x,transform.position.y -1.5f, transform.position.z);
-        if (Physics.Raycast(pointCalculeAngleCharacter.transform.position, Vector3.up, out angleCharacterHit, 2))
-        {
-            float currentAngleCharacter = Vector3.Angle(angleCharacterHit.normal, Vector3.down);
-            if(currentAngleCharacter > 7.5f)
-            {
-                angleCharacter = currentAngleCharacter - angleGround;
-            }
-            else
-            {
-                angleCharacter = currentAngleCharacter;
-            }
 
-            if(angleCharacter >= maxAngleCharacter)
-            {
-                toMushAngleOnCharacter = true;
-            }
-            else
-            {
-                toMushAngleOnCharacter = false;
-            }
-        }
-    }
 
-    private bool CheckUp()
-    {
-        if (Physics.Raycast(pointCheckUp.transform.position, Vector3.up, out checkUpHit, maxDistanceToCheck, layerGround))
-        {
-            isUp = true;
-            isDown = false;
-            return true;
-        }
-        return false;
-    }
-
-    private bool CheckDown()
-    {
-        if (Physics.Raycast(pointCheckDown.transform.position, -Vector3.up, out checkDownHit, maxDistanceToCheck, layerGround))
-        {
-            isDown = true;
-            isUp = false;
-            return true;
-        }
-        else
-        {
-            isUp = true;
-            isDown = false;
-        }
-        return false;
-    }
 }

@@ -14,6 +14,6 @@ public class C_StabilisateurCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(character, Vector3.forward);
+        transform.LookAt(character);
     }
 }
