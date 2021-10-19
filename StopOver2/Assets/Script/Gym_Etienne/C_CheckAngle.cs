@@ -22,24 +22,67 @@ public class C_CheckAngle : MonoBehaviour
     public bool isUp;
     public bool isDown;
 
+    public C_CharacterController3 _CharacterController3;
+
     private RaycastHit checkUpHit;
     private RaycastHit checkDownHit;
 
 
     private RaycastHit angleGroundHit;
     private RaycastHit angleCharacterHit;
+
+    private int stayOnAir;
     // Start is called before the first frame update
     void Start()
     {
         isDown = true;
+        stayOnAir = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         CalculateAngle();
-            CheckDown();
-        
+
+        if (isUp)
+        {
+            StartCoroutine(CheckUp());
+            StopCoroutine(CheckDown());
+        }else if (isDown)
+        {
+            StartCoroutine(CheckDown());
+            StopCoroutine(CheckUp());
+        }
+       
+
+
+        if (!_CharacterController3.onAir)
+        {
+            if (isUp)
+            {
+                stayOnAir = 1;
+            }else if (isDown)
+            {
+                stayOnAir = 2;
+            }
+
+        }
+
+        if (_CharacterController3.onAir)
+        {
+            Debug.Log(stayOnAir);
+            if(stayOnAir == 1)
+            {
+                isUp = true;
+            }else if(stayOnAir == 2)
+            {
+                isDown = true;
+            }
+
+        }
+
+
+
 
     }
 
@@ -74,65 +117,55 @@ public class C_CheckAngle : MonoBehaviour
         }
     }
 
-    private bool CheckUp()
+
+    IEnumerator CheckUp()
     {
-        if (Physics.Raycast(pointCheckUp.transform.position, Vector3.up, out checkUpHit, maxDistanceToCheck, layerGround))
-        {
-            Debug.Log("Is Check Up");
-            isUp = true;
-            isDown = false;
-            return true;
-        }
-        else
-        {
-            isDown = true;
-            isUp = false;
-            CheckDown();
-            return false;
-        }
-    }
-
-    private void CheckDown()
-    {
-        if (isDown)
-        {
-
-            if (Physics.Raycast(pointCheckDown.transform.position, transform.TransformDirection(-Vector3.up), out checkDownHit, maxDistanceToCheck, layerGround))
-            {
-                Debug.Log("Is Check Down");
-                isDown = true;
-                isUp = false;
-                pointCheckUp.SetActive(false);
-                Debug.Log(checkDownHit.distance);
-            }
-            else if(checkDownHit.distance >= maxDistanceToCheck -0.25f)
-            {
-                Debug.Log("Swith Down To Up");
-                isUp = true;
-                isDown = false;
-                pointCheckUp.SetActive(true);
-            }
-        }
-
         if (isUp)
         {
-            if(Physics.Raycast(pointCheckUp.transform.position, transform.TransformDirection(-Vector3.up), out checkUpHit, maxDistanceToCheck, layerGround))
+            if (Physics.Raycast(pointCheckUp.transform.position, pointCheckUp.transform.TransformDirection(-Vector3.up), out checkUpHit, maxDistanceToCheck, layerGround))
             {
-                Debug.Log("Is Check Up");
+
                 isUp = true;
                 isDown = false;
                 pointCheckDown.SetActive(false);
-                //Debug.Log(checkUpHit.distance);
+                //Debug.Log(checkUpHit);
             }
-            else if(checkUpHit.distance >= maxDistanceToCheck - 0.25f)
+            else
             {
-                Debug.Log("Swith Up to Down");
+
                 isDown = true;
                 isUp = false;
                 pointCheckDown.SetActive(true);
             }
 
         }
- 
+
+        yield return false;
     }
+
+    IEnumerator CheckDown()
+    {
+        if (isDown)
+        {
+
+            if (Physics.Raycast(pointCheckDown.transform.position, pointCheckDown.transform.TransformDirection(-Vector3.up), out checkDownHit, maxDistanceToCheck, layerGround))
+            {
+
+                isDown = true;
+                isUp = false;
+                pointCheckUp.SetActive(false);
+
+            }
+            else
+            {
+
+                isUp = true;
+                isDown = false;
+                pointCheckUp.SetActive(true);
+            }
+        }
+
+        yield return false;
+    }
+
 }

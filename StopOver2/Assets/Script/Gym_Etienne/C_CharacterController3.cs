@@ -68,6 +68,11 @@ public class C_CharacterController3 : MonoBehaviour
     public float maxDistanceSphereCast;
     public LayerMask layerGround;
     [Space]
+    [Header("Air Control")]
+    [Space]
+    public float airControlSpeedSize;
+    public float airControlSpeedForward;
+    [Space]
     [Header("Other Script")]
     [Space]
     public C_CheckAngle _CheckAngle;
@@ -111,7 +116,7 @@ public class C_CharacterController3 : MonoBehaviour
     private GameObject currentFaceHit;
     private bool isRotate;
 
-
+    public bool onAir;
 
 
 
@@ -144,6 +149,11 @@ public class C_CharacterController3 : MonoBehaviour
             //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         }
         #endregion
+
+        if (onAir)
+        {
+            AirControlle();
+        }
 
         #region Reset Scene
         if (Input.GetKeyDown(KeyCode.F5))
@@ -246,16 +256,16 @@ public class C_CharacterController3 : MonoBehaviour
         }
         #endregion
 
-
-
         #region Acceleration Forward / Forward / Backward 
+        groundCheck.transform.rotation = Quaternion.Euler(0, 0, 0);
         RaycastHit groundHit;
-        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, 10f))
+        if (Physics.Raycast(groundCheck.transform.position, (Vector3.down), out groundHit, distanceNoControl + 2f , layerGround))
         {
+            Debug.Log("Grouded");
             distanceGroundChara = groundHit.distance;
-
             if (distanceGroundChara <= distanceNoControl)
             {
+                onAir = false;
                 if (Input.GetAxis("Vertical") > 0)
                 {
                     if (!boostActiv)
@@ -291,11 +301,24 @@ public class C_CharacterController3 : MonoBehaviour
                 }
 
             }
+
+
+        }
+        else
+        {
+            onAir = true;
         }
         #endregion
 
         #region Size
-        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * speedSize);
+        if (_CheckAngle.isDown)
+        {
+            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * speedSize);
+
+        }else if (_CheckAngle.isUp)
+        {
+            rb.AddTorque(Time.deltaTime * transform.TransformDirection(-Vector3.up) * Input.GetAxis("Horizontal") * speedSize);
+        }
         #endregion
 
         #region Gestion Dampening Virage / Strength Division Virage
@@ -338,7 +361,7 @@ public class C_CharacterController3 : MonoBehaviour
         #region Gestion Propulseur Left / Right
         if (_CheckAngle.isDown)
         {
-            Debug.Log("Propulseur Down");
+            //Debug.Log("Propulseur Down");
             foreach (GameObject propulsPointRightDown in arrayPropulseurPointRightDown)
             {
                 RaycastHit hit;
@@ -378,7 +401,7 @@ public class C_CharacterController3 : MonoBehaviour
             }
         }else if (_CheckAngle.isUp)
         {
-            Debug.Log("Propulseur Up");
+            //Debug.Log("Propulseur Up");
             foreach (GameObject propulsPointLeftUp in arrayPropulseurPointLeftUp)
             {
                 RaycastHit hit;
@@ -403,7 +426,7 @@ public class C_CharacterController3 : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(propulsPointRighttUp.transform.position, transform.TransformDirection(Vector3.up), out hit, length))
                 {
-                    Debug.Log("hit2");
+                    //Debug.Log("hit2");
 
                     float forceAmount = 0;
                     forceAmount = currentStrengthRight * (length - hit.distance) / length + (currentDampening * (lastHitDistRight * hit.distance));
@@ -420,6 +443,8 @@ public class C_CharacterController3 : MonoBehaviour
         }
 
         #endregion
+
+
     }
 
 
@@ -452,7 +477,14 @@ public class C_CharacterController3 : MonoBehaviour
         
     }
 
+    public void AirControlle()
+    {
+        Debug.Log("YAAAAAAAAAa");
 
+        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * airControlSpeedSize);
+
+        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * Input.GetAxis("Vertical") * airControlSpeedForward);
+    }
 
 
 }
