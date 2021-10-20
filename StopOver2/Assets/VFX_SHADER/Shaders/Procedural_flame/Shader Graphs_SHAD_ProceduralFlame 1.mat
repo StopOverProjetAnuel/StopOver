@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SHAD_ProceduralFlame
+  m_Name: Shader Graphs_SHAD_ProceduralFlame 1
   m_Shader: {fileID: -6465566751694194690, guid: 49e8b5fa406d3d046b8f0058dc1eaf05, type: 3}
   m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
@@ -48,7 +48,7 @@ Material:
     m_Floats:
     - Vector1_4e6cf095d3874e7a9c9e0ff6bb230e88: 1
     - Vector1_59879f143165483ea3b35926aa36a1a2: 0.43
-    - Vector1_629eeeecc65e4e4cb51ac1398e3ccf27: -0.6
+    - Vector1_629eeeecc65e4e4cb51ac1398e3ccf27: 0.09
     - Vector1_7182c08785f546a9b15086a1358a7702: 1
     - Vector1_7d0e39f56377428e999191da48721178: 5
     - Vector1_8ae007824d654ae2b133b88547823e49: 2
@@ -56,7 +56,7 @@ Material:
     - Vector1_bdcd5fdde6be43e598c856d45526e8c2: 0.1
     - Vector1_c1ddb68d4c214f3bb8510fdf7286e046: 20
     - Vector1_e292442526084c6d8738b58c3d74b32e: 0.086
-    - Vector1_f444548df2aa4a78a6cf2bfaaf4c11e0: 4.74
+    - Vector1_f444548df2aa4a78a6cf2bfaaf4c11e0: -0.12
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
@@ -99,8 +99,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_3a2baa5c13df41c2b1f912483d666cae: {r: 38.688446, g: 0, b: 67.79352, a: 0}
-    - Color_6c2612b894e04de293c17cc6ceecb159: {r: 4.0818086, g: 0, b: 16.94838, a: 0}
+    - Color_3a2baa5c13df41c2b1f912483d666cae: {r: 90.509636, g: 19.209606, b: 0, a: 0}
+    - Color_6c2612b894e04de293c17cc6ceecb159: {r: 16.94838, g: 0, b: 0.5324098, a: 0}
     - Vector2_5044e95fec5d41a1b558474d4d3fa08d: {r: -0.1, g: -2, b: 0, a: 0}
     - Vector2_bc6e94b47d234446a502f7f07e0bfa46: {r: 0, g: -2, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}

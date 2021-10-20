@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SHAD_ProceduralFlame
+  m_Name: Shader Graphs_SHAD_ProceduralFlame 2
   m_Shader: {fileID: -6465566751694194690, guid: 49e8b5fa406d3d046b8f0058dc1eaf05, type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _DOUBLESIDED_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -18,10 +18,10 @@ Material:
     MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
+  - TransparentBackface
   - TransparentDepthPrepass
   - TransparentDepthPostpass
-  - TransparentBackface
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -71,7 +71,7 @@ Material:
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
-    - _EnableFogOnTransparent: 1
+    - _EnableFogOnTransparent: 0
     - _OpaqueCullMode: 2
     - _RenderQueueType: 4
     - _SrcBlend: 1
@@ -99,8 +99,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_3a2baa5c13df41c2b1f912483d666cae: {r: 38.688446, g: 0, b: 67.79352, a: 0}
-    - Color_6c2612b894e04de293c17cc6ceecb159: {r: 4.0818086, g: 0, b: 16.94838, a: 0}
+    - Color_3a2baa5c13df41c2b1f912483d666cae: {r: 33.894257, g: 101.86889, b: 194.20493, a: 0}
+    - Color_6c2612b894e04de293c17cc6ceecb159: {r: 2.3843138, g: 23.341177, b: 32, a: 0}
     - Vector2_5044e95fec5d41a1b558474d4d3fa08d: {r: -0.1, g: -2, b: 0, a: 0}
     - Vector2_bc6e94b47d234446a502f7f07e0bfa46: {r: 0, g: -2, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
