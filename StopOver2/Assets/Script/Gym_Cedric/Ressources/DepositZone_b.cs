@@ -38,7 +38,7 @@ public class DepositZone_b : MonoBehaviour
             {
                 timerFont.GetComponent<MeshRenderer>().material = chargeMat;
                 ressourceManager.TriggerScore(1);
-                waitDeposit = Mathf.Clamp(waitDeposit - 0.75f, 0.01f, 1f);
+                waitDeposit = Mathf.Clamp(waitDeposit - 0.75f, 0.005f, 1f);
                 previousTime = Time.time + waitDeposit;
             }
         }

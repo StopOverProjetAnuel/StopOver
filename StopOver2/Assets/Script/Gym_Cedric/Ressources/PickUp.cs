@@ -7,7 +7,7 @@ public class PickUp : MonoBehaviour
     private RessourceManager ressourceManager;
     public float ressourceGive;
 
-    private void Awake()
+    private void Start()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
     }
