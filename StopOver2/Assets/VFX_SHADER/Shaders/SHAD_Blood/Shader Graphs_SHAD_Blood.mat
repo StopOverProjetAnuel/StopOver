@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-635287498336570741
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,18 +20,17 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Shield
-  m_Shader: {fileID: -6465566751694194690, guid: 5774fea82bfab264b92631aac1793ec2, type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_Name: Shader Graphs_SHAD_Blood
+  m_Shader: {fileID: -6465566751694194690, guid: 93c3de55043b33543a52747fdf06bc25, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
+    _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
   m_CustomRenderQueue: 3000
   stringTagMap:
-    MotionVector: User
     RenderType: Transparent
   disabledShaderPasses:
-  - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
@@ -26,6 +38,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_87d41bedd3834c7eba71d9aacda32398:
+        m_Texture: {fileID: 2800000, guid: aa1a0cbbc5609144d8fe8ab5f43969e2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -39,16 +55,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_16c76bad18984d69a02ffb5d57a638dc: -0.8
-    - Vector1_4a22b07e305e4c3ba45220267d182867: 1
-    - Vector1_4d8d6de78f83495b96d6db52fc8cab51: 1
-    - Vector1_7c96a9fed98e413280ffdcea70a02567: 6.6
-    - Vector1_bf20b520167049cf84109e98aa20d784: -1.54
-    - Vector1_d4ae45d70fd544b286ada68f441068b0: 0.24
-    - Vector1_d84ac2790e2949d7816f7ca436462a73: -1.99
-    - Vector1_ebab6462d09e41989e792692c512a5d0: 1
+    - Vector1_149a5e71f6a04ea489a7a161cfa59a3d: 0.5
+    - Vector1_4e77e2340b91454ba8ede7cb9e4a6579: 5
+    - Vector1_779ab405118b44d9b1108cdc509774c6: 0.87
     - _AddPrecomputedVelocity: 0
-    - _AlphaCutoffEnable: 0
+    - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
@@ -91,27 +102,11 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 4
+    - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_baa039909ab94de093c5a2d13d7419cf: {r: 22.780083, g: 24.721567, b: 0, a: 0}
-    - Color_c77b481223a641f2b1cda37fb077e0fb: {r: 0, g: 5.922071, b: 13.928808, a: 0}
-    - Vector2_69ce0139aa594bc28a81eb7a44f9be6f: {r: 20, g: 20, b: 0, a: 0}
-    - Vector2_7cb2754f4cf340d6b3b9a0ab70cbf282: {r: 1, g: 0, b: 0, a: 0}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - Color_a23df6ff01704d7881df23b94ca1c000: {r: 15.999998, g: 15.999998, b: 15.999998, a: 1}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2632867203257245448
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11

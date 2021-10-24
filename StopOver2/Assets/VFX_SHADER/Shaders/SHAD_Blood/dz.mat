@@ -7,9 +7,10 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_EngineFlame
-  m_Shader: {fileID: -6465566751694194690, guid: 49e8b5fa406d3d046b8f0058dc1eaf05, type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_Name: dz
+  m_Shader: {fileID: -6465566751694194690, guid: 93c3de55043b33543a52747fdf06bc25, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _DISABLE_SSR_TRANSPARENT _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
+    _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -19,18 +20,15 @@ Material:
     RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
-  - TransparentDepthPrepass
+  - RayTracingPrepass
   - TransparentDepthPostpass
   - TransparentBackface
+  - TransparentDepthPrepass
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_0901554f35914a10af60e10c92933364:
-        m_Texture: {fileID: 2800000, guid: fa439d05663ba9c4fac00387cb8d4866, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_721c1d8516274b268a80166330f74726:
-        m_Texture: {fileID: 2800000, guid: 370ecf8ffe80bc440997df8d47f9ee53, type: 3}
+    - Texture2D_87d41bedd3834c7eba71d9aacda32398:
+        m_Texture: {fileID: 2800000, guid: 2800a5922d4290940a813dd6516cdffb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -46,22 +44,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_4e6cf095d3874e7a9c9e0ff6bb230e88: 1.77
-    - Vector1_59879f143165483ea3b35926aa36a1a2: 0.525
-    - Vector1_629eeeecc65e4e4cb51ac1398e3ccf27: 1.98
-    - Vector1_7182c08785f546a9b15086a1358a7702: 1
-    - Vector1_7d0e39f56377428e999191da48721178: 5
-    - Vector1_8ae007824d654ae2b133b88547823e49: 2
-    - Vector1_9da38cab12e44eeebe4e5b5d795acfb1: 4.24
-    - Vector1_a45e3e808e4a4891b12610d1a50680c1: 0.5
-    - Vector1_a6981283ef9a48ca9e62e2f0c992065a: 0.05
-    - Vector1_b2ef91987cc94ff89049a3edaa6198a4: 1
-    - Vector1_bdcd5fdde6be43e598c856d45526e8c2: 0.1
-    - Vector1_c1ddb68d4c214f3bb8510fdf7286e046: 20
-    - Vector1_e292442526084c6d8738b58c3d74b32e: 0.097
-    - Vector1_f444548df2aa4a78a6cf2bfaaf4c11e0: 4.74
+    - Vector1_149a5e71f6a04ea489a7a161cfa59a3d: 0.5
+    - Vector1_4e77e2340b91454ba8ede7cb9e4a6579: 5
+    - Vector1_5355bdb7b2824791937a4c5c8b9dea4f: 6.07
+    - Vector1_779ab405118b44d9b1108cdc509774c6: 0.16
     - _AddPrecomputedVelocity: 0
-    - _AlphaCutoffEnable: 0
+    - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
@@ -73,10 +61,15 @@ Material:
     - _DoubleSidedEnable: 1
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
-    - _EnableBlendModePreserveSpecularLighting: 0
+    - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
+    - _RayTracing: 0
+    - _ReceivesSSR: 1
+    - _ReceivesSSRTransparent: 0
+    - _RefractionModel: 0
     - _RenderQueueType: 4
+    - _RequireSplitLighting: 0
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0
@@ -88,6 +81,7 @@ Material:
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
+    - _SupportDecals: 1
     - _SurfaceType: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -98,19 +92,15 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 4
+    - _ZTestGBuffer: 3
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_3a2baa5c13df41c2b1f912483d666cae: {r: 0, g: 25.052296, b: 85.445015, a: 0}
-    - Color_6c2612b894e04de293c17cc6ceecb159: {r: 0, g: 4.894118, b: 23.968628, a: 0}
-    - Color_9461617606b34136989bf20518b0997c: {r: 0, g: 0.7033999, b: 1, a: 1}
-    - Vector2_5044e95fec5d41a1b558474d4d3fa08d: {r: -0.1, g: -2, b: 0, a: 0}
-    - Vector2_bc6e94b47d234446a502f7f07e0bfa46: {r: 0, g: -2, b: 0, a: 0}
-    - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - Color_a23df6ff01704d7881df23b94ca1c000: {r: 4, g: 4, b: 4, a: 1}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2043334584378273790
+--- !u!114 &3452238643473081438
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
