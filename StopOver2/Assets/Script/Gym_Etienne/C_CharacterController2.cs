@@ -28,6 +28,7 @@ public class C_CharacterController2 : MonoBehaviour
     [Space]
     [Header("Parametre General")]
     [Space]
+    public Transform cameraTranform;
     public float distanceNoControl;
     [Space]
     [Header("Parametre Forward")]
@@ -58,19 +59,28 @@ public class C_CharacterController2 : MonoBehaviour
     public ParticleSystem fxBoostSurchaufe;
     public Material matSurchaufeMoteur;
     [Space]
+    [Header("Parametre Air Control")]
+    [Space]
+    public bool isOnAir;
+    public float airControlSpeedSize;
+    public float airControlSpeedForward;
+    [Space]
     [Header("Check Ground")]
     [Space]
     public float radiuSpherecast;
     public float maxDistanceSphereCast;
     public LayerMask layerGround;
     [Space]
-    [Header("")]
+    [Header("Check Angle")]
     [Space]
+    public GameObject checkBackPoint;
     public float distanceCalculAngleGround;
-    public float angleGround;
     public GameObject pointCalculeAngleCharacter;
+    public float angleGround;
     public float angleCharacter;
     public float maxAngleCharacter;
+    public bool toMushAngleOnCharacter;
+    public bool isOnBack;
    
 
 
@@ -112,7 +122,8 @@ public class C_CharacterController2 : MonoBehaviour
 
     private RaycastHit angleGroundHit;
     private RaycastHit angleCharacterHit;
-    [SerializeField]private bool toMushAngleOnCharacter;
+
+    private Quaternion cameraDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -132,18 +143,6 @@ public class C_CharacterController2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #region Check Ground + Constraint RB
-        RaycastHit faceHit;
-        if(Physics.SphereCast(centerOfMass.transform.position, radiuSpherecast , transform.TransformDirection(-Vector3.up),out faceHit, maxDistanceSphereCast, layerGround))
-        {
-            currentFaceHit = faceHit.transform.gameObject;
-            rb.constraints = RigidbodyConstraints.None;            
-        }
-        else
-        {
-            //rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        }
-        #endregion
 
         #region Reset Scene
         if (Input.GetKeyDown(KeyCode.F5))
@@ -152,7 +151,28 @@ public class C_CharacterController2 : MonoBehaviour
         }
         #endregion
 
+        if (isOnAir)
+        {
+            AirControlle();
+
+            RaycastHit hitBack;
+            if (Physics.Raycast(checkBackPoint.transform.position, transform.TransformDirection(Vector3.up), out hitBack, 2f))
+            {
+                isOnBack = true;
+            }
+            else
+            {
+                isOnBack = false;
+            }
+        }
+
         CalculateAngle();
+
+        if (isOnBack && Input.GetKeyDown(KeyCode.E))
+        {
+            transform.rotation = Quaternion.identity;
+            transform.rotation = Quaternion.Euler(transform.rotation.x, 0, transform.rotation.z);
+        }
     }
 
     public void FixedUpdate()
@@ -175,6 +195,14 @@ public class C_CharacterController2 : MonoBehaviour
             accelerationBoostDone = false;
             boostActiv = false;
         }
+        #endregion
+
+        #region Direction Character Camera
+        cameraDirection = Quaternion.AngleAxis(cameraTranform.rotation.eulerAngles.y, Vector3.up);
+        cameraDirection.x = transform.localRotation.x;
+        cameraDirection.z = transform.localRotation.z;
+        transform.rotation = cameraDirection;
+        //Debug.Log(cameraDirection);
         #endregion
 
         #region Boost duration Acceleration / Cooldown Boost / Surchaufe
@@ -232,7 +260,7 @@ public class C_CharacterController2 : MonoBehaviour
                 currentColdownBoost = surchaufeCooldownBoost;
             }
 
-            Debug.Log(currentColdownBoost);
+            
             t4 += Time.deltaTime / currentColdownBoost;
 
             if (surchaufe)
@@ -243,16 +271,16 @@ public class C_CharacterController2 : MonoBehaviour
         }
         #endregion
 
-
-
         #region Acceleration Forward / Forward / Backward 
         RaycastHit groundHit;
         if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, 10f))
         {
+            Debug.Log("Touch");
             distanceGroundChara = groundHit.distance;
 
             if (distanceGroundChara <= distanceNoControl)
             {
+                isOnAir = false;
                 if (Input.GetAxis("Vertical") > 0)
                 {
                     if (!boostActiv)
@@ -288,11 +316,19 @@ public class C_CharacterController2 : MonoBehaviour
                 }
 
             }
+            else
+            {
+                isOnAir = true;
+            }
+        }
+        else
+        {
+            isOnAir = true;
         }
         #endregion
 
         #region Size
-        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * speedSize);
+        //rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * speedSize);
         #endregion
 
         #region Gestion Dampening Virage / Strength Division Virage
@@ -429,6 +465,27 @@ public class C_CharacterController2 : MonoBehaviour
             {
                 toMushAngleOnCharacter = false;
             }
+        }
+    }
+
+    public void AirControlle()
+    {
+        Debug.Log("YAAAAAAAAAa");
+
+        rb.AddTorque(Time.deltaTime * transform.TransformDirection(-Vector3.forward) * Input.GetAxis("Horizontal") * airControlSpeedSize);
+
+        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -Input.GetAxis("Vertical") * airControlSpeedForward);
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (focus)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 }
