@@ -14,11 +14,13 @@ public class C_CharacterController2 : MonoBehaviour
     [Space]
     public GameObject[] arrayPropulseurPointRight;
     public GameObject[] arrayPropulseurPointLeft;
+    public GameObject[] arrayPropulseurPointFront;
     [Space]
     public float length;
     public float strengthRight;
     public float strengthLeft;
-    public float divisionStrength;
+    public float strengthFront;
+    public float MultiStrength;
     public float divisionStrengthAngle;
     [Space]
     [Header("Parametre Dampening")]
@@ -74,8 +76,10 @@ public class C_CharacterController2 : MonoBehaviour
     [Header("Check Angle")]
     [Space]
     public GameObject checkBackPoint;
-    public float distanceCalculAngleGround;
     public GameObject pointCalculeAngleCharacter;
+    public GameObject pointCalculeAngleGround;
+    public float distanceCalculAngleGround;
+    public float angleMinActivPropulsFront;
     public float angleGround;
     public float angleCharacter;
     public float maxAngleCharacter;
@@ -88,9 +92,11 @@ public class C_CharacterController2 : MonoBehaviour
     private Rigidbody rb;
     private float lastHitDistRight;
     private float lastHitDistLeft;
+    private float lastHitDistFront;
 
     private float currentStrengthRight;
     private float currentStrengthLeft;
+    private float currentStrengthFront;
 
     private float distanceGroundChara;
 
@@ -122,6 +128,8 @@ public class C_CharacterController2 : MonoBehaviour
 
     private RaycastHit angleGroundHit;
     private RaycastHit angleCharacterHit;
+
+    private float tStrengthAngle;
 
     private Quaternion cameraDirection;
 
@@ -275,7 +283,7 @@ public class C_CharacterController2 : MonoBehaviour
         RaycastHit groundHit;
         if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, 10f))
         {
-            Debug.Log("Touch");
+            //Debug.Log("Touch");
             distanceGroundChara = groundHit.distance;
 
             if (distanceGroundChara <= distanceNoControl)
@@ -334,8 +342,8 @@ public class C_CharacterController2 : MonoBehaviour
         #region Gestion Dampening Virage / Strength Division Virage
         if (Input.GetAxis("Horizontal") < 0 && !toMushAngleOnCharacter)
         {
-            currentStrengthLeft = strengthLeft / divisionStrength;
-            currentStrengthRight = strengthRight;
+            currentStrengthRight = strengthRight * MultiStrength;
+            currentStrengthLeft = strengthLeft;
             if (isRotate)
             {
                 currentDampening = dampeningRotate;
@@ -343,8 +351,8 @@ public class C_CharacterController2 : MonoBehaviour
             }
         }else if(Input.GetAxis("Horizontal") > 0 && !toMushAngleOnCharacter)
         {
-            currentStrengthRight = strengthRight /divisionStrength;
-            currentStrengthLeft = strengthLeft;
+            currentStrengthLeft = strengthLeft * MultiStrength;
+            currentStrengthRight = strengthRight;
             if (isRotate)
             {
                 currentDampening = dampeningRotate;
@@ -405,6 +413,31 @@ public class C_CharacterController2 : MonoBehaviour
 
         }
         #endregion
+
+        if(angleGround > angleMinActivPropulsFront)
+        {
+            tStrengthAngle = angleGround / 75;
+            Debug.Log("t angle :" + tStrengthAngle);
+            currentStrengthFront = Mathf.Lerp(1, strengthFront, tStrengthAngle);
+            Debug.Log("Strength Front :" + currentStrengthFront);
+            foreach (GameObject propulsPointFront in arrayPropulseurPointFront)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(propulsPointFront.transform.position, transform.TransformDirection(-Vector3.up), out hit, length))
+                {
+                    float forceAmount = 0;
+                    forceAmount = currentStrengthFront * (length - hit.distance) / length + (currentDampening * (lastHitDistFront * hit.distance));
+                    rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointFront.transform.position);
+
+                    lastHitDistFront = hit.distance;
+                }
+                else
+                {
+                    lastHitDistFront = length;
+                }
+
+            }
+        }
     }
 
 
@@ -439,7 +472,7 @@ public class C_CharacterController2 : MonoBehaviour
 
     private void CalculateAngle()
     {
-        if(Physics.Raycast(transform.position, Vector3.down, out angleGroundHit, distanceCalculAngleGround))
+        if(Physics.Raycast(pointCalculeAngleGround.transform.position, Vector3.down, out angleGroundHit, distanceCalculAngleGround))
         {
             angleGround = Vector3.Angle(angleGroundHit.normal, Vector3.up);
         }
@@ -470,7 +503,7 @@ public class C_CharacterController2 : MonoBehaviour
 
     public void AirControlle()
     {
-        Debug.Log("YAAAAAAAAAa");
+        //Debug.Log("YAAAAAAAAAa");
 
         rb.AddTorque(Time.deltaTime * transform.TransformDirection(-Vector3.forward) * Input.GetAxis("Horizontal") * airControlSpeedSize);
 
