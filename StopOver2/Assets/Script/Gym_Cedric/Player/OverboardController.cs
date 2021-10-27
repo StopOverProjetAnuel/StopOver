@@ -4,30 +4,49 @@ using UnityEngine;
 
 public class OverboardController : MonoBehaviour
 {
+    #region Variables
     private Rigidbody rb;
-    private Transform tf;
-    public LayerMask myLM;
-    public Vector3 groundedCheckBox = new Vector3(1, 0.5f, 1);
-    public float movementSpeed = 500f;
-    public float sprintSpeed = 1000f;
+
+    #region Movement Variables
+    [Header("Movement Parameters")]
     private float currentSpeed;
-    public float rotateSpeed = 720f;
-    public float jumpForce = 10f;
-    public int airJumpCount = 1;
-    private int jumpLeft;
-    public GameObject mainBodyModel;
-    public float inclDegrees = 5f;
+    public float movementSpeed;
+    public float sprintSpeed;
+    public float rotateSpeed;
+
+    [Header("Fall Parameters")]
     public Vector3 gravityForceFall;
     private Vector3 gravityReset = new Vector3(0, -9.81f, 0);
+    #endregion
+
+    #region Recolt Variables
+    [HideInInspector] public int nbState;
+
+    #region Nudge Bars
+    [Header("Nugde Bars States")]
+    public GameObject nudgeBars;
+    public Material[] nudgeBarsMaterials;
+    public float min1stState;
+    public float min2ndState;
+    #endregion
+
+    #endregion
+
+    #region Animation Variables
+    [Header("Vehicle procedural animation")]
+    public GameObject mainBodyModel;
+    public float inclDegrees;
+    #endregion
+    #endregion
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        tf = GetComponent<Transform>();
-        jumpLeft = airJumpCount;
         currentSpeed = movementSpeed;
     }
 
+    #region Movement
     private void FixedUpdate()
     {
         MyMovement();
@@ -53,15 +72,13 @@ public class OverboardController : MonoBehaviour
     {
         rb.AddRelativeTorque(0, Input.GetAxis("Mouse X") * rotateSpeed * Time.fixedDeltaTime, 0, ForceMode.Acceleration);
     }
-
-
+    #endregion
 
     private void Update()
     {
         Sprint();
-        MyJump();
-        ResetAirJump();
         GravityFallAcc();
+        NudgeBarsState();
     }
 
     private void Sprint()
@@ -76,34 +93,6 @@ public class OverboardController : MonoBehaviour
         }
     }
 
-    private void MyJump()
-    {
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-        }
-        else if (Input.GetButtonDown("Jump") && jumpLeft != 0)
-        {
-            rb.AddForce(0, jumpForce, 0, ForceMode.Impulse);
-            jumpLeft -= 1;
-        }
-    }
-
-    private bool IsGrounded()
-    {
-        bool ig = Physics.CheckBox(tf.position, groundedCheckBox, Quaternion.identity, myLM);
-        //Debug.Log("IsGrounded = " + ig);
-        return ig;
-    }
-
-    private void ResetAirJump()
-    {
-        if (IsGrounded())
-        {
-            jumpLeft = airJumpCount;
-        }
-    }
-
     private void GravityFallAcc()
     {
         if (rb.velocity.y <= -1f)
@@ -115,6 +104,33 @@ public class OverboardController : MonoBehaviour
         {
             Physics.gravity = gravityReset;
             rb.drag = 1f;
+        }
+    }
+
+    private void NudgeBarsState()
+    {
+        if (Input.GetAxis("Vertical") > 0)
+        {
+            nudgeBars.SetActive(true);
+            if (rb.velocity.magnitude >= min2ndState)
+            {
+                nbState = 3;
+            }
+            else if (rb.velocity.magnitude >= min1stState)
+            {
+                nbState = 2;
+            }
+            else
+            {
+                nbState = 1;
+            }
+
+            nudgeBars.GetComponent<MeshRenderer>().material = nudgeBarsMaterials[Mathf.Clamp(nbState - 1, 0, 2)];
+        }
+        else
+        {
+            nudgeBars.SetActive(false);
+            nbState = 0;
         }
     }
 }

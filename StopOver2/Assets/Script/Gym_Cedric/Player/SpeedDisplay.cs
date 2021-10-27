@@ -19,7 +19,8 @@ public class SpeedDisplay : MonoBehaviour
     private void Update()
     {
         float currentSpeed = Mathf.Clamp(rb_Player.velocity.magnitude, 0, Mathf.Infinity);
-        tMPSpeed.SetText("" + Mathf.RoundToInt(currentSpeed));
-        //Debug.Log("Speed = " + rb_Player.velocity.magnitude);
+        int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
+        tMPSpeed.SetText("" + currentSpeedInt);
+        //Debug.Log("Speed = " + currentSpeedInt);
     }
 }

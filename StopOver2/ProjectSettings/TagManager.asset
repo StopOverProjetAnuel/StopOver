@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -16,10 +17,10 @@ TagManager:
   - 
   - PostProcessing
   - Not in Reflection
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Weapon
+  - Ignore Player
+  - Ignore Weapon
   - 
   - 
   - 
