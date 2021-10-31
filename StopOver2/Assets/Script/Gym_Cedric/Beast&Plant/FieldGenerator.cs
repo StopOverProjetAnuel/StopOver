@@ -13,8 +13,10 @@ public class FieldGenerator : MonoBehaviour
     [HideInInspector] public float maxRandomScale = 1f;
 
     //Spawner Variables
-    [HideInInspector] public float spawnRadiusX = 10f;
-    [HideInInspector] public float spawnRadiusZ = 10f;
+    [HideInInspector] public int whichSpawner = 0;
+    [HideInInspector] public float spawnRadius = 10f;
+    [HideInInspector] public float spawnWidth = 10f;
+    [HideInInspector] public float spawnLength = 10f;
 
     private void Awake()
     {
@@ -31,9 +33,28 @@ public class FieldGenerator : MonoBehaviour
             float transformX = this.transform.position.x;
             float transformZ = this.transform.position.z;
 
-            //Set random float for a random Vector3 x and z
-            float randomSpawnX = Random.Range(-spawnRadiusX + transformX, spawnRadiusX + transformX);
-            float randomSpawnZ = Random.Range(-spawnRadiusZ + transformZ, spawnRadiusZ + transformZ);
+            //Initiate temporal variables
+            float randomSpawnX = 0;
+            float randomSpawnZ = 0;
+
+            //Choose between diffenrent spawning form
+            if (whichSpawner == 0) //The circle one
+            {
+                //Randomise inseide a circle
+                Vector2 randomSpawn = Random.insideUnitCircle * spawnRadius;
+                //Add the randomise with the actual spawner position
+                Vector2 transformVec2 = new Vector2(transform.position.x + randomSpawn.x, transform.position.z + randomSpawn.y);
+
+                //Attribute the Vector2 values for the new Position
+                randomSpawnX = transformVec2.x;
+                randomSpawnZ = transformVec2.y;
+            }
+            else if (whichSpawner == 1) //The square one
+            {
+                //Set random float for a random Vector3 x and z
+                randomSpawnX = Random.Range(-spawnWidth + transformX, spawnWidth + transformX);
+                randomSpawnZ = Random.Range(-spawnLength + transformZ, spawnLength + transformZ);
+            }
 
             //Set random Vector3 with the both previous float
             Vector3 randomPosition = new Vector3(randomSpawnX, 200, randomSpawnZ);
@@ -72,6 +93,18 @@ public class FieldGenerator : MonoBehaviour
         }
     }
 
+    #region Select Spawner Form
+    public void SelectCircle()
+    {
+        whichSpawner = 0;
+    }
+
+    public void SelectSquarre()
+    {
+        whichSpawner = 1;
+    }
+    #endregion
+
     public void RegenerateField()
     {
         ResetField();
@@ -80,11 +113,18 @@ public class FieldGenerator : MonoBehaviour
 
     public void ResetField()
     {
-        if (this.transform.childCount != 0)
+        if (this.transform.childCount > 0)
         {
             foreach (Transform child in transform)
             {
-                Destroy(child.gameObject);
+                if (Application.isEditor == true)
+                {
+                    DestroyImmediate(child.gameObject, true);
+                }
+                else
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
     }

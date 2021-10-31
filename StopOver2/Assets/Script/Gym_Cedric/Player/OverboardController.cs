@@ -59,7 +59,8 @@ public class OverboardController : MonoBehaviour
         {
             rb.AddRelativeForce(0, 0, Input.GetAxis("Vertical") * currentSpeed * Time.fixedDeltaTime, ForceMode.Acceleration);
         }
-        else if (Input.GetButton("Horizontal"))
+
+        if (Input.GetButton("Horizontal"))
         {
             rb.AddRelativeForce(Input.GetAxis("Horizontal") * currentSpeed * Time.fixedDeltaTime, 0, 0, ForceMode.Acceleration);
         }

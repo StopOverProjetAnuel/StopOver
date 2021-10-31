@@ -14,6 +14,7 @@ public class FieldGeneratorEditor : Editor
         FieldGenerator fieldGenerator = (FieldGenerator)target;
 
 
+        #region Object Parameters
         //Set le display dans l'inspector
         GUILayout.Label("Object Parameters", EditorStyles.boldLabel);
 
@@ -56,23 +57,56 @@ public class FieldGeneratorEditor : Editor
         fieldGenerator.maxRandomScale = EditorGUILayout.FloatField(fieldGenerator.maxRandomScale, GUILayout.MaxWidth(50));
 
         EditorGUILayout.EndHorizontal();
+#endregion
 
         GUILayout.Space(25);
 
+        #region Spawner Parameters
         GUILayout.Label("Spawner Parameters", EditorStyles.boldLabel);
         
         GUILayout.Space(15);
 
-        GUILayout.Label("Spawn Radius : ", EditorStyles.label);
-
         EditorGUILayout.BeginHorizontal();
 
-        fieldGenerator.spawnRadiusX = EditorGUILayout.FloatField("x : ", fieldGenerator.spawnRadiusX);
-        fieldGenerator.spawnRadiusZ = EditorGUILayout.FloatField("z : ", fieldGenerator.spawnRadiusZ);
+        if (GUILayout.Button("Circle Form"))
+        {
+            fieldGenerator.SelectCircle();
+        }
+
+        if (GUILayout.Button("Squarre Form"))
+        {
+            fieldGenerator.SelectSquarre();
+        }
 
         EditorGUILayout.EndHorizontal();
 
+        GUILayout.Space(15);
+
+        if (fieldGenerator.whichSpawner == 0)
+        {
+            GUILayout.Label("Spawn in circle form : ", EditorStyles.label);
+
+            fieldGenerator.spawnRadius = EditorGUILayout.FloatField("Radius : ", fieldGenerator.spawnRadius);
+        }
+        else if (fieldGenerator.whichSpawner == 1)
+        {
+            GUILayout.Label("Spawn in squarre form : ", EditorStyles.label);
+
+            EditorGUILayout.BeginHorizontal();
+
+            fieldGenerator.spawnWidth = EditorGUILayout.FloatField("Width (x) : ", fieldGenerator.spawnWidth);
+            fieldGenerator.spawnLength = EditorGUILayout.FloatField("Lenght (z) : ", fieldGenerator.spawnLength);
+
+            EditorGUILayout.EndHorizontal();
+        }
+        #endregion
+
         GUILayout.Space(25);
+
+        #region Editor Button
+        GUILayout.Label("Editor Action", EditorStyles.boldLabel);
+
+        GUILayout.Space(15);
 
         EditorGUILayout.BeginHorizontal();
 
@@ -87,5 +121,6 @@ public class FieldGeneratorEditor : Editor
         }
 
         EditorGUILayout.EndHorizontal();
+        #endregion
     }
 }
