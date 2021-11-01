@@ -21,6 +21,6 @@ public class VoidReset : MonoBehaviour
             m_rb.velocity.Set(0, 0, 0);
             m_Player.transform.position = startPosition;
         }
-        Debug.Log(collision.gameObject.CompareTag("Player"));
+        //Debug.Log(collision.gameObject.CompareTag("Player"));
     }
 }

@@ -4,14 +4,21 @@ using UnityEditor;
 [CustomEditor(typeof(FieldGenerator))]
 public class FieldGeneratorEditor : Editor
 {
+    FieldGenerator fieldGenerator;
+
+    private void OnEnable()
+    {
+        //Recup les données du script "FieldGenerator"
+        fieldGenerator = (FieldGenerator)target;
+    }
+
+    //Edite l'inspector Unity
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
 
         GUILayout.Space(25);
 
-        //Recup les données du script "FieldGenerator"
-        FieldGenerator fieldGenerator = (FieldGenerator)target;
 
 
         #region Object Parameters
@@ -27,37 +34,43 @@ public class FieldGeneratorEditor : Editor
         GUILayout.Label("Random Rotation : ", EditorStyles.label);
 
         EditorGUILayout.BeginHorizontal();
+        {
+            EditorGUILayout.BeginVertical();
+            {
+                fieldGenerator.minRandomRotation.x = EditorGUILayout.FloatField("x : ", fieldGenerator.minRandomRotation.x, GUILayout.ExpandWidth(false));
+                fieldGenerator.minRandomRotation.y = EditorGUILayout.FloatField("y : ", fieldGenerator.minRandomRotation.y, GUILayout.ExpandWidth(false));
+                fieldGenerator.minRandomRotation.z = EditorGUILayout.FloatField("z : ", fieldGenerator.minRandomRotation.z, GUILayout.ExpandWidth(false));
+            }
+            EditorGUILayout.EndVertical();
 
-        EditorGUILayout.BeginVertical();
-        fieldGenerator.minRandomRotation.x = EditorGUILayout.FloatField("x : ", fieldGenerator.minRandomRotation.x, GUILayout.ExpandWidth(false));
-        fieldGenerator.minRandomRotation.y = EditorGUILayout.FloatField("y : ", fieldGenerator.minRandomRotation.y, GUILayout.ExpandWidth(false));
-        fieldGenerator.minRandomRotation.z = EditorGUILayout.FloatField("z : ", fieldGenerator.minRandomRotation.z, GUILayout.ExpandWidth(false));
-        EditorGUILayout.EndVertical();
+            EditorGUILayout.BeginVertical();
+            {
+                EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomRotation.x, ref fieldGenerator.maxRandomRotation.x, -180, 180);
+                EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomRotation.y, ref fieldGenerator.maxRandomRotation.y, 0, 360);
+                EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomRotation.z, ref fieldGenerator.maxRandomRotation.z, -180, 180);
+            }
+            EditorGUILayout.EndVertical();
 
-        EditorGUILayout.BeginVertical();
-        EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomRotation.x, ref fieldGenerator.maxRandomRotation.x, -180, 180);
-        EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomRotation.y, ref fieldGenerator.maxRandomRotation.y, 0, 360);
-        EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomRotation.z, ref fieldGenerator.maxRandomRotation.z, -180, 180);
-        EditorGUILayout.EndVertical();
-
-        EditorGUILayout.BeginVertical();
-        fieldGenerator.maxRandomRotation.x = EditorGUILayout.FloatField(fieldGenerator.maxRandomRotation.x, GUILayout.MaxWidth(50));
-        fieldGenerator.maxRandomRotation.y = EditorGUILayout.FloatField(fieldGenerator.maxRandomRotation.y, GUILayout.MaxWidth(50));
-        fieldGenerator.maxRandomRotation.z = EditorGUILayout.FloatField(fieldGenerator.maxRandomRotation.z, GUILayout.MaxWidth(50));
-        EditorGUILayout.EndVertical();
-
+            EditorGUILayout.BeginVertical();
+            {
+                fieldGenerator.maxRandomRotation.x = EditorGUILayout.FloatField(fieldGenerator.maxRandomRotation.x, GUILayout.MaxWidth(50));
+                fieldGenerator.maxRandomRotation.y = EditorGUILayout.FloatField(fieldGenerator.maxRandomRotation.y, GUILayout.MaxWidth(50));
+                fieldGenerator.maxRandomRotation.z = EditorGUILayout.FloatField(fieldGenerator.maxRandomRotation.z, GUILayout.MaxWidth(50));
+            }
+            EditorGUILayout.EndVertical();
+        }
         EditorGUILayout.EndHorizontal();
 
         GUILayout.Space(10);
 
         EditorGUILayout.BeginHorizontal();
-
-        fieldGenerator.minRandomScale = EditorGUILayout.FloatField("Random Scale : ", fieldGenerator.minRandomScale, GUILayout.ExpandWidth(false));
-        EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomScale, ref fieldGenerator.maxRandomScale, 0, 2);
-        fieldGenerator.maxRandomScale = EditorGUILayout.FloatField(fieldGenerator.maxRandomScale, GUILayout.MaxWidth(50));
-
+        {
+            fieldGenerator.minRandomScale = EditorGUILayout.FloatField("Random Scale : ", fieldGenerator.minRandomScale, GUILayout.ExpandWidth(false));
+            EditorGUILayout.MinMaxSlider(ref fieldGenerator.minRandomScale, ref fieldGenerator.maxRandomScale, 0, 2);
+            fieldGenerator.maxRandomScale = EditorGUILayout.FloatField(fieldGenerator.maxRandomScale, GUILayout.MaxWidth(50));
+        }
         EditorGUILayout.EndHorizontal();
-#endregion
+        #endregion
 
         GUILayout.Space(25);
 
@@ -92,12 +105,7 @@ public class FieldGeneratorEditor : Editor
         {
             GUILayout.Label("Spawn in squarre form : ", EditorStyles.label);
 
-            EditorGUILayout.BeginHorizontal();
-
-            fieldGenerator.spawnWidth = EditorGUILayout.FloatField("Width (x) : ", fieldGenerator.spawnWidth);
-            fieldGenerator.spawnLength = EditorGUILayout.FloatField("Lenght (z) : ", fieldGenerator.spawnLength);
-
-            EditorGUILayout.EndHorizontal();
+            fieldGenerator.spawnWidthNLength = EditorGUILayout.Vector2Field("Width & Length : ", fieldGenerator.spawnWidthNLength);
         }
         #endregion
 

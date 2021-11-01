@@ -15,8 +15,7 @@ public class FieldGenerator : MonoBehaviour
     //Spawner Variables
     [HideInInspector] public int whichSpawner = 0;
     [HideInInspector] public float spawnRadius = 10f;
-    [HideInInspector] public float spawnWidth = 10f;
-    [HideInInspector] public float spawnLength = 10f;
+    [HideInInspector] public Vector2 spawnWidthNLength = new Vector2(10, 10);
 
     private void Awake()
     {
@@ -43,7 +42,7 @@ public class FieldGenerator : MonoBehaviour
                 //Randomise inseide a circle
                 Vector2 randomSpawn = Random.insideUnitCircle * spawnRadius;
                 //Add the randomise with the actual spawner position
-                Vector2 transformVec2 = new Vector2(transform.position.x + randomSpawn.x, transform.position.z + randomSpawn.y);
+                Vector2 transformVec2 = new Vector2(randomSpawn.x + transformX, randomSpawn.y + transformZ);
 
                 //Attribute the Vector2 values for the new Position
                 randomSpawnX = transformVec2.x;
@@ -52,8 +51,8 @@ public class FieldGenerator : MonoBehaviour
             else if (whichSpawner == 1) //The square one
             {
                 //Set random float for a random Vector3 x and z
-                randomSpawnX = Random.Range(-spawnWidth + transformX, spawnWidth + transformX);
-                randomSpawnZ = Random.Range(-spawnLength + transformZ, spawnLength + transformZ);
+                randomSpawnX = Random.Range(-spawnWidthNLength.x + transformX, spawnWidthNLength.x + transformX);
+                randomSpawnZ = Random.Range(-spawnWidthNLength.y + transformZ, spawnWidthNLength.y + transformZ);
             }
 
             //Set random Vector3 with the both previous float
