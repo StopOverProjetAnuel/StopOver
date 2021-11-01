@@ -7,6 +7,7 @@ public class DepositZone_b : MonoBehaviour
 {
     public float waitDeposit = 1;
     private float previousTime;
+    public float minSpeed;
     public GameObject m_Player;
     private RessourceManager ressourceManager;
     public GameObject timerFont;
@@ -29,7 +30,7 @@ public class DepositZone_b : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Rigidbody rb = m_Player.GetComponent<Rigidbody>();
-        if (m_Player != null && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= 1f)
+        if (m_Player != null && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= minSpeed)
         {
             if (previousTime <= Time.time)
             {
