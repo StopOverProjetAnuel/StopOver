@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4634074038436183969}
   - component: {fileID: 3404427451041262868}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: MushroomHead_Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: 8060809016858553275}
   - component: {fileID: 5524098151138171977}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Big_Plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,17 +160,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1036469320752719286, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 1496928571612430560, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1763904039170908321, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1890935668221724160, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 2701901194176850415, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2944369694605644193, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3407064595642734797, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 4588810072003546219, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
       propertyPath: m_Name
       value: Mushroom_model_b
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588810072003546219, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5435273763087560993, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212158669539856896, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7493255392097268846, guid: 3aaab50a907c2e94199f1fc86c61325d, type: 3}
       propertyPath: m_Mesh
