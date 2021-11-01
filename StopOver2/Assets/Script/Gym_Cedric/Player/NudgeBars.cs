@@ -12,6 +12,7 @@ public class NudgeBars : MonoBehaviour
 
     [Header("Nugde Bars States")]
     public GameObject nudgeBars;
+    public GameObject nudgeBars_model;
     public Material[] nudgeBarsMaterials;
     public float min1stState;
     public float min2ndState;
@@ -30,7 +31,7 @@ public class NudgeBars : MonoBehaviour
     {
         if (Input.GetAxis("Vertical") > 0)
         {
-            nudgeBars.SetActive(true);
+            nudgeBars_model.SetActive(true);
             if (rb.velocity.magnitude >= min2ndState)
             {
                 nbState = 3;
@@ -44,11 +45,11 @@ public class NudgeBars : MonoBehaviour
                 nbState = 1;
             }
 
-            nudgeBars.GetComponent<MeshRenderer>().material = nudgeBarsMaterials[Mathf.Clamp(nbState - 1, 0, 2)];
+            nudgeBars_model.GetComponent<MeshRenderer>().material = nudgeBarsMaterials[Mathf.Clamp(nbState - 1, 0, 2)];
         }
         else
         {
-            nudgeBars.SetActive(false);
+            nudgeBars_model.SetActive(false);
             nbState = 0;
         }
     }
