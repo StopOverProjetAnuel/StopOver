@@ -6,8 +6,7 @@ public class CollidedPlayer : MonoBehaviour
 {
     private RessourceManager ressourceManager;
 
-    private GameObject m_Player;
-    private OverboardController overboardController;
+    private NudgeBars nudgeBars;
     public string playerWeaponTagName;
 
     public GameObject droppedItem;
@@ -19,15 +18,13 @@ public class CollidedPlayer : MonoBehaviour
     private void Start()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
-
-        m_Player = GameObject.FindWithTag("Player");
-        overboardController = m_Player.GetComponent<OverboardController>();
+        nudgeBars = FindObjectOfType<NudgeBars>();
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerWeaponTagName) && overboardController.nbState >= resistanceLevel + 1)
+        if (other.CompareTag(playerWeaponTagName) && nudgeBars.nbState >= resistanceLevel + 1)
         {
             if (ressourceManager.currentRessource != ressourceManager.maxRessource)
             {
