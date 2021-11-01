@@ -7,7 +7,7 @@ public class DepositZone_b : MonoBehaviour
 {
     public float waitDeposit = 1;
     private float previousTime;
-    private GameObject m_Player;
+    public GameObject m_Player;
     private RessourceManager ressourceManager;
     public GameObject timerFont;
     public Material chargeMat;
@@ -15,14 +15,12 @@ public class DepositZone_b : MonoBehaviour
 
     private void Awake()
     {
-        m_Player = FindObjectOfType<OverboardController>().gameObject;
         ressourceManager = FindObjectOfType<RessourceManager>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        OverboardController player = other.GetComponent<OverboardController>();
-        if (player != null)
+        if (m_Player != null)
         {
             previousTime = Time.time + waitDeposit;
         }
@@ -30,9 +28,8 @@ public class DepositZone_b : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        OverboardController player = other.GetComponent<OverboardController>();
         Rigidbody rb = m_Player.GetComponent<Rigidbody>();
-        if (player != null && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= 1f)
+        if (m_Player != null && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= 1f)
         {
             if (previousTime <= Time.time)
             {
@@ -50,8 +47,7 @@ public class DepositZone_b : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        OverboardController player = other.GetComponent<OverboardController>();
-        if (player != null)
+        if (m_Player != null)
         {
             timerFont.GetComponent<MeshRenderer>().material = unchargeMat;
             waitDeposit = 1f;
