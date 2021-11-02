@@ -1,8 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class FieldGenerator : MonoBehaviour
 {
-    public GameObject[] spawnObjects;
+    [System.Serializable]
+    public class Field
+    {
+        public GameObject[] spawnObjects;
+        public int weight;
+    }
+
+    public List<Field> field = new List<Field>();
     public LayerMask ground = 0;
 
     //Object Variables
@@ -17,10 +25,11 @@ public class FieldGenerator : MonoBehaviour
     [HideInInspector] public float spawnRadius = 10f;
     [HideInInspector] public Vector2 spawnWidthNLength = new Vector2(10, 10);
 
+
     private void Awake()
     {
         //Call method
-        GenerateField();
+        RegenerateField();
     }
 
     public void GenerateField()
@@ -75,10 +84,10 @@ public class FieldGenerator : MonoBehaviour
             Quaternion randomRotation = Quaternion.Euler(randomVector3);
 
             //Choose a random gameobject
-            int randomObject = Random.Range(0, spawnObjects.Length);
+            int randomObject = Random.Range(0, field[0].spawnObjects.Length);
 
             //Spawn the object
-            GameObject spawnedObject = Instantiate(spawnObjects[randomObject], randomPosition, randomRotation);
+            GameObject spawnedObject = Instantiate(field[0].spawnObjects[randomObject], randomPosition, randomRotation);
 
             //Set random Scale
             float randomScale = Random.Range(minRandomScale, maxRandomScale);
@@ -114,7 +123,13 @@ public class FieldGenerator : MonoBehaviour
     {
         if (this.transform.childCount > 0)
         {
-            foreach (Transform child in transform)
+            List<Transform> childList = new List<Transform>();
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Transform gChild = transform.GetChild(i);
+                childList.Add(gChild);
+            }
+            foreach (Transform child in childList)
             {
                 if (Application.isEditor == true)
                 {
