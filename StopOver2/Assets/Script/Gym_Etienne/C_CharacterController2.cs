@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class C_CharacterController2 : MonoBehaviour
 {
+    [Header("Input")]
+    [Space]
+    public string boostInputName = "Boost";
+
     [Header("Gameobject")]
     [Space]
     public GameObject groundCheck;
@@ -133,6 +137,8 @@ public class C_CharacterController2 : MonoBehaviour
 
     private Quaternion cameraDirection;
 
+     
+
     // Start is called before the first frame update
     void Start()
     {
@@ -144,8 +150,7 @@ public class C_CharacterController2 : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         matSurchaufeMoteur.color = Color.white;
-        
-        
+
     }
 
     // Update is called once per frame
@@ -187,7 +192,8 @@ public class C_CharacterController2 : MonoBehaviour
     {
         #region Lunch / Stop Boost
         
-        if (Input.GetKey(KeyCode.Space) && canBoost)
+        //if (Input.GetKey(KeyCode.Space) && canBoost)
+        if (Input.GetAxis(boostInputName) > 0 && canBoost)
         {
             fxBoost.Play();
             boostActiv = true;
