@@ -6,14 +6,13 @@ public class FieldGenerator : MonoBehaviour
     [System.Serializable]
     public class Field
     {
-        public GameObject[] spawnObjects;
+        public GameObject spawnObjects;
         public int weight;
     }
 
+    //Object Variables
     public List<Field> field = new List<Field>();
     public LayerMask ground = 0;
-
-    //Object Variables
     [HideInInspector] public int spawnAmmount = 1;
     [HideInInspector] public Vector3 minRandomRotation = Vector3.zero;
     [HideInInspector] public Vector3 maxRandomRotation = Vector3.zero;
@@ -84,10 +83,10 @@ public class FieldGenerator : MonoBehaviour
             Quaternion randomRotation = Quaternion.Euler(randomVector3);
 
             //Choose a random gameobject
-            int randomObject = Random.Range(0, field[0].spawnObjects.Length);
+            int randomObject = Random.Range(0, field.Count);
 
             //Spawn the object
-            GameObject spawnedObject = Instantiate(field[0].spawnObjects[randomObject], randomPosition, randomRotation);
+            GameObject spawnedObject = Instantiate(field[randomObject].spawnObjects, randomPosition, randomRotation);
 
             //Set random Scale
             float randomScale = Random.Range(minRandomScale, maxRandomScale);
