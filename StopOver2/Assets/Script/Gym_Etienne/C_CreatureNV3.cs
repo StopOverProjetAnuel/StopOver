@@ -13,9 +13,12 @@ public class C_CreatureNV3 : MonoBehaviour
 
     public float minTimeBetweenDrink;
     public float maxTimeBetweenDrink;
-
+    [Space]
     public float minTimeBetweenEat;
     public float maxTimeBetweenEat;
+    [Space]
+    public float minCooldownBetweenFase;
+    public float maxCooldownBetweenFase;
 
     private float distanceCreatureDestination;
 
@@ -27,6 +30,11 @@ public class C_CreatureNV3 : MonoBehaviour
 
     private float t2;
     private float currentTimeBetweenEat;
+
+    private float t3;
+    private float currentCooldownBetweenFase;
+    private bool cooldownBetweenFase;
+    private bool haveToDefCooldownTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +47,13 @@ public class C_CreatureNV3 : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
-        creature.SetDestination(_ZoneCreatureNV3.currentPointToGo.position);
+        Debug.Log(cooldownBetweenFase);
+
+        if (!cooldownBetweenFase)
+        {
+            creature.SetDestination(_ZoneCreatureNV3.currentPointToGo.position);
+
+        }
 
         distanceCreatureDestination = Vector3.Distance(_ZoneCreatureNV3.currentPointToGo.position, transform.position);
 
@@ -60,19 +74,32 @@ public class C_CreatureNV3 : MonoBehaviour
                 _ZoneCreatureNV3.goToEat = false;
             }
 
-            if (haveToDrink)
+            if (haveToDrink && !cooldownBetweenFase)
             {
+                cooldownBetweenFase = true;
                 FoundWater();
-            }else if(!haveToDrink && haveToEat)
+            }else if(!haveToDrink && haveToEat && !cooldownBetweenFase)
             {
+                cooldownBetweenFase = true;
                 FoundFood();
             }
 
-            if(!haveToDrink && !haveToEat)
+            if(!haveToDrink && !haveToEat && !cooldownBetweenFase)
             {
+                cooldownBetweenFase = true;
                 NewDestination();
             }
 
+        }
+
+        if (cooldownBetweenFase)
+        {
+            if (haveToDefCooldownTime)
+            {
+                currentCooldownBetweenFase = Random.Range(minCooldownBetweenFase, maxCooldownBetweenFase);
+                haveToDefCooldownTime = false;
+            }
+            CooldownBetweenFase();
         }
 
         
@@ -123,5 +150,19 @@ public class C_CreatureNV3 : MonoBehaviour
     private void FoundWater()
     {
         _ZoneCreatureNV3.FoundWater();
+    }
+
+    private void CooldownBetweenFase()
+    {
+        if(t3 >= 1)
+        {
+            cooldownBetweenFase = false;
+            haveToDefCooldownTime = true;
+            t3 = 0;
+        }
+        else
+        {
+            t3 += Time.deltaTime / currentCooldownBetweenFase;
+        }
     }
 }
