@@ -33342,7 +33342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 467416661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -263.12, y: 7.7, z: 287.48657}
+  m_LocalPosition: {x: -263.11996, y: 7.7, z: 287.48657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1658307018}
@@ -34399,7 +34399,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ZoneCreatureNV3: {fileID: 1650223553}
   creature: {fileID: 548150812}
+  speedBase: 5
+  speedFuit: 10
   pointCenterZone: {fileID: 1650223552}
+  charcter: {fileID: 416826807}
+  distanceMinCreatureCharcter: 60
   minTimeBetweenDrink: 60
   maxTimeBetweenDrink: 120
   minTimeBetweenEat: 30
@@ -34736,7 +34740,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 559433054}
-  m_LocalRotation: {x: 0.08355341, y: -0.24019775, z: 0.020756407, w: 0.9668987}
+  m_LocalRotation: {x: 0.08355328, y: -0.2401989, z: 0.020756477, w: 0.96689844}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -56538,8 +56542,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 991244522}
-  m_LocalRotation: {x: 0.08355341, y: -0.24019776, z: 0.020756407, w: 0.9668987}
-  m_LocalPosition: {x: -263.12, y: 7.7, z: 287.48657}
+  m_LocalRotation: {x: 0.08355329, y: -0.24019891, z: 0.02075648, w: 0.96689844}
+  m_LocalPosition: {x: -263.11996, y: 7.7, z: 287.48657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -62055,7 +62059,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1385474495}
-  m_LocalRotation: {x: 0.06590052, y: -0.24053647, z: 0.016371062, w: 0.968262}
+  m_LocalRotation: {x: 0.06590039, y: -0.24053758, z: 0.016371114, w: 0.9682618}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -83447,6 +83451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radiusZone: 25
+  radiusZoneFuit: 150
   foodCreatureNV3:
   - {fileID: 1752389588}
   - {fileID: 1808943539}
@@ -83549,7 +83554,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658307016}
-  m_LocalRotation: {x: 0.10098311, y: -0.23978423, z: 0.02508631, w: 0.965234}
+  m_LocalRotation: {x: 0.10098297, y: -0.23978536, z: 0.025086397, w: 0.96523374}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

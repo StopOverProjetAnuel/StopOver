@@ -6,6 +6,7 @@ public class C_ZoneCreatureNV3 : MonoBehaviour
 {
 
     public float radiusZone;
+    public float radiusZoneFuit;
     public GameObject[] foodCreatureNV3;
     public GameObject water;
 
@@ -50,5 +51,11 @@ public class C_ZoneCreatureNV3 : MonoBehaviour
         goToWater = true;
 
         currentPointToGo.position = water.transform.position;
+    }
+
+    public void Fuit()
+    {
+        currentPointToGo.localPosition = Random.insideUnitSphere * radiusZoneFuit;
+        currentPointToGo.position = new Vector3(currentPointToGo.position.x, 0.85f, currentPointToGo.position.z);
     }
 }

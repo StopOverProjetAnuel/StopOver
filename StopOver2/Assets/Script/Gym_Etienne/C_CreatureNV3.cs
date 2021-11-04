@@ -6,11 +6,15 @@ using UnityEngine.AI;
 public class C_CreatureNV3 : MonoBehaviour
 {
     public C_ZoneCreatureNV3 _ZoneCreatureNV3;
-
     public NavMeshAgent creature;
-
+    public float speedBase;
+    public float speedFuit;
     public Transform pointCenterZone;
 
+    public GameObject charcter;
+    public float distanceMinCreatureCharcter;
+
+    [Space]
     public float minTimeBetweenDrink;
     public float maxTimeBetweenDrink;
     [Space]
@@ -21,6 +25,7 @@ public class C_CreatureNV3 : MonoBehaviour
     public float maxCooldownBetweenFase;
 
     private float distanceCreatureDestination;
+    private float distanceCreatureCharcter;
 
     private bool haveToDrink;
     private bool haveToEat;
@@ -35,6 +40,10 @@ public class C_CreatureNV3 : MonoBehaviour
     private float currentCooldownBetweenFase;
     private bool cooldownBetweenFase;
     private bool haveToDefCooldownTime;
+
+    private bool fuit;
+    private bool selectPointFuit;
+    private Vector3 currentPointFuit;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,47 +56,72 @@ public class C_CreatureNV3 : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
-        Debug.Log(cooldownBetweenFase);
+        Debug.Log(fuit);
 
         if (!cooldownBetweenFase)
         {
             creature.SetDestination(_ZoneCreatureNV3.currentPointToGo.position);
-
         }
 
+        distanceCreatureCharcter = Vector3.Distance(charcter.transform.position, transform.position);
+
+        if(distanceCreatureCharcter < distanceMinCreatureCharcter)
+        {
+            if (!selectPointFuit)
+            {
+                SelectPointFuit();               
+            }
+
+            creature.speed = speedFuit;
+            fuit = true;
+        }else if(distanceCreatureCharcter > (distanceMinCreatureCharcter * 2.5))
+        {
+            creature.speed = speedBase;
+            selectPointFuit = false;
+            fuit = false;
+        }
+        
         distanceCreatureDestination = Vector3.Distance(_ZoneCreatureNV3.currentPointToGo.position, transform.position);
 
-
-        if(distanceCreatureDestination < 0.5f)
+        if(fuit && distanceCreatureDestination < 0.5f)
         {
-            if (_ZoneCreatureNV3.goToWater)
-            {
-                currentTimeBetweenDrink = Random.Range(minTimeBetweenDrink, maxTimeBetweenDrink);
-                haveToDrink = false;
-                _ZoneCreatureNV3.goToWater = false;
-            }
+                SelectPointFuit();            
+        }
 
-            if (_ZoneCreatureNV3.goToEat)
+        if (!fuit)
+        {
+            if(distanceCreatureDestination < 0.5f)
             {
-                currentTimeBetweenEat = Random.Range(minTimeBetweenEat, maxTimeBetweenEat);
-                haveToEat = false;
-                _ZoneCreatureNV3.goToEat = false;
-            }
+                if (_ZoneCreatureNV3.goToWater)
+                {
+                    currentTimeBetweenDrink = Random.Range(minTimeBetweenDrink, maxTimeBetweenDrink);
+                    haveToDrink = false;
+                    _ZoneCreatureNV3.goToWater = false;
+                }
 
-            if (haveToDrink && !cooldownBetweenFase)
-            {
-                cooldownBetweenFase = true;
-                FoundWater();
-            }else if(!haveToDrink && haveToEat && !cooldownBetweenFase)
-            {
-                cooldownBetweenFase = true;
-                FoundFood();
-            }
+                if (_ZoneCreatureNV3.goToEat)
+                {
+                    currentTimeBetweenEat = Random.Range(minTimeBetweenEat, maxTimeBetweenEat);
+                    haveToEat = false;
+                    _ZoneCreatureNV3.goToEat = false;
+                }
 
-            if(!haveToDrink && !haveToEat && !cooldownBetweenFase)
-            {
-                cooldownBetweenFase = true;
-                NewDestination();
+                if (haveToDrink && !cooldownBetweenFase)
+                {
+                    cooldownBetweenFase = true;
+                    FoundWater();
+                }else if(!haveToDrink && haveToEat && !cooldownBetweenFase)
+                {
+                    cooldownBetweenFase = true;
+                    FoundFood();
+                }
+
+                if(!haveToDrink && !haveToEat && !cooldownBetweenFase)
+                {
+                    cooldownBetweenFase = true;
+                    NewDestination();
+                }
+
             }
 
         }
@@ -164,5 +198,11 @@ public class C_CreatureNV3 : MonoBehaviour
         {
             t3 += Time.deltaTime / currentCooldownBetweenFase;
         }
+    }
+
+    private void SelectPointFuit()
+    {
+        _ZoneCreatureNV3.Fuit();
+        selectPointFuit = true;
     }
 }
