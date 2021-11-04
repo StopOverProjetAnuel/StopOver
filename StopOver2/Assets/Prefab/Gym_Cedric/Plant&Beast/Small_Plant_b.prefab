@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5524098151138171977}
   m_Layer: 12
   m_Name: Small_Plant_b
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -42,7 +42,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8979272754488225753}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -245,16 +245,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000028610229
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0021593156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000000038146972
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalRotation.w

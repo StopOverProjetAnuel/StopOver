@@ -11,11 +11,13 @@ public class NudgeBars : MonoBehaviour
     [HideInInspector] public int nbState;
 
     [Header("Nugde Bars States")]
-    public GameObject nudgeBars;
     public GameObject nudgeBars_model;
     public Material[] nudgeBarsMaterials;
     public float min1stState;
     public float min2ndState;
+
+    //Object Collision
+    private CollidedPlayer collidedPlayer;
 
     private void Awake()
     {
@@ -51,6 +53,39 @@ public class NudgeBars : MonoBehaviour
         {
             nudgeBars_model.SetActive(false);
             nbState = 0;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.parent == null)
+        {
+            doThing();
+        }
+        else
+        {
+            Transform tfParent = other.transform.parent;
+            if (tfParent.CompareTag("Destructible"))
+            {
+                collidedPlayer = tfParent.GetComponent<CollidedPlayer>();
+                collidedPlayer.TriggerCollisionPlayer();
+                Debug.Log("NudgeBars get triggered with a destructible object");
+            }
+            else
+            {
+                doThing();
+            }
+        }
+        Debug.Log("NudgeBars get triggered");
+
+        void doThing()
+        {
+            if (other.CompareTag("Destructible"))
+            {
+                collidedPlayer = other.GetComponent<CollidedPlayer>();
+                collidedPlayer.TriggerCollisionPlayer();
+                Debug.Log("NudgeBars get triggered with a destructible object");
+            }
         }
     }
 }

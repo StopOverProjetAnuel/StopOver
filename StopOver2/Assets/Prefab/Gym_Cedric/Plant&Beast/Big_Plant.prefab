@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &8361219642891248761
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8887427559675349405}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8499619990140012305, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
 --- !u!1 &8979272754488225753
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,11 +23,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7862259290605686096}
-  - component: {fileID: 8060809016858553275}
   - component: {fileID: 5524098151138171977}
   m_Layer: 14
   m_Name: Big_Plant
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34,20 +47,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &8060809016858553275
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8979272754488225753}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 5
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &5524098151138171977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,27 +186,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.96
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalScale.y
-      value: 5.2291803
+      value: 7.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.96
+      value: 11.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.000000028610229
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0021593156
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000000038146972
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalRotation.w
@@ -241,8 +240,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: modo_Champignion
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+      propertyPath: m_TagString
+      value: Destructible
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+--- !u!1 &8887427559675349405 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+  m_PrefabInstance: {fileID: 8617380149232039116}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8078803435107324711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}

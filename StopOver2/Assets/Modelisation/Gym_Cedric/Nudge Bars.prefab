@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6221094283007750195}
   - component: {fileID: 6732370480830133463}
   - component: {fileID: 2790926440862990915}
-  - component: {fileID: 3556201966356116008}
   m_Layer: 11
   m_Name: Nudge Bars
   m_TagString: Weapon
@@ -418,18 +417,4 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173658373073842761}
-  m_Mesh: {fileID: 0}
---- !u!64 &3556201966356116008
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 173658373073842761}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: -1
   m_Mesh: {fileID: 0}
