@@ -1,0 +1,48 @@
+# # Unité ##
+* .cs  diff = texte charp 
+* texte .cginc 
+* texte .shader 
+* .mat  merge = unityyamlmerge  eol = lf
+* .anim  merge = unityyamlmerge  eol = lf
+* .unity  merge = unityyamlmerge  eol = lf
+* .prefab  merge = unityyamlmerge  eol = lf
+* .physicsMaterial2D  merge = unityyamlmerge  eol = lf
+* .physicMaterial  merge = unityyamlmerge  eol = lf
+* .asset  merge = unityyamlmerge  eol = lf
+* .meta  merge = unityyamlmerge  eol = lf
+* .controller  merge = unityyamlmerge  eol = lf
+# # git-lfs ##
+# Image
+* .jpg  filter = lfs  diff = lfs  merge = lfs  - texte
+* .jpeg  filter = lfs  diff = lfs  merge = lfs  - texte
+* .png  filtre = lfs  diff = lfs  merge = lfs  - texte
+* .gif  filter = lfs  diff = lfs  merge = lfs  - texte
+* .psd  filter = lfs  diff = lfs  merge = lfs  - texte
+* .ai  filter = lfs  diff = lfs  merge = lfs  - texte
+* .tif  filter = lfs  diff = lfs  merge = lfs  - texte
+# Son
+* .mp3  filter = lfs  diff = lfs  merge = lfs  - texte
+* .wav  filter = lfs  diff = lfs  merge = lfs  - texte
+* .ogg  filter = lfs  diff = lfs  merge = lfs  - texte
+# Vidéo
+* .mp4  filter = lfs  diff = lfs  merge = lfs  - texte
+* .mov  filter = lfs  diff = lfs  merge = lfs  - texte
+# Objet 3D
+* .FBX  filter = lfs  diff = lfs  merge = lfs  - texte
+* .fbx  filter = lfs  diff = lfs  merge = lfs  - texte
+* .blend  filter = lfs  diff = lfs  merge = lfs  - texte
+* .obj  filter = lfs  diff = lfs  merge = lfs  - texte
+# ETC
+* .a  filter = lfs  diff = lfs  merge = lfs  - texte
+* .exr  filter = lfs  diff = lfs  merge = lfs  - texte
+* .tga  filter = lfs  diff = lfs  merge = lfs  - texte
+* filtre .pdf  = lfs diff = lfs merge = lfs - texte   
+* .zip  filter = lfs  diff = lfs  merge = lfs  - texte
+* .dll  filter = lfs  diff = lfs  merge = lfs  - texte
+* .unitypackage  filter = lfs  diff = lfs  merge = lfs  - texte
+* .aif  filter = lfs  diff = lfs  merge = lfs  - texte
+* .ttf  filter = lfs  diff = lfs  merge = lfs  - texte
+* .rns  filter = lfs  diff = lfs  merge = lfs  - texte
+* .reason  filter = lfs  diff = lfs  merge = lfs  - texte
+* .lxo  filter = lfs  diff = lfs  merge = lfs  - texte
+*.unity filter=lfs diff=lfs merge=lfs -text
