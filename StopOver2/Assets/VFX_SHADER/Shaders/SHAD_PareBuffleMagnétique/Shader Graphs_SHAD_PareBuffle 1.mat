@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2725988814042319145
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: "Shader Graphs_SHAD_PareBuffleMagn\xE9tique"
-  m_Shader: {fileID: -6465566751694194690, guid: 5f7c1bc33b3ab2c4ab8c37ae509e517f, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_Name: Shader Graphs_SHAD_PareBuffle 1
+  m_Shader: {fileID: -6465566751694194690, guid: b89a818f4e0ffbb4ba77783ebe446e1d, type: 3}
+  m_ShaderKeywords: _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
@@ -38,8 +25,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_c449270626c44bd0be6863453802cf16:
-        m_Texture: {fileID: 2800000, guid: b322b0de7c2f4e74c9f567b75b71e98e, type: 3}
+    - Texture:
+        m_Texture: {fileID: 2800000, guid: 7aca33e7531b11442aa1a0b7c3d9d6ec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -55,18 +42,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_bd396ef3e5d146cabaff73bad6a5507d: 3
+    - PulseDensity: 0.5
+    - SpeedTextPulse: 2
+    - Vector1_09e5db46be13432e98f3607ec0eca478: 0
+    - Vector1_d5b32ba934094a209855cf20f72975f1: 0
     - _AddPrecomputedVelocity: 0
-    - _AlphaCutoffEnable: 1
+    - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
@@ -94,14 +84,25 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 3
+    - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_78b8fdf95b3f4904938c063a35276321: {r: 0, g: 2.0084615, b: 3.509434, a: 0}
-    - Color_ce9fcfe5d8284ab88819ed5d8e142e11: {r: 0, g: 2.9485118, b: 2.7521076, a: 0}
-    - Vector2_42019d5da0054750b5f3d4e8cbd47709: {r: 0, g: 0.5, b: 0, a: 0}
-    - Vector2_58e77917422d41f1bdbb5b1df9e6688c: {r: 0.5, g: 0.1, b: 0, a: 0}
+    - Color_ff2090286bdb42af9ce95e7ce58dd0e0: {r: 0, g: 0.00030637256, b: 0.0007314645, a: 0}
+    - IntersectionColor: {r: 0, g: 0.14077187, b: 0.21509942, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &8665392971192949044
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11
