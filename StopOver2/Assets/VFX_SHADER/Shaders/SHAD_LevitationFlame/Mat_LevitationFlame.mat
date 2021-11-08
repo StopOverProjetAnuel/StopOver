@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7569504968928984958
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -20,12 +7,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_SHAD_Overheating Flame
-  m_Shader: {fileID: -6465566751694194690, guid: 11dc81f422d079444bef1ed9ce14d7a7, type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_Name: Mat_LevitationFlame
+  m_Shader: {fileID: -6465566751694194690, guid: 737423c04fbaad34686cf8036621bad1, type: 3}
+  m_ShaderKeywords: _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
@@ -34,14 +21,9 @@ Material:
   - MOTIONVECTORS
   - TransparentDepthPrepass
   - TransparentDepthPostpass
-  - TransparentBackface
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_462ace41108a40458faafcd26376ae2b:
-        m_Texture: {fileID: 2800000, guid: 56b7b6a9c1c8ea440b7aa39f8fd8787a, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,24 +37,27 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Distortion: 0.07
-    - Vector1_2875672bff254ba189ff3fe246276b15: 0
-    - Vector1_78b08202e9bf48d18e3519b57cd6cc56: 0
+    - Vector1_03b6c0970d754460981eecd2c53d6f8e: 2
+    - Vector1_a45e3e808e4a4891b12610d1a50680c1: 0.93
+    - Vector1_c1ddb68d4c214f3bb8510fdf7286e046: 259.59
+    - Vector1_dceb5a1a288e422bb8846b7a39e3697a: 57.95
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
-    - _BlendMode: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _BlendMode: 1
+    - _BoostFlame: 0.63
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
-    - _DstBlend: 10
+    - _DstBlend: 1
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
+    - _Flame_ColorGradient: 0
     - _OpaqueCullMode: 2
     - _RenderQueueType: 4
     - _SrcBlend: 1
@@ -87,7 +72,8 @@ Material:
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _SurfaceType: 1
-    - _TransparentBackfaceEnable: 0
+    - _Top_Flame_Gradient__Stop_flame_: 0
+    - _TransparentBackfaceEnable: 1
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
     - _TransparentDepthPrepassEnable: 0
@@ -100,9 +86,23 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_84b52585f8f6437e9a50ae07a0094c1c: {r: 1, g: 1, b: 1, a: 0}
-    - NoiseTiling: {r: 5, g: 5, b: 0, a: 0}
-    - Speed: {r: 0, g: -5, b: 0, a: 0}
+    - Color_248a0162cefc4e16a442229a46f3abbc: {r: 0.1711786, g: 0.90094, b: 2.297397, a: 0}
+    - Color_6507f5ffa6cf4107b6e5d3eadcd133bf: {r: 1, g: 0, b: 0.9626851, a: 0}
+    - Vector2_bc6e94b47d234446a502f7f07e0bfa46: {r: 0, g: -5.55, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+    - _NoiseTiling: {r: -0.36, g: 12, b: 0, a: 0}
   m_BuildTextureStacks: []
+--- !u!114 &4797490312766730920
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11
