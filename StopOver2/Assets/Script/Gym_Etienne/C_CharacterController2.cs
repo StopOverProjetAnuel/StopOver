@@ -149,7 +149,8 @@ public class C_CharacterController2 : MonoBehaviour
         rb.centerOfMass = centerOfMass.transform.localPosition;
 
         Cursor.lockState = CursorLockMode.Locked;
-        matSurchaufeMoteur.color = Color.white;
+        matSurchaufeMoteur.SetFloat("Color_Size", 0f);
+        matSurchaufeMoteur.SetFloat("_ColorDensity", 0f);
 
     }
 
@@ -236,8 +237,8 @@ public class C_CharacterController2 : MonoBehaviour
             t3 += Time.deltaTime / durasionBoost;
             if (!surchaufe)
             {
-                matSurchaufeMoteur.color = Color.Lerp(Color.white, Color.red, timeUsBoost);
-                matMoteurCurrentSurchaufe = matSurchaufeMoteur.color;
+                matSurchaufeMoteur.SetFloat("Color_Size", timeUsBoost);
+                matSurchaufeMoteur.SetFloat("_ColorDensity", timeUsBoost);
             }
         }
         else if(!boostActiv && transitionBoostToCooldown)
@@ -269,6 +270,7 @@ public class C_CharacterController2 : MonoBehaviour
             {
              
                 currentColdownBoost = Mathf.Lerp(0.5f, maxCooldownBoost, timeUsBoost);
+
             }else if (surchaufeMax)
             {
                 currentColdownBoost = surchaufeCooldownBoost;
