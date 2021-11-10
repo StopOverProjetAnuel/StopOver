@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class C_CharacterInput : MonoBehaviour
+public class C_CharacterInput : C_CharacterManager
 {
 
     [Header("Input")]
     [Space]
+    public float horizontalInput;
+
     public string boostInputName = "Boost";
+
+    public Transform cameraTranform;
+
+    public Quaternion cameraDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +24,10 @@ public class C_CharacterInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        horizontalInput = Input.GetAxisRaw("Horizontal");
+
+        cameraDirection = Quaternion.AngleAxis(cameraTranform.rotation.eulerAngles.y, Vector3.up);
+        cameraDirection.x = transform.localRotation.x;
+        cameraDirection.z = transform.localRotation.z;
     }
 }

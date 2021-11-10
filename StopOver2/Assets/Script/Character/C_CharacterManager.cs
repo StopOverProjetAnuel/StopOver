@@ -13,20 +13,35 @@ public class C_CharacterManager : MonoBehaviour
     public C_CharacterCalculAngle _CharacterCalculAngle;
     public C_CharacterAnime _CharacterAnime;
 
-    
-    
-    
+    public GameObject groundCheck;
+    public GameObject centerOfMass;
 
+    public Rigidbody rb;
+
+
+    private void Awake()
+    {
+        rb = this.GetComponent<Rigidbody>();
+
+        groundCheck = GameObject.Find("GroundCheck");
+        centerOfMass = GameObject.Find("CenterOfMass");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        rb.centerOfMass = centerOfMass.transform.localPosition;
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    private void FixedUpdate()
+    {
+        transform.rotation = _CharacterInput.cameraDirection;
     }
 }
