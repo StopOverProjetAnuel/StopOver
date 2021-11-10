@@ -18,6 +18,11 @@ public class C_CharacterManager : MonoBehaviour
 
     public Rigidbody rb;
 
+    public LayerMask layerGround;
+    public float distanceGroundChara;
+    public float distanceNoControl;
+    public bool isOnAir;
+
 
     private void Awake()
     {
@@ -37,7 +42,19 @@ public class C_CharacterManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        RaycastHit groundHit;
+        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, 10f, layerGround))
+        {
+            distanceGroundChara = groundHit.distance;
+
+            if (distanceGroundChara <= distanceNoControl)
+            {
+                isOnAir = false;
+            }else if (distanceGroundChara > distanceNoControl)
+            {
+                isOnAir = true;
+            }
+        }
     }
 
     private void FixedUpdate()

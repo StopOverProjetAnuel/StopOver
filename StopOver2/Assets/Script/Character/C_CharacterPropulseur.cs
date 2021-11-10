@@ -13,7 +13,7 @@ public class C_CharacterPropulseur : C_CharacterManager
     public float strengthRight;
     public float strengthLeft;
 
-    public float MultiStrength;
+    public float multiStrength;
     public float divisionStrength;
     public float multiLenght;
 
@@ -46,28 +46,58 @@ public class C_CharacterPropulseur : C_CharacterManager
     {
         if (_CharacterInput.horizontalInput < 0)
         {
-            rightLean = true;
-            leftLean = false;
-            currentLenghtRight = length * multiLenght;
-            currentStrengthRight = strengthRight * MultiStrength;
-            currentStrengthLeft = strengthLeft / divisionStrength;
+            //rightLean = true;
+            //leftLean = false;
+
+            if(currentTimeTransitionLean >= 1)
+            {
+                currentTimeTransitionLean = 1;
+            }
+            else
+            {
+                t1 += Time.deltaTime;
+                currentTimeTransitionLean = t1 / timeTransitionLean;
+            }
+
+            currentLenghtRight = Mathf.Lerp(length ,(length * multiLenght), currentTimeTransitionLean);
+            currentLenghtLeft = Mathf.Lerp(length,(length / divisionStrength), currentTimeTransitionLean);
+            //currentLenghtRight = length * (multiLenght * - _CharacterInput.horizontalInput);
+            //currentStrengthRight = strengthRight * multiStrength;
+            //currentStrengthLeft = strengthLeft / divisionStrength;
 
             currentDampening = dampening;
+
+            //Debug.Log("lenght Right" + currentLenghtRight);
         }
         else if (_CharacterInput.horizontalInput > 0)
         {
-            leftLean = true;
-            rightLean = false;
-            currentLenghtLeft = length * multiLenght;
-            currentStrengthLeft = strengthLeft * MultiStrength;
-            currentStrengthRight = strengthRight / divisionStrength;
+            //leftLean = true;
+            //rightLean = false;
+
+            if (currentTimeTransitionLean >= 1)
+            {
+                currentTimeTransitionLean = 1;
+            }
+            else
+            {
+                t1 += Time.deltaTime;
+                currentTimeTransitionLean = t1 / timeTransitionLean;
+            }
+
+            currentLenghtLeft = Mathf.Lerp(length,(length * multiLenght), currentTimeTransitionLean);
+            currentLenghtRight = Mathf.Lerp(length,(length / divisionStrength), currentTimeTransitionLean);
+            //currentLenghtLeft = length * (multiLenght * _CharacterInput.horizontalInput);
+            //currentStrengthLeft = strengthLeft * multiStrength;
+            //currentStrengthRight = strengthRight / divisionStrength;
 
             currentDampening = dampening;
+
+            //Debug.Log("lenght Left" + currentLenghtLeft);
         }
         else
         {
-            leftLean = false;
-            rightLean = false;
+            //leftLean = false;
+            //rightLean = false;
             currentTimeTransitionLean = 0;
             t1 = 0;
             currentLenghtRight = length;
@@ -86,7 +116,12 @@ public class C_CharacterPropulseur : C_CharacterManager
 
                 lastHitDistRight = hit.distance;
                 float forceAmount = 0;
-                if (!rightLean)
+
+                forceAmount = currentStrengthRight * (currentLenghtRight - lastHitDistRight) / currentLenghtRight + (currentDampening * (lastHitDistRight * hit.distance));
+
+                //Debug.Log("lastHitDistanceRight" + lastHitDistRight);
+
+                /*if (!rightLean)
                 {
                     forceAmount = currentStrengthRight * (currentLenghtRight - lastHitDistRight) / currentLenghtRight + (currentDampening * (lastHitDistRight * hit.distance));
                 }else if (rightLean)
@@ -103,7 +138,7 @@ public class C_CharacterPropulseur : C_CharacterManager
                         forceAmount = Mathf.Lerp(forceAmount, currentStrengthRight, currentTimeTransitionLean);
                     }
 
-                }
+                }*/
                 rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointRight.transform.position);
                 //Debug.Log("Force Right = " + forceAmount);
             }
@@ -122,7 +157,13 @@ public class C_CharacterPropulseur : C_CharacterManager
 
                 lastHitDistLeft = hit.distance;
                 float forceAmount = 0;
-                if (!leftLean)
+
+
+                forceAmount = currentStrengthLeft * (currentLenghtLeft - hit.distance) / currentLenghtLeft + (currentDampening * (lastHitDistLeft * hit.distance));
+
+                //Debug.Log("lastHitDistanceLeft" + lastHitDistLeft);
+
+                /*if (!leftLean)
                 {
                     forceAmount = currentStrengthLeft * (currentLenghtLeft - hit.distance) / currentLenghtLeft + (currentDampening * (lastHitDistLeft * hit.distance));
                 }else if (leftLean)
@@ -139,7 +180,7 @@ public class C_CharacterPropulseur : C_CharacterManager
                         forceAmount = Mathf.Lerp(forceAmount, currentStrengthLeft, currentTimeTransitionLean);
                     }
 
-                }
+                }*/
                 rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointLeft.transform.position);
                 //Debug.Log("Force Left = " + forceAmount);
             }
