@@ -10,7 +10,9 @@ public class SpeedDisplay : MonoBehaviour
     public GameObject m_Player;
     public Rigidbody rb_Player;
 
-    public blendtreeExemple blendtreeExemple;
+    //public blendtreeExemple blendtreeExemple;
+
+    [HideInInspector] public float currentSpeed;
 
     private void Awake()
     {
@@ -20,13 +22,13 @@ public class SpeedDisplay : MonoBehaviour
 
     private void Update()
     {
-        float currentSpeed = Mathf.Clamp(rb_Player.velocity.magnitude, 0, Mathf.Infinity);
+        currentSpeed = Mathf.Clamp(rb_Player.velocity.magnitude, 0, Mathf.Infinity);
         int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
         //tMPSpeed.SetText("" + currentSpeedInt);
         
 
-        float currentSpeedIntNormilezed = currentSpeed / 58;
-        Debug.Log(currentSpeedIntNormilezed);
-        blendtreeExemple.speed = currentSpeedIntNormilezed;
+        //float currentSpeedIntNormilezed = currentSpeed / 58;
+        //Debug.Log(currentSpeedIntNormilezed);
+        //blendtreeExemple.speed = currentSpeedIntNormilezed;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class OverboardController : MonoBehaviour
 {
     #region Variables
-    private Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
 
     #region Movement Variables
     [Header("Movement Parameters")]
@@ -28,6 +28,12 @@ public class OverboardController : MonoBehaviour
     public GameObject mainBodyModel;
     public float inclDegrees;
     #endregion
+
+    #region Camera Effects
+    private CameraEffects cameraEffects;
+    public float flashDuration = 0.1f;
+    private bool isFlashUsed = false;
+    #endregion
     #endregion
 
 
@@ -35,15 +41,17 @@ public class OverboardController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentSpeed = movementSpeed;
+
+        cameraEffects = FindObjectOfType<CameraEffects>();
     }
 
-    #region Movement
     private void FixedUpdate()
     {
         MyMovement();
         MyRotate();
     }
 
+    #region Movement
     private void MyMovement()
     {
         if (Input.GetButton("Vertical"))
@@ -77,10 +85,12 @@ public class OverboardController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentSpeed = sprintSpeed;
+            cameraEffects.TriggerFlashSpeed(true);
         }
         else if (currentSpeed != movementSpeed)
         {
             currentSpeed = movementSpeed;
+            cameraEffects.isActiveTriggered = false;
         }
     }
 
