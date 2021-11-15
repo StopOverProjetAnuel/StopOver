@@ -31,5 +31,7 @@ public class C_CharacterInput : C_CharacterManager
         cameraDirection = Quaternion.AngleAxis(cameraTranform.rotation.eulerAngles.y, Vector3.up);
         cameraDirection.x = transform.localRotation.x;
         cameraDirection.z = transform.localRotation.z;
+
+        cameraTranform.rotation = cameraDirection;
     }
 }

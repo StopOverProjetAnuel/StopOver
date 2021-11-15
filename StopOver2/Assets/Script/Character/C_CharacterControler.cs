@@ -9,6 +9,8 @@ public class C_CharacterControler : C_CharacterManager
     public float speedForward;
     public float speedBackWard;
 
+    public float torque;
+
     private bool firstAccelerationDone;
 
     private float t1;
@@ -58,5 +60,12 @@ public class C_CharacterControler : C_CharacterManager
 
         }
         
+    }
+
+    private void FixedUpdate()
+    {
+        //transform.rotation = _CharacterInput.cameraDirection;
+
+        rb.AddTorque(transform.up * torque * _CharacterInput.horizontalInput);
     }
 }

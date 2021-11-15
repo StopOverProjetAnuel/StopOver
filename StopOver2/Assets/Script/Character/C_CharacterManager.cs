@@ -22,8 +22,15 @@ public class C_CharacterManager : MonoBehaviour
     public float distanceGroundChara;
     public float distanceNoControl;
     public bool isOnAir;
+    [Space]
+    public float currentSpeed;
+    public float basseSpeed;
+    public float moyenSpeed;
+    public float hautSpeed;
 
-
+    public bool isBasseSpeed;
+    public bool isMoyenSpeed;
+    public bool isHautSpeed;
     private void Awake()
     {
         rb = this.GetComponent<Rigidbody>();
@@ -55,10 +62,44 @@ public class C_CharacterManager : MonoBehaviour
                 isOnAir = true;
             }
         }
+
+        CalculSpeedCharcter();
     }
 
-    private void FixedUpdate()
+
+    private void CalculSpeedCharcter()
     {
-        transform.rotation = _CharacterInput.cameraDirection;
+        currentSpeed = Mathf.Clamp(rb.velocity.magnitude, 0, Mathf.Infinity);
+        int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
+
+        if(currentSpeed <= basseSpeed)
+        {
+            isBasseSpeed = true;
+        }
+        else
+        {
+            isBasseSpeed = false;
+        }
+
+        if(currentSpeed <= moyenSpeed && currentSpeed > basseSpeed)
+        {
+            isMoyenSpeed = true;
+        }
+        else
+        {
+            isMoyenSpeed = false;
+        }
+
+        if(currentSpeed <= hautSpeed && currentSpeed > moyenSpeed)
+        {
+            isHautSpeed = true;
+        }
+        else
+        {
+            isHautSpeed = false;
+
+        }
     }
+
+
 }
