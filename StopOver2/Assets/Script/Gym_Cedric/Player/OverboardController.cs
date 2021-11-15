@@ -28,12 +28,6 @@ public class OverboardController : MonoBehaviour
     public GameObject mainBodyModel;
     public float inclDegrees;
     #endregion
-
-    #region Camera Effects
-    private CameraEffects cameraEffects;
-    public float flashDuration = 0.1f;
-    private bool isFlashUsed = false;
-    #endregion
     #endregion
 
 
@@ -41,8 +35,6 @@ public class OverboardController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         currentSpeed = movementSpeed;
-
-        cameraEffects = FindObjectOfType<CameraEffects>();
     }
 
     private void FixedUpdate()
@@ -85,12 +77,10 @@ public class OverboardController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentSpeed = sprintSpeed;
-            cameraEffects.TriggerFlashSpeed(true);
         }
         else if (currentSpeed != movementSpeed)
         {
             currentSpeed = movementSpeed;
-            cameraEffects.isActiveTriggered = false;
         }
     }
 

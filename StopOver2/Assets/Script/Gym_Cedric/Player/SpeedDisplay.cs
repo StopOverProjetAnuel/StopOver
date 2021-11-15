@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class SpeedDisplay : MonoBehaviour
 {
-    //public GameObject speedText;
-    //public TextMeshProUGUI tMPSpeed;
+    public GameObject speedText;
+    private TextMeshProUGUI tMPSpeed;
     public GameObject m_Player;
-    public Rigidbody rb_Player;
+    private Rigidbody rb_Player;
 
     //public blendtreeExemple blendtreeExemple;
 
@@ -16,7 +16,7 @@ public class SpeedDisplay : MonoBehaviour
 
     private void Awake()
     {
-        //tMPSpeed = speedText.GetComponent<TextMeshProUGUI>();
+        tMPSpeed = speedText.GetComponent<TextMeshProUGUI>();
         rb_Player = m_Player.GetComponent<Rigidbody>();
     }
 
@@ -24,7 +24,7 @@ public class SpeedDisplay : MonoBehaviour
     {
         currentSpeed = Mathf.Clamp(rb_Player.velocity.magnitude, 0, Mathf.Infinity);
         int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
-        //tMPSpeed.SetText("" + currentSpeedInt);
+        tMPSpeed.SetText("" + currentSpeedInt);
         
 
         //float currentSpeedIntNormilezed = currentSpeed / 58;
