@@ -9,12 +9,11 @@ public class C_CharacterInput : C_CharacterManager
     [Space]
     public float horizontalInput;
     public float verticalInput;
+    public float mouseXInput;
 
     public string boostInputName = "Boost";
 
-    public Transform cameraTranform;
 
-    public Quaternion cameraDirection;
 
     // Start is called before the first frame update
     void Start()
@@ -27,11 +26,8 @@ public class C_CharacterInput : C_CharacterManager
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+        mouseXInput = Input.GetAxis("Mouse X");
 
-        cameraDirection = Quaternion.AngleAxis(cameraTranform.rotation.eulerAngles.y, Vector3.up);
-        cameraDirection.x = transform.localRotation.x;
-        cameraDirection.z = transform.localRotation.z;
 
-        cameraTranform.rotation = cameraDirection;
     }
 }

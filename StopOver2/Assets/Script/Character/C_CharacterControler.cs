@@ -14,7 +14,7 @@ public class C_CharacterControler : C_CharacterManager
     private bool firstAccelerationDone;
 
     private float t1;
-    private float currentSpeedForward;
+    [HideInInspector]public float currentSpeedForward;
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +66,6 @@ public class C_CharacterControler : C_CharacterManager
     {
         //transform.rotation = _CharacterInput.cameraDirection;
 
-        rb.AddTorque(transform.up * torque * _CharacterInput.horizontalInput);
+        rb.AddTorque(transform.up * torque * _CharacterInput.mouseXInput);
     }
 }

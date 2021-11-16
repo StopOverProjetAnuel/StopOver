@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class C_CharacterPropulseur : C_CharacterManager
 {
-    
+    [SerializeField] Vector2 zRotMinMax = new Vector2(-30f, 30f);
+    [SerializeField] Vector2 xRotMinMax = new Vector2(-30f, 30f);
 
     public GameObject[] arrayPropulseurPointRight;
     public GameObject[] arrayPropulseurPointLeft;
@@ -42,7 +43,7 @@ public class C_CharacterPropulseur : C_CharacterManager
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (_CharacterInput.horizontalInput < 0)
         {
@@ -107,90 +108,51 @@ public class C_CharacterPropulseur : C_CharacterManager
             currentStrengthLeft = strengthLeft;
         }
 
+        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDistLeft);
+        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDistRight);
 
-        foreach (GameObject propulsPointRight in arrayPropulseurPointRight)
+        //LockRotation();
+    }
+
+    void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist)
+    {
+        foreach (GameObject propulsPoint in propulsors)
         {
             RaycastHit hit;
-            if (Physics.Raycast(propulsPointRight.transform.position, transform.TransformDirection(-Vector3.up), out hit, currentLenghtRight))
+            if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.TransformDirection(-Vector3.up), out hit, currentLength))
             {
 
-                lastHitDistRight = hit.distance;
+                lastHitDist = hit.distance;
                 float forceAmount = 0;
+                float lengthRatio = (currentLength - hit.distance) / currentLength;
 
-                forceAmount = currentStrengthRight * (currentLenghtRight - lastHitDistRight) / currentLenghtRight + (currentDampening * (lastHitDistRight * hit.distance));
+                forceAmount = currentStrength * lengthRatio + (currentDampening * (lastHitDist * hit.distance));
 
-                //Debug.Log("lastHitDistanceRight" + lastHitDistRight);
-
-                /*if (!rightLean)
-                {
-                    forceAmount = currentStrengthRight * (currentLenghtRight - lastHitDistRight) / currentLenghtRight + (currentDampening * (lastHitDistRight * hit.distance));
-                }else if (rightLean)
-                {
-                    if (currentTimeTransitionLean >= 1)
-                    {
-                        forceAmount = currentStrengthRight;
-                    }
-                    else
-                    {
-                        t1 += Time.deltaTime;
-                        currentTimeTransitionLean = t1 / timeTransitionLean;
-
-                        forceAmount = Mathf.Lerp(forceAmount, currentStrengthRight, currentTimeTransitionLean);
-                    }
-
-                }*/
-                rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointRight.transform.position);
-                //Debug.Log("Force Right = " + forceAmount);
+                rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPoint.transform.position);
             }
             else
             {
-                lastHitDistRight = currentLenghtRight;
+                lastHitDist = currentLength;
             }
 
         }
+    }
 
-        foreach (GameObject propulsPointLeft in arrayPropulseurPointLeft)
-        {
-            RaycastHit hit;
-            if (Physics.Raycast(propulsPointLeft.transform.position, transform.TransformDirection(-Vector3.up), out hit, currentLenghtLeft))
-            {
+    void LockRotation()
+    {
+       float currentZRotation = transform.localEulerAngles.z;
 
-                lastHitDistLeft = hit.distance;
-                float forceAmount = 0;
+        currentZRotation = Mathf.Clamp(currentZRotation, zRotMinMax.x, zRotMinMax.y);
 
+       float currentXRotation = transform.localEulerAngles.x;
+       currentXRotation = Mathf.Clamp(currentXRotation, xRotMinMax.x, xRotMinMax.y);
 
-                forceAmount = currentStrengthLeft * (currentLenghtLeft - hit.distance) / currentLenghtLeft + (currentDampening * (lastHitDistLeft * hit.distance));
-
-                //Debug.Log("lastHitDistanceLeft" + lastHitDistLeft);
-
-                /*if (!leftLean)
-                {
-                    forceAmount = currentStrengthLeft * (currentLenghtLeft - hit.distance) / currentLenghtLeft + (currentDampening * (lastHitDistLeft * hit.distance));
-                }else if (leftLean)
-                {
-
-                    if(currentTimeTransitionLean >= 1)
-                    {
-                        forceAmount = currentStrengthLeft;
-                    }
-                    else
-                    {
-                        t1 += Time.deltaTime;
-                        currentTimeTransitionLean = t1 / timeTransitionLean;
-                        forceAmount = Mathf.Lerp(forceAmount, currentStrengthLeft, currentTimeTransitionLean);
-                    }
-
-                }*/
-                rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPointLeft.transform.position);
-                //Debug.Log("Force Left = " + forceAmount);
-            }
-            else
-            {
-                lastHitDistLeft = currentLenghtLeft;
-            }
-
-        }
-
-        
+        Vector3 newRotation = new Vector3
+            (
+                currentXRotation,
+                transform.localEulerAngles.y,
+                currentZRotation
+            );
+        transform.localEulerAngles = newRotation;
     }
 }
