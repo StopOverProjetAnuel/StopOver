@@ -5,15 +5,19 @@ using UnityEngine;
 public class C_CharacterControler : C_CharacterManager
 {
     public float timeFirstAcceleration;
+    public float timeAcceleration;
     public float firstAccelerationForward;
     public float speedForward;
+    public AnimationCurve speedCurve;
     public float speedBackWard;
 
     public float torque;
 
     private bool firstAccelerationDone;
+    private bool accelerationDone;
 
     private float t1;
+    private float t2;
     [HideInInspector]public float currentSpeedForward;
     // Start is called before the first frame update
     void Start()
@@ -28,20 +32,12 @@ public class C_CharacterControler : C_CharacterManager
         {
             if(_CharacterInput.verticalInput > 0)
             {
-                if (t1 >= 1f)
-                {
-                    firstAccelerationDone = true;
-                    t1 = 0;
-                }
-
                 if (!firstAccelerationDone)
                 {
-                    t1 += Time.deltaTime / timeFirstAcceleration;
-                    currentSpeedForward = Mathf.SmoothStep(firstAccelerationForward, speedForward, t1);
-                }
-                else if (firstAccelerationDone)
+                    FirstAcceleration();
+                }else if (firstAccelerationDone && !accelerationDone)
                 {
-                    currentSpeedForward = speedForward;
+                    Acceleration();
                 }
 
                 rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * _CharacterInput.verticalInput * currentSpeedForward, transform.position);
@@ -50,16 +46,52 @@ public class C_CharacterControler : C_CharacterManager
             if(_CharacterInput.verticalInput < 0)
             {
                 firstAccelerationDone = false;
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * _CharacterInput.verticalInput * currentSpeedForward, transform.position);
+                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * _CharacterInput.verticalInput * speedBackWard, transform.position);
             }
 
             if(_CharacterInput.verticalInput == 0)
             {
                 firstAccelerationDone = false;
+                accelerationDone = false;
             }
 
         }
         
+    }
+
+    private void FirstAcceleration()
+    {
+        if(t2 >= 1f)
+        {
+            firstAccelerationDone = true;
+            accelerationDone = false; 
+            t2 = 0;
+        }
+
+        if (!firstAccelerationDone)
+        {
+            t2 += Time.deltaTime / timeFirstAcceleration;
+            currentSpeedForward = Mathf.SmoothStep(currentSpeedForward, firstAccelerationForward, t2);
+        }
+    }
+
+    private void Acceleration()
+    {
+        if (t1 >= 1f)
+        {
+            accelerationDone = true;
+            t1 = 0;
+        }
+
+        if (!accelerationDone)
+        {
+            t1 += Time.deltaTime / timeAcceleration;
+            currentSpeedForward = Mathf.SmoothStep(firstAccelerationForward, speedForward, t1);
+        }
+        else if (accelerationDone)
+        {
+            currentSpeedForward = speedForward;
+        }
     }
 
     private void FixedUpdate()

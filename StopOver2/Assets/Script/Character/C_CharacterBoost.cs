@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class C_CharacterBoost : C_CharacterManager
 {
-    public C_CharacterControler _CharacterControler;
+    
 
     public float boostForce;
     public float speedBoost;
@@ -20,36 +20,36 @@ public class C_CharacterBoost : C_CharacterManager
     private bool boostActiv;
     private bool firstImpulsBoostDone;
     private bool accelerationBoostDone;
-    private bool canBoost = true;
-    private bool boostColdown;
-    private bool surchaufe;
-    private bool transitionBoostToCooldown;
-    private bool surchaufeMax;
+    private bool canFirstImpuls;
 
 
     private float t2;
     // Start is called before the first frame update
     void Start()
     {
-        
+        canFirstImpuls = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(_CharacterInput.boostInput > 0 && canFirstImpuls)
+        {
+            FirstImpulsBoost(true);
+        }
+
+        if (firstImpulsBoostDone)
+        {
+            Boost(true);
+        }
+
+
     }
 
     private void Boost(bool caBombarde)
     {
         if (caBombarde)
         {
-            if (!firstImpulsBoostDone)
-            {
-                rb.AddForce(transform.TransformDirection(Vector3.forward) * boostForce, ForceMode.Impulse);
-                firstImpulsBoostDone = true;
-            }
-
             if (t2 >= 1f)
             {
                 accelerationBoostDone = true;
@@ -63,9 +63,21 @@ public class C_CharacterBoost : C_CharacterManager
             else if (accelerationBoostDone)
             {
                 _CharacterControler.currentSpeedForward = speedBoost;
+                firstImpulsBoostDone = false;
+                canFirstImpuls = true;
+                caBombarde = false;
             }
         }
 
 
+    }
+
+    private void FirstImpulsBoost(bool firstImpulsBoost)
+    {
+        rb.AddForce(transform.TransformDirection(Vector3.forward) * boostForce, ForceMode.Impulse);
+        accelerationBoostDone = false;
+        firstImpulsBoostDone = true;
+        canFirstImpuls = false;
+        firstImpulsBoost = false;
     }
 }

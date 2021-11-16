@@ -10,6 +10,7 @@ public class C_CharacterInput : C_CharacterManager
     public float horizontalInput;
     public float verticalInput;
     public float mouseXInput;
+    public float boostInput;
 
     public string boostInputName = "Boost";
 
@@ -27,6 +28,7 @@ public class C_CharacterInput : C_CharacterManager
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         mouseXInput = Input.GetAxis("Mouse X");
+        boostInput = Input.GetAxis(boostInputName);
 
 
     }

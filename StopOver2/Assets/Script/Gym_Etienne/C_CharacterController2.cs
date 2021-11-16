@@ -240,6 +240,8 @@ public class C_CharacterController2 : MonoBehaviour
                 matSurchaufeMoteur.SetFloat("Color_Size", timeUsBoost);
                 matSurchaufeMoteur.SetFloat("_ColorDensity", timeUsBoost);
             }
+
+           
         }
         else if(!boostActiv && transitionBoostToCooldown)
         {
