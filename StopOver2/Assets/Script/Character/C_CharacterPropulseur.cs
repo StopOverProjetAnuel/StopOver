@@ -32,8 +32,6 @@ public class C_CharacterPropulseur : C_CharacterManager
     private float currentLenghtRight;
     private float currentLenghtLeft;
 
-    private bool rightLean;
-    private bool leftLean;
 
     private float t1;
     private float currentTimeTransitionLean;
@@ -45,10 +43,9 @@ public class C_CharacterPropulseur : C_CharacterManager
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (_CharacterInput.horizontalInput < 0)
+        /*if (_CharacterInput.horizontalInput < 0)
         {
-            //rightLean = true;
-            //leftLean = false;
+
 
             if(currentTimeTransitionLean >= 1)
             {
@@ -62,9 +59,7 @@ public class C_CharacterPropulseur : C_CharacterManager
 
             currentLenghtRight = Mathf.Lerp(length ,(length * multiLenght), currentTimeTransitionLean);
             currentLenghtLeft = Mathf.Lerp(length,(length / divisionStrength), currentTimeTransitionLean);
-            //currentLenghtRight = length * (multiLenght * - _CharacterInput.horizontalInput);
-            //currentStrengthRight = strengthRight * multiStrength;
-            //currentStrengthLeft = strengthLeft / divisionStrength;
+
 
             currentDampening = dampening;
 
@@ -72,8 +67,7 @@ public class C_CharacterPropulseur : C_CharacterManager
         }
         else if (_CharacterInput.horizontalInput > 0)
         {
-            //leftLean = true;
-            //rightLean = false;
+
 
             if (currentTimeTransitionLean >= 1)
             {
@@ -87,9 +81,6 @@ public class C_CharacterPropulseur : C_CharacterManager
 
             currentLenghtLeft = Mathf.Lerp(length,(length * multiLenght), currentTimeTransitionLean);
             currentLenghtRight = Mathf.Lerp(length,(length / divisionStrength), currentTimeTransitionLean);
-            //currentLenghtLeft = length * (multiLenght * _CharacterInput.horizontalInput);
-            //currentStrengthLeft = strengthLeft * multiStrength;
-            //currentStrengthRight = strengthRight / divisionStrength;
 
             currentDampening = dampening;
 
@@ -97,8 +88,6 @@ public class C_CharacterPropulseur : C_CharacterManager
         }
         else
         {
-            //leftLean = false;
-            //rightLean = false;
             currentTimeTransitionLean = 0;
             t1 = 0;
             currentLenghtRight = length;
@@ -106,7 +95,15 @@ public class C_CharacterPropulseur : C_CharacterManager
             currentDampening = 0;
             currentStrengthRight = strengthRight;
             currentStrengthLeft = strengthLeft;
-        }
+        }*/
+
+        currentTimeTransitionLean = 0;
+        t1 = 0;
+        currentLenghtRight = length;
+        currentLenghtLeft = length;
+        currentDampening = 0;
+        currentStrengthRight = strengthRight;
+        currentStrengthLeft = strengthLeft;
 
         CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDistLeft);
         CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDistRight);

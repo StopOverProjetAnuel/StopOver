@@ -8,10 +8,11 @@ public class C_CharacterControler : C_CharacterManager
     public float timeAcceleration;
     public float firstAccelerationForward;
     public float speedForward;
-    public AnimationCurve speedCurve;
     public float speedBackWard;
 
     public float torque;
+
+    public float airControlSpeedForward;
 
     private bool firstAccelerationDone;
     private bool accelerationDone;
@@ -28,8 +29,11 @@ public class C_CharacterControler : C_CharacterManager
     // Update is called once per frame
     void Update()
     {
-        if (!isOnAir)
+        //CheckGrounded();
+
+        if (CheckGrounded() == true)
         {
+            
             if(_CharacterInput.verticalInput > 0)
             {
                 if (!firstAccelerationDone)
@@ -56,6 +60,12 @@ public class C_CharacterControler : C_CharacterManager
             }
 
         }
+
+        if (CheckGrounded() == false)
+        {
+            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -_CharacterInput.verticalInput * airControlSpeedForward);
+        }
+        
         
     }
 
@@ -96,8 +106,7 @@ public class C_CharacterControler : C_CharacterManager
 
     private void FixedUpdate()
     {
-        //transform.rotation = _CharacterInput.cameraDirection;
 
-        rb.AddTorque(transform.up * torque * _CharacterInput.mouseXInput);
+            rb.AddTorque(Vector3.up * torque * _CharacterInput.mouseXInput);
     }
 }

@@ -15,6 +15,7 @@ public class C_CharacterManager : MonoBehaviour
 
     public GameObject groundCheck;
     public GameObject centerOfMass;
+    public Transform centerOfMassBack;
 
     public Rigidbody rb;
 
@@ -37,33 +38,26 @@ public class C_CharacterManager : MonoBehaviour
 
         groundCheck = GameObject.Find("GroundCheck");
         centerOfMass = GameObject.Find("CenterOfMass");
+        centerOfMassBack = transform.Find("CenterOfMassBack");
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        rb.centerOfMass = centerOfMass.transform.localPosition;
+        //rb.centerOfMass = centerOfMass.transform.localPosition;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit groundHit;
-        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, 10f, layerGround))
-        {
-            distanceGroundChara = groundHit.distance;
 
-            if (distanceGroundChara <= distanceNoControl)
-            {
-                isOnAir = false;
-            }else if (distanceGroundChara > distanceNoControl)
-            {
-                isOnAir = true;
-            }
-        }
+        rb.centerOfMass = centerOfMass.transform.localPosition;
 
+
+        CheckGrounded();
         CalculSpeedCharcter();
+
     }
 
 
@@ -72,7 +66,7 @@ public class C_CharacterManager : MonoBehaviour
         currentSpeed = Mathf.Clamp(rb.velocity.magnitude, 0, Mathf.Infinity);
         int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
 
-        if(currentSpeed <= basseSpeed)
+        if(currentSpeed >= basseSpeed)
         {
             isBasseSpeed = true;
         }
@@ -81,7 +75,7 @@ public class C_CharacterManager : MonoBehaviour
             isBasseSpeed = false;
         }
 
-        if(currentSpeed <= moyenSpeed && currentSpeed > basseSpeed)
+        if(currentSpeed >= moyenSpeed && currentSpeed > basseSpeed)
         {
             isMoyenSpeed = true;
         }
@@ -90,7 +84,7 @@ public class C_CharacterManager : MonoBehaviour
             isMoyenSpeed = false;
         }
 
-        if(currentSpeed <= hautSpeed && currentSpeed > moyenSpeed)
+        if(currentSpeed >= hautSpeed && currentSpeed > moyenSpeed)
         {
             isHautSpeed = true;
         }
@@ -98,6 +92,22 @@ public class C_CharacterManager : MonoBehaviour
         {
             isHautSpeed = false;
 
+        }
+    }
+
+    public bool CheckGrounded()
+    {
+        RaycastHit groundHit;
+        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, distanceNoControl, layerGround))
+        {
+            distanceGroundChara = groundHit.distance;
+
+            return true;
+
+        }
+        else
+        {
+            return false;
         }
     }
 

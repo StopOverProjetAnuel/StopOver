@@ -33,16 +33,18 @@ public class C_CharacterBoost : C_CharacterManager
     // Update is called once per frame
     void Update()
     {
-        if(_CharacterInput.boostInput > 0 && canFirstImpuls)
+        if (CheckGrounded() == true)
         {
-            FirstImpulsBoost(true);
-        }
+            if(_CharacterInput.boostInput > 0 && canFirstImpuls)
+            {
+                FirstImpulsBoost(true);
+            }
 
-        if (firstImpulsBoostDone)
-        {
-            Boost(true);
+            if (firstImpulsBoostDone)
+            {
+                Boost(true);
+            }
         }
-
 
     }
 
