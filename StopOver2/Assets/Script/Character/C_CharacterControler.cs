@@ -11,6 +11,7 @@ public class C_CharacterControler : C_CharacterManager
     public float speedBackWard;
 
     public float torque;
+    public float torqueAirControl;
 
     public float airControlSpeedForward;
 
@@ -61,10 +62,7 @@ public class C_CharacterControler : C_CharacterManager
 
         }
 
-        if (CheckGrounded() == false)
-        {
-            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -_CharacterInput.verticalInput * airControlSpeedForward);
-        }
+
         
         
     }
@@ -106,7 +104,17 @@ public class C_CharacterControler : C_CharacterManager
 
     private void FixedUpdate()
     {
+        if (CheckGrounded() == false)
+        {
+            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -_CharacterInput.verticalInput * airControlSpeedForward);
+            rb.AddTorque(Vector3.up * torqueAirControl * _CharacterInput.mouseXInput);
 
+        }
+        else
+        {
             rb.AddTorque(Vector3.up * torque * _CharacterInput.mouseXInput);
+
+        }
+
     }
 }
