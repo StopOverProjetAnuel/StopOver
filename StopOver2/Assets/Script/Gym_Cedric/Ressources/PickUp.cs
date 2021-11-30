@@ -9,15 +9,21 @@ public class PickUp : MonoBehaviour
     private float currentTimeStart;
     public float timeBeforeGone = 30f;
 
+    [Space]
+
+    public float waitBeforeActive = 1;
+    private float timeSpawnSave;
+
     private void Start()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
         currentTimeStart = Time.time + timeBeforeGone;
+        timeSpawnSave = Time.time + waitBeforeActive;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && ressourceManager.currentRessource != ressourceManager.maxRessource)
+        if (other.gameObject.CompareTag("Player") && ressourceManager.currentRessource != ressourceManager.maxRessource && Time.time >= timeSpawnSave)
         {
             ressourceManager.TriggerRessourceCount(ressourceGive);
             GameObject.Destroy(this.gameObject);

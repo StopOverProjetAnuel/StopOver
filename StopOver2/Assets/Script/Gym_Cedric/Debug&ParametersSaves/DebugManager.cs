@@ -107,6 +107,7 @@ public class DebugManager : MonoBehaviour
     {
         objectOptionMenu.SetActive(true);
         objectMenu.SetActive(false);
+        TriggerOptionMenuPanels(0);
     }
 
     private void CloseOptionMenu()
