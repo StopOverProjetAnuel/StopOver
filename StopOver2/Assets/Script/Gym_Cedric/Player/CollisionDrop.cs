@@ -22,6 +22,8 @@ public class CollisionDrop : MonoBehaviour
 
     [Header("Debug Option")]
     [SerializeField] bool showDebug = false;
+    [SerializeField] bool showExplosionRadius = false;
+    [SerializeField] Color explosionColor;
 
 
     private void OnEnable()
@@ -36,7 +38,7 @@ public class CollisionDrop : MonoBehaviour
         Vector3 toCollisionPoint = impactPoint - transform.position; //give direction of the impact
         float dot = Vector3.Dot(toCollisionPoint.normalized, transform.forward); //convert degrees to radial
 
-        if (dot < frontRadial)
+        if (dot < frontRadial && ressourceManager.currentRessource != 0)
         {
             float a;
             a = ressourceManager.currentRessource / resourceForceDivider;
@@ -59,7 +61,8 @@ public class CollisionDrop : MonoBehaviour
             #region Debug
             if (showDebug)
             {
-                Debug.Log("Drop item : " + c / 10 + d);
+                float e = c / 10 + d;
+                Debug.Log("Drop item : " + e);
             }
             #endregion
         }
@@ -89,6 +92,12 @@ public class CollisionDrop : MonoBehaviour
         if (rbItem)
         {
             rbItem.AddExplosionForce(bumpForce, transform.position, spawnOffset, bumpUpwardModifier);
+            #region Debug
+            if (showDebug)
+            {
+                Debug.Log("Explosion Triggered");
+            }
+            #endregion
         }
 
         PickUp puItem = item.GetComponent<PickUp>();
@@ -96,6 +105,21 @@ public class CollisionDrop : MonoBehaviour
         if (puItem)
         {
             puItem.ressourceGive = resourceGive;
+            #region Debug
+            if (showDebug)
+            {
+                Debug.Log("Item Resource Count = " + resourceGive);
+            }
+            #endregion
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (showExplosionRadius)
+        {
+            Gizmos.color = explosionColor;
+            Gizmos.DrawWireSphere(transform.position, spawnOffset);
         }
     }
 }
