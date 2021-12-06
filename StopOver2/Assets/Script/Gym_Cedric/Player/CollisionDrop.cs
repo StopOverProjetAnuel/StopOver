@@ -9,13 +9,15 @@ public class CollisionDrop : MonoBehaviour
     [SerializeField] GameObject prefabToSpawn;
 
     [Header("Parameters")]
-    [SerializeField] float frontDegrees = 45f;
-    private float frontRadial;
-    [SerializeField] float minSpeedLose = 15f;
-    [SerializeField] float resourceForceDivider = 2f;
+    float frontRadial;
+    [SerializeField] float minSpeedToLose = 15f;
+    [SerializeField] float maxSpeedToLose = 100f;
+    [SerializeField] float resourceMaxLoseInPercent = 50f;
+    float resourceForceDivider = 1f;
     [SerializeField] float resourceCountPerPickUp = 10f;
 
     [Header("Drop Parameters")]
+    [SerializeField] float frontDegrees = 45f;
     [SerializeField] float spawnOffset = 1f;
     [SerializeField] float bumpForce = 1f;
     [SerializeField] float bumpUpwardModifier = 1f;
@@ -29,6 +31,7 @@ public class CollisionDrop : MonoBehaviour
     private void OnEnable()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
+        rb = GetComponent<Rigidbody>();
         frontRadial = frontDegrees / 90f; //convert "frontDegrees" into radial by dividing it by the max of the dot value in degrees (90°)
     }
 
@@ -38,11 +41,15 @@ public class CollisionDrop : MonoBehaviour
         Vector3 toCollisionPoint = impactPoint - transform.position; //give direction of the impact
         float dot = Vector3.Dot(toCollisionPoint.normalized, transform.forward); //convert degrees to radial
 
-        if (dot < frontRadial && ressourceManager.currentRessource != 0)
+        if (dot < frontRadial && ressourceManager.currentRessource != 0 && collision.relativeVelocity.magnitude >= minSpeedToLose)
         {
-            float a;
-            a = ressourceManager.currentRessource / resourceForceDivider;
-            ressourceManager.currentRessource = a;
+            float maxL = maxSpeedToLose - minSpeedToLose;
+            float cL = Mathf.Clamp(collision.relativeVelocity.magnitude - minSpeedToLose, 0.0001f, maxL);
+            resourceForceDivider = Mathf.Clamp(cL / maxL, 0, 1);
+            float currentDivider = (resourceMaxLoseInPercent / 100) * resourceForceDivider;
+
+            float a = ressourceManager.currentRessource * currentDivider;
+            ressourceManager.currentRessource = Mathf.Clamp(ressourceManager.currentRessource - a, 0, ressourceManager.maxRessource);
 
             float b = a / resourceCountPerPickUp;
             float c = Mathf.Floor(b);
@@ -63,6 +70,9 @@ public class CollisionDrop : MonoBehaviour
             {
                 float e = c / 10 + d;
                 Debug.Log("Drop item : " + e);
+                Debug.Log("Impact Force : " + collision.relativeVelocity.magnitude);
+                Debug.Log("Current resource lose(s) : " + a);
+                Debug.Log("Player lose " + (currentDivider * 100) + "% of his current resource");
             }
             #endregion
         }
