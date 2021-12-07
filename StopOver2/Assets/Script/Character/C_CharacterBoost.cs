@@ -1,11 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class C_CharacterBoost : C_CharacterManager
+public class C_CharacterBoost : MonoBehaviour
 {
-    
-
     public float boostForce;
     public float speedBoost;
     public float timeAccelerationBoost;
@@ -17,7 +14,7 @@ public class C_CharacterBoost : C_CharacterManager
 
     public float currentColdownBoost;
     private float timeUsBoost;
-    private bool boostActiv;
+    [HideInInspector] public bool boostActiv;
     private bool firstImpulsBoostDone;
     private bool accelerationBoostDone;
     private bool canFirstImpuls;
@@ -32,35 +29,28 @@ public class C_CharacterBoost : C_CharacterManager
     }
 
     // Update is called once per frame
-    void Update()
+    public void TriggerBoost(float inputDirectionNorm, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
     {
-        if (CheckGrounded() == true && boostActiv)
+        if (isGrounded && boostActiv)
         {
-            if(_CharacterInput.boostInput > 0 && canFirstImpuls)
+            if (inputDirectionNorm > 0 && canFirstImpuls)
             {
-                FirstImpulsBoost(true);
+                FirstImpulsBoost(true, rb);
             }
 
 
-            if (_CharacterInput.boostInput > 0 && firstImpulsBoostDone)
+            if (inputDirectionNorm > 0 && firstImpulsBoostDone)
             {
-                Boost(true);
+                Boost(true, currentSpeedPlayer);
             }
             else
             {
-                StartCoroutine(CooldownBoost());
+                StartCoroutine(CooldownBoost(currentSpeedPlayer));
             }
         }
-
-        if (!boostActiv)
-        {
-            _CharacterFX.SurchauffeBoostDecres();
-
-        }
-
     }
 
-    private void Boost(bool caBombarde)
+    private void Boost(bool caBombarde, float currentSpeedPlayer)
     {
         if (caBombarde)
         {
@@ -72,9 +62,7 @@ public class C_CharacterBoost : C_CharacterManager
             if (!accelerationBoostDone && firstImpulsBoostDone)
             {
                 t2 += Time.deltaTime / timeAccelerationBoost;
-                _CharacterControler.currentSpeedForward = Mathf.SmoothStep(_CharacterControler.speedForward, speedBoost, t2);
-
-                _CharacterFX.SurchauffeBoost();
+                currentSpeedPlayer = Mathf.SmoothStep(currentSpeedPlayer, speedBoost, t2);
 
                 currentColdownBoost = Mathf.Lerp(minCooldownBoost, maxCooldownBoost, t2);
             }
@@ -82,9 +70,7 @@ public class C_CharacterBoost : C_CharacterManager
             {
                 currentColdownBoost = surchaufeCooldownBoost;
 
-                _CharacterFX.DesactiveBosstSurchauffe();
-
-                StartCoroutine(CooldownBoost());
+                StartCoroutine(CooldownBoost(currentSpeedPlayer));
                 caBombarde = false;
             }
         }
@@ -92,10 +78,8 @@ public class C_CharacterBoost : C_CharacterManager
 
     }
 
-    private void FirstImpulsBoost(bool firstImpulsBoost)
+    private void FirstImpulsBoost(bool firstImpulsBoost, Rigidbody rb)
     {
-        _CharacterFX.ActiveBoost();
-
         rb.AddForce(transform.TransformDirection(Vector3.forward) * boostForce, ForceMode.Impulse);
         accelerationBoostDone = false;
         firstImpulsBoostDone = true;
@@ -103,12 +87,10 @@ public class C_CharacterBoost : C_CharacterManager
         firstImpulsBoost = false;
     }
 
-    IEnumerator CooldownBoost()
+    IEnumerator CooldownBoost(float currentSpeedPlayer)
     {
         boostActiv = false;
-        _CharacterControler.currentSpeedForward = speedBoost;
-        
-        _CharacterFX.DesactiveBoost();
+        currentSpeedPlayer = speedBoost;
 
         yield return new WaitForSeconds(currentColdownBoost);
         t2 = 0;

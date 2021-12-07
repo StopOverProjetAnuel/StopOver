@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(C_CharacterPropulseur))]
 [RequireComponent(typeof(C_CharacterCalculAngle))]
 [RequireComponent(typeof(C_CharacterFX))]
-[RequireComponent(typeof(C_CharacterAnime))]
+[RequireComponent(typeof(C_CharacterAnim))]
 public class C_CharacterManager : MonoBehaviour
 {
     #region Script Used
@@ -16,7 +16,7 @@ public class C_CharacterManager : MonoBehaviour
     C_CharacterPropulseur _CharacterPropulseur;
     C_CharacterCalculAngle _CharacterCalculAngle;
     C_CharacterFX _CharacterFX;
-    C_CharacterAnime _CharacterAnime;
+    C_CharacterAnim _CharacterAnime;
     #endregion
 
     [Header("Object Require")]
@@ -51,7 +51,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterPropulseur = GetComponent<C_CharacterPropulseur>();
         _CharacterCalculAngle = GetComponent<C_CharacterCalculAngle>();
         _CharacterFX = GetComponent<C_CharacterFX>();
-        _CharacterAnime = GetComponent<C_CharacterAnime>();
+        _CharacterAnime = GetComponent<C_CharacterAnim>();
         #endregion
 
         rb = this.GetComponent<Rigidbody>();
@@ -61,25 +61,13 @@ public class C_CharacterManager : MonoBehaviour
         centerOfMassBack = transform.Find("CenterOfMassBack");
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //rb.centerOfMass = centerOfMass.transform.localPosition;
-
-    }
-
-    // Update is called once per frame
     void Update()
     {
-
         rb.centerOfMass = centerOfMass.transform.localPosition;
-
 
         CheckGrounded();
         CalculSpeedCharcter();
-
     }
-
 
     private void CalculSpeedCharcter()
     {
@@ -130,6 +118,4 @@ public class C_CharacterManager : MonoBehaviour
             return false;
         }
     }
-
-
 }

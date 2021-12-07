@@ -54,7 +54,7 @@ public class C_CharacterFX : C_CharacterManager
         matBoost.SetFloat("_Flame_ColorGradient", currentTimeSurchauffe);
     }
 
-    public void SurchauffeBoostDecres() 
+    public void SurchauffeBoostDecres(bool isNotActif) 
     {
 
         if(t1 >= 1)
