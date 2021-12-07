@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class blendtreeExemple : MonoBehaviour
 {
-    //___________________________________________________//Variables__________________________________________________________________________________________________________________________
+    //___________________________________________________//Variables\\__________________________________________________________________________________________________________________________
 
     [Range(0.0f, 1.0f)]                                  //la variable si dessous est un float variable entre 0 et 1 ET le float apparait sur l'inspector sous forme de slider
     public float speed;                                  //variable vitesse du joueur 
@@ -28,20 +28,20 @@ public class blendtreeExemple : MonoBehaviour
 
 
 
-    private void Start()//____________________________________________________//Start______________________________________________________________________________________________________________________________ 
+    private void Start()//____________________________________________________//Start\\______________________________________________________________________________________________________________________________ 
     {
         initiate();                                                           //récupère les component et les settings pour faires des variables exploitables
     }
 
 
-    private void Update()//___________________________________________________//Update______________________________________________________________________________________________________________________________
+    private void Update()//___________________________________________________//Update\\______________________________________________________________________________________________________________________________
     {
         UpdateBlendTree();                                                    //fait varier l'animator
         UpdateVolume();                                                       //fait vairer le postprocess
         UpdateParticleSystem();                                               //fait varier le particle system
     }
 
-    public void initiate()//_____________________________________________________________//Appelé dans start____________________________________________________________________________________
+    public void initiate()//_____________________________________________________________//Appelé dans start\\____________________________________________________________________________________
     {
         anim = GetComponent<Animator>();                                                 //attrape le component "animator" sur l'objet
         volume = GetComponent<Volume>();                                                 //attrape le component "Volume" sur l'objet
@@ -56,17 +56,17 @@ public class blendtreeExemple : MonoBehaviour
     }
 
 
-    void UpdateBlendTree()//__________________________________________//appelé dans Update____________________________________________________________________________________________________
+    void UpdateBlendTree()//__________________________________________//appelé dans Update\\____________________________________________________________________________________________________
     {
         anim.SetFloat("Speed", speed);                                // c'est la variable de l'animator qui agit sur le blendTree
     }
-    void UpdateVolume()//_____________________________________________//appelé dans Update____________________________________________________________________________________________________
+    void UpdateVolume()//_____________________________________________//appelé dans Update\\____________________________________________________________________________________________________
     {
         chromaticAberration.intensity.value = speed;                  // le setting "chromatique aberation" fonctionne de manière dynamique en fonction de la variable "speed"
         vignette.intensity.value = 0.6f * speed;                      // le setting "vignette" fonctionne de manière dynamique en fonction de la variable "speed" ET au max la valeur est égale à 0.6 
         motionBlur.intensity.value = 5.0f * speed;                    // le setting "motion blur" fonctionne de manière dynamique en fonction de la variable "speed" ET au max la valeur est égale à 5 
     }
-    void UpdateParticleSystem()//___________________________________________________//appelé dans Update_______________________________________________________________________________________________________
+    void UpdateParticleSystem()//___________________________________________________//appelé dans Update\\_______________________________________________________________________________________________________
     {
         var main = pS.main;                                                         // attrape le setting "Main" du component "particle system"
         main.startLifetime = 0.5f * Mathf.Sin(speed * Mathf.PI) + 0.05f;            // start life time = SLT =  0.5 x sin(speed x pi) +0.05   ; de cette manière speed = 0.5 <=> SLT = 0.5    ET   speed = 1 <=> SLT = 0.05                                   // attrape le setting "Main" du component "particle system"
@@ -82,7 +82,7 @@ public class blendtreeExemple : MonoBehaviour
         color.color = gradient;                                                     // utilise le nouveau gradient
 
     }  
-    public void UpdateGradient()//______________________________________________________//appelé dans Start ET UpdateParticleSystem____________________________________________________________________________________
+    public void UpdateGradient()//______________________________________________________//appelé dans Start ET UpdateParticleSystem\\____________________________________________________________________________________
     {
         ColorKey = new GradientColorKey[2];                                             //le gradient à 1 clée couleur
         ColorKey[0].color = Color.white;                                                //la clée est blanche
