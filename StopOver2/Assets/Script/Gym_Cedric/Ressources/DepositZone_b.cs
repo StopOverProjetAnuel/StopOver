@@ -30,7 +30,7 @@ public class DepositZone_b : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Rigidbody rb = m_Player.GetComponent<Rigidbody>();
-        if (m_Player != null && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= minSpeed)
+        if (other.CompareTag("Player") && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= minSpeed)
         {
             if (previousTime <= Time.time)
             {

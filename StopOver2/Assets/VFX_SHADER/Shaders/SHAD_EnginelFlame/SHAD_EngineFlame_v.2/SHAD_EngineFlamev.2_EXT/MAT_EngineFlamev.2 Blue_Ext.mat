@@ -50,10 +50,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_03b6c0970d754460981eecd2c53d6f8e: 0.9
+    - Vector1_03b6c0970d754460981eecd2c53d6f8e: 0.001
     - Vector1_a45e3e808e4a4891b12610d1a50680c1: 0.87
     - Vector1_c1ddb68d4c214f3bb8510fdf7286e046: 150
-    - Vector1_dceb5a1a288e422bb8846b7a39e3697a: 0.13
+    - Vector1_dceb5a1a288e422bb8846b7a39e3697a: -0.06
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 10
@@ -61,7 +61,7 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _BoostFlame: 0
+    - _BoostFlame: 1
     - _CullMode: 2
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0

@@ -19,6 +19,9 @@ public class NudgeBars : MonoBehaviour
     //Object Collision
     private CollidedPlayer collidedPlayer;
 
+    [Header("Debug Option")]
+    public bool showDebug = false;
+
     private void Awake()
     {
         rb = m_Player.GetComponent<Rigidbody>();
@@ -69,14 +72,24 @@ public class NudgeBars : MonoBehaviour
             {
                 collidedPlayer = tfParent.GetComponent<CollidedPlayer>();
                 collidedPlayer.TriggerCollisionPlayer();
-                Debug.Log("NudgeBars get triggered with a destructible object");
+                #region Debug
+                if (showDebug)
+                {
+                    Debug.Log("NudgeBars get triggered with a destructible object");
+                }
+                #endregion
             }
             else
             {
                 doThing();
             }
         }
-        Debug.Log("NudgeBars get triggered");
+        #region Debug
+        if (showDebug)
+        {
+            Debug.Log("NudgeBars get triggered");
+        }
+        #endregion
 
         void doThing()
         {
@@ -84,7 +97,12 @@ public class NudgeBars : MonoBehaviour
             {
                 collidedPlayer = other.GetComponent<CollidedPlayer>();
                 collidedPlayer.TriggerCollisionPlayer();
-                Debug.Log("NudgeBars get triggered with a destructible object");
+                #region Debug
+                if (showDebug)
+                {
+                    Debug.Log("NudgeBars get triggered with a destructible object");
+                }
+                #endregion
             }
         }
     }
