@@ -1,24 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(C_CharacterControler))]
+[RequireComponent(typeof(C_CharacterInput))]
+[RequireComponent(typeof(C_CharacterBoost))]
+[RequireComponent(typeof(C_CharacterPropulseur))]
+[RequireComponent(typeof(C_CharacterCalculAngle))]
+[RequireComponent(typeof(C_CharacterFX))]
+[RequireComponent(typeof(C_CharacterAnime))]
 public class C_CharacterManager : MonoBehaviour
 {
-    [Header("Character Script")]
-    public C_CharacterControler _CharacterControler;
-    public C_CharacterBoost _CharacterBoost;
-    public C_CharacterInput _CharacterInput;
-    public C_CharacterFX _CharacterFX;
-    public C_CharacterPropulseur _CharacterPropulseur;
-    public C_CharacterCalculAngle _CharacterCalculAngle;
-    public C_CharacterAnime _CharacterAnime;
+    #region Script Used
+    C_CharacterControler _CharacterControler;
+    C_CharacterInput _CharacterInput;
+    C_CharacterBoost _CharacterBoost;
+    C_CharacterPropulseur _CharacterPropulseur;
+    C_CharacterCalculAngle _CharacterCalculAngle;
+    C_CharacterFX _CharacterFX;
+    C_CharacterAnime _CharacterAnime;
+    #endregion
 
+    [Header("Object Require")]
     public GameObject groundCheck;
     public GameObject centerOfMass;
     public Transform centerOfMassBack;
 
     public Rigidbody rb;
 
+    [Header("Parameters")]
     public LayerMask layerGround;
     public float distanceGroundChara;
     public float distanceNoControl;
@@ -32,8 +40,20 @@ public class C_CharacterManager : MonoBehaviour
     public bool isBasseSpeed;
     public bool isMoyenSpeed;
     public bool isHautSpeed;
+
+
     private void Awake()
     {
+        #region Get Component
+        _CharacterControler = GetComponent<C_CharacterControler>();
+        _CharacterInput = GetComponent<C_CharacterInput>();
+        _CharacterBoost = GetComponent<C_CharacterBoost>();
+        _CharacterPropulseur = GetComponent<C_CharacterPropulseur>();
+        _CharacterCalculAngle = GetComponent<C_CharacterCalculAngle>();
+        _CharacterFX = GetComponent<C_CharacterFX>();
+        _CharacterAnime = GetComponent<C_CharacterAnime>();
+        #endregion
+
         rb = this.GetComponent<Rigidbody>();
 
         groundCheck = GameObject.Find("GroundCheck");

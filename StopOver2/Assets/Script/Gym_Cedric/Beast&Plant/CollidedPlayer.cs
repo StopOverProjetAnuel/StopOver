@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class CollidedPlayer : MonoBehaviour
 {
+    [Header("Require Information")]
     private RessourceManager ressourceManager;
 
     private NudgeBars nudgeBars;
     public string playerWeaponTagName;
 
+    [Header("Parameters")]
+    public bool isDropOnDestroy = false;
     public GameObject droppedItem;
     public float resourceGive;
     public int resistanceLevel;
@@ -48,7 +51,7 @@ public class CollidedPlayer : MonoBehaviour
             {
                 ressourceManager.TriggerRessourceCount(resourceGive);
             }
-            else
+            else if (isDropOnDestroy)
             {
                 GameObject item = Instantiate(droppedItem, this.transform.position, Quaternion.identity);
                 item.GetComponent<PickUp>().ressourceGive = resourceGive;

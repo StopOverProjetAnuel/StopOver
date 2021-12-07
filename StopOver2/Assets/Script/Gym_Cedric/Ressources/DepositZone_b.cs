@@ -8,7 +8,7 @@ public class DepositZone_b : MonoBehaviour
     public float waitDeposit = 1;
     private float previousTime;
     public float minSpeed;
-    public GameObject m_Player;
+    private GameObject m_Player;
     private RessourceManager ressourceManager;
     public GameObject timerFont;
     public Material chargeMat;
@@ -17,6 +17,7 @@ public class DepositZone_b : MonoBehaviour
     private void Awake()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
+        m_Player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void OnTriggerEnter(Collider other)
