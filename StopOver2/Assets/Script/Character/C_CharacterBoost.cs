@@ -7,8 +7,8 @@ public class C_CharacterBoost : MonoBehaviour
     public float speedBoost;
     public float timeAccelerationBoost;
     public float durasionBoost;
-    public float maxCooldownBoost;
     public float minCooldownBoost;
+    public float maxCooldownBoost;
     public float surchaufeCooldownBoost;
 
     public float currentColdownBoost;

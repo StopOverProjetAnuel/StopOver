@@ -60,10 +60,12 @@ public class C_CharacterPropulseur : MonoBehaviour
     {
         foreach (GameObject propulsPoint in propulsors)
         {
+            Debug.Log("Call propulsor");
             RaycastHit hit;
-            if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.TransformDirection(-Vector3.up), out hit, currentLength))
+            Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
+            if (Physics.Raycast(propulsPoint.transform.position, rayDirection, out hit, currentLength))
             {
-
+                Debug.Log("Hit Ground");
                 lastHitDist = hit.distance;
                 float forceAmount = 0;
                 float lengthRatio = (currentLength - hit.distance) / currentLength;
@@ -74,9 +76,9 @@ public class C_CharacterPropulseur : MonoBehaviour
             }
             else
             {
+                Debug.Log("Dont Hit Ground");
                 lastHitDist = currentLength;
             }
-
         }
     }
 
@@ -96,5 +98,11 @@ public class C_CharacterPropulseur : MonoBehaviour
                 currentZRotation
             );
         transform.localEulerAngles = newRotation;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(arrayPropulseurPointLeft[0].transform.position, arrayPropulseurPointLeft[0].transform.position - (Vector3.up * 4));
     }
 }

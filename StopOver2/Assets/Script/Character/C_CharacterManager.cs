@@ -22,15 +22,15 @@ public class C_CharacterManager : MonoBehaviour
     public GameObject centerOfMass;
     public Transform centerOfMassBack;
 
-    public Rigidbody rb;
 
+    [HideInInspector] public Rigidbody rb;
+
+    [HideInInspector] public float horizontalInput;
+    [HideInInspector] public float verticalInput;
+    [HideInInspector] public float mouseXInput;
+    [HideInInspector] public float boostInput;
 
     [Header("Input Parameters")]
-    public float horizontalInput;
-    public float verticalInput;
-    public float mouseXInput;
-    public float boostInput;
-
     public string boostInputName = "Boost";
 
 
@@ -45,9 +45,9 @@ public class C_CharacterManager : MonoBehaviour
     public float moyenSpeed;
     public float hautSpeed;
 
-    public bool isBasseSpeed;
-    public bool isMoyenSpeed;
-    public bool isHautSpeed;
+    public bool isLowSpeed;
+    public bool isAvarageSpeed;
+    public bool isHighSpeed ;
 
 
     private void Awake()
@@ -90,6 +90,7 @@ public class C_CharacterManager : MonoBehaviour
         CalculSpeedCharcter();
 
         _CharacterControler.TriggerControl(CheckGrounded(), verticalInput, rb);
+        _CharacterPropulseur.Propulsing();
     }
 
     private void FixedUpdate()
@@ -104,29 +105,29 @@ public class C_CharacterManager : MonoBehaviour
 
         if(currentSpeed >= basseSpeed)
         {
-            isBasseSpeed = true;
+            isLowSpeed = true;
         }
         else
         {
-            isBasseSpeed = false;
+            isLowSpeed = false;
         }
 
         if(currentSpeed >= moyenSpeed && currentSpeed > basseSpeed)
         {
-            isMoyenSpeed = true;
+            isAvarageSpeed = true;
         }
         else
         {
-            isMoyenSpeed = false;
+            isAvarageSpeed = false;
         }
 
         if(currentSpeed >= hautSpeed && currentSpeed > moyenSpeed)
         {
-            isHautSpeed = true;
+            isHighSpeed = true;
         }
         else
         {
-            isHautSpeed = false;
+            isHighSpeed = false;
 
         }
     }

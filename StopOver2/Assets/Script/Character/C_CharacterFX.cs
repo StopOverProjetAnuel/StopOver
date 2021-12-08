@@ -47,18 +47,19 @@ public class C_CharacterFX : MonoBehaviour
 
     public void SurchauffeBoostDecres(bool isNotActif) 
     {
-
         if(t1 >= 1)
         {
             t1 = 0;
         }
         else
         {
-            t1 -= Time.deltaTime / _CharacterBoost.currentColdownBoost;
+            t1 -= Time.fixedDeltaTime / _CharacterBoost.currentColdownBoost;
         }
         currentTimeSurchauffe = Mathf.Lerp(1, 0, t1);
         matSurchauffe.SetFloat("Color_Size", currentTimeSurchauffe);
         matSurchauffe.SetFloat("_ColorDensity", currentTimeSurchauffe);
         matBoost.SetFloat("_Flame_ColorGradient", currentTimeSurchauffe);
+
+        Debug.Log(t1);
     }
 }
