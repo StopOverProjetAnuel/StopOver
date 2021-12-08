@@ -45,9 +45,6 @@ public class C_CharacterManager : MonoBehaviour
     public float moyenSpeed;
     public float hautSpeed;
 
-    public bool isLowSpeed;
-    public bool isAvarageSpeed;
-    public bool isHighSpeed ;
 
 
     private void Awake()
@@ -102,34 +99,6 @@ public class C_CharacterManager : MonoBehaviour
     {
         currentSpeed = Mathf.Clamp(rb.velocity.magnitude, 0, Mathf.Infinity);
         int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
-
-        if(currentSpeed >= basseSpeed)
-        {
-            isLowSpeed = true;
-        }
-        else
-        {
-            isLowSpeed = false;
-        }
-
-        if(currentSpeed >= moyenSpeed && currentSpeed > basseSpeed)
-        {
-            isAvarageSpeed = true;
-        }
-        else
-        {
-            isAvarageSpeed = false;
-        }
-
-        if(currentSpeed >= hautSpeed && currentSpeed > moyenSpeed)
-        {
-            isHighSpeed = true;
-        }
-        else
-        {
-            isHighSpeed = false;
-
-        }
     }
 
     public bool CheckGrounded()

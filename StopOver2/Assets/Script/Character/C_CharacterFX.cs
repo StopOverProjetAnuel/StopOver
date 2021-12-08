@@ -4,6 +4,7 @@ using UnityEngine.VFX;
 public class C_CharacterFX : MonoBehaviour
 {
     C_CharacterBoost _CharacterBoost;
+    NudgeBars nudgeBars;
 
     public Material matBoost;
     public Material matSurchauffe;
@@ -12,10 +13,18 @@ public class C_CharacterFX : MonoBehaviour
 
     private float t1;
 
+    private int whichStateSpeed;
 
     public void InitiateFXValue(C_CharacterBoost cB)
     {
+        nudgeBars = GetComponent<NudgeBars>();
+        whichStateSpeed = nudgeBars.nbState;
         _CharacterBoost = cB;
+    }
+
+    public void TriggerContinuousFX()
+    {
+
     }
 
     public void ActiveBoost()
