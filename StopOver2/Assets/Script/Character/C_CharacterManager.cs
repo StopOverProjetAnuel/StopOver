@@ -1,7 +1,6 @@
 using UnityEngine;
 
 [RequireComponent(typeof(C_CharacterControler))]
-[RequireComponent(typeof(C_CharacterInput))]
 [RequireComponent(typeof(C_CharacterBoost))]
 [RequireComponent(typeof(C_CharacterPropulseur))]
 [RequireComponent(typeof(C_CharacterCalculAngle))]
@@ -11,7 +10,6 @@ public class C_CharacterManager : MonoBehaviour
 {
     #region Script Used
     C_CharacterControler _CharacterControler;
-    C_CharacterInput _CharacterInput;
     C_CharacterBoost _CharacterBoost;
     C_CharacterPropulseur _CharacterPropulseur;
     C_CharacterCalculAngle _CharacterCalculAngle;
@@ -25,6 +23,16 @@ public class C_CharacterManager : MonoBehaviour
     public Transform centerOfMassBack;
 
     public Rigidbody rb;
+
+
+    [Header("Input Parameters")]
+    public float horizontalInput;
+    public float verticalInput;
+    public float mouseXInput;
+    public float boostInput;
+
+    public string boostInputName = "Boost";
+
 
     [Header("Parameters")]
     public LayerMask layerGround;
@@ -46,7 +54,6 @@ public class C_CharacterManager : MonoBehaviour
     {
         #region Get Component
         _CharacterControler = GetComponent<C_CharacterControler>();
-        _CharacterInput = GetComponent<C_CharacterInput>();
         _CharacterBoost = GetComponent<C_CharacterBoost>();
         _CharacterPropulseur = GetComponent<C_CharacterPropulseur>();
         _CharacterCalculAngle = GetComponent<C_CharacterCalculAngle>();
@@ -54,11 +61,25 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterAnime = GetComponent<C_CharacterAnim>();
         #endregion
 
-        rb = this.GetComponent<Rigidbody>();
+        #region Get Input
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        mouseXInput = Input.GetAxis("Mouse X");
+        boostInput = Input.GetAxis(boostInputName);
+        #endregion
+
+        #region Get Object
+        rb = GetComponent<Rigidbody>();
 
         groundCheck = GameObject.Find("GroundCheck");
         centerOfMass = GameObject.Find("CenterOfMass");
         centerOfMassBack = transform.Find("CenterOfMassBack");
+        #endregion
+
+        #region Initiate Module Script Value
+        _CharacterBoost.IniatiateBoostValue();
+        _CharacterFX.InitiateFXValue(_CharacterBoost);
+        #endregion
     }
 
     void Update()

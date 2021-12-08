@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class C_CharacterFX : C_CharacterManager
+public class C_CharacterFX : MonoBehaviour
 {
-    //public C_CharacterBoost _CharacterBoost;
+    C_CharacterBoost _CharacterBoost;
 
     public Material matBoost;
     public Material matSurchauffe;
@@ -13,18 +11,11 @@ public class C_CharacterFX : C_CharacterManager
     private float currentTimeSurchauffe;
 
     private float t1;
-    // Start is called before the first frame update
-    void Start()
+
+
+    public void InitiateFXValue(C_CharacterBoost cB)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-        
+        _CharacterBoost = cB;
     }
 
     public void ActiveBoost()

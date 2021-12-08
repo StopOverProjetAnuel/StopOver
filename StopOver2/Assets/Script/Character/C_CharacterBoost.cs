@@ -11,7 +11,6 @@ public class C_CharacterBoost : MonoBehaviour
     public float minCooldownBoost;
     public float surchaufeCooldownBoost;
 
-
     public float currentColdownBoost;
     private float timeUsBoost;
     [HideInInspector] public bool boostActiv;
@@ -22,7 +21,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     public  float t2;
     // Start is called before the first frame update
-    void Start()
+    public void IniatiateBoostValue()
     {
         canFirstImpuls = true;
         boostActiv = true;
