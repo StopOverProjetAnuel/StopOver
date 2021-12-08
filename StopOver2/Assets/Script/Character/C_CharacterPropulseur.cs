@@ -1,9 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class C_CharacterPropulseur : C_CharacterManager
+public class C_CharacterPropulseur : MonoBehaviour
 {
+    private Rigidbody rb;
+
     [SerializeField] Vector2 zRotMinMax = new Vector2(-30f, 30f);
     [SerializeField] Vector2 xRotMinMax = new Vector2(-30f, 30f);
 
@@ -35,67 +35,11 @@ public class C_CharacterPropulseur : C_CharacterManager
 
     private float t1;
     private float currentTimeTransitionLean;
-    // Start is called before the first frame update
-    void Start()
+
+
+    public void InitiatePropulsorValue(Rigidbody PlayerRb)
     {
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-        /*if (_CharacterInput.horizontalInput < 0)
-        {
-
-
-            if(currentTimeTransitionLean >= 1)
-            {
-                currentTimeTransitionLean = 1;
-            }
-            else
-            {
-                t1 += Time.deltaTime;
-                currentTimeTransitionLean = t1 / timeTransitionLean;
-            }
-
-            currentLenghtRight = Mathf.Lerp(length ,(length * multiLenght), currentTimeTransitionLean);
-            currentLenghtLeft = Mathf.Lerp(length,(length / divisionStrength), currentTimeTransitionLean);
-
-
-            currentDampening = dampening;
-
-            //Debug.Log("lenght Right" + currentLenghtRight);
-        }
-        else if (_CharacterInput.horizontalInput > 0)
-        {
-
-
-            if (currentTimeTransitionLean >= 1)
-            {
-                currentTimeTransitionLean = 1;
-            }
-            else
-            {
-                t1 += Time.deltaTime;
-                currentTimeTransitionLean = t1 / timeTransitionLean;
-            }
-
-            currentLenghtLeft = Mathf.Lerp(length,(length * multiLenght), currentTimeTransitionLean);
-            currentLenghtRight = Mathf.Lerp(length,(length / divisionStrength), currentTimeTransitionLean);
-
-            currentDampening = dampening;
-
-            //Debug.Log("lenght Left" + currentLenghtLeft);
-        }
-        else
-        {
-            currentTimeTransitionLean = 0;
-            t1 = 0;
-            currentLenghtRight = length;
-            currentLenghtLeft = length;
-            currentDampening = 0;
-            currentStrengthRight = strengthRight;
-            currentStrengthLeft = strengthLeft;
-        }*/
+        rb = PlayerRb;
 
         currentTimeTransitionLean = 0;
         t1 = 0;
@@ -104,11 +48,12 @@ public class C_CharacterPropulseur : C_CharacterManager
         currentDampening = 0;
         currentStrengthRight = strengthRight;
         currentStrengthLeft = strengthLeft;
+    }
 
+    public void Propulsing()
+    {
         CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDistLeft);
         CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDistRight);
-
-        //LockRotation();
     }
 
     void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist)

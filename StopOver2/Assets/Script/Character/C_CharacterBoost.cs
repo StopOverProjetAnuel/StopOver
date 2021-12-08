@@ -74,8 +74,6 @@ public class C_CharacterBoost : MonoBehaviour
                 caBombarde = false;
             }
         }
-
-
     }
 
     private void FirstImpulsBoost(bool firstImpulsBoost, Rigidbody rb)

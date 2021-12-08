@@ -14,15 +14,7 @@ public class C_CharacterInput : C_CharacterManager
 
     public string boostInputName = "Boost";
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    ²                                                               
     void Update()
     {
         horizontalInput = Input.GetAxis("Horizontal");
