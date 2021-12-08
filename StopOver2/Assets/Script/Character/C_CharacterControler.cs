@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class C_CharacterControler : C_CharacterManager
+public class C_CharacterControler : MonoBehaviour
 {
     public float timeFirstAcceleration;
     public float timeAcceleration;
@@ -21,21 +21,13 @@ public class C_CharacterControler : C_CharacterManager
     private float t1;
     private float t2;
     [HideInInspector]public float currentSpeedForward;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void TriggerControl(bool isGrounded, float verticalInput, Rigidbody rb)
     {
-        //CheckGrounded();
-
-        if (CheckGrounded() == true)
+        if (isGrounded == true)
         {
             
-            if(_CharacterInput.verticalInput > 0)
+            if(verticalInput > 0)
             {
                 if (!firstAccelerationDone)
                 {
@@ -45,26 +37,21 @@ public class C_CharacterControler : C_CharacterManager
                     Acceleration();
                 }
 
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * _CharacterInput.verticalInput * currentSpeedForward, transform.position);
+                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * currentSpeedForward, transform.position);
             }
 
-            if(_CharacterInput.verticalInput < 0)
+            if(verticalInput < 0)
             {
                 firstAccelerationDone = false;
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * _CharacterInput.verticalInput * speedBackWard, transform.position);
+                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * speedBackWard, transform.position);
             }
 
-            if(_CharacterInput.verticalInput == 0)
+            if(verticalInput == 0)
             {
                 firstAccelerationDone = false;
                 accelerationDone = false;
             }
-
         }
-
-
-        
-        
     }
 
     private void FirstAcceleration()

@@ -88,6 +88,8 @@ public class C_CharacterManager : MonoBehaviour
 
         CheckGrounded();
         CalculSpeedCharcter();
+
+        _CharacterControler.TriggerControl(CheckGrounded(), verticalInput, rb);
     }
 
     private void CalculSpeedCharcter()
