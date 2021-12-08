@@ -29,8 +29,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636140666571402986}
-  m_LocalRotation: {x: 0.090516225, y: -0.90189165, z: 0.23077182, w: 0.3537551}
-  m_LocalPosition: {x: -24.340685, y: 3.438515, z: 135.10393}
+  m_LocalRotation: {x: 6.28037e-16, y: 0.7071069, z: -6.2803713e-16, w: 0.70710677}
+  m_LocalPosition: {x: 158.9, y: 3.18, z: 9.100001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1636140667284810111}
@@ -868,8 +868,8 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0
     donutRadius: 0.2
-    m_Position: {x: -1.01, y: -0.19, z: 0}
-    m_Rotation: {x: -5.41, y: 90, z: 0}
+    m_Position: {x: -0.03, y: 0.11, z: 0.43}
+    m_Rotation: {x: -5.41, y: 180, z: 0}
     m_Scale: {x: 0.1, y: 0.05, z: 0.03}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -5181,10 +5181,10 @@ MonoBehaviour:
   m_CollideAgainst:
     serializedVersion: 2
     m_Bits: 1
-  m_IgnoreTag: 
+  m_IgnoreTag: Untagged
   m_TransparentLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1
   m_MinimumDistanceFromTarget: 0.1
   m_AvoidObstacles: 1
   m_DistanceLimit: 0
