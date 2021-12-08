@@ -92,6 +92,11 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterControler.TriggerControl(CheckGrounded(), verticalInput, rb);
     }
 
+    private void FixedUpdate()
+    {
+        _CharacterControler.TriggerFixedControl(CheckGrounded(), verticalInput, mouseXInput, rb);
+    }
+
     private void CalculSpeedCharcter()
     {
         currentSpeed = Mathf.Clamp(rb.velocity.magnitude, 0, Mathf.Infinity);

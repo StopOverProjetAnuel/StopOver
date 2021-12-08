@@ -89,19 +89,17 @@ public class C_CharacterControler : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void TriggerFixedControl(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb)
     {
-        if (CheckGrounded() == false)
+        if (isGrounded == false)
         {
-            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -_CharacterInput.verticalInput * airControlSpeedForward);
-            rb.AddTorque(Vector3.up * torqueAirControl * _CharacterInput.mouseXInput);
+            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -verticalInput * airControlSpeedForward);
+            rb.AddTorque(Vector3.up * torqueAirControl * mouseXInput);
 
         }
         else
         {
-            rb.AddTorque(Vector3.up * torque * _CharacterInput.mouseXInput);
-
+            rb.AddTorque(Vector3.up * torque * mouseXInput);
         }
-
     }
 }
