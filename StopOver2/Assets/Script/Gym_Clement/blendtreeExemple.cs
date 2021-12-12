@@ -9,7 +9,7 @@ using UnityEditor;
 
 public class blendtreeExemple : MonoBehaviour
 {
-    //___________________________________________________//Variables\\__________________________________________________________________________________________________________________________
+    //___________________________________________________//Variables\\____________________________________________________________________________________________________________________________________________________
 
     [Range(0.0f, 1.0f)]                                  //la variable si dessous est un float variable entre 0 et 1 ET le float apparait sur l'inspector sous forme de slider
     public float speed;                                  //variable vitesse du joueur 
@@ -28,7 +28,7 @@ public class blendtreeExemple : MonoBehaviour
 
 
 
-    private void Start()//____________________________________________________//Start\\______________________________________________________________________________________________________________________________ 
+    private void Start()//____________________________________________________//Start\\_______________________________________________________________________________________________________________________________
     {
         initiate();                                                           //récupère les component et les settings pour faires des variables exploitables
     }
@@ -41,7 +41,7 @@ public class blendtreeExemple : MonoBehaviour
         UpdateParticleSystem();                                               //fait varier le particle system
     }
 
-    public void initiate()//_____________________________________________________________//Appelé dans start\\____________________________________________________________________________________
+    public void initiate()//________________________________________________________//Appelé dans start\\_____________________________________________________________________________________________________________
     {
         anim = GetComponent<Animator>();                                                 //attrape le component "animator" sur l'objet
         volume = GetComponent<Volume>();                                                 //attrape le component "Volume" sur l'objet
@@ -56,17 +56,17 @@ public class blendtreeExemple : MonoBehaviour
     }
 
 
-    void UpdateBlendTree()//__________________________________________//appelé dans Update\\____________________________________________________________________________________________________
+    void UpdateBlendTree()//________________________________________________________//appelé dans Update\\____________________________________________________________________________________________________________
     {
         anim.SetFloat("Speed", speed);                                // c'est la variable de l'animator qui agit sur le blendTree
     }
-    void UpdateVolume()//_____________________________________________//appelé dans Update\\____________________________________________________________________________________________________
+    void UpdateVolume()//___________________________________________________________//appelé dans Update\\____________________________________________________________________________________________________________
     {
         chromaticAberration.intensity.value = speed;                  // le setting "chromatique aberation" fonctionne de manière dynamique en fonction de la variable "speed"
         vignette.intensity.value = 0.6f * speed;                      // le setting "vignette" fonctionne de manière dynamique en fonction de la variable "speed" ET au max la valeur est égale à 0.6 
         motionBlur.intensity.value = 5.0f * speed;                    // le setting "motion blur" fonctionne de manière dynamique en fonction de la variable "speed" ET au max la valeur est égale à 5 
     }
-    void UpdateParticleSystem()//___________________________________________________//appelé dans Update\\_______________________________________________________________________________________________________
+    void UpdateParticleSystem()//___________________________________________________//appelé dans Update\\____________________________________________________________________________________________________________
     {
         var main = pS.main;                                                         // attrape le setting "Main" du component "particle system"
         main.startLifetime = 0.5f * Mathf.Sin(speed * Mathf.PI) + 0.05f;            // start life time = SLT =  0.5 x sin(speed x pi) +0.05   ; de cette manière speed = 0.5 <=> SLT = 0.5    ET   speed = 1 <=> SLT = 0.05                                   // attrape le setting "Main" du component "particle system"
@@ -82,7 +82,7 @@ public class blendtreeExemple : MonoBehaviour
         color.color = gradient;                                                     // utilise le nouveau gradient
 
     }  
-    public void UpdateGradient()//______________________________________________________//appelé dans Start ET UpdateParticleSystem\\____________________________________________________________________________________
+    public void UpdateGradient()//__________________________________________________//appelé dans Start ET UpdateParticleSystem\\_____________________________________________________________________________________
     {
         ColorKey = new GradientColorKey[2];                                             //le gradient à 1 clée couleur
         ColorKey[0].color = Color.white;                                                //la clée est blanche
@@ -100,4 +100,62 @@ public class blendtreeExemple : MonoBehaviour
 
         gradient.SetKeys(ColorKey,AlphaKey);                                            //met à jour le gradient pour le particule system
     }
+    public void CameraCollision(float magnitude)
+    {
+        StartCoroutine(CSOnCollision(magnitude));
+    }
+    public void CameraMediumHarvest()
+    {
+        StartCoroutine(CSOnMediumHarvest(1.0f));
+    }
+    public void CameraBigHarvest()
+    {
+        StartCoroutine(CSOnBigHarvest(1.0f));
+    }
+    public IEnumerator CSOnCollision(float weight)//_______
+    {
+        float value = Mathf.Clamp((weight - ((Time.deltaTime) * 0.9f)),0.0f , 1.0f);
+        anim.SetLayerWeight(1, value);
+        if(value != 0.0f)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(CSOnCollision(value));
+        }
+        else
+        {
+            StopCoroutine(CSOnCollision(0.0f));
+        }
+    }
+    public IEnumerator CSOnMediumHarvest(float weight)//______
+    {
+        float value = Mathf.Clamp((weight - Time.deltaTime), 0.0f, 1.0f);
+        anim.SetLayerWeight(2, value);
+        if (value != 0.0f)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(CSOnMediumHarvest(value));
+        }
+        else
+        {
+            StopCoroutine(CSOnMediumHarvest(0.0f));
+        }
+    }
+    public IEnumerator CSOnBigHarvest(float weight)//______
+    {
+        float value = Mathf.Clamp((weight - ((Time.deltaTime) * 2.0f)), 0.0f, 1.0f);
+        anim.SetLayerWeight(3, value);
+        if (value != 0.0f)
+        {
+            yield return new WaitForEndOfFrame();
+            StartCoroutine(CSOnBigHarvest(value));
+        }
+        else
+        {
+            StopCoroutine(CSOnBigHarvest(0.0f));
+        }
+    }
+
+
+
+
 }
