@@ -28,13 +28,13 @@ public class blendtreeExemple : MonoBehaviour
 
 
 
-    private void Start()//____________________________________________________//Start\\_______________________________________________________________________________________________________________________________
+    private void Start()//__________________________________________________________//Start\\_________________________________________________________________________________________________________________________
     {
         initiate();                                                           //récupère les component et les settings pour faires des variables exploitables
     }
 
 
-    private void Update()//___________________________________________________//Update\\______________________________________________________________________________________________________________________________
+    private void Update()//_________________________________________________________//Update\\________________________________________________________________________________________________________________________
     {
         UpdateBlendTree();                                                    //fait varier l'animator
         UpdateVolume();                                                       //fait vairer le postprocess
@@ -100,58 +100,58 @@ public class blendtreeExemple : MonoBehaviour
 
         gradient.SetKeys(ColorKey,AlphaKey);                                            //met à jour le gradient pour le particule system
     }
-    public void CameraCollision(float magnitude)
+    public void CameraCollision(float magnitude)//__________________________________//appelé chez le player\\_________________________________________________________________________________________________________
     {
-        StartCoroutine(CSOnCollision(magnitude));
+        StartCoroutine(CSOnCollision(magnitude));                                   //démare un camera shake violent qui diminue avec le temps
     }
-    public void CameraMediumHarvest()
+    public void CameraMediumHarvest()//_____________________________________________//appelé chez le player\\_________________________________________________________________________________________________________
     {
-        StartCoroutine(CSOnMediumHarvest(1.0f));
+        StartCoroutine(CSOnMediumHarvest(1.0f));                                    //fait un recul sur la camera sur une récolte moyenne (feedback)
     }
-    public void CameraBigHarvest()
+    public void CameraBigHarvest()//________________________________________________//appelé chez le player\\_________________________________________________________________________________________________________
     {
-        StartCoroutine(CSOnBigHarvest(1.0f));
+        StartCoroutine(CSOnBigHarvest(1.0f));                                       //fait un recul + camera shake sur une grosse récolte (feedback)
     }
-    public IEnumerator CSOnCollision(float weight)//_______
+    public IEnumerator CSOnCollision(float weight)//________________________________//appelé dans CameraCollision\\___________________________________________________________________________________________________
     {
-        float value = Mathf.Clamp((weight - ((Time.deltaTime) * 0.9f)),0.0f , 1.0f);
-        anim.SetLayerWeight(1, value);
-        if(value != 0.0f)
+        float value = Mathf.Clamp((weight - ((Time.deltaTime) * 0.9f)),0.0f , 1.0f);      // diminue progressivement la valeur du shake 
+        anim.SetLayerWeight(1, value);                                                    // modifie l'influance du layer d'animation. les layers offrent des animations qui s'additionent avec les autres animatinons actives
+        if(value != 0.0f)                                                                 // si le shake n'est pas terminé
         {
-            yield return new WaitForEndOfFrame();
-            StartCoroutine(CSOnCollision(value));
+            yield return new WaitForEndOfFrame();                                         // attend une frame pour éviter le crash
+            StartCoroutine(CSOnCollision(value));                                         // recomence la couroutine pour continuer le shake
         }
-        else
+        else                                                                              // si le shake est fini
         {
-            StopCoroutine(CSOnCollision(0.0f));
-        }
-    }
-    public IEnumerator CSOnMediumHarvest(float weight)//______
-    {
-        float value = Mathf.Clamp((weight - Time.deltaTime), 0.0f, 1.0f);
-        anim.SetLayerWeight(2, value);
-        if (value != 0.0f)
-        {
-            yield return new WaitForEndOfFrame();
-            StartCoroutine(CSOnMediumHarvest(value));
-        }
-        else
-        {
-            StopCoroutine(CSOnMediumHarvest(0.0f));
+            StopCoroutine(CSOnCollision(0.0f));                                           // arrête la couroutine
         }
     }
-    public IEnumerator CSOnBigHarvest(float weight)//______
+    public IEnumerator CSOnMediumHarvest(float weight)//____________________________//appelé dans CameraMediumHarvest\\_______________________________________________________________________________________________
     {
-        float value = Mathf.Clamp((weight - ((Time.deltaTime) * 2.0f)), 0.0f, 1.0f);
-        anim.SetLayerWeight(3, value);
-        if (value != 0.0f)
+        float value = Mathf.Clamp((weight - Time.deltaTime), 0.0f, 1.0f);                // diminue progressivement la valeur du shake 
+        anim.SetLayerWeight(2, value);                                                   // modifie l'influance du layer d'animation. les layers offrent des animations qui s'additionent avec les autres animatinons actives
+        if (value != 0.0f)                                                               // si le shake n'est pas terminé
         {
-            yield return new WaitForEndOfFrame();
-            StartCoroutine(CSOnBigHarvest(value));
+            yield return new WaitForEndOfFrame();                                        // attend une frame pour éviter le crash
+            StartCoroutine(CSOnMediumHarvest(value));                                    // recomence la couroutine pour continuer le shake
         }
-        else
+        else                                                                             // si le shake est fini
         {
-            StopCoroutine(CSOnBigHarvest(0.0f));
+            StopCoroutine(CSOnMediumHarvest(0.0f));                                      // arrête la couroutine
+        }
+    }
+    public IEnumerator CSOnBigHarvest(float weight)//_______________________________//appelé dans CameraBigHarvest\\__________________________________________________________________________________________________
+    {
+        float value = Mathf.Clamp((weight - ((Time.deltaTime) * 2.0f)), 0.0f, 1.0f);    // diminue progressivement la valeur du shake 
+        anim.SetLayerWeight(3, value);                                                  // modifie l'influance du layer d'animation. les layers offrent des animations qui s'additionent avec les autres animatinons actives
+        if (value != 0.0f)                                                              // si le shake n'est pas terminé
+        {
+            yield return new WaitForEndOfFrame();                                       // attend une frame pour éviter le crash
+            StartCoroutine(CSOnBigHarvest(value));                                      // recomence la couroutine pour continuer le shake
+        }
+        else                                                                            // si le shake est fini
+        {
+            StopCoroutine(CSOnBigHarvest(0.0f));                                        // arrête la couroutine
         }
     }
 
