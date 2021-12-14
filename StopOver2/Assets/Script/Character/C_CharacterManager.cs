@@ -59,8 +59,8 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
 
         #region Get Input
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
+        horizontalInput = Input.GetAxis("HorizontalManette");
+        verticalInput = Input.GetAxis("VerticalManette");
         mouseXInput = Input.GetAxis("Mouse X");
         boostInput = Input.GetAxis(boostInputName);
         #endregion
@@ -77,6 +77,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterBoost.IniatiateBoostValue();
         _CharacterFX.InitiateFXValue(_CharacterBoost);
         _CharacterPropulseur.InitiatePropulsorValue(rb);
+        _CharacterControler.InitiateControlValue();
         #endregion
     }
 
@@ -87,17 +88,25 @@ public class C_CharacterManager : MonoBehaviour
         CheckGrounded();
         CalculSpeedCharcter();
 
-        _CharacterControler.TriggerControl(CheckGrounded(), verticalInput, rb);
-        if(CheckGrounded() == true)
-        {
-            _CharacterPropulseur.Propulsing();
+        horizontalInput = Input.GetAxis("HorizontalManette");
+        verticalInput = Input.GetAxis("VerticalManette");
+        mouseXInput = Input.GetAxis("Mouse X");
+        boostInput = Input.GetAxis(boostInputName);
 
-        }
+        _CharacterBoost.TriggerBoost(boostInput, CheckGrounded(), rb, rb.velocity.magnitude);
     }
 
     private void FixedUpdate()
     {
+        if (CheckGrounded())
+        {
+            _CharacterControler.TriggerControl(verticalInput, rb);
+            //Debug.Log(verticalInput);
+            _CharacterPropulseur.Propulsing();
+        }
+
         _CharacterControler.TriggerFixedControl(CheckGrounded(), verticalInput, mouseXInput, rb);
+        _CharacterControler.GravityFall(CheckGrounded(), rb);
     }
 
     private void CalculSpeedCharcter()
@@ -114,14 +123,10 @@ public class C_CharacterManager : MonoBehaviour
             distanceGroundChara = groundHit.distance;
 
             return true;
-
-            
-
         }
         else
         {
             return false;
-            
         }
     }
 

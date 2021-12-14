@@ -59,14 +59,13 @@ public class C_CharacterPropulseur : MonoBehaviour
     {
         CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist);
         CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist);
-        Debug.Log("propuls call");
+        //Debug.Log("propuls call");
     }
 
     void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist)
     {
-        Debug.Log("Current Length : " + currentLength);
-        Debug.Log("Current Str : " + currentStrength);
-        currentLength = length;
+        //Debug.Log("Current Length : " + currentLength);
+        //Debug.Log("Current Str : " + currentStrength);
         foreach (GameObject propulsPoint in propulsors)
         {
             //Debug.Log("Call propulsor");
@@ -74,7 +73,7 @@ public class C_CharacterPropulseur : MonoBehaviour
             Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
             if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength))
             {
-                Debug.Log("Hit Ground");
+                //Debug.Log("Hit Ground");
                 lastHitDist = hit.distance;
                // Debug.Log("lastHit" + lastHitDist);
                 float forceAmount = 0;
@@ -82,13 +81,13 @@ public class C_CharacterPropulseur : MonoBehaviour
                 //Debug.Log("ratio" + lengthRatio);
 
                 forceAmount = currentStrength * lengthRatio + (currentDampening * (lastHitDist * hit.distance));
-                Debug.Log("ForceAmount" + forceAmount);
+                //Debug.Log("ForceAmount" + forceAmount);
 
                 rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPoint.transform.position);
             }
             else
             {
-                Debug.Log("Dont Hit Ground");
+                //Debug.Log("Dont Hit Ground");
                 lastHitDist = currentLength;
             }
         }
@@ -116,5 +115,6 @@ public class C_CharacterPropulseur : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(arrayPropulseurPointLeft[0].transform.position, arrayPropulseurPointLeft[0].transform.position - (Vector3.up * 4));
+        Gizmos.DrawLine(arrayPropulseurPointRight[0].transform.position, arrayPropulseurPointRight[0].transform.position - (Vector3.up * 4));
     }
 }

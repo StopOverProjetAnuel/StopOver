@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class C_CharacterControler : MonoBehaviour
 {
+    C_CharacterBoost _CharacterBoost;
+
     public float timeFirstAcceleration;
     public float timeAcceleration;
     public float firstAccelerationForward;
@@ -20,53 +22,68 @@ public class C_CharacterControler : MonoBehaviour
 
     private float t1;
     private float t2;
-    [HideInInspector]public float currentSpeedForward;
+    public float currentSpeedForward;
 
-    public void TriggerControl(bool isGrounded, float verticalInput, Rigidbody rb)
+    public float fallAcceleration;
+    public float dragAirForce;
+    public float dragGroundForce;
+
+    public void InitiateControlValue()
     {
-        if (isGrounded == true)
+        _CharacterBoost = GetComponent<C_CharacterBoost>();
+    }
+
+    public void TriggerControl(float verticalInput, Rigidbody rb)
+    {
+        //Debug.Log("Control Triggered");
+        if(verticalInput > 0)
         {
-            
-            if(verticalInput > 0)
+            //Debug.Log("Player Forward");
+            if (!firstAccelerationDone)
             {
-                if (!firstAccelerationDone)
-                {
-                    FirstAcceleration();
-                }else if (firstAccelerationDone && !accelerationDone)
-                {
-                    Acceleration();
-                }
-
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * currentSpeedForward, transform.position);
+                FirstAcceleration();
+            }
+            else if (firstAccelerationDone && !accelerationDone)
+            {
+                Acceleration();
             }
 
-            if(verticalInput < 0)
-            {
-                firstAccelerationDone = false;
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * speedBackWard, transform.position);
-            }
+            rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * currentSpeedForward, transform.position);
+        }
 
-            if(verticalInput == 0)
-            {
-                firstAccelerationDone = false;
-                accelerationDone = false;
-            }
+        if (verticalInput < 0)
+        {
+            firstAccelerationDone = false;
+            rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * speedBackWard, transform.position);
+        }
+
+        if(verticalInput == 0)
+        {
+            firstAccelerationDone = false;
+            accelerationDone = false;
         }
     }
 
     private void FirstAcceleration()
     {
-        if(t2 >= 1f)
+        if (!_CharacterBoost.isBoosted)
         {
-            firstAccelerationDone = true;
-            accelerationDone = false; 
-            t2 = 0;
-        }
+            if(t2 >= 1f)
+            {
+                firstAccelerationDone = true;
+                accelerationDone = false; 
+                t2 = 0;
+            }
 
-        if (!firstAccelerationDone)
+            if (!firstAccelerationDone)
+            {
+                t2 += Time.deltaTime / timeFirstAcceleration;
+                currentSpeedForward = Mathf.SmoothStep(currentSpeedForward, firstAccelerationForward, t2);
+            }
+        }
+        else
         {
-            t2 += Time.deltaTime / timeFirstAcceleration;
-            currentSpeedForward = Mathf.SmoothStep(currentSpeedForward, firstAccelerationForward, t2);
+            currentSpeedForward = 30000;
         }
     }
 
@@ -100,6 +117,19 @@ public class C_CharacterControler : MonoBehaviour
         else
         {
             rb.AddTorque(Vector3.up * torque * mouseXInput);
+        }
+    }
+
+    public void GravityFall(bool isGrounded, Rigidbody rb)
+    {
+        if (isGrounded)
+        {
+            rb.drag = dragGroundForce;
+        }
+        else
+        {
+            rb.drag = dragAirForce;
+            rb.AddForce(Vector3.down * fallAcceleration, ForceMode.Acceleration);
         }
     }
 }

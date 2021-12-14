@@ -18,6 +18,8 @@ public class C_CharacterBoost : MonoBehaviour
     private bool accelerationBoostDone;
     private bool canFirstImpuls;
 
+    public bool isBoosted = false;
+
 
     public  float t2;
     // Start is called before the first frame update
@@ -30,6 +32,7 @@ public class C_CharacterBoost : MonoBehaviour
     // Update is called once per frame
     public void TriggerBoost(float inputDirectionNorm, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
     {
+        Debug.Log("Boost Triggered");
         if (isGrounded && boostActiv)
         {
             if (inputDirectionNorm > 0 && canFirstImpuls)
@@ -51,6 +54,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     private void Boost(bool caBombarde, float currentSpeedPlayer)
     {
+        Debug.Log("Boost Call");
         if (caBombarde)
         {
             if (t2 >= 1f)
@@ -64,6 +68,8 @@ public class C_CharacterBoost : MonoBehaviour
                 currentSpeedPlayer = Mathf.SmoothStep(currentSpeedPlayer, speedBoost, t2);
 
                 currentColdownBoost = Mathf.Lerp(minCooldownBoost, maxCooldownBoost, t2);
+
+                isBoosted = true;
             }
             else if (accelerationBoostDone)
             {
@@ -88,6 +94,7 @@ public class C_CharacterBoost : MonoBehaviour
     {
         boostActiv = false;
         currentSpeedPlayer = speedBoost;
+        isBoosted = false;
 
         yield return new WaitForSeconds(currentColdownBoost);
         t2 = 0;
