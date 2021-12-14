@@ -7,8 +7,8 @@ public class C_CharacterPropulseur : MonoBehaviour
     [SerializeField] Vector2 zRotMinMax = new Vector2(-30f, 30f);
     [SerializeField] Vector2 xRotMinMax = new Vector2(-30f, 30f);
 
-    public GameObject[] arrayPropulseurPointRight;
-    public GameObject[] arrayPropulseurPointLeft;
+    public GameObject[] arrayPropulseurPointRight = new GameObject[0];
+    public GameObject[] arrayPropulseurPointLeft = new GameObject[0];
 
     public float length;
     public float strengthRight;
@@ -36,6 +36,9 @@ public class C_CharacterPropulseur : MonoBehaviour
     private float t1;
     private float currentTimeTransitionLean;
 
+    private float lastHitDist;
+
+
 
     public void InitiatePropulsorValue(Rigidbody PlayerRb)
     {
@@ -48,29 +51,38 @@ public class C_CharacterPropulseur : MonoBehaviour
         currentDampening = 0;
         currentStrengthRight = strengthRight;
         currentStrengthLeft = strengthLeft;
+
+        lastHitDist = 2;
     }
 
     public void Propulsing()
     {
-        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDistLeft);
-        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDistRight);
+        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist);
+        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist);
+        Debug.Log("propuls call");
     }
 
     void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist)
     {
+        Debug.Log("Current Length : " + currentLength);
+        Debug.Log("Current Str : " + currentStrength);
+        currentLength = length;
         foreach (GameObject propulsPoint in propulsors)
         {
-            Debug.Log("Call propulsor");
+            //Debug.Log("Call propulsor");
             RaycastHit hit;
             Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
-            if (Physics.Raycast(propulsPoint.transform.position, rayDirection, out hit, currentLength))
+            if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength))
             {
                 Debug.Log("Hit Ground");
                 lastHitDist = hit.distance;
+               // Debug.Log("lastHit" + lastHitDist);
                 float forceAmount = 0;
                 float lengthRatio = (currentLength - hit.distance) / currentLength;
+                //Debug.Log("ratio" + lengthRatio);
 
                 forceAmount = currentStrength * lengthRatio + (currentDampening * (lastHitDist * hit.distance));
+                Debug.Log("ForceAmount" + forceAmount);
 
                 rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPoint.transform.position);
             }

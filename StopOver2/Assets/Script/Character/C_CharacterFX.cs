@@ -18,7 +18,7 @@ public class C_CharacterFX : MonoBehaviour
     public void InitiateFXValue(C_CharacterBoost cB)
     {
         nudgeBars = GetComponent<NudgeBars>();
-        whichStateSpeed = nudgeBars.nbState;
+        //whichStateSpeed = nudgeBars.nbState;
         _CharacterBoost = cB;
     }
 

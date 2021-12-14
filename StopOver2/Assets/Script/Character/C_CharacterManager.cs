@@ -76,6 +76,7 @@ public class C_CharacterManager : MonoBehaviour
         #region Initiate Module Script Value
         _CharacterBoost.IniatiateBoostValue();
         _CharacterFX.InitiateFXValue(_CharacterBoost);
+        _CharacterPropulseur.InitiatePropulsorValue(rb);
         #endregion
     }
 
@@ -87,7 +88,11 @@ public class C_CharacterManager : MonoBehaviour
         CalculSpeedCharcter();
 
         _CharacterControler.TriggerControl(CheckGrounded(), verticalInput, rb);
-        _CharacterPropulseur.Propulsing();
+        if(CheckGrounded() == true)
+        {
+            _CharacterPropulseur.Propulsing();
+
+        }
     }
 
     private void FixedUpdate()
@@ -110,10 +115,14 @@ public class C_CharacterManager : MonoBehaviour
 
             return true;
 
+            
+
         }
         else
         {
             return false;
+            
         }
     }
+
 }
