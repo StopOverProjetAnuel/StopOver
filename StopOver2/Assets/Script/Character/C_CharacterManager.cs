@@ -100,7 +100,7 @@ public class C_CharacterManager : MonoBehaviour
             _CharacterPropulseur.Propulsing();
         }
 
-        _CharacterControler.TriggerFixedControl(CheckGrounded(), verticalInput, mouseXInput, rb);
+        _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
     }
 

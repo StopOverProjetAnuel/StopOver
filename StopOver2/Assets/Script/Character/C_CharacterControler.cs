@@ -4,29 +4,37 @@ using UnityEngine;
 
 public class C_CharacterControler : MonoBehaviour
 {
+    #region Varibles
     C_CharacterBoost _CharacterBoost;
 
+    [Header("Speed Parameters")]
     public float timeFirstAcceleration;
     public float timeAcceleration;
     public float firstAccelerationForward;
     public float speedForward;
     public float speedBackWard;
 
-    public float torque;
-    public float torqueAirControl;
+    [SerializeField] float rotateSpeed;
+    [SerializeField] float rSAirMultiplier; //rotate speed
 
     public float airControlSpeedForward;
 
-    private bool firstAccelerationDone;
-    private bool accelerationDone;
+    bool firstAccelerationDone;
+    bool accelerationDone;
 
-    private float t1;
-    private float t2;
+    float t1;
+    float t2;
     public float currentSpeedForward;
 
+    [Header("Fall Parameters")]
     public float fallAcceleration;
     public float dragAirForce;
     public float dragGroundForce;
+    [Space]
+    public float fallAngle = 30f;
+    public AnimationCurve smoothFallForward;
+    float fallTimer;
+    #endregion
 
     public void InitiateControlValue()
     {
@@ -48,13 +56,13 @@ public class C_CharacterControler : MonoBehaviour
                 Acceleration();
             }
 
-            rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * currentSpeedForward, transform.position);
+            rb.AddForce(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * currentSpeedForward);
         }
 
         if (verticalInput < 0)
         {
             firstAccelerationDone = false;
-            rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * speedBackWard, transform.position);
+            rb.AddForce(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * speedBackWard);
         }
 
         if(verticalInput == 0)
@@ -106,17 +114,37 @@ public class C_CharacterControler : MonoBehaviour
         }
     }
 
-    public void TriggerFixedControl(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb)
+    public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb)
     {
-        if (isGrounded == false)
-        {
-            rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.right) * -verticalInput * airControlSpeedForward);
-            rb.AddTorque(Vector3.up * torqueAirControl * mouseXInput);
+        Vector3 rotateValue = Vector3.up * rotateSpeed * mouseXInput * Time.fixedDeltaTime;
 
+        if (isGrounded)
+        {
+            rb.AddTorque(rotateValue, ForceMode.Acceleration);
+
+            if (fallTimer != 0)
+            {
+                fallTimer = 0f;
+            }
         }
         else
         {
-            rb.AddTorque(Vector3.up * torque * mouseXInput);
+            rb.AddTorque(rotateValue * rSAirMultiplier);
+
+            if (fallTimer <= 1)
+            {
+                Vector3 keepCurrentRotation = transform.localRotation.eulerAngles; //Keep the current rotation in y and z
+                keepCurrentRotation.x = 0f;
+                Vector3 fallRotation = fallAngle * Vector3.right; //Make the new rotation in x
+                Vector3 changeRotation = fallRotation + keepCurrentRotation; //Combine both
+                //transform.localRotation = Quaternion.Euler(smoothFallForward.Evaluate(fallTimer));
+
+                fallTimer += Time.fixedDeltaTime;
+
+                Debug.Log("keepCurrentRotation" + keepCurrentRotation);
+                Debug.Log("fallRotation" + fallRotation);
+                Debug.Log("changeRotation" + changeRotation);
+            }
         }
     }
 
