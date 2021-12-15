@@ -58,13 +58,6 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterAnime = GetComponent<C_CharacterAnim>();
         #endregion
 
-        #region Get Input
-        horizontalInput = Input.GetAxis("HorizontalManette");
-        verticalInput = Input.GetAxis("VerticalManette");
-        mouseXInput = Input.GetAxis("Mouse X");
-        boostInput = Input.GetAxis(boostInputName);
-        #endregion
-
         #region Get Object
         rb = GetComponent<Rigidbody>();
 
@@ -85,13 +78,15 @@ public class C_CharacterManager : MonoBehaviour
     {
         rb.centerOfMass = centerOfMass.transform.localPosition;
 
-        CheckGrounded();
-        CalculSpeedCharcter();
-
-        horizontalInput = Input.GetAxis("HorizontalManette");
-        verticalInput = Input.GetAxis("VerticalManette");
+        #region Get Input
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
         mouseXInput = Input.GetAxis("Mouse X");
         boostInput = Input.GetAxis(boostInputName);
+        #endregion
+
+        CheckGrounded();
+        CalculSpeedCharcter();
 
         _CharacterBoost.TriggerBoost(boostInput, CheckGrounded(), rb, rb.velocity.magnitude);
     }
