@@ -84,7 +84,7 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _Remplissage: 0.2
+    - _Remplissage: 0.007
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SrcBlend: 1
@@ -115,8 +115,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_0fe3bd31b9474410aade493b9072253a: {r: 0, g: 0.45117542, b: 1.4937824, a: 0}
-    - Color_7c80ee81745743febd2339e68830cd79: {r: 0, g: 0.18039216, b: 0.7490196, a: 0}
+    - Color_0fe3bd31b9474410aade493b9072253a: {r: 3.9886336, g: 1.0905771, b: 0, a: 0}
+    - Color_7c80ee81745743febd2339e68830cd79: {r: 0, g: 0.20483543, b: 0.12290126, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
