@@ -59,10 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWeaponTagName: Weapon
+  isDropOnDestroy: 0
   droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 10
   resistanceLevel: 0
+  showDebug: 0
 --- !u!1001 &1435087359328739959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,6 +304,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_Name
       value: modo_Champignion
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}

@@ -8,7 +8,6 @@ public class CollidedPlayer : MonoBehaviour
     private RessourceManager ressourceManager;
 
     private NudgeBars nudgeBars;
-    public string playerWeaponTagName;
 
     [Header("Parameters")]
     public bool isDropOnDestroy = false;
@@ -16,6 +15,9 @@ public class CollidedPlayer : MonoBehaviour
     public float resourceGive;
     public int resistanceLevel;
 
+    [Space(10)]
+
+    public bool showDebug = false;
 
 
     private void Start()
@@ -24,7 +26,7 @@ public class CollidedPlayer : MonoBehaviour
         nudgeBars = FindObjectOfType<NudgeBars>();
     }
 
-
+    #region OLD
     /**private void OnCollisionEnter(Collision col)
     {
         Collider other = col.collider;
@@ -42,6 +44,7 @@ public class CollidedPlayer : MonoBehaviour
             Transform.Destroy(gameObject);
         }
     }*/
+    #endregion
 
     public void TriggerCollisionPlayer()
     {
@@ -57,8 +60,19 @@ public class CollidedPlayer : MonoBehaviour
                 item.GetComponent<PickUp>().ressourceGive = resourceGive;
             }
             Transform.Destroy(gameObject);
-            //Debug.Log(gameObject.name + " task executed");
+
+            #region Debug
+            if (showDebug)
+            {
+                Debug.Log(gameObject.name + " task executed");
+            }
+            #endregion
         }
-        //Debug.Log(gameObject.name + " have been triggered");
+        #region Debug
+        if (showDebug)
+        {
+            Debug.Log(gameObject.name + " have been triggered");
+        }
+        #endregion
     }
 }

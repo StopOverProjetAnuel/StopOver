@@ -55,14 +55,14 @@ public class C_CharacterPropulseur : MonoBehaviour
         lastHitDist = 2;
     }
 
-    public void Propulsing()
+    public void Propulsing(LayerMask mask)
     {
-        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist);
-        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist);
+        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist, mask);
+        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist, mask);
         //Debug.Log("propuls call");
     }
 
-    void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist)
+    void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist, LayerMask mask)
     {
         //Debug.Log("Current Length : " + currentLength);
         //Debug.Log("Current Str : " + currentStrength);
@@ -71,7 +71,7 @@ public class C_CharacterPropulseur : MonoBehaviour
             //Debug.Log("Call propulsor");
             RaycastHit hit;
             Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
-            if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength))
+            if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength, mask.value))
             {
                 //Debug.Log("Hit Ground");
                 lastHitDist = hit.distance;

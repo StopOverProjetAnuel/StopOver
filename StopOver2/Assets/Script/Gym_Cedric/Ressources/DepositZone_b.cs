@@ -5,6 +5,7 @@ using TMPro;
 
 public class DepositZone_b : MonoBehaviour
 {
+    public string playerTag = "Player";
     public float waitDeposit = 1;
     private float previousTime;
     public float minSpeed;
@@ -13,6 +14,11 @@ public class DepositZone_b : MonoBehaviour
     public GameObject timerFont;
     public Material chargeMat;
     public Material unchargeMat;
+
+    [Space(10)]
+
+    public bool showDebug = false;
+
 
     private void Awake()
     {
@@ -31,20 +37,43 @@ public class DepositZone_b : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Rigidbody rb = m_Player.GetComponent<Rigidbody>();
-        if (other.CompareTag("Player") && ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= minSpeed)
+        if (other.gameObject == m_Player)
         {
-            if (previousTime <= Time.time)
+            if (ressourceManager.currentRessource != 0 && rb.velocity.magnitude <= minSpeed)
             {
-                timerFont.GetComponent<MeshRenderer>().material = chargeMat;
-                ressourceManager.TriggerScore(1);
-                waitDeposit = Mathf.Clamp(waitDeposit - 0.75f, 0.005f, 1f);
-                previousTime = Time.time + waitDeposit;
+                if (previousTime <= Time.time)
+                {
+                    timerFont.GetComponent<MeshRenderer>().material = chargeMat;
+                    ressourceManager.TriggerScore(1);
+                    waitDeposit = Mathf.Clamp(waitDeposit - 0.75f, 0.005f, 1f);
+                    previousTime = Time.time + waitDeposit;
+                }
+
+                #region Debug
+                if (showDebug)
+                {
+                    Debug.Log("Player deposing");
+                }
+                #endregion
             }
+            else
+            {
+                timerFont.GetComponent<MeshRenderer>().material = unchargeMat;
+            }
+            #region Debug
+            if (showDebug)
+            {
+                Debug.Log("Player detected");
+            }
+            #endregion
         }
-        else
+        #region Debug
+        if (showDebug)
         {
-            timerFont.GetComponent<MeshRenderer>().material = unchargeMat;
+            Debug.Log("Deposit Zone trigered");
+            Debug.Log(other.gameObject.name);
         }
+        #endregion
     }
 
     private void OnTriggerExit(Collider other)

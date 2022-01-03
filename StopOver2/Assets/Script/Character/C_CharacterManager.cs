@@ -97,7 +97,7 @@ public class C_CharacterManager : MonoBehaviour
         {
             _CharacterControler.TriggerControl(verticalInput, rb);
             //Debug.Log(verticalInput);
-            _CharacterPropulseur.Propulsing();
+            _CharacterPropulseur.Propulsing(layerGround);
         }
 
         _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb);
@@ -113,10 +113,9 @@ public class C_CharacterManager : MonoBehaviour
     public bool CheckGrounded()
     {
         RaycastHit groundHit;
-        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, distanceNoControl, layerGround))
+        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, distanceNoControl, layerGround.value))
         {
             distanceGroundChara = groundHit.distance;
-
             return true;
         }
         else

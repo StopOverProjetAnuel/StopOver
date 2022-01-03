@@ -50,7 +50,7 @@ public class NudgeBars : MonoBehaviour
                 nbState = 1;
             }
 
-            nudgeBars_model.GetComponent<MeshRenderer>().material = nudgeBarsMaterials[Mathf.Clamp(nbState - 1, 0, 2)];
+            //nudgeBars_model.GetComponent<MeshRenderer>().material = nudgeBarsMaterials[nbState - 1];
         }
         else
         {
@@ -61,16 +61,11 @@ public class NudgeBars : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.parent == null)
+        Transform parent = other.transform.parent;
+        if (parent.TryGetComponent<CollidedPlayer>(out collidedPlayer))
         {
-            doThing();
-        }
-        else
-        {
-            Transform tfParent = other.transform.parent;
-            if (tfParent.CompareTag("Destructible"))
+            if (parent.CompareTag("Destructible"))
             {
-                collidedPlayer = tfParent.GetComponent<CollidedPlayer>();
                 collidedPlayer.TriggerCollisionPlayer();
                 #region Debug
                 if (showDebug)
@@ -79,19 +74,8 @@ public class NudgeBars : MonoBehaviour
                 }
                 #endregion
             }
-            else
-            {
-                doThing();
-            }
         }
-        #region Debug
-        if (showDebug)
-        {
-            Debug.Log("NudgeBars get triggered");
-        }
-        #endregion
-
-        void doThing()
+        else
         {
             if (other.CompareTag("Destructible"))
             {
@@ -105,5 +89,11 @@ public class NudgeBars : MonoBehaviour
                 #endregion
             }
         }
+        #region Debug
+        if (showDebug)
+        {
+            Debug.Log("NudgeBars get triggered");
+        }
+        #endregion
     }
 }
