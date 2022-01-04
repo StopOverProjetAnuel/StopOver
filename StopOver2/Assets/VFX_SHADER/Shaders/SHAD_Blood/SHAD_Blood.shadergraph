@@ -428,6 +428,9 @@
     "m_ActiveTargets": [
         {
             "m_Id": "6391c33d9e2b4ab3b8736c80838127c1"
+        },
+        {
+            "m_Id": "a5f701d64c154e2aba8cd16869b33c0f"
         }
     ]
 }
@@ -459,9 +462,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1036.0,
-            "y": 720.0,
-            "width": 119.99999237060547,
+            "x": -1035.0,
+            "y": 727.0,
+            "width": 120.00000762939453,
             "height": 149.0
         }
     },
@@ -711,7 +714,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Alpha",
     "m_StageCapability": 2,
-    "m_Value": 0.47999998927116396,
+    "m_Value": -0.5299999713897705,
     "m_DefaultValue": 1.0,
     "m_Labels": []
 }
@@ -1185,8 +1188,8 @@
     "m_ObjectId": "633983500aa848058b85b53ac80b2a8d",
     "m_Title": "Alpha qui gère l'alpha clip ( en fct de la curve sur le part system)",
     "m_Position": {
-        "x": -1372.0,
-        "y": 611.9998779296875
+        "x": -1371.0,
+        "y": 619.0
     }
 }
 
@@ -1441,7 +1444,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -854.0,
-            "y": 219.00003051757813,
+            "y": 218.0,
             "width": 208.0,
             "height": 302.0
         }
@@ -1481,7 +1484,7 @@
     "overrideHLSLDeclaration": false,
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
-    "m_Value": 0.0,
+    "m_Value": 0.029999999329447748,
     "m_FloatType": 0,
     "m_RangeValues": {
         "x": 0.0,
@@ -1927,6 +1930,14 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.VFXTarget",
+    "m_ObjectId": "a5f701d64c154e2aba8cd16869b33c0f",
+    "m_Lit": true,
+    "m_AlphaTest": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.UVNode",
     "m_ObjectId": "a6674f3e33094301817c9aa98a90ce6c",
     "m_Group": {
@@ -1937,10 +1948,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1347.0,
-            "y": 670.9999389648438,
-            "width": 208.0,
-            "height": 313.9999694824219
+            "x": -1346.0,
+            "y": 678.0,
+            "width": 207.99998474121095,
+            "height": 314.0
         }
     },
     "m_Slots": [
@@ -2018,9 +2029,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -847.0,
-            "y": 720.0,
-            "width": 208.0,
+            "x": -846.0000610351563,
+            "y": 727.0,
+            "width": 207.99998474121095,
             "height": 278.0
         }
     },
@@ -2098,7 +2109,7 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -1144.0,
-            "y": 204.0,
+            "y": 202.99998474121095,
             "width": 208.0,
             "height": 278.0
         }
@@ -2386,8 +2397,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1366.0,
-            "y": -428.0,
+            "x": -1367.000244140625,
+            "y": -454.0,
             "width": 208.0,
             "height": 278.0
         }
@@ -2679,9 +2690,9 @@
         "m_Position": {
             "serializedVersion": "2",
             "x": -1029.0,
-            "y": 496.0,
-            "width": 126.0,
-            "height": 77.0
+            "y": 495.0000305175781,
+            "width": 140.0,
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -2754,7 +2765,7 @@
     "m_Title": "Faire ressortir les gouttes de sang du fond noir",
     "m_Position": {
         "x": -1169.0,
-        "y": 145.00003051757813
+        "y": 143.99996948242188
     }
 }
 
