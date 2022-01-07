@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Liquid
+  m_Name: Mat_Liquid
   m_Shader: {fileID: -6465566751694194690, guid: 1c87af2219ecf73479f98a9d98e2a0ca, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DOUBLESIDED_ON
   m_LightmapFlags: 4
@@ -59,7 +59,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
-    - _Remplissage: -0.008
+    - _Remplissage: 0.1
     - _RenderQueueType: 1
     - _SrcBlend: 1
     - _StencilRef: 0

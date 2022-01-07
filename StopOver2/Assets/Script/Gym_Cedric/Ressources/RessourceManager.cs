@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class RessourceManager : MonoBehaviour
 {
-    public float currentRessource;
-    public float maxRessource = 100;
-    public float minRessource = 0;
-    public float currentResourceScored;
+    [Header("Objects Need")]
     public GameObject scoreDisplayObj;
     private TextMeshProUGUI scoreDisplayText;
+    [Header("RealTime Resources")]
+    public float currentRessource;
+    public float currentResourceScored;
+    [Header("Parameters")]
+    public float maxRessource = 100;
+    public float minRessource = 0;
 
     private void Awake()
     {

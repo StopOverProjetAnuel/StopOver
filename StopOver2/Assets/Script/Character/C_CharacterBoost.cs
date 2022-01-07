@@ -1,18 +1,24 @@
-using System.Collections;
 using UnityEngine;
 
 public class C_CharacterBoost : MonoBehaviour
 {
-    public float boostForce;
+    #region Variables
+    #region Scripts Used
+    C_CharacterControler _CharacterControler;
+    #endregion
+
+    public float boostImpulseForce;
     public float speedBoost;
-    public float timeAccelerationBoost;
-    public float durasionBoost;
+    public float timeAccBoost;
+    private float currentTimeAccBoost;
     public float minCooldownBoost;
     public float maxCooldownBoost;
     public float surchaufeCooldownBoost;
+    private float currentCooldownBoost;
 
-    public float currentColdownBoost;
-    private float timeUsBoost;
+    public bool showDebug = false;
+    #region OLD
+    /**private float timeUsBoost;
     [HideInInspector] public bool boostActiv;
     private bool firstImpulsBoostDone;
     private bool accelerationBoostDone;
@@ -20,28 +26,104 @@ public class C_CharacterBoost : MonoBehaviour
 
     public bool isBoosted = false;
 
+    public  float t2;*/
+    #endregion
+    #endregion
 
-    public  float t2;
-    // Start is called before the first frame update
-    public void IniatiateBoostValue()
+
+    public void IniatiateBoostValue() //Work with awake
+    {
+        _CharacterControler = GetComponent<C_CharacterControler>();
+    }
+
+    public void TriggerBoost(float getMoveForward, bool inputBoostTrigger, bool inputBoostTriggerContinue, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
+    {
+        if (getMoveForward > 0 && currentCooldownBoost == 0) 
+        { 
+            if (inputBoostTrigger)
+            {
+                BoostImpulseForce(rb);
+            }
+        
+            if (inputBoostTriggerContinue && currentTimeAccBoost != timeAccBoost)
+            {
+                UseBoostSpeed();
+                IncreesBoostTimer();
+            }
+            else if (!inputBoostTriggerContinue && _CharacterControler.currentSpeedForward != _CharacterControler.speedForward)
+            {
+                ResetBoostSpeed();
+            }
+        }
+        else if (currentCooldownBoost != 0)
+        {
+            DecreesBoostCooldown();
+        }
+
+        #region Debug
+        if (showDebug)
+        {
+            Debug.Log("Boost button is active : " + inputBoostTriggerContinue);
+            Debug.Log("Current Cooldown Boost : " + Mathf.Round(currentCooldownBoost));
+            Debug.Log("Current Time Acceleration Boost : " + Mathf.Round(currentTimeAccBoost));
+        }
+        #endregion
+    }
+
+    private void BoostImpulseForce(Rigidbody rb)
+    {
+        rb.AddRelativeForce(0, 0, boostImpulseForce, ForceMode.Impulse);
+    }
+
+    private void UseBoostSpeed()
+    {
+        _CharacterControler.currentSpeedForward = speedBoost;
+    }
+
+    private void IncreesBoostTimer()
+    {
+        currentTimeAccBoost = Mathf.Clamp(currentTimeAccBoost + Time.fixedDeltaTime, 0, timeAccBoost);
+
+        if (currentTimeAccBoost == timeAccBoost)
+        {
+            ResetBoostSpeed();
+            currentCooldownBoost = surchaufeCooldownBoost;
+        }
+    }
+
+    private void ResetBoostSpeed()
+    {
+        _CharacterControler.currentSpeedForward = _CharacterControler.speedForward;
+
+        float a = currentTimeAccBoost / timeAccBoost;
+        float b = Mathf.Lerp(minCooldownBoost, maxCooldownBoost, a);
+        currentCooldownBoost = b;
+        
+        currentTimeAccBoost = 0f;
+    }
+
+    private void DecreesBoostCooldown()
+    {
+        currentCooldownBoost = Mathf.Clamp(currentCooldownBoost - Time.fixedDeltaTime, 0, surchaufeCooldownBoost);
+    }
+
+    #region OLD (don t erase it)
+    /**public void IniatiateBoostValue() //Work with awake
     {
         canFirstImpuls = true;
         boostActiv = true;
     }
-
-    // Update is called once per frame
-    public void TriggerBoost(float inputDirectionNorm, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
+    public void TriggerBoost(float inputBoostTrigger, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
     {
-        Debug.Log("Boost Triggered");
         if (isGrounded && boostActiv)
         {
-            if (inputDirectionNorm > 0 && canFirstImpuls)
+            if (inputBoostTrigger > 0 && canFirstImpuls)
             {
                 FirstImpulsBoost(true, rb);
             }
 
 
-            if (inputDirectionNorm > 0 && firstImpulsBoostDone)
+            if (inputBoostTrigger > 0 && firstImpulsBoostDone)
             {
                 Boost(true, currentSpeedPlayer);
             }
@@ -102,5 +184,6 @@ public class C_CharacterBoost : MonoBehaviour
         canFirstImpuls = true;
         Debug.Log("Cooldown Done");
         boostActiv = true;
-    }
+    }*/
+    #endregion
 }

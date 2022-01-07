@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class C_CharacterControler : MonoBehaviour
@@ -13,6 +11,8 @@ public class C_CharacterControler : MonoBehaviour
     public float firstAccelerationForward;
     public float speedForward;
     public float speedBackWard;
+    [HideInInspector]
+    public float currentSpeedForward;
 
     [SerializeField] float rotateSpeed;
     [SerializeField] float rSAirMultiplier; //rotate speed
@@ -24,7 +24,6 @@ public class C_CharacterControler : MonoBehaviour
 
     float t1;
     float t2;
-    public float currentSpeedForward;
 
     [Header("Fall Parameters")]
     public float fallAcceleration;
@@ -34,45 +33,57 @@ public class C_CharacterControler : MonoBehaviour
     public float fallAngle = 30f;
     public AnimationCurve smoothFallForward;
     float fallTimer;
+
+    [Space(10)]
+    public bool showDebug = false;
     #endregion
 
     public void InitiateControlValue()
     {
         _CharacterBoost = GetComponent<C_CharacterBoost>();
+        currentSpeedForward = speedForward;
     }
 
     public void TriggerControl(float verticalInput, Rigidbody rb)
     {
-        //Debug.Log("Control Triggered");
-        if(verticalInput > 0)
+        if(verticalInput > 0) //Move Forward
         {
-            //Debug.Log("Player Forward");
-            if (!firstAccelerationDone)
+            rb.AddRelativeForce(0, 0, verticalInput * currentSpeedForward);
+            #region Debug
+            if (showDebug)
+            {
+                Debug.Log("Player Forward");
+            }
+            #endregion
+            #region OLD
+            /**if (!firstAccelerationDone)
             {
                 FirstAcceleration();
             }
             else if (firstAccelerationDone && !accelerationDone)
             {
                 Acceleration();
-            }
-
-            rb.AddForce(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * currentSpeedForward);
+            }*/
+            #endregion
         }
 
-        if (verticalInput < 0)
+        if (verticalInput < 0) //Move Backward
         {
-            firstAccelerationDone = false;
-            rb.AddForce(Time.deltaTime * transform.TransformDirection(Vector3.forward) * verticalInput * speedBackWard);
+            rb.AddRelativeForce(0, 0, verticalInput * currentSpeedForward);
+            #region OLD
+            //firstAccelerationDone = false;
+            #endregion
         }
-
-        if(verticalInput == 0)
+        #region OLD
+        /**if(verticalInput == 0)
         {
             firstAccelerationDone = false;
             accelerationDone = false;
-        }
+        }*/
+        #endregion
     }
-
-    private void FirstAcceleration()
+    #region OLD
+    /**private void FirstAcceleration()
     {
         if (!_CharacterBoost.isBoosted)
         {
@@ -112,7 +123,8 @@ public class C_CharacterControler : MonoBehaviour
         {
             currentSpeedForward = speedForward;
         }
-    }
+    }*/
+    #endregion
 
     public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb)
     {

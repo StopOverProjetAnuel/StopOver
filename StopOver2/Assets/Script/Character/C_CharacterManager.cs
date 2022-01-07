@@ -28,7 +28,8 @@ public class C_CharacterManager : MonoBehaviour
     [HideInInspector] public float horizontalInput;
     [HideInInspector] public float verticalInput;
     [HideInInspector] public float mouseXInput;
-    [HideInInspector] public float boostInput;
+    [HideInInspector] public bool boostInputHold;
+    [HideInInspector] public bool boostInputDown;
 
     [Header("Input Parameters")]
     public string boostInputName = "Boost";
@@ -76,19 +77,22 @@ public class C_CharacterManager : MonoBehaviour
 
     void Update()
     {
-        rb.centerOfMass = centerOfMass.transform.localPosition;
+        rb.centerOfMass = centerOfMass.transform.localPosition; //Place center of mass (need cause all the "mass" are at the back of the pivot)
 
         #region Get Input
-        horizontalInput = Input.GetAxis("Horizontal");
-        verticalInput = Input.GetAxis("Vertical");
-        mouseXInput = Input.GetAxis("Mouse X");
-        boostInput = Input.GetAxis(boostInputName);
+        horizontalInput = Input.GetAxis("Horizontal"); //Get right & left Input
+        verticalInput = Input.GetAxis("Vertical"); //Get forward & backward Input
+        mouseXInput = Input.GetAxis("Mouse X"); //Get mouse horizontal movement
+        boostInputHold = Input.GetButton(boostInputName); //Get boost button hold
+        boostInputDown = Input.GetButtonDown(boostInputName); //Get boost button when press
         #endregion
 
         CheckGrounded();
-        CalculSpeedCharcter();
+        CalculSpeedCharacter();
 
-        _CharacterBoost.TriggerBoost(boostInput, CheckGrounded(), rb, rb.velocity.magnitude);
+        _CharacterBoost.TriggerBoost(verticalInput, boostInputDown, boostInputHold, CheckGrounded(), rb, rb.velocity.magnitude);
+
+        _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1));
     }
 
     private void FixedUpdate()
@@ -96,7 +100,6 @@ public class C_CharacterManager : MonoBehaviour
         if (CheckGrounded())
         {
             _CharacterControler.TriggerControl(verticalInput, rb);
-            //Debug.Log(verticalInput);
             _CharacterPropulseur.Propulsing(layerGround);
         }
 
@@ -104,7 +107,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterControler.GravityFall(CheckGrounded(), rb);
     }
 
-    private void CalculSpeedCharcter()
+    private void CalculSpeedCharacter()
     {
         currentSpeed = Mathf.Clamp(rb.velocity.magnitude, 0, Mathf.Infinity);
         int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
