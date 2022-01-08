@@ -18,9 +18,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: 240
-    y: -386
-    width: 1683
-    height: 2275
+    y: -451
+    width: 1389
+    height: 2320
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3720,7 +3720,7 @@ MonoBehaviour:
   - link:
     - context: {fileID: 8926484042661614555}
       slotIndex: 0
-  eventName: OnPlay
+  eventName: SmokeEngineON
 --- !u!114 &8926484042661614678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3770,7 +3770,7 @@ MonoBehaviour:
   - link:
     - context: {fileID: 8926484042661614555}
       slotIndex: 1
-  eventName: OnPlay
+  eventName: SmokeEngineOFF
 --- !u!114 &8926484042661614680
 MonoBehaviour:
   m_ObjectHideFlags: 0

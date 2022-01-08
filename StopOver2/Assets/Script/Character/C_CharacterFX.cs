@@ -10,15 +10,26 @@ public class C_CharacterFX : MonoBehaviour
     #endregion
 
     [Header("Boost Parameters")]
-    public Material matBoost;
-    public Material matSurchauffe;
-    public VisualEffect flammeSurchauffe;
-    private float currentTimeSurchauffe;
-    private float t1;
+    public GameObject flameIntObject;
+    private Renderer flameIntShader;
+    public GameObject flameExtObject;
+    private Renderer flameExtShader;
+    public GameObject boostReadyObject;
+    [HideInInspector]
+    public VisualEffect boostReadyVFX;
+    public GameObject distorsionObject;
+    private VisualEffect distorsionVFX;
+    public GameObject[] overheatingObjects = new GameObject[4];
+    private VisualEffect sparkEngineVFX;
+    private VisualEffect smokeEngineVFX;
+    private VisualEffect overheatingFlameVFX;
+    private VisualEffect overheatingDistortionVFX;
+    public GameObject reactorObject;
+    private Renderer reactorMat;
 
     [Header("FuelTank Parameters")]
     public GameObject fuelTankFluide;
-    public Renderer fluideShader;
+    private Renderer fluideShader;
 
     [Header("Camera Effects Parameters")]
     public float maxSpeedCamEffect = 60f;
@@ -39,6 +50,21 @@ public class C_CharacterFX : MonoBehaviour
         ressourceManager = FindObjectOfType<RessourceManager>();
         fluideShader = fuelTankFluide.GetComponent<Renderer>();
         speedEffectCamera = FindObjectOfType<SpeedEffectCamera>();
+
+
+        #region BoostVFX
+        flameIntShader = flameIntObject.GetComponent<Renderer>();
+        flameExtShader = flameExtObject.GetComponent<Renderer>();
+        boostReadyVFX = boostReadyObject.GetComponent<VisualEffect>();
+        distorsionVFX = distorsionObject.GetComponent<VisualEffect>();
+
+        sparkEngineVFX = overheatingObjects[0].GetComponent<VisualEffect>();
+        smokeEngineVFX = overheatingObjects[1].GetComponent<VisualEffect>();
+        overheatingFlameVFX = overheatingObjects[2].GetComponent<VisualEffect>();
+        overheatingDistortionVFX = overheatingObjects[3].GetComponent<VisualEffect>();
+
+        reactorMat = reactorObject.GetComponent<Renderer>();
+        #endregion
     }
 
     public void TriggerContinuousFX(float currentSpeed, float mouseX)
@@ -49,51 +75,68 @@ public class C_CharacterFX : MonoBehaviour
     }
 
     #region Boost
+    public void SignBoost()
+    {
+        flameIntShader.sharedMaterial.SetFloat("_Top_Flame_Gradient__Stop_flame_", 0f);
+        flameIntShader.sharedMaterial.SetFloat("_BoostFlame", 0.675f);
+        distorsionVFX.SendEvent("BoostOFF");
+
+        sparkEngineVFX.SendEvent("BoostOFF");
+        smokeEngineVFX.SendEvent("SmokeEngineOFF");
+        overheatingDistortionVFX.SendEvent("OverheatingOFF");
+    }
+
     public void ActiveBoost()
     {
-        /**matBoost.SetFloat("_Top_Flame_Gradient__Stop_flame_", 0);
-       
-        matBoost.SetFloat("_BoostFlame", 1);*/
+        flameIntShader.sharedMaterial.SetFloat("_BoostFlame", 1f);
+        flameExtShader.sharedMaterial.SetFloat("_BoostFlame", 1f);
+        distorsionVFX.SendEvent("BoostON");
     }
 
     public void DesactiveBoost()
     {
-        //matBoost.SetFloat("_BoostFlame", 0.63f);
+        flameIntShader.sharedMaterial.SetFloat("_Top_Flame_Gradient__Stop_flame_", 1f);
+        flameExtShader.sharedMaterial.SetFloat("_BoostFlame", 0f);
+        distorsionVFX.SendEvent("BoostOFF");
     }
 
+    /////////////////////////////
 
+    private float currentColorSize;
+    private float currentColorDensity;
 
-    public void SurchauffeBoost()
+    public void SurchauffeBoost(float currentTimeAcc, float maxTimeAcc)
     {
-        /**currentTimeSurchauffe = Mathf.Lerp(0, 1, _CharacterBoost.t2);
-        matSurchauffe.SetFloat("Color_Size", currentTimeSurchauffe);
-        matSurchauffe.SetFloat("_ColorDensity", currentTimeSurchauffe);
-        matBoost.SetFloat("_Flame_ColorGradient", currentTimeSurchauffe);*/
-    }
+        float a = maxTimeAcc / 2;
+        currentColorSize = currentTimeAcc / a;
+        reactorMat.sharedMaterial.SetFloat("Color_Size", currentColorSize);
 
-    public void DesactiveBosstSurchauffe()
-    {
-        /**flammeSurchauffe.Play();
-        matBoost.SetFloat("_BoostFlame", 0.63f);
-        matBoost.SetFloat("_Top_Flame_Gradient__Stop_flame_", 1);*/
-    }
-
-    public void SurchauffeBoostDecres(bool isNotActif) 
-    {
-        /**if(t1 >= 1)
+        float c = maxTimeAcc - a;
+        if (currentTimeAcc >= a)
         {
-            t1 = 0;
+            currentColorDensity = currentTimeAcc / c;
+            reactorMat.sharedMaterial.SetFloat("_ColorDensity", currentColorDensity);
         }
-        else
-        {
-            t1 -= Time.fixedDeltaTime / _CharacterBoost.currentColdownBoost;
-        }
-        currentTimeSurchauffe = Mathf.Lerp(1, 0, t1);
-        matSurchauffe.SetFloat("Color_Size", currentTimeSurchauffe);
-        matSurchauffe.SetFloat("_ColorDensity", currentTimeSurchauffe);
-        matBoost.SetFloat("_Flame_ColorGradient", currentTimeSurchauffe);
+    }
 
-        Debug.Log(t1);*/
+    public void DesactiveBoostSurchauffe()
+    {
+        distorsionVFX.SendEvent("EngineOFF");
+
+        sparkEngineVFX.SendEvent("BoostON");
+        smokeEngineVFX.SendEvent("SmokeEngineON");
+        overheatingFlameVFX.SendEvent("OverheatingFlameON");
+        overheatingDistortionVFX.SendEvent("OverheatingON");
+    }
+
+    public void SurchauffeBoostDecres(float currentCooldownBoost, float maxCooldownBoost) 
+    {
+        float a = currentCooldownBoost / maxCooldownBoost;
+        float b = Mathf.Lerp(0, currentColorSize, a);
+        reactorMat.sharedMaterial.SetFloat("Color_Size", b);
+
+        float c = Mathf.Lerp(0, currentColorDensity, a);
+        reactorMat.sharedMaterial.SetFloat("_ColorDensity", c);
     }
     #endregion
 

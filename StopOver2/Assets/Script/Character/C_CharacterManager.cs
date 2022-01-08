@@ -75,6 +75,11 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
     }
 
+    private void Start()
+    {
+        _CharacterFX.SignBoost();
+    }
+
     void Update()
     {
         rb.centerOfMass = centerOfMass.transform.localPosition; //Place center of mass (need cause all the "mass" are at the back of the pivot)

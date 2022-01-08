@@ -5,6 +5,7 @@ public class C_CharacterBoost : MonoBehaviour
     #region Variables
     #region Scripts Used
     C_CharacterControler _CharacterControler;
+    C_CharacterFX _CharacterFX;
     #endregion
 
     public float boostImpulseForce;
@@ -15,6 +16,7 @@ public class C_CharacterBoost : MonoBehaviour
     public float maxCooldownBoost;
     public float surchaufeCooldownBoost;
     private float currentCooldownBoost;
+    private float saveMaxCooldownBoost;
 
     public bool showDebug = false;
     #region OLD
@@ -34,6 +36,7 @@ public class C_CharacterBoost : MonoBehaviour
     public void IniatiateBoostValue() //Work with awake
     {
         _CharacterControler = GetComponent<C_CharacterControler>();
+        _CharacterFX = GetComponent<C_CharacterFX>();
     }
 
     public void TriggerBoost(float getMoveForward, bool inputBoostTrigger, bool inputBoostTriggerContinue, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
@@ -73,6 +76,7 @@ public class C_CharacterBoost : MonoBehaviour
     private void BoostImpulseForce(Rigidbody rb)
     {
         rb.AddRelativeForce(0, 0, boostImpulseForce, ForceMode.Impulse);
+        _CharacterFX.ActiveBoost();
     }
 
     private void UseBoostSpeed()
@@ -84,10 +88,14 @@ public class C_CharacterBoost : MonoBehaviour
     {
         currentTimeAccBoost = Mathf.Clamp(currentTimeAccBoost + Time.fixedDeltaTime, 0, timeAccBoost);
 
+        _CharacterFX.SurchauffeBoost(currentTimeAccBoost, timeAccBoost);
+
         if (currentTimeAccBoost == timeAccBoost)
         {
             ResetBoostSpeed();
+            _CharacterFX.DesactiveBoostSurchauffe();
             currentCooldownBoost = surchaufeCooldownBoost;
+            saveMaxCooldownBoost = surchaufeCooldownBoost;
         }
     }
 
@@ -98,13 +106,24 @@ public class C_CharacterBoost : MonoBehaviour
         float a = currentTimeAccBoost / timeAccBoost;
         float b = Mathf.Lerp(minCooldownBoost, maxCooldownBoost, a);
         currentCooldownBoost = b;
-        
+        saveMaxCooldownBoost = b;
+
         currentTimeAccBoost = 0f;
+
+        _CharacterFX.DesactiveBoost();
     }
 
     private void DecreesBoostCooldown()
     {
         currentCooldownBoost = Mathf.Clamp(currentCooldownBoost - Time.fixedDeltaTime, 0, surchaufeCooldownBoost);
+
+        _CharacterFX.SurchauffeBoostDecres(currentCooldownBoost, saveMaxCooldownBoost);
+
+        if (currentCooldownBoost == 0)
+        {
+            _CharacterFX.SignBoost();
+            _CharacterFX.boostReadyVFX.SendEvent("BoostReady");
+        }
     }
 
     #region OLD (don t erase it)
