@@ -39,7 +39,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX = GetComponent<C_CharacterFX>();
     }
 
-    public void TriggerBoost(float getMoveForward, bool inputBoostTrigger, bool inputBoostTriggerContinue, bool isGrounded, Rigidbody rb, float currentSpeedPlayer)
+    public void TriggerBoost(float getMoveForward, bool inputBoostTrigger, bool inputBoostTriggerContinue, Rigidbody rb)
     {
         if (getMoveForward > 0 && currentCooldownBoost == 0) 
         { 
@@ -53,7 +53,7 @@ public class C_CharacterBoost : MonoBehaviour
                 UseBoostSpeed();
                 IncreesBoostTimer();
             }
-            else if (!inputBoostTriggerContinue && _CharacterControler.currentSpeedForward != _CharacterControler.speedForward)
+            else if (!inputBoostTriggerContinue && _CharacterControler.currentSpeed != _CharacterControler.speedPlayer)
             {
                 ResetBoostSpeed();
             }
@@ -81,7 +81,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     private void UseBoostSpeed()
     {
-        _CharacterControler.currentSpeedForward = speedBoost;
+        _CharacterControler.currentSpeed = speedBoost;
     }
 
     private void IncreesBoostTimer()
@@ -101,7 +101,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     private void ResetBoostSpeed()
     {
-        _CharacterControler.currentSpeedForward = _CharacterControler.speedForward;
+        _CharacterControler.currentSpeed = _CharacterControler.speedPlayer;
 
         float a = currentTimeAccBoost / timeAccBoost;
         float b = Mathf.Lerp(minCooldownBoost, maxCooldownBoost, a);

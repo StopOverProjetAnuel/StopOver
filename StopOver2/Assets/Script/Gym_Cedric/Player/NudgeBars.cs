@@ -36,7 +36,7 @@ public class NudgeBars : MonoBehaviour
     {
         if (Input.GetAxis("Vertical") > 0)
         {
-            nudgeBars_model.SetActive(true);
+            //nudgeBars_model.SetActive(true);
             if (rb.velocity.magnitude >= min2ndState)
             {
                 nbState = 3;
@@ -54,7 +54,7 @@ public class NudgeBars : MonoBehaviour
         }
         else
         {
-            nudgeBars_model.SetActive(false);
+            //nudgeBars_model.SetActive(false);
             nbState = 0;
         }
     }

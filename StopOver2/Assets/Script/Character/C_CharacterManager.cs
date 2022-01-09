@@ -93,30 +93,21 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
 
         CheckGrounded();
-        CalculSpeedCharacter();
 
-        _CharacterBoost.TriggerBoost(verticalInput, boostInputDown, boostInputHold, CheckGrounded(), rb, rb.velocity.magnitude);
+        _CharacterBoost.TriggerBoost(verticalInput, boostInputDown, boostInputHold, rb);
 
         _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1));
     }
 
     private void FixedUpdate()
     {
-        if (CheckGrounded())
-        {
-            _CharacterControler.TriggerControl(verticalInput, rb);
-            _CharacterPropulseur.Propulsing(layerGround);
-        }
+        _CharacterControler.TriggerControl(verticalInput, rb, CheckGrounded());
+        _CharacterPropulseur.Propulsing(layerGround);
 
-        _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb);
+        _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
     }
 
-    private void CalculSpeedCharacter()
-    {
-        currentSpeed = Mathf.Clamp(rb.velocity.magnitude, 0, Mathf.Infinity);
-        int currentSpeedInt = Mathf.RoundToInt(currentSpeed);
-    }
 
     public bool CheckGrounded()
     {
@@ -124,6 +115,7 @@ public class C_CharacterManager : MonoBehaviour
         if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, distanceNoControl, layerGround.value))
         {
             distanceGroundChara = groundHit.distance;
+            LastAirAngleChara();
             return true;
         }
         else
@@ -132,4 +124,10 @@ public class C_CharacterManager : MonoBehaviour
         }
     }
 
+    private Quaternion airAngle;
+
+    private void LastAirAngleChara()
+    {
+        airAngle = transform.localRotation;
+    }
 }

@@ -6,24 +6,21 @@ public class C_CharacterControler : MonoBehaviour
     C_CharacterBoost _CharacterBoost;
 
     [Header("Speed Parameters")]
-    public float timeFirstAcceleration;
-    public float timeAcceleration;
-    public float firstAccelerationForward;
-    public float speedForward;
-    public float speedBackWard;
+    public float speedPlayer;
     [HideInInspector]
-    public float currentSpeedForward;
-
-    [SerializeField] float rotateSpeed;
-    [SerializeField] float rSAirMultiplier; //rotate speed
+    public float currentSpeed;
+    public float speedBackwardMultiplier = 0.5f;
+    public float speedAirMultiplier = 0.25f;
+    private float currentAirMultiplier = 1f;
+    public float firstAccelerationForce = 50f;
+    private bool firstAccelerationDone = false;
 
     public float airControlSpeedForward;
 
-    bool firstAccelerationDone;
-    bool accelerationDone;
-
-    float t1;
-    float t2;
+    public float maxRotateSpeed = 1440f;
+    public float minRotateSpeed = 720f;
+    public float maxSpeedForMinRspeed = 60f;
+    public float rSAirMultiplier; //rotate speed
 
     [Header("Fall Parameters")]
     public float fallAcceleration;
@@ -31,8 +28,8 @@ public class C_CharacterControler : MonoBehaviour
     public float dragGroundForce;
     [Space]
     public float fallAngle = 30f;
-    public AnimationCurve smoothFallForward;
-    float fallTimer;
+    public float timeToFallPos = 1f;
+    private float fallTimer;
 
     [Space(10)]
     public bool showDebug = false;
@@ -41,21 +38,33 @@ public class C_CharacterControler : MonoBehaviour
     public void InitiateControlValue()
     {
         _CharacterBoost = GetComponent<C_CharacterBoost>();
-        currentSpeedForward = speedForward;
+        currentSpeed = speedPlayer;
     }
 
-    public void TriggerControl(float verticalInput, Rigidbody rb)
+    public void TriggerControl(float verticalInput, Rigidbody rb, bool isGrounded)
     {
+        if (isGrounded && currentAirMultiplier != 1f)
+        {
+            currentAirMultiplier = 1f;
+        }
+        else if (currentAirMultiplier != speedAirMultiplier)
+        {
+            currentAirMultiplier = speedAirMultiplier;
+        }
+
+
         if(verticalInput > 0) //Move Forward
         {
-            rb.AddRelativeForce(0, 0, verticalInput * currentSpeedForward);
-            #region Debug
-            if (showDebug)
+            if (firstAccelerationDone)
             {
-                Debug.Log("Player Forward");
-            }
-            #endregion
-            #region OLD
+                rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * currentAirMultiplier, ForceMode.Acceleration);
+                #region Debug
+                if (showDebug)
+                {
+                    Debug.Log("Player Forward");
+                }
+                #endregion
+                #region OLD
             /**if (!firstAccelerationDone)
             {
                 FirstAcceleration();
@@ -65,11 +74,21 @@ public class C_CharacterControler : MonoBehaviour
                 Acceleration();
             }*/
             #endregion
+            }
+            else
+            {
+                rb.AddRelativeForce(0, 0, firstAccelerationForce, ForceMode.Impulse);
+                firstAccelerationDone = true;
+            }
+        }
+        else if (verticalInput == 0 && firstAccelerationDone == true)
+        {
+            firstAccelerationDone = false;
         }
 
         if (verticalInput < 0) //Move Backward
         {
-            rb.AddRelativeForce(0, 0, verticalInput * currentSpeedForward);
+            rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * speedBackwardMultiplier * currentAirMultiplier, ForceMode.Acceleration);
             #region OLD
             //firstAccelerationDone = false;
             #endregion
@@ -126,9 +145,11 @@ public class C_CharacterControler : MonoBehaviour
     }*/
     #endregion
 
-    public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb)
+    public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb, Quaternion airAngle)
     {
-        Vector3 rotateValue = Vector3.up * rotateSpeed * mouseXInput * Time.fixedDeltaTime;
+        float normSpeed = Mathf.Clamp(rb.velocity.magnitude / maxSpeedForMinRspeed, 0, 1);
+        float currentRotateSpeed = Mathf.Lerp(maxRotateSpeed, minRotateSpeed, normSpeed);
+        Vector3 rotateValue = Vector3.up * currentRotateSpeed * mouseXInput * Time.fixedDeltaTime;
 
         if (isGrounded)
         {
@@ -141,21 +162,25 @@ public class C_CharacterControler : MonoBehaviour
         }
         else
         {
-            rb.AddTorque(rotateValue * rSAirMultiplier);
+            rb.AddTorque(rotateValue * rSAirMultiplier, ForceMode.Acceleration);
 
-            if (fallTimer <= 1)
+            if (fallTimer <= timeToFallPos)
             {
-                Vector3 keepCurrentRotation = transform.localRotation.eulerAngles; //Keep the current rotation in y and z
-                keepCurrentRotation.x = 0f;
-                Vector3 fallRotation = fallAngle * Vector3.right; //Make the new rotation in x
-                Vector3 changeRotation = fallRotation + keepCurrentRotation; //Combine both
-                //transform.localRotation = Quaternion.Euler(smoothFallForward.Evaluate(fallTimer));
+                float a = Mathf.Clamp(fallTimer / timeToFallPos, 0, 1);
+                Quaternion b = Quaternion.Euler(new Vector3(fallAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z));
+                Quaternion c = Quaternion.Lerp(airAngle, b, a);
+
+                transform.rotation = c;
 
                 fallTimer += Time.fixedDeltaTime;
 
-                Debug.Log("keepCurrentRotation" + keepCurrentRotation);
-                Debug.Log("fallRotation" + fallRotation);
-                Debug.Log("changeRotation" + changeRotation);
+                #region Debug
+                if (showDebug)
+                {
+                    Debug.Log("airAngle : " + airAngle);
+                    Debug.Log("new airAngle : " + b.eulerAngles);
+                }
+                #endregion
             }
         }
     }

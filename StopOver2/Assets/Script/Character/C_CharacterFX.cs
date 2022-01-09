@@ -38,6 +38,7 @@ public class C_CharacterFX : MonoBehaviour
     public GameObject characterModel;
     public float leanAngleZ = 25f;
     public float leanAngleY = 15f;
+    public float leaningSpeed = 0.1f;
 
     [Space(10)]
 
@@ -143,7 +144,7 @@ public class C_CharacterFX : MonoBehaviour
     private void FuelTankAmount()
     {
         float a = ressourceManager.currentRessource / ressourceManager.maxRessource;
-        float b = Mathf.Lerp(-0.1f, 0.1f, a);
+        float b = Mathf.Lerp(-0.16f, 0.16f, a);
         fluideShader.sharedMaterial.SetFloat("_Remplissage", b);
     }
 
@@ -160,10 +161,14 @@ public class C_CharacterFX : MonoBehaviour
         #endregion
     }
 
+    float smoothMouseMovement = 0f;
+
     private void LeaningModel(float mouseX)
     {
-        float leaningAngleZ = -mouseX * leanAngleZ;
-        float leaningAngleY = mouseX * leanAngleY;
+        smoothMouseMovement = Mathf.SmoothStep(smoothMouseMovement, mouseX, leaningSpeed);
+
+        float leaningAngleY = smoothMouseMovement * leanAngleY;
+        float leaningAngleZ = -smoothMouseMovement * leanAngleZ;
 
         Vector3 leaningAngle = new Vector3(0, leaningAngleY, leaningAngleZ);
 
