@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEditor;
-using GD.MinMaxSlider;
+
 
 public class PostProcessController : MonoBehaviour
 {
@@ -25,10 +25,6 @@ public class PostProcessController : MonoBehaviour
     public float twilightToNight = 33;//_____________________________________________//définit en % la durée du crépuscule par rapport à la variable Timer
     [Range(0, 100)]
     public float nightToDawn = 66;//_________________________________________________//définit en % la durée de la nuit par rapport à la variable Timer
-
-    [MinMaxSlider(0,100)]
-    public Vector2 vector2;
-
     [Header("Ne peut être édité")]
     [Header("______________________________________________________________________________________________________________________________________________________________________________")]
     [Space(10)]
