@@ -146,7 +146,7 @@ public class PostProcessController : MonoBehaviour
                                                                                     //         _______/
 
         Vol3Keys[0] = new Keyframe { time = 0, value = 0 };                         // la première keyframe à pour coordonée (0,0)
-        Vol3Keys[1] = new Keyframe { time = n, value = 0 };                         // la deuxime keyframe se situe en fonction du pourcentage donné avec TwilightToNight, elle est de valeur 0 pour former une ligne droite horiontale avec la première keyframe
+        Vol3Keys[1] = new Keyframe { time = d - 0.2f, value = 0 };                         // la deuxime keyframe se situe en fonction du pourcentage donné avec TwilightToNight, elle est de valeur 0 pour former une ligne droite horiontale avec la première keyframe
         Vol3Keys[2] = new Keyframe { time = d, value = 1 };                         // la troisième keyframe se situe en fonction du pourcentage donné avec nightToDawn, elle est de valeur 1 pour former une ligne ascendante avec la deuxième keyframe
         Vol3Keys[3] = new Keyframe { time = 1, value = 1 };                         // la dernière keyframe de coordonée (1,1) fait une ligne horizontale avec la troisième keyframe 
 
