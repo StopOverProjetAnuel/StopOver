@@ -15,15 +15,15 @@ public class SpeedEffectCamera : MonoBehaviour
     [Range(0.0f, 1.0f)]                                  //la variable si dessous est un float variable entre 0 et 1 ET le float apparait sur l'inspector sous forme de slider
     public float speed;                                  //variable vitesse du joueur 
 
-    [HideInInspector]
+    //[HideInInspector]
     public AnimationCurve SpeedFOV;                      // (0 , 60) ; (0.3333 , 70) ; (0.6666 , 80) ; (1 , 100)
-    [HideInInspector]
+    //[HideInInspector]
     public AnimationCurve SpeedAmplitude;                // (0 , 0) ; (0.3333 , 0.5) ; (0.6666 , 2) ; (1 , 3)
-    [HideInInspector]
+    //[HideInInspector]
     public AnimationCurve SpeedFrequence;                // (0 , 0) ; (0.3333 , 0.5) ; (0.6666 , 2) ; (1 , 3)
-    [HideInInspector]
+    //[HideInInspector]
     public AnimationCurve SpeedOffsetY;                  // (0 , 3.6) ; (0.3333 , 3.6) ; (0.6666 , 3.2) ; (1 , 2.5)
-    [HideInInspector]
+    //[HideInInspector]
     public AnimationCurve SpeedOffsetZ;                  // (0 , -15) ; (0.3333 , -15) ; (0.6666 , -13) ; (1 , -11)
 
 

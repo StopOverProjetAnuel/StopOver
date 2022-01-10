@@ -80,11 +80,10 @@ public class C_CharacterPropulseur : MonoBehaviour
                 float lengthRatio = Mathf.Clamp(hit.distance / length, 0, 1);
                 float forceAmount = thrustersForceMultiplier.Evaluate(lengthRatio);
 
-                float forceNorm = Mathf.Clamp(rb.velocity.magnitude / thrustersForceSpeedRequire, 0, 1);
-                float forceMultiplier = Mathf.Lerp(minThrustersForce, maxThrustersForce, forceNorm);
-                float currentThrustersForce = minThrustersForce * forceMultiplier;
+                float forceMultiplier = Mathf.Clamp(rb.velocity.magnitude / thrustersForceSpeedRequire, 0, 1);
+                float currentThrustersForce = Mathf.Lerp(minThrustersForce, maxThrustersForce, forceMultiplier);
 
-                rb.AddForceAtPosition(transform.up * forceAmount * minThrustersForce, propulsPoint.transform.position, ForceMode.Acceleration);
+                rb.AddForceAtPosition(transform.up * forceAmount * currentThrustersForce, propulsPoint.transform.position, ForceMode.Acceleration);
             }
             else
             {
