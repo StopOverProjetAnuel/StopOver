@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5806447715297980862}
   - component: {fileID: 1223588457538326918}
   - component: {fileID: 3480090426262845815}
-  m_Layer: 0
+  - component: {fileID: 1582986264102277675}
+  m_Layer: 6
   m_Name: pTorus2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -81,6 +82,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1582986264102277675
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 45294261255040293}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5876722744731809403, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &300218307376009716
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,9 +107,10 @@ GameObject:
   - component: {fileID: 6823580614504122557}
   - component: {fileID: 7314707253031028894}
   - component: {fileID: 5405967697676380189}
-  m_Layer: 0
+  - component: {fileID: 5646753230946195571}
+  m_Layer: 6
   m_Name: pTorus8
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,6 +178,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5646753230946195571
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 300218307376009716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2132019842022078190, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &2554464136914913555
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,9 +203,10 @@ GameObject:
   - component: {fileID: 7837486991322481320}
   - component: {fileID: 6905355208588026789}
   - component: {fileID: 313982973126598938}
-  m_Layer: 0
+  - component: {fileID: 8607270056817297361}
+  m_Layer: 6
   m_Name: pTorus13
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -243,6 +274,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8607270056817297361
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2554464136914913555}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3115736782069012854, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &3064501282101430285
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,9 +299,10 @@ GameObject:
   - component: {fileID: 8874130653225700206}
   - component: {fileID: 1175725063373858581}
   - component: {fileID: 4600324150568267180}
-  m_Layer: 0
+  - component: {fileID: 8440133375461263878}
+  m_Layer: 6
   m_Name: pTorus11
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -324,6 +370,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8440133375461263878
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3064501282101430285}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -33196953299731213, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &4040419285746956895
 GameObject:
   m_ObjectHideFlags: 0
@@ -335,9 +395,10 @@ GameObject:
   - component: {fileID: 8176755830583044203}
   - component: {fileID: 8199343927026233552}
   - component: {fileID: 686840004620783287}
-  m_Layer: 0
+  - component: {fileID: 1395708854882852576}
+  m_Layer: 6
   m_Name: pTorus12
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,6 +466,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1395708854882852576
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4040419285746956895}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 8242711516750871410, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &4058814986049778864
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,9 +491,10 @@ GameObject:
   - component: {fileID: 6724753323825434158}
   - component: {fileID: 8046091700121266882}
   - component: {fileID: 3533716811332521864}
-  m_Layer: 0
+  - component: {fileID: 2917578673039213961}
+  m_Layer: 6
   m_Name: pTorus15
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -486,6 +562,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2917578673039213961
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4058814986049778864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3930055410114883275, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &4151617286022386710
 GameObject:
   m_ObjectHideFlags: 0
@@ -495,9 +585,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3663204684145626796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Racine2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,9 +633,10 @@ GameObject:
   - component: {fileID: 822950372546344901}
   - component: {fileID: 3913217364696888764}
   - component: {fileID: 8686448887284655803}
-  m_Layer: 0
+  - component: {fileID: 7436635665091257833}
+  m_Layer: 6
   m_Name: pTorus10
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -613,6 +704,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7436635665091257833
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4778313480014484061}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7348864981835258854, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &4925031120929918498
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,9 +729,10 @@ GameObject:
   - component: {fileID: 5042771175147443367}
   - component: {fileID: 1167396702775905088}
   - component: {fileID: 2172409156294098398}
-  m_Layer: 0
+  - component: {fileID: 3758402599115320472}
+  m_Layer: 6
   m_Name: pTorus9
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -694,6 +800,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &3758402599115320472
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4925031120929918498}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 566819825560819117, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &4972770697513774530
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,9 +825,10 @@ GameObject:
   - component: {fileID: 1957355136657455238}
   - component: {fileID: 192391736013345531}
   - component: {fileID: 1084404203262634881}
-  m_Layer: 0
+  - component: {fileID: 8193231430568722477}
+  m_Layer: 6
   m_Name: pTorus16
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -775,6 +896,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8193231430568722477
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972770697513774530}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7830417436106554257, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &6687724034223572495
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,9 +921,10 @@ GameObject:
   - component: {fileID: 6764786745739346806}
   - component: {fileID: 1058526389380105091}
   - component: {fileID: 3100608201401690239}
-  m_Layer: 0
+  - component: {fileID: 5102152807076671621}
+  m_Layer: 6
   m_Name: pTorus6
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -856,6 +992,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5102152807076671621
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6687724034223572495}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -269169311728208888, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &6806939705107184335
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,9 +1017,10 @@ GameObject:
   - component: {fileID: 5753518641932923542}
   - component: {fileID: 8893931577453431136}
   - component: {fileID: 1695732382983659982}
-  m_Layer: 0
+  - component: {fileID: 2292467987211787777}
+  m_Layer: 6
   m_Name: pTorus1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -937,6 +1088,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2292467987211787777
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6806939705107184335}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1865056248366311061, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &6827097406473971522
 GameObject:
   m_ObjectHideFlags: 0
@@ -948,9 +1113,10 @@ GameObject:
   - component: {fileID: 196276614158262627}
   - component: {fileID: 4641138117065158524}
   - component: {fileID: 8586542220338381162}
-  m_Layer: 0
+  - component: {fileID: 7099860991968906285}
+  m_Layer: 6
   m_Name: pTorus5
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1018,6 +1184,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &7099860991968906285
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6827097406473971522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2522272101781878571, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &7217279221748677636
 GameObject:
   m_ObjectHideFlags: 0
@@ -1029,9 +1209,10 @@ GameObject:
   - component: {fileID: 6012953427341828484}
   - component: {fileID: 5099493432246007969}
   - component: {fileID: 3312861516961440192}
-  m_Layer: 0
+  - component: {fileID: 5469058690034275923}
+  m_Layer: 6
   m_Name: pTorus7
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1099,6 +1280,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5469058690034275923
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7217279221748677636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7463348197650510824, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &7495978268904723854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,9 +1305,10 @@ GameObject:
   - component: {fileID: 3407881784950668033}
   - component: {fileID: 6829909858315291479}
   - component: {fileID: 1396210720024108790}
-  m_Layer: 0
+  - component: {fileID: 6355725046266386896}
+  m_Layer: 6
   m_Name: pTorus3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1180,6 +1376,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6355725046266386896
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495978268904723854}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 450443091681560433, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &7742652111442654938
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,9 +1401,10 @@ GameObject:
   - component: {fileID: 6080950993149234548}
   - component: {fileID: 867801448074675361}
   - component: {fileID: 2091179545756972356}
-  m_Layer: 0
+  - component: {fileID: 4770185307970169572}
+  m_Layer: 6
   m_Name: pTorus4
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1261,6 +1472,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4770185307970169572
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742652111442654938}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3968828189106086409, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}
 --- !u!1 &8474616213836160022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,9 +1497,10 @@ GameObject:
   - component: {fileID: 1829180335565262842}
   - component: {fileID: 3509729611690652294}
   - component: {fileID: 1052794218238194342}
-  m_Layer: 0
+  - component: {fileID: 658738467021541183}
+  m_Layer: 6
   m_Name: pTorus14
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1342,3 +1568,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &658738467021541183
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8474616213836160022}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1240527682499595965, guid: 83a79f5ef033e3e438d16fea227d2460, type: 3}

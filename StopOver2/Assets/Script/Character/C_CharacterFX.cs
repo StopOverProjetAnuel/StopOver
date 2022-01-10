@@ -10,22 +10,21 @@ public class C_CharacterFX : MonoBehaviour
     #endregion
 
     [Header("Boost Parameters")]
-    public GameObject flameIntObject;
-    private Renderer flameIntShader;
-    public GameObject flameExtObject;
-    private Renderer flameExtShader;
-    public GameObject boostReadyObject;
-    [HideInInspector]
+    public Renderer flameIntShader;
+    public Renderer flameExtShader;
     public VisualEffect boostReadyVFX;
-    public GameObject distorsionObject;
-    private VisualEffect distorsionVFX;
+    public VisualEffect distorsionVFX;
     public GameObject[] overheatingObjects = new GameObject[4];
+    #region OverheatingVFX
     private VisualEffect sparkEngineVFX;
     private VisualEffect smokeEngineVFX;
     private VisualEffect overheatingFlameVFX;
     private VisualEffect overheatingDistortionVFX;
-    public GameObject reactorObject;
-    private Renderer reactorMat;
+    #endregion
+    public Renderer reactorMat;
+
+    [Header("Vehicle Parameters")]
+    public VisualEffect smokeShip;
 
     [Header("FuelTank Parameters")]
     public GameObject fuelTankFluide;
@@ -54,25 +53,19 @@ public class C_CharacterFX : MonoBehaviour
 
 
         #region BoostVFX
-        flameIntShader = flameIntObject.GetComponent<Renderer>();
-        flameExtShader = flameExtObject.GetComponent<Renderer>();
-        boostReadyVFX = boostReadyObject.GetComponent<VisualEffect>();
-        distorsionVFX = distorsionObject.GetComponent<VisualEffect>();
-
         sparkEngineVFX = overheatingObjects[0].GetComponent<VisualEffect>();
         smokeEngineVFX = overheatingObjects[1].GetComponent<VisualEffect>();
         overheatingFlameVFX = overheatingObjects[2].GetComponent<VisualEffect>();
         overheatingDistortionVFX = overheatingObjects[3].GetComponent<VisualEffect>();
-
-        reactorMat = reactorObject.GetComponent<Renderer>();
         #endregion
     }
 
-    public void TriggerContinuousFX(float currentSpeed, float mouseX)
+    public void TriggerContinuousFX(float currentSpeed, float mouseX, bool isGrounded)
     {
         FuelTankAmount();
         FovSpeed(currentSpeed);
         LeaningModel(mouseX);
+        TriggerSmokeShip(isGrounded);
     }
 
     #region Boost
@@ -173,5 +166,21 @@ public class C_CharacterFX : MonoBehaviour
         Vector3 leaningAngle = new Vector3(0, leaningAngleY, leaningAngleZ);
 
         characterModel.transform.localRotation = Quaternion.Euler(leaningAngle);
+    }
+
+    private bool isSmokePlay = false;
+
+    public void TriggerSmokeShip(bool isGrounded)
+    {
+        if (isGrounded && !isSmokePlay)
+        {
+            smokeShip.SendEvent("SmokeOn");
+            isSmokePlay = true;
+        }
+        else
+        {
+            smokeShip.SendEvent("SmokeOff");
+            isSmokePlay = false;
+        }
     }
 }

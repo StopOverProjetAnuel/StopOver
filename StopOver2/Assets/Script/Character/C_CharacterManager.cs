@@ -25,11 +25,11 @@ public class C_CharacterManager : MonoBehaviour
 
     [HideInInspector] public Rigidbody rb;
 
-    [HideInInspector] public float horizontalInput;
-    [HideInInspector] public float verticalInput;
-    [HideInInspector] public float mouseXInput;
-    [HideInInspector] public bool boostInputHold;
-    [HideInInspector] public bool boostInputDown;
+    [HideInInspector] public float horizontalInput = 0f;
+    [HideInInspector] public float verticalInput = 0f;
+    [HideInInspector] public float mouseXInput = 0f;
+    [HideInInspector] public bool boostInputHold = false;
+    [HideInInspector] public bool boostInputDown = false;
 
     [Header("Input Parameters")]
     public string boostInputName = "Boost";
@@ -46,6 +46,7 @@ public class C_CharacterManager : MonoBehaviour
     public float moyenSpeed;
     public float hautSpeed;
 
+    private Quaternion airAngle = Quaternion.identity;
 
 
     private void Awake()
@@ -92,18 +93,17 @@ public class C_CharacterManager : MonoBehaviour
         boostInputDown = Input.GetButtonDown(boostInputName); //Get boost button when press
         #endregion
 
-        CheckGrounded();
-
         _CharacterBoost.TriggerBoost(verticalInput, boostInputDown, boostInputHold, rb);
 
-        _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1));
+        _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded());
     }
 
     private void FixedUpdate()
     {
         _CharacterControler.TriggerControl(verticalInput, rb, CheckGrounded());
-        _CharacterPropulseur.Propulsing(layerGround);
+        _CharacterPropulseur.Propulsing(layerGround, rb.velocity.magnitude);
 
+        CheckGrounded();
         _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
     }
@@ -124,7 +124,6 @@ public class C_CharacterManager : MonoBehaviour
         }
     }
 
-    private Quaternion airAngle;
 
     private void LastAirAngleChara()
     {

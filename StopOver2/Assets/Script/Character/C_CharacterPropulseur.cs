@@ -32,8 +32,11 @@ public class C_CharacterPropulseur : MonoBehaviour
     private float currentLenghtRight;
     private float currentLenghtLeft;
 
-
-    private float t1;
+    [Header("Thrusters Force")]
+    public float minThrustersForce = 5f;
+    public float maxThrustersForce = 20f;
+    public AnimationCurve thrustersForceMultiplier;
+    public float thrustersForceSpeedRequire = 30f;
     private float currentTimeTransitionLean;
 
     private float lastHitDist;
@@ -45,7 +48,6 @@ public class C_CharacterPropulseur : MonoBehaviour
         rb = PlayerRb;
 
         currentTimeTransitionLean = 0;
-        t1 = 0;
         currentLenghtRight = length;
         currentLenghtLeft = length;
         currentDampening = 0;
@@ -55,14 +57,14 @@ public class C_CharacterPropulseur : MonoBehaviour
         lastHitDist = 2;
     }
 
-    public void Propulsing(LayerMask mask)
+    public void Propulsing(LayerMask mask, float speed)
     {
-        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist, mask);
-        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist, mask);
+        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist, mask, speed);
+        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist, mask, speed);
         //Debug.Log("propuls call");
     }
 
-    void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist, LayerMask mask)
+    void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist, LayerMask mask, float speed)
     {
         //Debug.Log("Current Length : " + currentLength);
         //Debug.Log("Current Str : " + currentStrength);
@@ -73,17 +75,16 @@ public class C_CharacterPropulseur : MonoBehaviour
             Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
             if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength, mask.value))
             {
-                //Debug.Log("Hit Ground");
                 lastHitDist = hit.distance;
-               // Debug.Log("lastHit" + lastHitDist);
-                float forceAmount = 0;
-                float lengthRatio = (currentLength - hit.distance) / currentLength;
-                //Debug.Log("ratio" + lengthRatio);
 
-                forceAmount = currentStrength * lengthRatio + (currentDampening * (lastHitDist * hit.distance));
-                //Debug.Log("ForceAmount" + forceAmount);
+                float lengthRatio = Mathf.Clamp(hit.distance / length, 0, 1);
+                float forceAmount = thrustersForceMultiplier.Evaluate(lengthRatio);
 
-                rb.AddForceAtPosition(transform.up * forceAmount * rb.mass, propulsPoint.transform.position);
+                float forceNorm = Mathf.Clamp(rb.velocity.magnitude / thrustersForceSpeedRequire, 0, 1);
+                float forceMultiplier = Mathf.Lerp(minThrustersForce, maxThrustersForce, forceNorm);
+                float currentThrustersForce = minThrustersForce * forceMultiplier;
+
+                rb.AddForceAtPosition(transform.up * forceAmount * minThrustersForce, propulsPoint.transform.position, ForceMode.Acceleration);
             }
             else
             {

@@ -104,7 +104,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785571383895433731}
-  m_LocalRotation: {x: -0, y: 0.30039924, z: -0, w: 0.9538136}
+  m_LocalRotation: {x: 0, y: 0.30039787, z: 0, w: 0.953814}
   m_LocalPosition: {x: -256, y: 0.8441162, z: 206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -417,9 +417,9 @@ GameObject:
   - component: {fileID: 1785571384433233084}
   - component: {fileID: 1785571384433233087}
   - component: {fileID: 1785571384433233086}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base_model_2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -432,8 +432,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1785571384433233080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 15.28, z: 34.1}
-  m_LocalScale: {x: 30, y: 9.3378, z: 21.359098}
+  m_LocalPosition: {x: -0, y: 12.4, z: 6.5}
+  m_LocalScale: {x: 30, y: 19.932095, z: 32.796898}
   m_Children: []
   m_Father: {fileID: 1785571385060039000}
   m_RootOrder: 1
@@ -709,7 +709,7 @@ GameObject:
   - component: {fileID: 1785571385060039000}
   m_Layer: 0
   m_Name: Base_model
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -788,12 +788,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a97d5afe60ae61e4eab2f34ea27a31a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTag: Player
   waitDeposit: 1
   minSpeed: 3
-  m_Player: {fileID: 0}
   timerFont: {fileID: 1785571384383618522}
   chargeMat: {fileID: 2100000, guid: 031fa93102e922441bf643dd4141dc02, type: 2}
   unchargeMat: {fileID: 2100000, guid: bc3b616894664d6439bc14636da8a9a6, type: 2}
+  showDebug: 1
 --- !u!1 &1785571385527530857
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,13 +807,13 @@ GameObject:
   - component: {fileID: 1785571385527530861}
   - component: {fileID: 1785571385527530860}
   - component: {fileID: 1785571385527530863}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Base_model_1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1785571385527530862
 Transform:
   m_ObjectHideFlags: 0
