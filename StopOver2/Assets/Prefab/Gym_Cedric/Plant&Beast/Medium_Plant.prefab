@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerWeaponTagName: Weapon
+  isDropOnDestroy: 0
   droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 50
   resistanceLevel: 1
+  showDebug: 0
 --- !u!136 &7169046624372870199
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -223,15 +224,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3.4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3.4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 909c72c695b9e0c4faa79d83ece607be, type: 3}
       propertyPath: m_LocalPosition.x
