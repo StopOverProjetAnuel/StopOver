@@ -68,6 +68,11 @@ public class C_CharacterFX : MonoBehaviour
         TriggerSmokeShip(isGrounded);
     }
 
+    public void TriggerEnterCollision()
+    {
+        TriggerJoystickShake();
+    }
+
     #region Boost
     public void SignBoost()
     {
@@ -160,8 +165,8 @@ public class C_CharacterFX : MonoBehaviour
     {
         smoothMouseMovement = Mathf.SmoothStep(smoothMouseMovement, mouseX, leaningSpeed);
 
-        float leaningAngleY = smoothMouseMovement * leanAngleY;
-        float leaningAngleZ = -smoothMouseMovement * leanAngleZ;
+        float leaningAngleY = smoothMouseMovement * leanAngleY * Time.timeScale;
+        float leaningAngleZ = -smoothMouseMovement * leanAngleZ * Time.timeScale;
 
         Vector3 leaningAngle = new Vector3(0, leaningAngleY, leaningAngleZ);
 
@@ -170,7 +175,7 @@ public class C_CharacterFX : MonoBehaviour
 
     private bool isSmokePlay = false;
 
-    public void TriggerSmokeShip(bool isGrounded)
+    private void TriggerSmokeShip(bool isGrounded)
     {
         if (isGrounded && !isSmokePlay)
         {
@@ -182,5 +187,10 @@ public class C_CharacterFX : MonoBehaviour
             smokeShip.SendEvent("SmokeOff");
             isSmokePlay = false;
         }
+    }
+
+    private void TriggerJoystickShake()
+    {
+
     }
 }
