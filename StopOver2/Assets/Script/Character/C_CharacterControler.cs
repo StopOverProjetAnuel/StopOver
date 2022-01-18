@@ -194,7 +194,7 @@ public class C_CharacterControler : MonoBehaviour
         else
         {
             rb.drag = dragAirForce;
-            rb.AddForce(Vector3.down * fallAcceleration, ForceMode.Acceleration);
+            rb.AddForce(Vector3.down * fallAcceleration, ForceMode.Force);
         }
     }
 }
