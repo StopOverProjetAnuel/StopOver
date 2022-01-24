@@ -33,6 +33,7 @@ public class C_CharacterManager : MonoBehaviour
 
     [Header("Input Parameters")]
     public string boostInputName = "Boost";
+    public float maxInputValue = 1f;
 
 
     [Header("Parameters")]
@@ -88,7 +89,7 @@ public class C_CharacterManager : MonoBehaviour
         #region Get Input
         horizontalInput = Input.GetAxis("Horizontal"); //Get right & left Input
         verticalInput = Input.GetAxis("Vertical"); //Get forward & backward Input
-        mouseXInput = Input.GetAxis("Mouse X"); //Get mouse horizontal movement
+        mouseXInput = Mathf.Clamp(Input.GetAxis("Mouse X"), -maxInputValue, maxInputValue); //Get mouse horizontal movement
         boostInputHold = Input.GetButton(boostInputName); //Get boost button hold
         boostInputDown = Input.GetButtonDown(boostInputName); //Get boost button when press
         #endregion
@@ -100,7 +101,7 @@ public class C_CharacterManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _CharacterControler.TriggerControl(verticalInput, rb, CheckGrounded());
+        _CharacterControler.TriggerControl(verticalInput, rb, CheckGrounded(), centerOfMass);
         _CharacterPropulseur.Propulsing(layerGround, rb.velocity.magnitude);
 
         CheckGrounded();

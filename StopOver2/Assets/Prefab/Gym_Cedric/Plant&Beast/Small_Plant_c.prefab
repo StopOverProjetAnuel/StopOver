@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1413541656694344918}
   - {fileID: 7707327357334429317}
-  - {fileID: 2645511541316700292}
+  - {fileID: 7943782654599410418}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
   droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
-  resourceGive: 2.5
+  resourceGive: 2
   resistanceLevel: 0
   showDebug: 0
 --- !u!1001 &150695929931028261
@@ -120,11 +120,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: plant_8_low
       objectReference: {fileID: 0}
+    - target: {fileID: 7794214843752146391, guid: 9a945b1232955f84d87ed9b6d78f8174, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a945b1232955f84d87ed9b6d78f8174, type: 3}
---- !u!4 &2645511541316700292 stripped
+--- !u!4 &7943782654599410418 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2783751908647640993, guid: 9a945b1232955f84d87ed9b6d78f8174, type: 3}
+  m_CorrespondingSourceObject: {fileID: 7794214843752146391, guid: 9a945b1232955f84d87ed9b6d78f8174, type: 3}
   m_PrefabInstance: {fileID: 150695929931028261}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1435087359328739959

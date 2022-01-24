@@ -22,8 +22,14 @@ public class C_CharacterControler : MonoBehaviour
     public float maxSpeedForMinRspeed = 60f;
     public float rSAirMultiplier; //rotate speed
 
+    public float comFowardPos = 0.95f;
+
     [Header("Fall Parameters")]
-    public float fallAcceleration;
+    public float maxFallAcceleration = 110f;
+    public float minFallAcceleration = 50f;
+    [SerializeField]
+    private float currentFallAcceleration = 50f;
+    public AnimationCurve curveFallAcceleration;
     public float dragAirForce;
     public float dragGroundForce;
     [Space]
@@ -41,7 +47,7 @@ public class C_CharacterControler : MonoBehaviour
         currentSpeed = speedPlayer;
     }
 
-    public void TriggerControl(float verticalInput, Rigidbody rb, bool isGrounded)
+    public void TriggerControl(float verticalInput, Rigidbody rb, bool isGrounded, GameObject centerOfMass)
     {
         if (isGrounded && currentAirMultiplier != 1f)
         {
@@ -89,61 +95,11 @@ public class C_CharacterControler : MonoBehaviour
         if (verticalInput < 0) //Move Backward
         {
             rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * speedBackwardMultiplier * currentAirMultiplier, ForceMode.Acceleration);
-            #region OLD
-            //firstAccelerationDone = false;
-            #endregion
         }
-        #region OLD
-        /**if(verticalInput == 0)
-        {
-            firstAccelerationDone = false;
-            accelerationDone = false;
-        }*/
-        #endregion
+
+        Vector3 newComPos = new Vector3(0, 1, comFowardPos * Input.GetAxisRaw("Vertical"));
+        centerOfMass.transform.localPosition = newComPos;
     }
-    #region OLD
-    /**private void FirstAcceleration()
-    {
-        if (!_CharacterBoost.isBoosted)
-        {
-            if(t2 >= 1f)
-            {
-                firstAccelerationDone = true;
-                accelerationDone = false; 
-                t2 = 0;
-            }
-
-            if (!firstAccelerationDone)
-            {
-                t2 += Time.deltaTime / timeFirstAcceleration;
-                currentSpeedForward = Mathf.SmoothStep(currentSpeedForward, firstAccelerationForward, t2);
-            }
-        }
-        else
-        {
-            currentSpeedForward = 30000;
-        }
-    }
-
-    private void Acceleration()
-    {
-        if (t1 >= 1f)
-        {
-            accelerationDone = true;
-            t1 = 0;
-        }
-
-        if (!accelerationDone)
-        {
-            t1 += Time.deltaTime / timeAcceleration;
-            currentSpeedForward = Mathf.SmoothStep(firstAccelerationForward, speedForward, t1);
-        }
-        else if (accelerationDone)
-        {
-            currentSpeedForward = speedForward;
-        }
-    }*/
-    #endregion
 
     public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb, Quaternion airAngle)
     {
@@ -190,11 +146,30 @@ public class C_CharacterControler : MonoBehaviour
         if (isGrounded)
         {
             rb.drag = dragGroundForce;
+
+            if (accelerationFallTimer != 0f) //reset timer fall acceleration
+            {
+                accelerationFallTimer = 0f;
+                currentFallAcceleration = minFallAcceleration;
+            }
         }
         else
         {
             rb.drag = dragAirForce;
-            rb.AddForce(Vector3.down * fallAcceleration, ForceMode.Force);
+            rb.AddForce(Vector3.down * currentFallAcceleration, ForceMode.Force);
+
+            if (currentFallAcceleration != maxFallAcceleration)
+            {
+                IncreesFallAcceleration();
+            }
         }
+    }
+
+    float accelerationFallTimer = 0f;
+    private void IncreesFallAcceleration()
+    {
+        accelerationFallTimer = Mathf.Clamp(accelerationFallTimer + Time.fixedDeltaTime / 2, 0, 1);
+        float a = curveFallAcceleration.Evaluate(accelerationFallTimer);
+        currentFallAcceleration = Mathf.Lerp(minFallAcceleration, maxFallAcceleration, a);
     }
 }

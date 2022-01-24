@@ -86,7 +86,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     private void IncreesBoostTimer()
     {
-        currentTimeAccBoost = Mathf.Clamp(currentTimeAccBoost + Time.fixedDeltaTime, 0, timeAccBoost);
+        currentTimeAccBoost = Mathf.Clamp(currentTimeAccBoost + Time.fixedDeltaTime / 2, 0, timeAccBoost);
 
         _CharacterFX.SurchauffeBoost(currentTimeAccBoost, timeAccBoost);
 
@@ -115,7 +115,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     private void DecreesBoostCooldown()
     {
-        currentCooldownBoost = Mathf.Clamp(currentCooldownBoost - Time.fixedDeltaTime, 0, surchaufeCooldownBoost);
+        currentCooldownBoost = Mathf.Clamp(currentCooldownBoost - Time.fixedDeltaTime / 2, 0, surchaufeCooldownBoost);
 
         _CharacterFX.SurchauffeBoostDecres(currentCooldownBoost, saveMaxCooldownBoost);
 

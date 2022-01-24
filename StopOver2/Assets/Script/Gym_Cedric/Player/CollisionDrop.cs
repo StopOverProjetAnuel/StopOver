@@ -39,7 +39,10 @@ public class CollisionDrop : MonoBehaviour
     {
         Vector3 impactPoint = collision.GetContact(0).point; //take coordinate of the 1st impact
         Vector3 toCollisionPoint = impactPoint - transform.position; //give direction of the impact
-        float dot = Vector3.Dot(toCollisionPoint.normalized, transform.forward); //convert degrees to radial
+        toCollisionPoint.y = 0f;
+        Vector3 forward = transform.forward;
+        forward.y = 0f;
+        float dot = Vector3.Dot(toCollisionPoint.normalized, forward); //convert degrees to radial
 
         if (dot < frontRadial && ressourceManager.currentRessource != 0 && collision.relativeVelocity.magnitude >= minSpeedToLose)
         {
