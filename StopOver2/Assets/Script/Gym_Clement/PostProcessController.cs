@@ -13,9 +13,12 @@ public class PostProcessController : MonoBehaviour
 
 
     //_________________________________________________________________________________//Public\\_________________________________________________________________________________________________
+    #region
+    public VolumeProfile twillight;
+    public VolumeProfile night;
+    public VolumeProfile Dawn;
     [Header("Réglage De la durée de la partie en secondes")]
     [Header("______________________________________________________________________________________________________________________________________________________________________________")]
-    [Space(10)]
     public float Timer = 600.0f;//____________________________________________________//c'est le Timer pour régler la durée de la partie en secondes il est arondis au centième au cas où il serait affiché à l'écran
     [Space()]
     [Header("(!!! Twilight To Night est toujours inferieur à Night To Dawn !!!)")]
@@ -36,30 +39,19 @@ public class PostProcessController : MonoBehaviour
     public AnimationCurve Vol2Weight;//______________________________________________// courbe d'animation utilisé pour définir l'influance du second post process le long de la duré du Timer
     [HideInInspector]
     public AnimationCurve Vol3Weight;//______________________________________________// courbe d'animation utilisé pour définir l'influance du troisème post process le long de la duré du Timer
-
-
-
-
+    #endregion
 
     //________________________________________________________________________________//Private\\_________________________________________________________________________________________________
+    #region
 
     private float CurentTimer = 0.0f;                                                // variable qui variera entre 0 et la fin du Timer
-
-    private Volume[] allVol;                                              // array qui va lister les component PostProcessVolume sur le GameObject 
-    private Volume Vol1;                                                  // premier component de type PostProcessVolume sur le GameObject
-    private Volume Vol2;                                                  // deuxième component de type PostProcessVolume sur le GameObject
-    private Volume Vol3;                                                  // troisième component de type PostProcessVolume sur le GameObject
-
 
     private Keyframe[] Vol1Keys = new Keyframe[4];                                   // array de 4 keyframes qui tracera la courbe PPV1Weight
     private Keyframe[] Vol2Keys = new Keyframe[5];                                   // array de 5 keyframes qui tracera la courbe PPV2Weight
     private Keyframe[] Vol3Keys = new Keyframe[4];                                   // array de 4 keyframes qui tracera la courbe PPV3Weight
 
 
-
-
-
-
+    #endregion
 
     //______________________________________________________________________________//Fonctions\\____________________________________________________________________________________________________
 
@@ -72,10 +64,7 @@ public class PostProcessController : MonoBehaviour
 
     public void Initiate()//____________________________________________________//initiate\\___________________________________________________________________________________________________
     {
-        allVol = gameObject.GetComponents<Volume>();                     // définit un array qui liste tous les component PostProcessVolume sur le GameObject
-        Vol1 = allVol[0];                                                           // le premier component de la liste sera associé à la valeur PPV1
-        Vol2 = allVol[1];                                                           // le deuxième component de la liste sera associé à la valeur PPV2
-        Vol3 = allVol[2];                                                           // le troisième component de la liste sera associé à la valeur PPV3
+
 
         // ralentis l'animator en fonction du timer
         SetCurves();                                                                // trace les courbes en fonction des valeurs twilightToNight et nightToDawn
@@ -92,9 +81,9 @@ public class PostProcessController : MonoBehaviour
 
         WeightVolume = CurentTimer / MaxTimer;                                         // montre la progression du Timer sur un slider permet également de evaluer les courbes voir is dessous
 
-        Vol1.weight = Vol1Weight.Evaluate(WeightVolume);                               // évaluation des courbes: grace au float entre 0 et 1 donné par la valeur WeightPPV un nouveau float 
-        Vol2.weight = Vol2Weight.Evaluate(WeightVolume);//                                est donnée en sortie en fonction de la hauteur du point sur la courbe à l'instant donné par WeightPPV  
-        Vol3.weight = Vol3Weight.Evaluate(WeightVolume);//                                cette valeur est ensuite utilisé pour définir l'influance du component PostProcessVolume
+        //Vol1.weight = Vol1Weight.Evaluate(WeightVolume);                               // évaluation des courbes: grace au float entre 0 et 1 donné par la valeur WeightPPV un nouveau float 
+        //Vol2.weight = Vol2Weight.Evaluate(WeightVolume);//                                est donnée en sortie en fonction de la hauteur du point sur la courbe à l'instant donné par WeightPPV  
+        //Vol3.weight = Vol3Weight.Evaluate(WeightVolume);//                                cette valeur est ensuite utilisé pour définir l'influance du component PostProcessVolume
         //                                                                             il existe 3 courbes soit 1 courbes pour chaque component
 
         if (CurentTimer != MaxTimer)                                                // si le timer n'est pas fini à la fin de la fonction
