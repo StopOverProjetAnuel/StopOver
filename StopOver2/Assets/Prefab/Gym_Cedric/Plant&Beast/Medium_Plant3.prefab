@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: 5524098151138171977}
-  - component: {fileID: 7169046624372870199}
+  - component: {fileID: 8924786821675200210}
   m_Layer: 14
   m_Name: Medium_Plant3
   m_TagString: Destructible
@@ -52,20 +52,19 @@ MonoBehaviour:
   resourceGive: 50
   resistanceLevel: 1
   showDebug: 0
---- !u!136 &7169046624372870199
-CapsuleCollider:
+--- !u!65 &8924786821675200210
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8979272754488225753}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.52
-  m_Height: 4.89
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.72, z: -0.4}
+  serializedVersion: 2
+  m_Size: {x: 3, y: 7, z: 3}
+  m_Center: {x: 0, y: 2.9, z: 0}
 --- !u!1001 &1435087359328739959
 PrefabInstance:
   m_ObjectHideFlags: 0
