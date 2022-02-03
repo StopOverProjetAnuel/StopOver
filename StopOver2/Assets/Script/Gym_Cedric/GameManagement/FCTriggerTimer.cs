@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class FCTriggerTimer : MonoBehaviour
 {
-    private FCGameManager _FCGameManager;
+    private GMTimer _GMTimer;
+    private GMVictoryChecker _GMVictoryChecker;
 
     [SerializeField] private bool triggerAtEnter = true;
     [SerializeField] private Color debugBoxColliderColor = Color.red;
@@ -11,20 +12,22 @@ public class FCTriggerTimer : MonoBehaviour
 
     private void Awake()
     {
-        _FCGameManager = FindObjectOfType<FCGameManager>();
+        _GMTimer = FindObjectOfType<GMTimer>();
+        _GMVictoryChecker = FindObjectOfType<GMVictoryChecker>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_FCGameManager && other.tag == "Player")
+        if (_GMTimer && other.tag == "Player")
         {
             if (triggerAtEnter)
             {
-                _FCGameManager.playTimer = true;
+                _GMTimer.playTimer = true;
             }
             else
             {
-                _FCGameManager.playTimer = false;
+                _GMVictoryChecker.TriggerVictory();
+                _GMTimer.playTimer = false;
             }
         }
     }
