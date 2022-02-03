@@ -18,6 +18,7 @@ public class FCGameManager : MonoBehaviour
     private void Awake()
     {
         currentTime = maxTime;
+        DisplayTimer();
     }
 
     private void Update()

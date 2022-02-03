@@ -16,19 +16,19 @@ public class FCTriggerTimer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_FCGameManager && triggerAtEnter && other.tag == "Player")
+        if (_FCGameManager && other.tag == "Player")
         {
-            _FCGameManager.playTimer = true;
+            if (triggerAtEnter)
+            {
+                _FCGameManager.playTimer = true;
+            }
+            else
+            {
+                _FCGameManager.playTimer = false;
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (_FCGameManager && !triggerAtEnter && other.tag == "Player")
-        {
-            _FCGameManager.playTimer = false;
-        }
-    }
 
     private void OnDrawGizmos()
     {
