@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
@@ -16,6 +17,11 @@ public class GMMenu : MonoBehaviour
     public TextMeshProUGUI EndMenuTitle;
     public string victoryText = "You Won !";
     public string defeatText = "You Lose ;c";
+
+    //Reload Scene
+    private Transform startTransformPlayer;
+    private List<GameObject> disableObjects = new List<GameObject>();
+
 
     public void InitiateGMMenu()
     {
@@ -117,8 +123,8 @@ public class GMMenu : MonoBehaviour
 
     public void Retry()
     {
-        Scene a = SceneManager.GetActiveScene();
-        SceneManager.LoadScene(a.name);
+        Scene currentActiveScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentActiveScene.name);
     }
 
     public void OpenEndMenu(bool isWin)

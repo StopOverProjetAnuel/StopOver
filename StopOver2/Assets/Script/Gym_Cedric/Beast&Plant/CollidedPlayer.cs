@@ -20,7 +20,7 @@ public class CollidedPlayer : MonoBehaviour
     public bool showDebug = false;
 
 
-    private void Start()
+    private void Awake()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
         nudgeBars = FindObjectOfType<NudgeBars>();
@@ -46,32 +46,48 @@ public class CollidedPlayer : MonoBehaviour
     }*/
     #endregion
 
-    public void TriggerCollisionPlayer()
+    public void TriggerCollisionPlayer(Rigidbody rb)
     {
         if (nudgeBars.nbState >= resistanceLevel + 1)
         {
-            if (ressourceManager.currentRessource != ressourceManager.maxRessource)
-            {
-                ressourceManager.TriggerRessourceCount(resourceGive);
-            }
-            else if (isDropOnDestroy)
-            {
-                GameObject item = Instantiate(droppedItem, this.transform.position, Quaternion.identity);
-                item.GetComponent<PickUp>().ressourceGive = resourceGive;
-            }
-            Transform.Destroy(gameObject);
-
-            #region Debug
-            if (showDebug)
-            {
-                Debug.Log(gameObject.name + " task executed");
-            }
-            #endregion
+            GettingDestroy();
         }
+        else
+        {
+            Vector3 storedVelocity = rb.velocity;
+            storedVelocity.x *= 0.5f;
+            storedVelocity.z *= 0.5f;
+            rb.velocity = storedVelocity;
+            GettingDestroy();
+        }
+
         #region Debug
         if (showDebug)
         {
             Debug.Log(gameObject.name + " have been triggered");
+        }
+        #endregion
+    }
+
+    private void GettingDestroy()
+    {
+
+        if (ressourceManager.currentRessource != ressourceManager.maxRessource)
+        {
+            ressourceManager.TriggerRessourceCount(resourceGive);
+        }
+        else if (isDropOnDestroy)
+        {
+            GameObject item = Instantiate(droppedItem, this.transform.position, Quaternion.identity);
+            item.GetComponent<PickUp>().ressourceGive = resourceGive;
+        }
+
+        gameObject.SetActive(false);
+
+        #region Debug
+        if (showDebug)
+        {
+            Debug.Log(gameObject.name + " task executed");
         }
         #endregion
     }

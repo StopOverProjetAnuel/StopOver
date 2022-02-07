@@ -66,7 +66,7 @@ public class NudgeBars : MonoBehaviour
         {
             if (parent.CompareTag("Destructible"))
             {
-                collidedPlayer.TriggerCollisionPlayer();
+                collidedPlayer.TriggerCollisionPlayer(rb);
                 #region Debug
                 if (showDebug)
                 {
@@ -80,7 +80,7 @@ public class NudgeBars : MonoBehaviour
             if (other.CompareTag("Destructible"))
             {
                 collidedPlayer = other.GetComponent<CollidedPlayer>();
-                collidedPlayer.TriggerCollisionPlayer();
+                collidedPlayer.TriggerCollisionPlayer(rb);
                 #region Debug
                 if (showDebug)
                 {
