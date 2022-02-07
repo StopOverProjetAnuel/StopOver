@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1413541656694344918}
   - {fileID: 4946252639449193372}
-  - {fileID: 5422693765559125358}
+  - {fileID: 730368715399161167}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -50,7 +50,7 @@ MonoBehaviour:
   isDropOnDestroy: 0
   droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 50
-  resistanceLevel: 1
+  resistanceLevel: 0
   showDebug: 0
 --- !u!65 &2760164561237336817
 BoxCollider:
@@ -344,10 +344,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: plant_4_low
       objectReference: {fileID: 0}
+    - target: {fileID: 8226388246176389571, guid: c275037afab47484d9c63bef85ad6b8f, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c275037afab47484d9c63bef85ad6b8f, type: 3}
---- !u!4 &5422693765559125358 stripped
+--- !u!4 &730368715399161167 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 3695640840380004834, guid: c275037afab47484d9c63bef85ad6b8f, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8226388246176389571, guid: c275037afab47484d9c63bef85ad6b8f, type: 3}
   m_PrefabInstance: {fileID: 8649386269415455884}
   m_PrefabAsset: {fileID: 0}
