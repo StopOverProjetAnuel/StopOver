@@ -80,7 +80,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
   droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
-  resourceGive: 50
+  resourceGive: 100
   resistanceLevel: 2
   showDebug: 0
 --- !u!65 &6561861379987697297
@@ -94,8 +94,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 7.0374017, y: 6.2775908, z: 3.4981172}
-  m_Center: {x: -1.6818812, y: 3.1837955, z: 0.03848183}
+  m_Size: {x: 11.493203, y: 10.690797, z: 3.4981172}
+  m_Center: {x: -3.909782, y: 5.3903985, z: 0.03848183}
 --- !u!1001 &1938774868329559379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,6 +149,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7598100023986332075, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
       propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598100023986332075, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598100023986332075, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7598100023986332075, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
+      propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8971192245404401888, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
