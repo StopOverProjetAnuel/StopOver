@@ -43,9 +43,10 @@ GameObject:
   - component: {fileID: 5070728106392650214}
   - component: {fileID: 1869584558695364551}
   - component: {fileID: 1890164757740754117}
-  m_Layer: 0
+  - component: {fileID: 2493938173834333798}
+  m_Layer: 14
   m_Name: Roche5_9_5
-  m_TagString: Untagged
+  m_TagString: Destructible
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -126,3 +127,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2493938173834333798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4913085599131033725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDropOnDestroy: 0
+  droppedItem: {fileID: 0}
+  resourceGive: 0
+  resistanceLevel: 2
+  showDebug: 0
