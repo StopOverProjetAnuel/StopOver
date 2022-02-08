@@ -11,12 +11,13 @@ public class C_CharacterBoost : MonoBehaviour
     public float boostImpulseForce;
     public float speedBoost;
     public float timeAccBoost;
-    private float currentTimeAccBoost;
+    private float currentTimeAccBoost = 0f;
     public float minCooldownBoost;
     public float maxCooldownBoost;
     public float surchaufeCooldownBoost;
-    private float currentCooldownBoost;
-    private float saveMaxCooldownBoost;
+    private float currentCooldownBoost = 0f;
+    private float saveMaxCooldownBoost = 0f;
+    private bool boostPressed = true;
 
     public bool showDebug = false;
     #region OLD
@@ -37,30 +38,46 @@ public class C_CharacterBoost : MonoBehaviour
     {
         _CharacterControler = GetComponent<C_CharacterControler>();
         _CharacterFX = GetComponent<C_CharacterFX>();
+
+        boostPressed = true;
     }
 
     public void TriggerBoost(float getMoveForward, bool inputBoostTrigger, bool inputBoostTriggerContinue, Rigidbody rb)
     {
-        if (getMoveForward > 0 && currentCooldownBoost == 0) 
+        if (getMoveForward > 0 && currentCooldownBoost == 0 && boostPressed) 
         { 
             if (inputBoostTrigger)
             {
                 BoostImpulseForce(rb);
+                Debug.Log("Trigger BoostImpulseForce");
             }
         
             if (inputBoostTriggerContinue && currentTimeAccBoost != timeAccBoost)
             {
                 UseBoostSpeed();
                 IncreesBoostTimer();
+                Debug.Log("Trigger UseBoostSpeed & IncreesBoostTimer");
             }
             else if (!inputBoostTriggerContinue && _CharacterControler.currentSpeed != _CharacterControler.speedPlayer)
             {
                 ResetBoostSpeed();
+                Debug.Log("Trigger ResetBoostSpeed");
             }
+        }
+        else if (currentTimeAccBoost != 0)
+        {
+            ResetBoostSpeed();
         }
         else if (currentCooldownBoost != 0)
         {
             DecreesBoostCooldown();
+            boostPressed = false;
+            Debug.Log("Trigger DecreesBoostCooldown");
+        }
+
+        if (Input.GetButtonUp("Boost"))
+        {
+            boostPressed = true;
         }
 
         #region Debug

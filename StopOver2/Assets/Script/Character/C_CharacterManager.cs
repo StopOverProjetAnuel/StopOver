@@ -96,7 +96,7 @@ public class C_CharacterManager : MonoBehaviour
 
         _CharacterBoost.TriggerBoost(verticalInput, boostInputDown, boostInputHold, rb);
 
-        _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded());
+        _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded(), boostInputHold);
     }
 
     private void FixedUpdate()

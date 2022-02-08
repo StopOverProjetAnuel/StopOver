@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.VFX;
+using System.Collections.Generic;
 
 public class C_CharacterFX : MonoBehaviour
 {
@@ -60,10 +61,10 @@ public class C_CharacterFX : MonoBehaviour
         #endregion
     }
 
-    public void TriggerContinuousFX(float currentSpeed, float mouseX, bool isGrounded)
+    public void TriggerContinuousFX(float currentSpeed, float mouseX, bool isGrounded, bool isBoosted)
     {
         FuelTankAmount();
-        FovSpeed(currentSpeed);
+        FovSpeed(currentSpeed, isBoosted);
         LeaningModel(mouseX);
         TriggerSmokeShip(isGrounded);
     }
@@ -146,15 +147,26 @@ public class C_CharacterFX : MonoBehaviour
         fluideShader.sharedMaterial.SetFloat("_Remplissage", b);
     }
 
-    private void FovSpeed(float currentSpeed)
+    private float c = 0f;
+    private float fovTimer = 0f;
+    private void FovSpeed(float currentSpeed, bool isBoosted)
     {
-        float a = Mathf.Clamp(currentSpeed / maxSpeedCamEffect, 0, 1);
-        speedEffectCamera.speed = a;
+        float a = Mathf.Clamp(currentSpeed / 60f, 0f, 1f);
+        float b = Mathf.Lerp(0, 0.75f, a);
 
+        if (isBoosted && b == 0.75f)
+        {
+            b = 1f;
+        }
+
+        c = Mathf.Lerp(c, b, fovTimer);
+        fovTimer = (fovTimer < 0.1f) ? Mathf.Clamp(fovTimer + Time.deltaTime, 0f, 0.1f) : fovTimer = 0f; // IF(?) fovTimer < 0.1f DO Mathf.Clamp(fovTimer + Time.deltaTime, 0f, 0.1f) ELSE(:) fovTimer = 0f
+
+        speedEffectCamera.speed = c;
         #region Debug
         if (showDebug)
         {
-            Debug.Log("Speed percent cam effects" + a);
+            Debug.Log("Speed percent cam effects" + b * 100);
         }
         #endregion
     }
