@@ -3,11 +3,13 @@ using UnityEngine;
 public class GMVictoryChecker : MonoBehaviour
 {
     private GMMenu _GMMenu;
+    private GMScoring _GMScoring;
 
 
-    public void InitiateGMVictoryChecker(GMMenu gMMenu)
+    public void InitiateGMVictoryChecker(GMMenu gMMenu, GMScoring gMScoring)
     {
         _GMMenu = gMMenu;
+        _GMScoring = gMScoring;
     }
 
     public void TriggerVictory()
@@ -15,6 +17,7 @@ public class GMVictoryChecker : MonoBehaviour
         if (Time.timeScale != 0f)
         {
             _GMMenu.OpenEndMenu(true);
+            _GMScoring.CalculateFinalScore();
             Time.timeScale = 0f;
         }
     }

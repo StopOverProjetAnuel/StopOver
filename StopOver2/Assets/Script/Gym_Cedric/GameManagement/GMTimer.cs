@@ -10,8 +10,7 @@ public class GMTimer : MonoBehaviour
 
     [Header("Timer parameters")]
     public float maxTime = 240f;
-    [SerializeField]
-    private float currentTime = 0f;
+    public float currentTime = 0f;
 
     public bool playTimer = false;
 
