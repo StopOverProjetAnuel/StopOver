@@ -23,7 +23,7 @@ public class PickUp : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && ressourceManager.currentRessource != ressourceManager.maxRessource && Time.time >= timeSpawnSave)
+        if (other.gameObject.CompareTag("Weapon") && ressourceManager.currentRessource != ressourceManager.maxRessource && Time.time >= timeSpawnSave)
         {
             ressourceManager.TriggerRessourceCount(ressourceGive);
             GameObject.Destroy(this.gameObject);
