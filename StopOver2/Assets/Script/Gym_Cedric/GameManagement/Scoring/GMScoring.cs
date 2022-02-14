@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -20,6 +22,7 @@ public class GMScoring : MonoBehaviour
     {
         _GMTimer = gMTimer;
         _RessourceManager = FindObjectOfType<RessourceManager>();
+        SaveScoreData();
     }
 
     public void CalculateFinalScore()
@@ -37,4 +40,26 @@ public class GMScoring : MonoBehaviour
     {
         scoreText.text = prefixScore + finalScore + suffixScore;
     }
+
+
+
+    [SerializeField] private LeaderBoardData _LeaderBoardData = new LeaderBoardData();
+    public void SaveScoreData()
+    {
+        string leaderBoard = JsonUtility.ToJson(_LeaderBoardData);
+        System.IO.File.WriteAllText(Application.persistentDataPath + "/LeaderBoard.json", leaderBoard);
+    }
+}
+
+[System.Serializable]
+public class LeaderBoardData
+{
+    public List<ScoreData> scoreData = new List<ScoreData>();
+}
+
+[System.Serializable]
+public class ScoreData
+{
+    public string name;
+    public float scoreValue;
 }
