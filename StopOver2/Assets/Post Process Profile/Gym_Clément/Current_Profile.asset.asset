@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Value: 1
   enabled:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   colorMode:
     m_OverrideState: 1
     m_Value: 1
@@ -208,11 +208,11 @@ MonoBehaviour:
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 0
-    m_Value: 0.3232202
+    m_Value: 0.041270126
     min: 0
   upperHemisphereLuxColor:
     m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.1499767, z: 0.41086867}
+    m_Value: {x: 0.36579782, y: 0.25286004, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 0
     m_Value: 20000
@@ -228,7 +228,7 @@ MonoBehaviour:
     m_Value: 0
   hdriSky:
     m_OverrideState: 1
-    m_Value: {fileID: 8900000, guid: 89878140665978f4f9f27f55a61fb12d, type: 3}
+    m_Value: {fileID: 8900000, guid: a81552b25f3b36b43b82a6c5daf6e098, type: 3}
   enableDistortion:
     m_OverrideState: 0
     m_Value: 0
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7fd9488000d3734a9e00ee676215985, type: 3}
-  m_Name: 1_Twilight Profile PlaceHolder
+  m_Name: Current_Profile.asset
   m_EditorClassIdentifier: 
   components:
   - {fileID: 8377558556308659290}

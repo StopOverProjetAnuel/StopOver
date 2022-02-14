@@ -376,20 +376,19 @@ MonoBehaviour:
   m_Name: 2_Night Profile PlaceHolder
   m_EditorClassIdentifier: 
   components:
-  - {fileID: 4461781875361150944}
   - {fileID: -6984303908829562098}
-  - {fileID: 4527213961537249793}
-  - {fileID: 5212597411444258495}
+  - {fileID: 4461781875361150944}
   - {fileID: 3186148639446438598}
   - {fileID: -4649499425666289119}
-  - {fileID: -3327294013225861539}
+  - {fileID: 5212597411444258495}
+  - {fileID: 4527213961537249793}
   - {fileID: -7430573636677242626}
+  - {fileID: -3327294013225861539}
   - {fileID: -7874768091045805506}
   - {fileID: 8077613937030835082}
   - {fileID: 4171729671168613013}
   - {fileID: -5826876097481899556}
   - {fileID: -6936476472948809513}
-  - {fileID: 4173850043468212133}
 --- !u!114 &3186148639446438598
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -551,58 +550,6 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
     min: 0
---- !u!114 &4173850043468212133
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1be1b6c95cd2e41b27903b9270817f, type: 3}
-  m_Name: Vignette
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  mode:
-    m_OverrideState: 0
-    m_Value: 0
-  color:
-    m_OverrideState: 0
-    m_Value: {r: 0, g: 0, b: 0, a: 1}
-    hdr: 0
-    showAlpha: 0
-    showEyeDropper: 1
-  center:
-    m_OverrideState: 0
-    m_Value: {x: 0.5, y: 0.5}
-  intensity:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 1
-  smoothness:
-    m_OverrideState: 0
-    m_Value: 0.2
-    min: 0.01
-    max: 1
-  roundness:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
-  rounded:
-    m_OverrideState: 0
-    m_Value: 0
-  mask:
-    m_OverrideState: 0
-    m_Value: {fileID: 0}
-  opacity:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 1
 --- !u!114 &4461781875361150944
 MonoBehaviour:
   m_ObjectHideFlags: 3

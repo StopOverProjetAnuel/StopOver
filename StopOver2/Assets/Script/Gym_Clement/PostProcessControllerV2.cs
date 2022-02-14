@@ -9,7 +9,10 @@ using UnityEditor;
 public class PostProcessControllerV2 : MonoBehaviour
 {
     #region variables public 
+    [Space(10)]
+    public Gradient progressBar; // aucun effet sur le code
 
+    [Space(10)]
     public VolumeProfile Twilight;
     #region twilight settings
     private VisualEnvironment t_VisEnviro;
@@ -65,10 +68,10 @@ public class PostProcessControllerV2 : MonoBehaviour
     //d_setting
 
     [Space(10)]
-    public float UpdateSkybox; // vitesse du code pour alléger charge de travail
+    public float blendSpeed = 1; // vitesse du code pour alléger charge de travail
 
     [Space(10)]
-    public float Timer; // temps du jeu
+    public float Timer = 240f; // temps du jeu
 
     [Space(10)]
     [Range(0,100)]
@@ -80,7 +83,6 @@ public class PostProcessControllerV2 : MonoBehaviour
     [Range(0, 1)]
     public float TransitionDawn;    //durée de la transition vers aube
 
-    public AnimationCurve transition;// feedback aucun effet sur le code 
     #endregion
 
     #region variables private
@@ -89,19 +91,11 @@ public class PostProcessControllerV2 : MonoBehaviour
     private Volume DNVolume;                // cherche component volume
     private VolumeProfile CurrentVolProfile;// cherche profile sur component
 
-    private float progress;                 //progressiou timer entre 0 et 1
+    private float progress;                 //progression timer entre 0 et 1
+    
+    //private Color[] AllColors = new Color[6] { Color.red, new Color (1,1,0,1), Color.green, Color.cyan, Color.blue, Color.magenta };        // couleurs de référence pas touche
 
-    [SerializeField]
-    private AnimationCurve RED;      // courbes de référence pas touche
-    [SerializeField]
-    private AnimationCurve GREEN;     //
-    [SerializeField]
-    private AnimationCurve BLUE;      //
-
-    [SerializeField]
-    private Color[] AllColors;        // couleurs de référence pas touche
-
-    private Gradient gradient;        // variable voir make gradient 
+    //private Gradient gradient;              // variable voir make gradient 
 
     #region Current Profile Settings
     private VisualEnvironment c_VisEnviro;
@@ -121,112 +115,160 @@ public class PostProcessControllerV2 : MonoBehaviour
     //c_setting
 
     #region HDRI Sky Curves
-    private AnimationCurve crvHDRISkyScrollspeed;
-    private AnimationCurve crvHDRISkyExposure;
-    private AnimationCurve crvHDRISkyRotation;
+    [HideInInspector]
+    public AnimationCurve crvHDRISkyExposure;
 
     #endregion
     //crvHDRISkySetting
 
     #region Fog Curves
-    private AnimationCurve crvFogBaseHeight;
-    private AnimationCurve crvFogMaxHeight;
-    private Gradient crvFogTint;
-    private Gradient crvFogAlbedo;
+    [HideInInspector]
+    public AnimationCurve crvFogBaseHeight;
+    [HideInInspector]
+    public AnimationCurve crvFogMaxHeight;
+    [HideInInspector]
+    public Gradient crvFogTint;
+    [HideInInspector]
+    public Gradient crvFogAlbedo;
 
     #endregion
     //crvFogSetting
 
     #region Exposure Curves
-    private AnimationCurve crvExposureFixedExposure;
-    private AnimationCurve crvExposureCompensation;
+    [HideInInspector]
+    public AnimationCurve crvExposureFixedExposure;
+    [HideInInspector]
+    public AnimationCurve crvExposureCompensation;
     #endregion
     //crvExposureSetting
 
     #region Bloom Curves
-    private AnimationCurve crvBloomThreshold;
-    private AnimationCurve crvBloomScatter;
+    [HideInInspector]
+    public AnimationCurve crvBloomThreshold;
+    [HideInInspector]
+    public AnimationCurve crvBloomScatter;
     #endregion
     //crvBloomSetting
 
     #region Color Adjustment Curves
-    private AnimationCurve crvColorAdjustmentPostExposure;
-    private AnimationCurve crvColorAdjustmentContrast;
-    private AnimationCurve crvColorAdjustmentSaturation;
+    [HideInInspector]
+    public AnimationCurve crvColorAdjustmentPostExposure;
+    [HideInInspector]
+    public AnimationCurve crvColorAdjustmentContrast;
+    [HideInInspector]
+    public AnimationCurve crvColorAdjustmentSaturation;
     #endregion
     //crvColorAdjustmentSetting
 
     #region Channel Mixer
-    private AnimationCurve crvChannelMixerRedR;
-    private AnimationCurve crvChannelMixerRedG;
-    private AnimationCurve crvChannelMixerRedB;
-    private AnimationCurve crvChannelMixerGreenR;
-    private AnimationCurve crvChannelMixerGreenG;
-    private AnimationCurve crvChannelMixerGreenB;
-    private AnimationCurve crvChannelMixerBlueR;
-    private AnimationCurve crvChannelMixerBlueG;
-    private AnimationCurve crvChannelMixerBlueB;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerRedR;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerRedG;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerRedB;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerGreenR;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerGreenG;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerGreenB;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerBlueR;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerBlueG;
+    [HideInInspector]
+    public AnimationCurve crvChannelMixerBlueB;
 
     #endregion
     //crvChannelMixerSetting
 
     #region Film Grain
-    private AnimationCurve crvFilmGrainIntensity;
-    private AnimationCurve crvFilmGrainResponse;
-    private Keyframe[] keyFilmGrainIntensity = new Keyframe[6];
-    private Keyframe[] keyFilmGrainResponse = new Keyframe[6];
+    [HideInInspector]
+    public AnimationCurve crvFilmGrainIntensity;
+    [HideInInspector]
+    public AnimationCurve crvFilmGrainResponse;
+
     #endregion
     //crvFilmGrainSetting
 
     #region Lift Gamma Gain
-    private AnimationCurve crvLiftGammaGainLiftX; 
-    private AnimationCurve crvLiftGammaGainLiftY; 
-    private AnimationCurve crvLiftGammaGainLiftZ; 
-    private AnimationCurve crvLiftGammaGainLiftW; 
-    private AnimationCurve crvLiftGammaGainGammaX; 
-    private AnimationCurve crvLiftGammaGainGammaY; 
-    private AnimationCurve crvLiftGammaGainGammaZ; 
-    private AnimationCurve crvLiftGammaGainGammaW; 
-    private AnimationCurve crvLiftGammaGainGainX;
-    private AnimationCurve crvLiftGammaGainGainY;
-    private AnimationCurve crvLiftGammaGainGainZ;
-    private AnimationCurve crvLiftGammaGainGainW;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainLiftX;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainLiftY;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainLiftZ;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainLiftW;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGammaX;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGammaY;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGammaZ;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGammaW;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGainX;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGainY;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGainZ;
+    [HideInInspector]
+    public AnimationCurve crvLiftGammaGainGainW;
 
     #endregion
     //crvLiftGammaGainSetting
 
     #region Shadow Midtones High
-    private AnimationCurve crvShadowMidtonesHighShadowX;
-    private AnimationCurve crvShadowMidtonesHighShadowY;
-    private AnimationCurve crvShadowMidtonesHighShadowZ;
-    private AnimationCurve crvShadowMidtonesHighShadowW;
-    private AnimationCurve crvShadowMidtonesHighMidtonesX;
-    private AnimationCurve crvShadowMidtonesHighMidtonesY;
-    private AnimationCurve crvShadowMidtonesHighMidtonesZ;
-    private AnimationCurve crvShadowMidtonesHighMidtonesW;
-    private AnimationCurve crvShadowMidtonesHighHighX;
-    private AnimationCurve crvShadowMidtonesHighHighY;
-    private AnimationCurve crvShadowMidtonesHighHighZ;
-    private AnimationCurve crvShadowMidtonesHighHighW;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighShadowX;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighShadowY;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighShadowZ;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighShadowW;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighMidtonesX;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighMidtonesY;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighMidtonesZ;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighMidtonesW;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighHighX;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighHighY;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighHighZ;
+    [HideInInspector]
+    public AnimationCurve crvShadowMidtonesHighHighW;
 
     #endregion
     //crvShadowMidtoneHighSetting
 
     #region Split Toning
-    private Gradient crvSplitToningShadow;
-    private Gradient crvSplitToningHighlight;
-    private AnimationCurve crvSplitToningBalance;
+    [HideInInspector]
+    public Gradient crvSplitToningShadow;
+    [HideInInspector]
+    public Gradient crvSplitToningHighlight;
+    [HideInInspector]
+    public AnimationCurve crvSplitToningBalance;
 
     #endregion
     //crvSplitToningSetting
 
     #region White balance
-    private AnimationCurve crvWhiteBalanceTemperature;
-    private AnimationCurve crvWhiteBalanceTint;
+    [HideInInspector]
+    public AnimationCurve crvWhiteBalanceTemperature;
+    [HideInInspector]
+    public AnimationCurve crvWhiteBalanceTint;
+
     #endregion
     //crvWhiteBalance
-
-    
 
     #endregion
 
@@ -237,10 +279,7 @@ public class PostProcessControllerV2 : MonoBehaviour
 
         StartCoroutine(SetupCurentProfile()); // draw curves
 
-        StartCoroutine(StartDNCycle(UpdateSkybox,Timer)); // démare le timer et évolution du post process
-
-        ShowTransition(); //feedback
-
+        //StartCoroutine(StartDNCycle(UpdateSkybox,Timer)); // démare le timer et évolution du post process
     }
 
     private void initiate()
@@ -327,6 +366,7 @@ public class PostProcessControllerV2 : MonoBehaviour
             Timer -= Refresh;
             progress = 1 - (Timer / MaxTimer);
             ReadCurves();
+            ShowProgress();
             yield return new WaitForSeconds(Refresh);
             StartCoroutine(StartDNCycle(Refresh,MaxTimer));
         }
@@ -334,9 +374,7 @@ public class PostProcessControllerV2 : MonoBehaviour
 
     private IEnumerator SetupCurentProfile()
     {
-        MakeCurve(crvHDRISkyScrollspeed, t_HDRISky.scrollSpeed.value, n_HDRISky.scrollSpeed.value, d_HDRISky.scrollSpeed.value);
         MakeCurve(crvHDRISkyExposure, t_HDRISky.exposure.value, n_HDRISky.exposure.value, d_HDRISky.exposure.value);
-        MakeCurve(crvHDRISkyRotation, t_HDRISky.rotation.value, n_HDRISky.rotation.value, d_HDRISky.rotation.value);
             yield return new WaitForEndOfFrame();
         MakeCurve(crvFogBaseHeight,t_Fog.baseHeight.value,n_Fog.baseHeight.value,d_Fog.baseHeight.value);
         MakeCurve(crvFogMaxHeight,t_Fog.maximumHeight.value,n_Fog.maximumHeight.value,d_Fog.maximumHeight.value);
@@ -399,14 +437,13 @@ public class PostProcessControllerV2 : MonoBehaviour
             yield return new WaitForEndOfFrame();
         MakeCurve(crvWhiteBalanceTemperature, t_WhiteBalance.temperature.value, n_WhiteBalance.temperature.value, d_WhiteBalance.temperature.value);
         MakeCurve(crvWhiteBalanceTint, t_WhiteBalance.tint.value, n_WhiteBalance.tint.value, d_WhiteBalance.tint.value);
+
+        StartCoroutine(StartDNCycle(blendSpeed, Timer));
     }
-
-
+    
     void ReadCurves()
     {
-        c_HDRISky.scrollSpeed.value = crvHDRISkyScrollspeed.Evaluate(progress);
         c_HDRISky.exposure.value = crvHDRISkyExposure.Evaluate(progress);
-        c_HDRISky.rotation.value = crvHDRISkyRotation.Evaluate(progress);
         c_Fog.baseHeight.value = crvFogBaseHeight.Evaluate(progress);
         c_Fog.maximumHeight.value = crvFogMaxHeight.Evaluate(progress);
         c_Fog.tint.value = crvFogTint.Evaluate(progress);
@@ -440,486 +477,45 @@ public class PostProcessControllerV2 : MonoBehaviour
         c_SplitTonning.balance.value = crvSplitToningBalance.Evaluate(progress);
         c_WhiteBalance.temperature.value = crvWhiteBalanceTemperature.Evaluate(progress);
         c_WhiteBalance.tint.value = crvWhiteBalanceTemperature.Evaluate(progress);
+
+        c_FilmGrain.type.value = (progress > twilightToNight/100 && progress < nightToDawn/100) ? n_FilmGrain.type.value : c_FilmGrain.type.value;
+        c_FilmGrain.type.value = (progress > nightToDawn/100) ? d_FilmGrain.type.value : c_FilmGrain.type.value;
+        
+        //cubemap
     }
 
-    #region GradientMaker
-    private IEnumerator MakeGradient(Gradient var, Color a, Color b, Color c)
+    void ShowProgress()
     {
-        float t = twilightToNight / 100;
-        float d = nightToDawn / 100;
-
-        yield return new WaitForEndOfFrame();
-        SetSaturatedGradient(a, b);
-        yield return new WaitForEndOfFrame();
-        UpdateSaturation(a, b);
-        yield return new WaitForEndOfFrame();
-        UpdateLuminosity(a, b);
-        yield return new WaitForEndOfFrame();
-        ResizeGradient(t, TransitionNight);
-
-        Gradient G1 = new Gradient();
-        G1.SetKeys(gradient.colorKeys, gradient.alphaKeys);
-        yield return new WaitForEndOfFrame();
-
-
-        SetSaturatedGradient(b, c);
-        yield return new WaitForEndOfFrame();
-        UpdateSaturation(b, c);
-        yield return new WaitForEndOfFrame();
-        UpdateLuminosity(b, c);
-        yield return new WaitForEndOfFrame();
-        ResizeGradient(d, TransitionDawn);
-
-        Gradient G2 = new Gradient();
-        G2.SetKeys(gradient.colorKeys, gradient.alphaKeys);
-
-        CombineGradient(G1, G2);
-        var.SetKeys(gradient.colorKeys, gradient.alphaKeys);
-        gradient = var;
-
+        GradientColorKey[] kc = progressBar.colorKeys;        
+        kc[0].time = progress;
+        kc[1].time = progress + 0.001f;
+        progressBar.SetKeys(kc, progressBar.alphaKeys);
     }
-    Color RecognizeColor(Color c)
+
+    void MakeGradient(Gradient g, Color c1, Color c2, Color c3)
     {
-        Vector4 V4 = c;
-        V4 *= 1.5f;
-        V4 = new Vector4(Mathf.Clamp(V4.x, 0, 1), Mathf.Clamp(V4.y, 0, 1), Mathf.Clamp(V4.z, 0, 1), Mathf.Clamp(V4.w, 0, 1));
-        c = V4;
+        GradientColorKey[] ck = new GradientColorKey[6];
+        GradientAlphaKey[] ak = new GradientAlphaKey[1];
+        ak[0].time = 0;
+        ak[0].alpha = 1;
 
-        if (c.maxColorComponent == c.r) // si le rouge qui est superieur
-        {
-            if (c.r == c.g) // si c'est jaune
-            {
-                return new Color(1, 1, 0, 1);
-            }
-            else if (c.r == c.b) // si c'est rose
-            {
-                return new Color(1, 0, 1, 1);
-            }
-            else // si c'est rouge
-            {
-                return new Color(1, 0, 0, 1);
-            }
-        }
-        else if (c.maxColorComponent == c.g) // si c'est le vert qui est superieur
-        {
-            if (c.g == c.b) // si c'est cyan
-            {
-                return new Color(0, 1, 1, 1);
-            }
-            else // si c'est vert
-            {
-                return new Color(0, 1, 0, 1);
-            }
+        ck[0].time = 0;
+        ck[1].time = twilightToNight / 100;
+        ck[2].time = twilightToNight / 100 + TransitionNight;
+        ck[3].time = nightToDawn / 100;
+        ck[4].time = nightToDawn / 100 + TransitionDawn;
+        ck[5].time = 1;
 
-        }
-        else // si c'est le bleu qui est supperieur
-        {
-            return new Color(0, 0, 1, 1); //alors c'est bleu
-        }
+        ck[0].color = c1;
+        ck[1].color = c1;
+        ck[2].color = c2;
+        ck[3].color = c2;
+        ck[4].color = c3;
+        ck[5].color = c3;
+
+        g.SetKeys(ck, ak);
     }
-    void SetSaturatedGradient(Color a, Color b)
-    {
-        Color A = RecognizeColor(a);
-        Color B = RecognizeColor(b);
-        int idxA;
-        int idxB;
-        if (A == AllColors[0])
-        {
-            idxA = 1;
-        }
-        else if (A == AllColors[1])
-        {
-            idxA = 2;
-        }
-        else if (A == AllColors[2])
-        {
-            idxA = 3;
-        }
-        else if (A == AllColors[3])
-        {
-            idxA = 4;
-        }
-        else if (A == AllColors[4])
-        {
-            idxA = 5;
-        }
-        else
-        {
-            idxA = 6;
-        }
-
-        if (B == AllColors[0])
-        {
-            idxB = 1;
-        }
-        else if (B == AllColors[1])
-        {
-            idxB = 2;
-        }
-        else if (B == AllColors[2])
-        {
-            idxB = 3;
-        }
-        else if (B == AllColors[3])
-        {
-            idxB = 4;
-        }
-        else if (B == AllColors[4])
-        {
-            idxB = 5;
-        }
-        else
-        {
-            idxB = 6;
-        }
-
-        int d = idxA - idxB;
-        if (d == 1)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].color = a;
-            colorKeys[1].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == 2)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[3];
-            colorKeys[0].color = b;
-            colorKeys[1].color = AllColors[idxB];
-            colorKeys[2].color = a;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 0.5f;
-            colorKeys[2].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-
-        }
-        else if (d == 3)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[4];
-            colorKeys[0].color = a;
-            colorKeys[1].color = AllColors[idxB + 1];
-            colorKeys[2].color = AllColors[idxB];
-            colorKeys[3].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 0.33f;
-            colorKeys[2].time = 0.66f;
-            colorKeys[3].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == 4)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[3];
-            colorKeys[0].color = a;
-            colorKeys[1].color = AllColors[idxA];
-            colorKeys[2].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 0.5f;
-            colorKeys[2].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == 5)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].color = a;
-            colorKeys[1].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == -1)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].color = a;
-            colorKeys[1].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == -2)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[3];
-            colorKeys[0].color = a;
-            colorKeys[1].color = AllColors[idxA];
-            colorKeys[2].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 0.5f;
-            colorKeys[2].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == -3)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[4];
-            colorKeys[0].color = a;
-            colorKeys[1].color = AllColors[idxA];
-            colorKeys[2].color = AllColors[idxA + 1];
-            colorKeys[3].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 0.33f;
-            colorKeys[2].time = 0.66f;
-            colorKeys[3].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == -4)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[3];
-            colorKeys[0].color = a;
-            colorKeys[1].color = AllColors[idxB];
-            colorKeys[2].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 0.5f;
-            colorKeys[2].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == -5)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].color = a;
-            colorKeys[1].color = b;
-            colorKeys[0].time = 0;
-            colorKeys[1].time = 1;
-
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-        else if (d == 0)
-        {
-            GradientColorKey[] colorKeys = new GradientColorKey[2];
-            colorKeys[0].color = a;
-            colorKeys[0].time = 0;
-            colorKeys[1].color = b;
-            colorKeys[1].time = 1;
-            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[1];
-            alphaKeys[0].alpha = 1;
-            alphaKeys[0].time = 0;
-
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-    }
-    void UpdateSaturation(Color a, Color b)
-    {
-        GradientColorKey[] colorKeys = gradient.colorKeys;
-        GradientAlphaKey[] alphaKeys = gradient.alphaKeys;
-        float f = colorKeys.Length - 1;
-        float minA = minvalue(a);
-        float minB = minvalue(b);
-
-        for (int i = 0; i <= f; i++)
-        {
-            float minVar = minvalue(colorKeys[i].color);
-
-            if (colorKeys[i].color.r == minVar) //si rouge est le plus petit
-            {
-                colorKeys[i].color += new Color(Mathf.Lerp(minA, minB, i / f), 0, 0, 0);
-
-                if (colorKeys[i].color.g == minVar)
-                {
-                    colorKeys[i].color += new Color(0, Mathf.Lerp(minA, minB, i / f), 0, 0);
-                }
-                else if (colorKeys[i].color.b == minVar)
-                {
-                    colorKeys[i].color += new Color(0, 0, Mathf.Lerp(minA, minB, i / f), 0);
-                }
-                gradient.SetKeys(colorKeys, alphaKeys);
-            }
-            else if (colorKeys[i].color.g == minVar) //si vert est le plus petit
-            {
-                colorKeys[i].color += new Color(0, Mathf.Lerp(minA, minB, i / f), 0, 0);
-
-                if (colorKeys[i].color.r == minVar)
-                {
-                    colorKeys[i].color += new Color(Mathf.Lerp(minA, minB, i / f), 0, 0, 0);
-                }
-                else if (colorKeys[i].color.b == minVar)
-                {
-                    colorKeys[i].color += new Color(0, 0, Mathf.Lerp(minA, minB, i / f), 0);
-                }
-                gradient.SetKeys(colorKeys, alphaKeys);
-            }
-            else if (colorKeys[i].color.b == minVar) //si bleu est le plus petit
-            {
-                colorKeys[i].color += new Color(0, 0, Mathf.Lerp(minA, minB, i / f), 0);
-                if (colorKeys[i].color.r == minVar)
-                {
-                    colorKeys[i].color += new Color(0, Mathf.Lerp(minA, minB, i / f), 0, 0);
-                }
-                else if (colorKeys[i].color.g == minVar)
-                {
-                    colorKeys[i].color += new Color(0, Mathf.Lerp(minA, minB, i / f), 0, 0);
-                }
-                gradient.SetKeys(colorKeys, alphaKeys);
-            }
-        }
-
-    }
-    void UpdateLuminosity(Color a, Color b)
-    {
-        GradientColorKey[] colorKeys = gradient.colorKeys;
-        GradientAlphaKey[] alphaKeys = gradient.alphaKeys;
-        float f = colorKeys.Length - 1;
-        float maxA = a.maxColorComponent;
-        float maxB = b.maxColorComponent;
-
-        for (int i = 0; i <= f; i++)
-        {
-            float maxVar = colorKeys[i].color.maxColorComponent;
-            if (colorKeys[i].color.r == maxVar)
-            {
-                colorKeys[i].color -= new Color(1 - Mathf.Lerp(maxA, maxB, i / f), 0, 0, 0);
-
-                if (colorKeys[i].color.g == maxVar)
-                {
-                    colorKeys[i].color -= new Color(0, 1 - Mathf.Lerp(maxA, maxB, i / f), 0, 0);
-                }
-                else if (colorKeys[i].color.b == maxVar)
-                {
-                    colorKeys[i].color -= new Color(0, 0, 1 - Mathf.Lerp(maxA, maxB, i / f), 0);
-                }
-                gradient.SetKeys(colorKeys, alphaKeys);
-            }
-            else if (colorKeys[i].color.g == maxVar)
-            {
-                colorKeys[i].color -= new Color(0, 1 - Mathf.Lerp(maxA, maxB, i / f), 0, 0);
-
-                if (colorKeys[i].color.r == maxVar)
-                {
-                    colorKeys[i].color -= new Color(1 - Mathf.Lerp(maxA, maxB, i / f), 0, 0, 0);
-                }
-                else if (colorKeys[i].color.b == maxVar)
-                {
-                    colorKeys[i].color -= new Color(0, 0, 1 - Mathf.Lerp(maxA, maxB, i / f), 0);
-                }
-                gradient.SetKeys(colorKeys, alphaKeys);
-            }
-            else if (colorKeys[i].color.b == maxVar)
-            {
-                colorKeys[i].color -= new Color(0, 0, 1 - Mathf.Lerp(maxA, maxB, i / f), 0);
-
-                if (colorKeys[i].color.r == maxVar)
-                {
-                    colorKeys[i].color -= new Color(1 - Mathf.Lerp(maxA, maxB, i / f), 0, 0, 0);
-                }
-                else if (colorKeys[i].color.g == maxVar)
-                {
-                    colorKeys[i].color -= new Color(0, 1 - Mathf.Lerp(maxA, maxB, i / f), 0, 0);
-                }
-                gradient.SetKeys(colorKeys, alphaKeys);
-            }
-
-        }
-    }
-    void ResizeGradient(float tr, float ti)
-    {
-        GradientColorKey[] colorKeys = gradient.colorKeys;
-        GradientAlphaKey[] alphaKeys = gradient.alphaKeys;
-        float f = colorKeys.Length - 1;
-        float e = tr + ti;
-
-        for (int i = 0; i <= f; i++)
-        {
-            colorKeys[i].time = Mathf.Lerp(tr, e, i / f);
-            gradient.SetKeys(colorKeys, alphaKeys);
-        }
-    }
-    void CombineGradient(Gradient G1, Gradient G2)
-    {
-        GradientColorKey[] G1colorKeys = G1.colorKeys;
-        GradientColorKey[] G2colorKeys = G2.colorKeys;
-        GradientColorKey[] NEWColorKeys = new GradientColorKey[G1colorKeys.Length + G2colorKeys.Length];
-        GradientAlphaKey[] alphaKeys = gradient.alphaKeys;
-        int f1 = G1colorKeys.Length - 1;
-        int f2 = G2colorKeys.Length - 1;
-
-        for (int i = 0; i <= f1; i++)
-        {
-            NEWColorKeys[i].color = G1colorKeys[i].color;
-            NEWColorKeys[i].time = G1colorKeys[i].time;
-            gradient.SetKeys(NEWColorKeys, alphaKeys);
-        }
-        for (int i = f1 + 1; i <= f1 + f2 + 1; i++)
-        {
-            NEWColorKeys[i].color = G2colorKeys[i - f1 - 1].color;
-            NEWColorKeys[i].time = G2colorKeys[i - f1 - 1].time;
-            gradient.SetKeys(NEWColorKeys, alphaKeys);
-        }
-    }
-    void ShowTransition()
-    {
-        Keyframe[] k = new Keyframe[6];
-        k[0].value = 1;
-        k[0].time = 0;
-        k[1].value = 1;
-        k[1].time = twilightToNight / 100;
-        k[2].value = 0;
-        k[2].time = twilightToNight / 100 + TransitionNight;
-        k[3].value = 0;
-        k[3].time = nightToDawn / 100;
-        k[4].value = 1;
-        k[4].time = nightToDawn / 100 + TransitionDawn;
-        k[5].value = 1;
-        k[5].time = 1;
-        transition.keys = k;
-    }
-    float minvalue(Color input)
-    {
-        Vector4 a = input;
-        Vector4 b = (a - new Vector4(1, 1, 1, 0));   // make négative color
-        Color c = -b;                               // make new color
-        return (1 - c.maxColorComponent);             // return min value
-    }
-    #endregion
-
-    #region CurveMaker
-    private void MakeCurve(AnimationCurve var , float a, float b,float c)
+    void MakeCurve(AnimationCurve var , float a, float b,float c)
     {
         Keyframe[] k = new Keyframe[6];
         k[0].value = a;
@@ -936,5 +532,4 @@ public class PostProcessControllerV2 : MonoBehaviour
         k[5].time = 1;
         var.keys = k;
     }
-    #endregion
 }
