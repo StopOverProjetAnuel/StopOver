@@ -9,19 +9,32 @@ public class GMScoring : MonoBehaviour
     private RessourceManager _RessourceManager;
 
     [Header("Parameters")]
-    public float pointPerTime = 2f;
-    public float pointPerResource = 1f;
+    [SerializeField] private float pointPerTime = 2f;
+    [SerializeField] private float pointPerResource = 1f;
     private float finalScore = 0f;
 
     [Header("Display Score")]
-    public TextMeshProUGUI scoreText;
-    public string prefixScore = "You earned ";
-    public string suffixScore = " points !";
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private string prefixScore = "You earned ";
+    [SerializeField] private string suffixScore = " points !";
+    [SerializeField] private int numberScoreStore = 3;
+    private LeaderBoardData _LeaderBoardData = new LeaderBoardData();
 
     public void InitiateGMScoring(GMTimer gMTimer)
     {
         _GMTimer = gMTimer;
         _RessourceManager = FindObjectOfType<RessourceManager>();
+
+        ScoreData newScore = new ScoreData();
+
+        newScore.name = "none";
+        newScore.scoreValue = 0f;
+
+        for (int i = 0; i < numberScoreStore; i++)
+        {
+            _LeaderBoardData.scoreData.Add(newScore);
+        }
+
         SaveScoreData();
     }
 
@@ -39,11 +52,33 @@ public class GMScoring : MonoBehaviour
     private void DisplayFinalScore()
     {
         scoreText.text = prefixScore + finalScore + suffixScore;
+
+
+
+        string[] scoreNames = new string[numberScoreStore];
+        float[] scoreValues = new float[numberScoreStore];
+
+        scoreValues = JsonUtility.FromJson<float[]>("scoreValue");
+
+        for (int i = 0; i < numberScoreStore; i++)
+        {
+            if (finalScore >= scoreValues[i])
+            {
+
+            }
+        }
+
+        ScoreData newScore = new ScoreData();
+        newScore.name = "none";
+        newScore.scoreValue = finalScore;
+
+        _LeaderBoardData.scoreData.Add(newScore);
+
+        SaveScoreData();
     }
 
 
 
-    [SerializeField] private LeaderBoardData _LeaderBoardData = new LeaderBoardData();
     public void SaveScoreData()
     {
         string leaderBoard = JsonUtility.ToJson(_LeaderBoardData);

@@ -13,7 +13,6 @@ public class GMMenu : MonoBehaviour
     public GameObject[] objectOptionMenuPanels;
 
     [Header("Victory/Defeat Menu")]
-    [SerializeField] private TopScore _TopScore;
     public GameObject EndMenu;
     public TextMeshProUGUI EndMenuTitle;
     public string victoryText = "You Won !";

@@ -3,7 +3,14 @@ using UnityEngine;
 public class DebugManager : MonoBehaviour
 {
     private RessourceManager ressourceManager;
-    public float ressourceGiveNRemove = 10f;
+    [SerializeField] private float ressourceGiveNRemove = 10f;
+
+    [Header("Teleportation")]
+    [SerializeField] private Transform playerPos;
+    [SerializeField] private KeyCode startPosInput;
+    [SerializeField] private Transform startPos;
+    [SerializeField] private KeyCode endPosInput;
+    [SerializeField] private Transform endPos;
 
     private void Awake()
     {
@@ -14,6 +21,7 @@ public class DebugManager : MonoBehaviour
     {
         GiveRessources();
         RemoveRessources();
+        StartEndTp();
     }
 
     #region ResourceManagement
@@ -33,4 +41,10 @@ public class DebugManager : MonoBehaviour
         }
     }
     #endregion
+
+    private void StartEndTp()
+    {
+        playerPos.position = Input.GetKeyDown(startPosInput) ? startPos.position : playerPos.position;
+        playerPos.position = Input.GetKeyDown(endPosInput) ? endPos.position : playerPos.position;
+    }
 }

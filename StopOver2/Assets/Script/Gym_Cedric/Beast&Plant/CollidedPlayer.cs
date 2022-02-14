@@ -14,6 +14,7 @@ public class CollidedPlayer : MonoBehaviour
     public GameObject droppedItem;
     public float resourceGive;
     public int resistanceLevel;
+    public bool isDestroyWithRequirement = false;
 
     [Space(10)]
 
@@ -52,7 +53,7 @@ public class CollidedPlayer : MonoBehaviour
         {
             GettingDestroy();
         }
-        else
+        else if (!isDestroyWithRequirement || nudgeBars.nbState >= resistanceLevel)
         {
             Vector3 storedVelocity = rb.velocity;
             storedVelocity.x *= 0.5f;
