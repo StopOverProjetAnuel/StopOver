@@ -16,9 +16,9 @@ public class GMVictoryChecker : MonoBehaviour
     {
         if (Time.timeScale != 0f)
         {
+            Time.timeScale = 0f;
             _GMMenu.OpenEndMenu(true);
             _GMScoring.CalculateFinalScore();
-            Time.timeScale = 0f;
         }
     }
 
@@ -26,8 +26,8 @@ public class GMVictoryChecker : MonoBehaviour
     {
         if (Time.timeScale != 0f)
         {
-            _GMMenu.OpenEndMenu(false);
             Time.timeScale = 0f;
+            _GMMenu.OpenEndMenu(false);
         }
     }
 }
