@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using TMPro;
 
@@ -17,8 +19,7 @@ public class GMScoring : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private string prefixScore = "You earned ";
     [SerializeField] private string suffixScore = " points !";
-    [SerializeField] private int numberScoreStore = 3;
-    private ScoreData _ScoreData = new ScoreData();
+    [SerializeField ]private ScoreData[] _ScoreData;
 
     public void InitiateGMScoring(GMTimer gMTimer)
     {
@@ -26,19 +27,22 @@ public class GMScoring : MonoBehaviour
         _RessourceManager = FindObjectOfType<RessourceManager>();
 
 
-        if (!System.IO.File.Exists(Application.persistentDataPath + "/LeaderBoard.json"))
+
+        if (!Directory.Exists(Application.persistentDataPath + "/score_saves"))
         {
-            ScoreData iniScoreData = new ScoreData();
+            Directory.CreateDirectory(Application.persistentDataPath + "/score_saves");
+        }
 
-            iniScoreData.name = "none";
-            iniScoreData.scoreValue = 0f;
-
-            for (int i = 0; i < numberScoreStore; i++)
+        for (int i = 0; i < _ScoreData.Length; i++)
+        {
+            if (!File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc"))
             {
-                SaveScoreData(iniScoreData, i.ToString());
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc");
+                string json = JsonUtility.ToJson(_ScoreData[i]);
+                bf.Serialize(file, json);
+                file.Close();
             }
-
-            Debug.Log("Creating saves files");
         }
     }
 
