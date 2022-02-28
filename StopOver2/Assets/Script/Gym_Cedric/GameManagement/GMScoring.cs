@@ -59,7 +59,7 @@ public class GMScoring : MonoBehaviour
 
     private void DisplayFinalScore()
     {
-        #region Display score
+        /**#region Display score
         for (int i = 0; i < numberScoreStore; i++)
         {
             if (finalScore >= _ScoreData.scoreValue)
@@ -99,7 +99,7 @@ public class GMScoring : MonoBehaviour
 
             SaveScoreData(scoreDataArray[i], i.ToString());
         }
-        #endregion
+        #endregion*/
     }
 
 
