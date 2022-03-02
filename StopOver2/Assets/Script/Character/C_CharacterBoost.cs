@@ -49,19 +49,19 @@ public class C_CharacterBoost : MonoBehaviour
             if (inputBoostTrigger)
             {
                 BoostImpulseForce(rb);
-                Debug.Log("Trigger BoostImpulseForce");
+                //Debug.Log("Trigger BoostImpulseForce");
             }
         
             if (inputBoostTriggerContinue && currentTimeAccBoost != timeAccBoost)
             {
                 UseBoostSpeed();
                 IncreesBoostTimer();
-                Debug.Log("Trigger UseBoostSpeed & IncreesBoostTimer");
+                //Debug.Log("Trigger UseBoostSpeed & IncreesBoostTimer");
             }
             else if (!inputBoostTriggerContinue && _CharacterControler.currentSpeed != _CharacterControler.speedPlayer)
             {
                 ResetBoostSpeed();
-                Debug.Log("Trigger ResetBoostSpeed");
+                //Debug.Log("Trigger ResetBoostSpeed");
             }
         }
         else if (currentTimeAccBoost != 0)
@@ -72,7 +72,7 @@ public class C_CharacterBoost : MonoBehaviour
         {
             DecreesBoostCooldown();
             boostPressed = false;
-            Debug.Log("Trigger DecreesBoostCooldown");
+            //Debug.Log("Trigger DecreesBoostCooldown");
         }
 
         if (Input.GetButtonUp("Boost"))

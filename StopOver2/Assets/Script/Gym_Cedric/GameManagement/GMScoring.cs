@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -19,7 +18,7 @@ public class GMScoring : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private string prefixScore = "You earned ";
     [SerializeField] private string suffixScore = " points !";
-    [SerializeField ]private ScoreData[] _ScoreData;
+    [SerializeField] private List<ScoreData> _ScoreData = new List<ScoreData>(3);
 
     public void InitiateGMScoring(GMTimer gMTimer)
     {
@@ -27,14 +26,16 @@ public class GMScoring : MonoBehaviour
         _RessourceManager = FindObjectOfType<RessourceManager>();
 
 
-
+        #region Create Folder and saves text
         if (!Directory.Exists(Application.persistentDataPath + "/score_saves"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/score_saves");
         }
 
-        for (int i = 0; i < _ScoreData.Length; i++)
+        for (int i = 0; i < _ScoreData.Count; i++)
         {
+            _ScoreData[i].name = "none";
+            _ScoreData[i].scoreValue = 0f;
             if (!File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc"))
             {
                 BinaryFormatter bf = new BinaryFormatter();
@@ -44,6 +45,7 @@ public class GMScoring : MonoBehaviour
                 file.Close();
             }
         }
+        #endregion
     }
 
     public void CalculateFinalScore()
@@ -59,12 +61,20 @@ public class GMScoring : MonoBehaviour
 
     private void DisplayFinalScore()
     {
-        /**#region Display score
-        for (int i = 0; i < numberScoreStore; i++)
+        #region Load score
+        for (int i = 0; i < _ScoreData.Count; i++)
         {
-            if (finalScore >= _ScoreData.scoreValue)
+            LoadScoreData(_ScoreData[i], i.ToString());
+        }
+        #endregion
+
+        #region Display & save score
+        for (int i = 0; i < _ScoreData.Count; i++)
+        {
+            if (finalScore >= _ScoreData[i].scoreValue)
             {
                 scoreText.text = "New Record ! " + finalScore + " Points !!!";
+                SorteScore(i);
                 break;
             }
             else
@@ -74,41 +84,54 @@ public class GMScoring : MonoBehaviour
         }
         #endregion
 
-        #region Place the new score
-        ScoreData[] scoreDataArray = new ScoreData[numberScoreStore];
-
-        for (int i = 0; i < numberScoreStore; i++)
+        #region Save Data
+        for (int i = 0; i < _ScoreData.Count; i++)
         {
-
-            string jsonString = System.IO.File.ReadAllText(Application.persistentDataPath + "/scoreData" + i.ToString() + ".json");
-            _ScoreData.ReadJson(jsonString);
-            Debug.Log("json data : " + jsonString);
-
-            Debug.Log("Score Data n°" + i.ToString() + " : " + _ScoreData.name);
-            Debug.Log("Score Data n°" + i.ToString() + " : " + _ScoreData.scoreValue);
-
-            if (finalScore >= _ScoreData.scoreValue)
-            {
-                scoreDataArray[i].name = "none";
-                scoreDataArray[i].scoreValue = finalScore;
-            }
-            else
-            {
-                scoreDataArray[i] = _ScoreData;
-            }
-
-            SaveScoreData(scoreDataArray[i], i.ToString());
+            SaveScoreData(_ScoreData[i], i.ToString());
         }
-        #endregion*/
+        #endregion
+    }
+
+    private void SorteScore(int scoringPos)
+    {
+        for (int i = 0; i < _ScoreData.Count; i++)
+        {
+            if (finalScore >= _ScoreData[i].scoreValue)
+            {
+                ScoreData newScore = new ScoreData()
+                {
+                    name = "none",
+                    scoreValue = finalScore
+                };
+
+                _ScoreData.Insert(i, newScore);
+                break;
+            }
+        }
+
+        _ScoreData.RemoveAt(3);
     }
 
 
 
-    public void SaveScoreData(ScoreData scoreDataToSave, string scorePosition)
+    private void SaveScoreData(ScoreData scoreDataToSave, string scorePosition)
     {
-        string scoreDataJson = JsonUtility.ToJson(scoreDataToSave);
-        System.IO.File.Delete(Application.persistentDataPath + "/scoreData" + scorePosition + ".json");
-        System.IO.File.WriteAllText(Application.persistentDataPath + "/scoreData" + scorePosition + ".json", scoreDataJson);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc");
+        string json = JsonUtility.ToJson(scoreDataToSave);
+        bf.Serialize(file, json);
+        file.Close();
+    }
+
+    private void LoadScoreData(ScoreData scoreDataToLoad, string scorePosition)
+    {
+        BinaryFormatter bf = new BinaryFormatter();
+        if (File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc"))
+        {
+            FileStream file = File.Open(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc", FileMode.Open);
+            JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), scoreDataToLoad);
+            file.Close();
+        }
     }
 }
 
@@ -118,18 +141,4 @@ public class ScoreData
 {
     public string name;
     public float scoreValue;
-
-    public void ReadJson(string jsonString)
-    {
-        name = JsonUtility.FromJson<ScoreData>(jsonString).name;
-        scoreValue = JsonUtility.FromJson<ScoreData>(jsonString).scoreValue;
-        Debug.Log(name);
-        Debug.Log(scoreValue);
-    }
-
-    public void ResetValues()
-    {
-        name = null;
-        scoreValue = 0f;
-    }
 }
