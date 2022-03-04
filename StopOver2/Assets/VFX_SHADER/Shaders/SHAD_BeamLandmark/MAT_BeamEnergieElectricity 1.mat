@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-334742327177811199
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,13 +20,12 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_BeamLandmarkTop
-  m_Shader: {fileID: -6465566751694194690, guid: 33229bd896dbc41439bf387039e8d5c8, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _ALPHATOMASK_ON _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
-    _SURFACE_TYPE_TRANSPARENT
+  m_Name: MAT_BeamEnergieElectricity 1
+  m_Shader: {fileID: -6465566751694194690, guid: 90a9234fe1daaf04b911547df8043124, type: 3}
+  m_ShaderKeywords: _ALPHATEST_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
+  m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
   stringTagMap:
     MotionVector: User
@@ -26,22 +38,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _SampleTexture2D_28c19796f6fc481695230fd370813b5d_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 2b9425d4694fc7d4588198638dd53ba4, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_b20788432755486b84c0c29d6fea69f4_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 2b9425d4694fc7d4588198638dd53ba4, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_ffaf4d7bc5dc4d8e83bc40306e02c862_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 32cfc8fcb9928c844b7bbb20412a4d1d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _TopBeamText:
-        m_Texture: {fileID: 2800000, guid: 773bbe3f013efc845acf7e8554b6ef32, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -55,21 +51,23 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_356c85328ca341ecafc6835eb04d4b44: 0
-    - Vector1_4b1a35d5a79c4b739ed685124f2153db: 18.35
+    - Vector1_a2c6b56c0fab468498afec6203e64be3: 0
+    - Vector1_e15b771f9a4d4b31b139015608cedd56: 100
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
-    - _AlphaToMask: 1
-    - _AlphaToMaskInspectorValue: 1
+    - _AlphaToMask: 0
+    - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 1
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 1
+    - _ElectricScale: 25
+    - _ElectricityAmount: 1.5
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
@@ -99,25 +97,10 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - Color_7385ed24892f46a39535267dc674a198: {r: 0, g: 2.152609, b: 1.006938, a: 0}
-    - Vector2_6f68d15a3c574fcaac9a4b5b49908bfd: {r: 0, g: -2, b: 0, a: 0}
-    - Vector2_8f98d60a52f54497867c1cdfb62e78d4: {r: 0, g: -3, b: 0, a: 0}
-    - Vector2_d35001f61e9b472b8e47582d83a80400: {r: 0, g: -1, b: 0, a: 0}
+    - Color_a4554b3889cb4e4982bcfb75c786a966: {r: 0, g: 2.6980393, b: 4, a: 0}
+    - Color_ff7ca4a98eb347b3aa7f3a01d559daa1: {r: 0, g: 0.7176819, b: 1, a: 0}
+    - ElectricSpeed_02: {r: 1, g: -1, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
+    - _ElectricSpeed_01: {r: -1, g: 1, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopBeamspeed: {r: 0, g: -3, b: 0, a: 0}
-    - _TopColorBeam: {r: 0, g: 3.785461, b: 3.9999995, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &7532143230617549061
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11

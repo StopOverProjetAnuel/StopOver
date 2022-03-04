@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_BeamLandmarkBase
   m_Shader: {fileID: -6465566751694194690, guid: 53769c9c94c52a94286d601f2d346aa0, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -80,7 +80,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _AddPrecomputedVelocity: 0
-    - _AlphaCutoffEnable: 1
+    - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 1
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
@@ -117,12 +117,12 @@ Material:
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 3
+    - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
     - Color_09e9b54e8c7d411e85faa2e2f8b75377: {r: 0, g: 5.992157, b: 4.2082095, a: 0}
-    - Color_92f2decf6cfe48a8bc65233816644060: {r: 0, g: 44.727043, b: 37.701855, a: 0}
+    - Color_92f2decf6cfe48a8bc65233816644060: {r: 0, g: 1.4738017, b: 1.403842, a: 0}
     - Vector2_1f404407481e4293a8d8bbac46696d9c: {r: 0, g: -0.5, b: 0, a: 0}
     - Vector2_bd5d21494c0a4ae4a957342cf44325c6: {r: 0, g: -0.5, b: 0, a: 0}
     - Vector2_c6f921ce70e348a2bfc9e490f8a06456: {r: 0, g: -3, b: 0, a: 0}
