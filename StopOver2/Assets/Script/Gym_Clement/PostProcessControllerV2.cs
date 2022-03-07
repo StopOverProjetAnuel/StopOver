@@ -87,7 +87,6 @@ public class PostProcessControllerV2 : MonoBehaviour
 
     #region variables private
 
-    private Camera mCamera;                 // cherche main camera
     private Volume DNVolume;                // cherche component volume
     private VolumeProfile CurrentVolProfile;// cherche profile sur component
 
@@ -284,9 +283,7 @@ public class PostProcessControllerV2 : MonoBehaviour
 
     private void initiate()
     {
-        mCamera = Camera.main;
-
-        DNVolume = mCamera.GetComponent<Volume>();
+        DNVolume = GameObject.Find("Sky and Fog Volume").GetComponent<Volume>();
 
         CurrentVolProfile = DNVolume.profile;
 
