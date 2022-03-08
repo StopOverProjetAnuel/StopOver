@@ -8,6 +8,7 @@ public class GMScoring : MonoBehaviour
 {
     private GMTimer _GMTimer;
     private RessourceManager _RessourceManager;
+    private GMMenu _GMMenu;
 
     [Header("Parameters")]
     [SerializeField] private float pointPerTime = 2f;
@@ -16,15 +17,22 @@ public class GMScoring : MonoBehaviour
 
     [Header("Display Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI playerName;
+    private int scorePosSaveName;
     [SerializeField] private string prefixScore = "You earned ";
     [SerializeField] private string suffixScore = " points !";
     [SerializeField] private List<ScoreData> _ScoreData = new List<ScoreData>(3);
+    [SerializeField] TextMeshProUGUI[] EndMenuLeaderboardNames;
+    [SerializeField] TextMeshProUGUI[] EndMenuLeaderboardScores;
 
-    public void InitiateGMScoring(GMTimer gMTimer)
+    public void InitiateGMScoring(GMTimer gMTimer, GMMenu gMMenu)
     {
         _GMTimer = gMTimer;
         _RessourceManager = FindObjectOfType<RessourceManager>();
+        _GMMenu = gMMenu;
 
+
+        if (_ScoreData.Count != 3) _ScoreData.AddRange(new List<ScoreData>(3)); 
 
         #region Create Folder and saves text
         if (!Directory.Exists(Application.persistentDataPath + "/score_saves"))
@@ -55,7 +63,7 @@ public class GMScoring : MonoBehaviour
 
         finalScore = timerPoints + resourcePoints;
         finalScore = Mathf.Round(finalScore);
-
+        Debug.Log("score : " + finalScore);
         DisplayFinalScore();
     }
 
@@ -74,22 +82,24 @@ public class GMScoring : MonoBehaviour
             if (finalScore >= _ScoreData[i].scoreValue)
             {
                 scoreText.text = "New Record ! " + finalScore + " Points !!!";
-                SorteScore(i);
+                scorePosSaveName = i;
+                SorteScore(scorePosSaveName);
+                _GMMenu.TriggerEndMenuSave();
                 break;
             }
             else
             {
                 scoreText.text = prefixScore + finalScore + suffixScore;
+                _GMMenu.OpenEndMenuButton();
             }
         }
         #endregion
 
-        #region Save Data
         for (int i = 0; i < _ScoreData.Count; i++)
         {
-            SaveScoreData(_ScoreData[i], i.ToString());
+            EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
+            EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
         }
-        #endregion
     }
 
     private void SorteScore(int scoringPos)
@@ -114,13 +124,27 @@ public class GMScoring : MonoBehaviour
 
 
 
-    private void SaveScoreData(ScoreData scoreDataToSave, string scorePosition)
+    public void SaveScoreData()
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc");
-        string json = JsonUtility.ToJson(scoreDataToSave);
-        bf.Serialize(file, json);
-        file.Close();
+        _ScoreData[scorePosSaveName].name = playerName.text;
+
+        for (int i = 0; i < _ScoreData.Count; i++)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc");
+            string json = JsonUtility.ToJson(_ScoreData[i]);
+            bf.Serialize(file, json);
+            file.Close();
+        }
+
+        for (int i = 0; i < _ScoreData.Count; i++)
+        {
+            EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
+            EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
+        }
+
+        _GMMenu.TriggerEndMenuSave();
+        _GMMenu.OpenEndMenuButton();
     }
 
     private void LoadScoreData(ScoreData scoreDataToLoad, string scorePosition)

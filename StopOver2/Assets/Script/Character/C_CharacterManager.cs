@@ -30,6 +30,7 @@ public class C_CharacterManager : MonoBehaviour
     [HideInInspector] public float mouseXInput = 0f;
     [HideInInspector] public bool boostInputHold = false;
     [HideInInspector] public bool boostInputDown = false;
+    [HideInInspector] public bool boostInputUp = false;
 
     [Header("Input Parameters")]
     public string boostInputName = "Boost";
@@ -70,7 +71,7 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
 
         #region Initiate Module Script Value
-        _CharacterBoost.IniatiateBoostValue();
+        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, rb);
         _CharacterFX.InitiateFXValue(_CharacterBoost);
         _CharacterPropulseur.InitiatePropulsorValue(rb);
         _CharacterControler.InitiateControlValue();
@@ -92,19 +93,20 @@ public class C_CharacterManager : MonoBehaviour
         mouseXInput = Mathf.Clamp(Input.GetAxis("Mouse X"), -maxInputValue, maxInputValue); //Get mouse horizontal movement
         boostInputHold = Input.GetButton(boostInputName); //Get boost button hold
         boostInputDown = Input.GetButtonDown(boostInputName); //Get boost button when press
+        boostInputUp = Input.GetButtonUp(boostInputName); //Get boost button when press
         #endregion
 
-        _CharacterBoost.TriggerBoost(verticalInput, boostInputDown, boostInputHold, rb);
+        _CharacterBoost.TriggerBoost(boostInputDown, boostInputHold, boostInputUp);
 
-        _CharacterFX.TriggerContinuousFX(rb.velocity.magnitude, Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded(), boostInputHold);
+        _CharacterFX.TriggerContinuousFX(Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded());
     }
 
     private void FixedUpdate()
     {
+        CheckGrounded();
+
         _CharacterControler.TriggerControl(verticalInput, rb, CheckGrounded(), centerOfMass);
         _CharacterPropulseur.Propulsing(layerGround, rb.velocity.magnitude);
-
-        CheckGrounded();
         _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
     }

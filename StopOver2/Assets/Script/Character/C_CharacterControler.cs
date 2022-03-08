@@ -13,10 +13,10 @@ public class C_CharacterControler : MonoBehaviour
     public float speedAirMultiplier = 0.25f;
     private float currentAirMultiplier = 1f;
     public float firstAccelerationForce = 50f;
-    private bool firstAccelerationDone = false;
 
     public float airControlSpeedForward;
 
+    [Header("Rotation Parameters")]
     public float maxRotateSpeed = 1440f;
     public float minRotateSpeed = 720f;
     public float maxSpeedForMinRspeed = 60f;
@@ -61,35 +61,13 @@ public class C_CharacterControler : MonoBehaviour
 
         if(verticalInput > 0) //Move Forward
         {
-            if (firstAccelerationDone)
-            {
-                rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * currentAirMultiplier, ForceMode.Acceleration);
-                #region Debug
+            rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * currentAirMultiplier, ForceMode.Acceleration);
+            #region Debug
                 if (showDebug)
                 {
                     Debug.Log("Player Forward");
                 }
                 #endregion
-                #region OLD
-            /**if (!firstAccelerationDone)
-            {
-                FirstAcceleration();
-            }
-            else if (firstAccelerationDone && !accelerationDone)
-            {
-                Acceleration();
-            }*/
-            #endregion
-            }
-            else
-            {
-                rb.AddRelativeForce(0, 0, firstAccelerationForce, ForceMode.Impulse);
-                firstAccelerationDone = true;
-            }
-        }
-        else if (verticalInput == 0 && firstAccelerationDone == true)
-        {
-            firstAccelerationDone = false;
         }
 
         if (verticalInput < 0) //Move Backward

@@ -15,6 +15,7 @@ public class DebugManager : MonoBehaviour
     private void Awake()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
+        playerPos = FindObjectOfType<C_CharacterManager>().transform;
     }
 
     private void Update()

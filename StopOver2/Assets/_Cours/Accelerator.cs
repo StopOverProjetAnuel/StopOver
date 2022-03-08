@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class C_CharacterBoost : MonoBehaviour
+public class Accelerator : MonoBehaviour
 {
     [SerializeField] bool debug = true;
 
@@ -26,7 +26,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     float accelerationTimer = 0f;
     float cooldownTimer = 0f;
-    bool overheat = false;
+    float currentSpeed = 0f;
 
     float accelerationRatio = 0f;
     bool isAccelerating = false;
@@ -36,22 +36,18 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterControler = characterControler;
         _CharacterFX = characterFX;
         rb = _rb;
-
-        baseSpeed = _CharacterControler.speedPlayer;
     }
 
-    public void TriggerBoost(bool boostBegan, bool boostHeld, bool boostEnd)
+    private void TriggerBoost(bool boostBegan, bool boostHeld)
     {
-        BoostHandler(boostBegan, boostHeld, boostEnd);
+        BoostHandler(boostBegan, boostHeld);
     }
 
 
 
-    public void BoostHandler(bool boostBegan, bool boostHeld, bool boostEnd)
+    public void BoostHandler(bool boostBegan, bool boostHeld)
     {
-        _CharacterFX.FovSpeed(rb.velocity.magnitude, isAccelerating);
-
-        if (!CooldownHandler(Time.fixedDeltaTime))
+        if (!CooldownHandler(Time.deltaTime))
         {
             if (debug) Debug.Log("Cooldown : " + cooldownTimer);
             return;
@@ -61,6 +57,7 @@ public class C_CharacterBoost : MonoBehaviour
         {
             if (debug) Debug.Log("Boost Began");
             BeginBoost();
+
             return;
         }
 
@@ -71,7 +68,7 @@ public class C_CharacterBoost : MonoBehaviour
             return;
         }
 
-        if (isAccelerating && boostEnd)
+        if (isAccelerating)
         {
             if (debug) Debug.Log("Boost Released : " + accelerationTimer);
             ReleaseBoost();
@@ -98,23 +95,15 @@ public class C_CharacterBoost : MonoBehaviour
         accelerationRatio = accelerationTimer / accelerationDuration;
 
         float curveValue = accelerationCurve.Evaluate(accelerationRatio);
-        _CharacterControler.currentSpeed = Mathf.Lerp(baseSpeed, boostSpeed, curveValue);
-
-        _CharacterFX.ActiveBoost();
-        _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
+        currentSpeed = Mathf.Lerp(baseSpeed, boostSpeed, curveValue);
 
         // Si on dépasse la durée d'acceleration
         if (accelerationTimer >= accelerationDuration)
         {
-            isAccelerating = false;
-            overheat = true;
-            SetCooldown(overheat, accelerationRatio);
+            SetCooldown(true, accelerationRatio);
             accelerationTimer = 0f;
+            isAccelerating = false;
 
-            _CharacterControler.currentSpeed = baseSpeed;
-
-            _CharacterFX.DesactiveBoost();
-            _CharacterFX.DesactiveBoostOverheat();
         }
     }
 
@@ -123,14 +112,33 @@ public class C_CharacterBoost : MonoBehaviour
     /// </summary>
     public void ReleaseBoost()
     {
-        overheat = false;
-        SetCooldown(overheat, accelerationRatio);
+        SetCooldown(false, accelerationRatio);
 
         isAccelerating = false;
         accelerationRatio = 0f;
         accelerationTimer = 0f;
+        currentSpeed = baseSpeed;
 
-        _CharacterFX.DesactiveBoost();
+    }
+
+    /// <summary>
+    /// Optional - Handles acceleration and deceleration over time
+    /// </summary>
+    public void AccelerationHandler(float delta)
+    {
+        if (isAccelerating)
+        {
+            accelerationTimer = Mathf.Clamp(accelerationTimer + delta / 2, 0f, accelerationDuration);
+        }
+        else
+        {
+            accelerationTimer = Mathf.Clamp(accelerationTimer - delta / 2, 0f, accelerationDuration);
+        }
+
+        accelerationRatio = accelerationTimer / accelerationDuration;
+
+        float curveValue = accelerationCurve.Evaluate(accelerationRatio);
+        currentSpeed = Mathf.Lerp(baseSpeed, boostSpeed, curveValue);
     }
 
     /// <summary>
@@ -141,16 +149,12 @@ public class C_CharacterBoost : MonoBehaviour
         if (cooldownTimer > 0f)
         {
             cooldownTimer = Mathf.Clamp(cooldownTimer - delta, 0f, overheatCooldown);
-            _CharacterFX.OverheatBoostDecres(cooldownTimer, overheatCooldown);
             return false;
         }
         else
         {
-            overheat = false;
-            _CharacterFX.SignBoost();
             return true;
         }
-
     }
 
     /// <summary>

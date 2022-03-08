@@ -26,7 +26,7 @@ public class FCGameManager : MonoBehaviour
         _GMTimer.InitiateGMTimer(_GMVictoryChecker);
         _GMVictoryChecker.InitiateGMVictoryChecker(_GMMenu, _GMScoring);
         _GMMenu.InitiateGMMenu();
-        _GMScoring.InitiateGMScoring(_GMTimer);
+        _GMScoring.InitiateGMScoring(_GMTimer, _GMMenu);
     }
 
     private void Update()

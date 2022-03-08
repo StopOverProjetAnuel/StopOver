@@ -28,8 +28,7 @@ public class C_CharacterFX : MonoBehaviour
     public VisualEffect smokeShip;
 
     [Header("FuelTank Parameters")]
-    public GameObject fuelTankFluide;
-    private Renderer fluideShader;
+    [SerializeField] Renderer fluideShader;
 
     [Header("Camera Effects Parameters")]
     public float maxSpeedCamEffect = 60f;
@@ -49,7 +48,6 @@ public class C_CharacterFX : MonoBehaviour
     {
         _CharacterBoost = cB;
         ressourceManager = FindObjectOfType<RessourceManager>();
-        fluideShader = fuelTankFluide.GetComponent<Renderer>();
         speedEffectCamera = FindObjectOfType<SpeedEffectCamera>();
 
 
@@ -61,10 +59,9 @@ public class C_CharacterFX : MonoBehaviour
         #endregion
     }
 
-    public void TriggerContinuousFX(float currentSpeed, float mouseX, bool isGrounded, bool isBoosted)
+    public void TriggerContinuousFX(float mouseX, bool isGrounded)
     {
         FuelTankAmount();
-        FovSpeed(currentSpeed, isBoosted);
         LeaningModel(mouseX);
         TriggerSmokeShip(isGrounded);
     }
@@ -105,21 +102,21 @@ public class C_CharacterFX : MonoBehaviour
     private float currentColorSize;
     private float currentColorDensity;
 
-    public void SurchauffeBoost(float currentTimeAcc, float maxTimeAcc)
+    public void OverheatBoost(float currentTimeAcc, float maxTimeAcc)
     {
-        float a = maxTimeAcc / 2;
-        currentColorSize = currentTimeAcc / a;
+        float halfTimeAcc = maxTimeAcc / 2;
+        currentColorSize = currentTimeAcc / halfTimeAcc;
         reactorMat.sharedMaterial.SetFloat("Color_Size", currentColorSize);
 
-        float c = maxTimeAcc - a;
-        if (currentTimeAcc >= a)
+        float lateHalftTimeAcc = maxTimeAcc - halfTimeAcc;
+        if (currentTimeAcc >= halfTimeAcc)
         {
-            currentColorDensity = currentTimeAcc / c;
+            currentColorDensity = currentTimeAcc / lateHalftTimeAcc;
             reactorMat.sharedMaterial.SetFloat("_ColorDensity", currentColorDensity);
         }
     }
 
-    public void DesactiveBoostSurchauffe()
+    public void DesactiveBoostOverheat()
     {
         distorsionVFX.SendEvent("EngineOFF");
 
@@ -129,7 +126,7 @@ public class C_CharacterFX : MonoBehaviour
         overheatingDistortionVFX.SendEvent("OverheatingON");
     }
 
-    public void SurchauffeBoostDecres(float currentCooldownBoost, float maxCooldownBoost) 
+    public void OverheatBoostDecres(float currentCooldownBoost, float maxCooldownBoost) 
     {
         float a = currentCooldownBoost / maxCooldownBoost;
         float b = Mathf.Lerp(0, currentColorSize, a);
@@ -142,6 +139,8 @@ public class C_CharacterFX : MonoBehaviour
 
     private void FuelTankAmount()
     {
+        if (!fluideShader.sharedMaterial) return;
+
         float a = ressourceManager.currentRessource / ressourceManager.maxRessource;
         float b = Mathf.Lerp(-0.16f, 0.16f, a);
         fluideShader.sharedMaterial.SetFloat("_Remplissage", b);
@@ -149,7 +148,7 @@ public class C_CharacterFX : MonoBehaviour
 
     private float c = 0f;
     private float fovTimer = 0f;
-    private void FovSpeed(float currentSpeed, bool isBoosted)
+    public void FovSpeed(float currentSpeed, bool isBoosted)
     {
         float a = Mathf.Clamp(currentSpeed / 60f, 0f, 1f);
         float b = Mathf.Lerp(0, 0.75f, a);

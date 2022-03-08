@@ -6,21 +6,24 @@ using TMPro;
 public class GMMenu : MonoBehaviour
 {
     [Header("Pause & Option Menu")]
-    private static bool gameIsPaused = false;
-    public GameObject objectMenu;
-    private static bool objectOptionMenuIsOpen = false;
-    public GameObject objectOptionMenu;
-    public GameObject[] objectOptionMenuPanels;
+    static bool gameIsPaused = false;
+    [SerializeField] GameObject objectMenu;
+    static bool objectOptionMenuIsOpen = false;
+    [SerializeField] GameObject objectOptionMenu;
+    [SerializeField] GameObject[] objectOptionMenuPanels;
 
     [Header("Victory/Defeat Menu")]
-    public GameObject EndMenu;
-    public TextMeshProUGUI EndMenuTitle;
-    public string victoryText = "You Won !";
-    public string defeatText = "You Lose ;c";
+    [SerializeField] GameObject EndMenu;
+    [SerializeField] TextMeshProUGUI EndMenuTitle;
+    [SerializeField] string victoryText = "You Won !";
+    [SerializeField] string defeatText = "You Lose ;c";
+    [SerializeField] GameObject EndMenuButton;
+    [SerializeField] GameObject EndMenuSave;
+    [SerializeField] GameObject EndMenuLeaderboard;
 
     //Reload Scene
-    private Transform startTransformPlayer;
-    private List<GameObject> disableObjects = new List<GameObject>();
+    Transform startTransformPlayer;
+    List<GameObject> disableObjects = new List<GameObject>();
 
 
     public void InitiateGMMenu()
@@ -127,6 +130,8 @@ public class GMMenu : MonoBehaviour
         SceneManager.LoadScene(currentActiveScene.name);
     }
 
+
+    #region End Menu
     public void OpenEndMenu(bool isWin)
     {
         EndMenu.SetActive(true);
@@ -144,4 +149,34 @@ public class GMMenu : MonoBehaviour
     {
         EndMenu.SetActive(false);
     }
+
+    public void OpenEndMenuButton()
+    {
+        EndMenuButton.SetActive(true);
+    }
+
+    public void TriggerEndMenuSave()
+    {
+        if (!EndMenuSave.activeSelf)
+        {
+            EndMenuSave.SetActive(true);
+        }
+        else
+        {
+            EndMenuSave.SetActive(false);
+        }
+    }
+
+    public void TriggerEndMenuLeaderboard()
+    {
+        if (!EndMenuLeaderboard.activeSelf)
+        {
+            EndMenuLeaderboard.SetActive(true);
+        }
+        else
+        {
+            EndMenuLeaderboard.SetActive(false);
+        }
+    }
+    #endregion
 }
