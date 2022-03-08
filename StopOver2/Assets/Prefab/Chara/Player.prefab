@@ -414,6 +414,7 @@ MonoBehaviour:
   mouseXInput: 0
   boostInputHold: 0
   boostInputDown: 0
+  boostInputUp: 0
   boostInputName: Boost
   maxInputValue: 1
   layerGround:
@@ -497,14 +498,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c967f844ed042f46b78a7410717e84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPlayer: 200
+  speedPlayer: 225
   currentSpeed: 0
   speedBackwardMultiplier: 0.5
   speedAirMultiplier: 0.25
   firstAccelerationForce: 25
   airControlSpeedForward: 150
-  maxRotateSpeed: 1600
-  minRotateSpeed: 1150
+  maxRotateSpeed: 1500
+  minRotateSpeed: 1500
   maxSpeedForMinRspeed: 60
   rSAirMultiplier: 0.75
   comFowardPos: 0.95
@@ -537,8 +538,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   dragAirForce: 1.5
   dragGroundForce: 2
-  fallAngle: 5
-  timeToFallPos: 1
+  fallAngle: 10
+  timeToFallPos: 0.5
+  autoDiveSpeedMul: 1
   showDebug: 0
 --- !u!114 &282605674362107391
 MonoBehaviour:
@@ -552,13 +554,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7100ec31b779b6649b292db3e37a6d47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boostImpulseForce: 60
-  speedBoost: 350
-  timeAccBoost: 3
-  minCooldownBoost: 1
-  maxCooldownBoost: 4
-  surchaufeCooldownBoost: 6
-  showDebug: 0
+  debug: 1
+  baseSpeed: 225
+  boostSpeed: 400
+  accelerationInitialImpulse: 100
+  cooldownDurationMinMax: {x: 1, y: 2.5}
+  overheatCooldown: 10
+  accelerationDuration: 1.75
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &282605674362107388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +608,7 @@ MonoBehaviour:
   - {fileID: 282605674136667077}
   reactorMat: {fileID: 5984865515097100615}
   smokeShip: {fileID: 6419763694905929147}
-  fuelTankFluide: {fileID: 275136625022972943}
+  fluideShader: {fileID: 2289775593494296618}
   maxSpeedCamEffect: 90
   characterModel: {fileID: 8038904585720458881}
   leanAngleZ: 25
@@ -628,12 +654,12 @@ MonoBehaviour:
   prefabToSpawn: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   minSpeedToLose: 15
   maxSpeedToLose: 90
-  resourceMaxLoseInPercent: 50
+  resourceMaxLoseInPercent: 25
   resourceCountPerPickUp: 50
   frontDegrees: 45
-  spawnOffset: 1
-  bumpForce: 20
-  bumpUpwardModifier: 10
+  spawnOffset: 2
+  bumpForce: 40
+  bumpUpwardModifier: 20
   showDebug: 1
   showExplosionRadius: 1
   explosionColor: {r: 1, g: 0, b: 0, a: 0}
@@ -1286,8 +1312,8 @@ MonoBehaviour:
   nbState: 0
   nudgeBars_model: {fileID: 0}
   nudgeBarsMaterials: []
-  min1stState: 50
-  min2ndState: 80
+  min1stState: 70
+  min2ndState: 100
   showDebug: 0
 --- !u!1 &282605675187614033
 GameObject:
@@ -1868,8 +1894,8 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 408.1671
+  m_Color: {r: 0.5322179, g: 0.9545129, b: 0.9811321, a: 1}
+  m_Intensity: 14824.499
   m_Range: 90
   m_SpotAngle: 80
   m_InnerSpotAngle: 6
@@ -1912,7 +1938,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6586
+  m_ColorTemperature: 9379
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -1939,7 +1965,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 21791.809
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2003,7 +2029,7 @@ MonoBehaviour:
     m_UseOverride: 1
     m_Level: 0
   m_ShadowDimmer: 1
-  m_VolumetricShadowDimmer: 1
+  m_VolumetricShadowDimmer: 0
   m_ShadowFadeDistance: 10000
   m_UseContactShadow:
     m_Override: 0
@@ -2035,7 +2061,7 @@ MonoBehaviour:
   m_ShadowVariant: 0
   m_ShadowPrecision: 0
   useOldInspector: 0
-  useVolumetric: 1
+  useVolumetric: 0
   featuresFoldout: 1
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
@@ -2180,8 +2206,8 @@ Light:
   serializedVersion: 10
   m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 408.1671
+  m_Color: {r: 0.5322179, g: 0.9545129, b: 0.9811321, a: 1}
+  m_Intensity: 14824.499
   m_Range: 90
   m_SpotAngle: 80
   m_InnerSpotAngle: 6
@@ -2224,7 +2250,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 1
-  m_ColorTemperature: 6586
+  m_ColorTemperature: 9379
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -2251,7 +2277,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 600
+  m_Intensity: 21791.809
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -2315,7 +2341,7 @@ MonoBehaviour:
     m_UseOverride: 1
     m_Level: 0
   m_ShadowDimmer: 1
-  m_VolumetricShadowDimmer: 1
+  m_VolumetricShadowDimmer: 0
   m_ShadowFadeDistance: 10000
   m_UseContactShadow:
     m_Override: 0
@@ -2347,7 +2373,7 @@ MonoBehaviour:
   m_ShadowVariant: 0
   m_ShadowPrecision: 0
   useOldInspector: 0
-  useVolumetric: 1
+  useVolumetric: 0
   featuresFoldout: 1
   showAdditionalSettings: 0
   m_AreaLightEmissiveMeshShadowCastingMode: 0
@@ -2471,7 +2497,7 @@ PrefabInstance:
     - target: {fileID: 2029696920423488458, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7974961acd4795442973047dc8730ca5, type: 2}
+      objectReference: {fileID: 2100000, guid: ffc6a85be7148e847878763830ee1b17, type: 2}
     - target: {fileID: 2835613609187824488, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -2516,6 +2542,18 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6555993438552588181, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.695
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993438552588181, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.212
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993438552588181, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.712
+      objectReference: {fileID: 0}
     - target: {fileID: 6555993438553951832, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2540,6 +2578,30 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[3]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6555993439083587647, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.564
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439083587647, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439083587647, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.726
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439368172974, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.044
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439368172974, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.627
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439368172974, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.628
+      objectReference: {fileID: 0}
     - target: {fileID: 6555993439510528969, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -2551,6 +2613,18 @@ PrefabInstance:
     - target: {fileID: 6555993439621987676, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439796997756, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.072
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439796997756, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.512
+      objectReference: {fileID: 0}
+    - target: {fileID: 6555993439796997756, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.616
       objectReference: {fileID: 0}
     - target: {fileID: 6555993439863990519, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2647,9 +2721,9 @@ VisualEffect:
   m_CorrespondingSourceObject: {fileID: 6555993438553951835, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &275136625022972943 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 17309681771632623, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+--- !u!23 &2289775593494296618 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2029696920423488458, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &7723795428856529723 stripped

@@ -24,6 +24,7 @@ public class C_CharacterControler : MonoBehaviour
 
     public float comFowardPos = 0.95f;
 
+
     [Header("Fall Parameters")]
     public float maxFallAcceleration = 110f;
     public float minFallAcceleration = 50f;
@@ -33,21 +34,24 @@ public class C_CharacterControler : MonoBehaviour
     public float dragAirForce;
     public float dragGroundForce;
     [Space]
-    public float fallAngle = 30f;
+    public float fallAngle = 15f;
     public float timeToFallPos = 1f;
     private float fallTimer;
+    private Rigidbody rb;
+    public float autoDiveSpeedMul = 1f;
 
     [Space(10)]
     public bool showDebug = false;
     #endregion
 
-    public void InitiateControlValue()
+    public void InitiateControlValue(Rigidbody pRb)
     {
         _CharacterBoost = GetComponent<C_CharacterBoost>();
         currentSpeed = speedPlayer;
+        rb = pRb;
     }
 
-    public void TriggerControl(float verticalInput, Rigidbody rb, bool isGrounded, GameObject centerOfMass)
+    public void TriggerControl(float verticalInput, bool isGrounded, GameObject centerOfMass)
     {
         if (isGrounded && currentAirMultiplier != 1f)
         {
@@ -79,7 +83,7 @@ public class C_CharacterControler : MonoBehaviour
         centerOfMass.transform.localPosition = newComPos;
     }
 
-    public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Rigidbody rb, Quaternion airAngle)
+    public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Quaternion airAngle)
     {
         float normSpeed = Mathf.Clamp(rb.velocity.magnitude / maxSpeedForMinRspeed, 0, 1);
         float currentRotateSpeed = Mathf.Lerp(maxRotateSpeed, minRotateSpeed, normSpeed);
@@ -98,25 +102,40 @@ public class C_CharacterControler : MonoBehaviour
         {
             rb.AddTorque(rotateValue * rSAirMultiplier, ForceMode.Acceleration);
 
-            if (fallTimer <= timeToFallPos)
-            {
-                float a = Mathf.Clamp(fallTimer / timeToFallPos, 0, 1);
-                Quaternion b = Quaternion.Euler(new Vector3(fallAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z));
-                Quaternion c = Quaternion.Lerp(airAngle, b, a);
-
-                transform.rotation = c;
-
-                fallTimer += Time.fixedDeltaTime;
-
-                #region Debug
-                if (showDebug)
-                {
-                    Debug.Log("airAngle : " + airAngle);
-                    Debug.Log("new airAngle : " + b.eulerAngles);
-                }
-                #endregion
-            }
+            AutoDive(airAngle);
         }
+    }
+
+    private void AutoDive(Quaternion airAngle)
+    {
+        if (fallTimer >= timeToFallPos && transform.localRotation.x < fallAngle)
+        {
+            float angleGap = fallAngle + transform.localRotation.x;
+
+            float angleVelocityX = angleGap * autoDiveSpeedMul;
+            rb.AddRelativeTorque(angleVelocityX, 0, 0, ForceMode.Acceleration);
+        }
+
+        #region auto dive player with transform rotation (outdated & take priority)
+        /*if (fallTimer <= timeToFallPos)
+        {
+            float timeAngle = Mathf.Clamp(fallTimer / timeToFallPos, 0, 1);
+            Quaternion newAirAngle = Quaternion.Euler(new Vector3(fallAngle, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z));
+            Quaternion currentAirAngle = Quaternion.Lerp(originAirAngle, newAirAngle, timeAngle);
+
+            transform.rotation = currentAirAngle;
+
+            fallTimer += Time.fixedDeltaTime;
+
+            #region Debug
+            if (showDebug)
+            {
+                Debug.Log("airAngle : " + airAngle);
+                Debug.Log("new airAngle : " + b.eulerAngles);
+            }
+            #endregion
+        }*/
+        #endregion
     }
 
     public void GravityFall(bool isGrounded, Rigidbody rb)

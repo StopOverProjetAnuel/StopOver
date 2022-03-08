@@ -74,7 +74,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, rb);
         _CharacterFX.InitiateFXValue(_CharacterBoost);
         _CharacterPropulseur.InitiatePropulsorValue(rb);
-        _CharacterControler.InitiateControlValue();
+        _CharacterControler.InitiateControlValue(rb);
         #endregion
     }
 
@@ -105,9 +105,9 @@ public class C_CharacterManager : MonoBehaviour
     {
         CheckGrounded();
 
-        _CharacterControler.TriggerControl(verticalInput, rb, CheckGrounded(), centerOfMass);
+        _CharacterControler.TriggerControl(verticalInput, CheckGrounded(), centerOfMass);
         _CharacterPropulseur.Propulsing(layerGround, rb.velocity.magnitude);
-        _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, rb, airAngle);
+        _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
     }
 
