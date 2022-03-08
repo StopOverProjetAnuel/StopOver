@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4342175460652373285
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 11
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Liquid
+  m_Name: Shader Graphs_SHAD_LiquidStockage
   m_Shader: {fileID: -6465566751694194690, guid: 1c87af2219ecf73479f98a9d98e2a0ca, type: 3}
   m_ShaderKeywords: _ALPHATEST_ON _DOUBLESIDED_ON
   m_LightmapFlags: 4
@@ -42,7 +55,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_9cc599122e654899874058fc6195e8a6: 1
+    - Vector1_9cc599122e654899874058fc6195e8a6: 0
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
@@ -59,11 +72,7 @@ Material:
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
-<<<<<<< Updated upstream
-    - _Remplissage: -0.16
-=======
-    - _Remplissage: 0.0077034375
->>>>>>> Stashed changes
+    - _Remplissage: 0
     - _RenderQueueType: 1
     - _SrcBlend: 1
     - _StencilRef: 0
@@ -92,21 +101,8 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_0fe3bd31b9474410aade493b9072253a: {r: 2, g: 1.1799954, b: 0, a: 0}
-    - Color_7c80ee81745743febd2339e68830cd79: {r: 0.023037504, g: 0.3526623, b: 0, a: 0}
+    - Color_0fe3bd31b9474410aade493b9072253a: {r: 0, g: 0.45342284, b: 0.06786342, a: 0}
+    - Color_7c80ee81745743febd2339e68830cd79: {r: 0, g: 2, b: 0.2016311, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &6962546910556364363
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 11
