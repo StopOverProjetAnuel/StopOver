@@ -29,11 +29,15 @@ public class C_CharacterManager : MonoBehaviour
     [HideInInspector] public float verticalInput = 0f;
     [HideInInspector] public float mouseXInput = 0f;
     [HideInInspector] public bool boostInputHold = false;
+    [HideInInspector] public bool boostInputHold2 = false;
     [HideInInspector] public bool boostInputDown = false;
+    [HideInInspector] public bool boostInputDown2 = false;
     [HideInInspector] public bool boostInputUp = false;
+    [HideInInspector] public bool boostInputUp2 = false;
 
     [Header("Input Parameters")]
     public string boostInputName = "Boost";
+    public string boostInputName2 = "Boost2";
     public float maxInputValue = 1f;
 
 
@@ -92,11 +96,14 @@ public class C_CharacterManager : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical"); //Get forward & backward Input
         mouseXInput = Mathf.Clamp(Input.GetAxis("Mouse X"), -maxInputValue, maxInputValue); //Get mouse horizontal movement
         boostInputHold = Input.GetButton(boostInputName); //Get boost button hold
+        boostInputHold2 = Input.GetButton(boostInputName2); //Get boost button hold
         boostInputDown = Input.GetButtonDown(boostInputName); //Get boost button when press
+        boostInputDown2 = Input.GetButtonDown(boostInputName2); //Get boost button when press
         boostInputUp = Input.GetButtonUp(boostInputName); //Get boost button when press
+        boostInputUp2 = Input.GetButtonUp(boostInputName2); //Get boost button when press
         #endregion
 
-        _CharacterBoost.TriggerBoost(boostInputDown, boostInputHold, boostInputUp);
+        _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2);
 
         _CharacterFX.TriggerContinuousFX(Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded());
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class CollidedPlayer : MonoBehaviour
 {
@@ -9,16 +10,18 @@ public class CollidedPlayer : MonoBehaviour
 
     private NudgeBars nudgeBars;
 
+    [SerializeField] private VisualEffect spashVFX;
+
     [Header("Parameters")]
     public bool isDropOnDestroy = false;
-    public GameObject droppedItem;
+    public static GameObject droppedItem;
     public float resourceGive;
     public int resistanceLevel;
     public bool isDestroyWithRequirement = false;
 
     [Space(10)]
 
-    public bool showDebug = false;
+    [SerializeField] private bool showDebug = false;
 
 
     private void Awake()

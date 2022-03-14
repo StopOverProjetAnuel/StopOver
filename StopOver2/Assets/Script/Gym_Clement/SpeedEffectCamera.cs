@@ -65,6 +65,7 @@ public class SpeedEffectCamera : MonoBehaviour
         UpdateParticleSystem();                                                 //fait varier le particle system
         SpeedCamera();                                                          //!\\
         //TrailsIntensity();                                                    //!\\
+        Debug.Log("speed : " + speed);
     }
 
 

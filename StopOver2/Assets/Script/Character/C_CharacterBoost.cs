@@ -49,7 +49,7 @@ public class C_CharacterBoost : MonoBehaviour
 
     public void BoostHandler(bool boostBegan, bool boostHeld, bool boostEnd)
     {
-        _CharacterFX.FovSpeed(rb.velocity.magnitude, isAccelerating);
+        _CharacterFX.FovSpeed(rb.velocity.magnitude, (boostHeld && isAccelerating));
 
         if (!CooldownHandler(Time.fixedDeltaTime))
         {
@@ -57,7 +57,7 @@ public class C_CharacterBoost : MonoBehaviour
             return;
         }
 
-        if (boostBegan)
+        if (boostBegan && boostHeld)
         {
             if (debug) Debug.Log("Boost Began");
             BeginBoost();

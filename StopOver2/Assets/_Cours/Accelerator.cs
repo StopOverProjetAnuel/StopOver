@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Accelerator : MonoBehaviour
 {
-    [SerializeField] bool debug = true;
+    /*[SerializeField] bool debug = true;
 
     #region Scripts Used
     C_CharacterControler _CharacterControler;
@@ -170,5 +170,5 @@ public class Accelerator : MonoBehaviour
         {
             cooldownTimer = Mathf.Lerp(cooldownDurationMinMax.x, cooldownDurationMinMax.y, ratio);
         }
-    }
+    }*/
 }
