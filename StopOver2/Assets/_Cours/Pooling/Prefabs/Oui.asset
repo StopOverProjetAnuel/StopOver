@@ -10,15 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34dea0eb11e8a37469cb8e6d4cea6475, type: 3}
-  m_Name: VfxToPool
+  m_Name: Oui
   m_EditorClassIdentifier: 
   objectPool:
-  - ID: Plant
-    prefab: {fileID: 5408972969370430797, guid: 23368979caa69a34aa4e0e3cc513d166, type: 3}
-    initialQuantity: 15
-  - ID: Rock
-    prefab: {fileID: 5408972969370430797, guid: 23368979caa69a34aa4e0e3cc513d166, type: 3}
-    initialQuantity: 10
-  - ID: Animal
-    prefab: {fileID: 5408972969370430797, guid: 23368979caa69a34aa4e0e3cc513d166, type: 3}
+  - ID: Cancer
+    prefab: {fileID: 3780857762412406732, guid: d3a9351e987a7f441a353125e79ad190,
+      type: 3}
+    initialQuantity: 5
+  - ID: Oui
+    prefab: {fileID: 4458604563818063606, guid: e0a83d375aba7b247896ba68673f78cd,
+      type: 3}
     initialQuantity: 5
