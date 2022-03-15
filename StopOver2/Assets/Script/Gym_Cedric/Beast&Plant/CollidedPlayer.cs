@@ -10,14 +10,16 @@ public class CollidedPlayer : MonoBehaviour
 
     private NudgeBars nudgeBars;
 
-    [SerializeField] private VisualEffect spashVFX;
-
     [Header("Parameters")]
     public bool isDropOnDestroy = false;
     public static GameObject droppedItem;
     public float resourceGive;
     public int resistanceLevel;
     public bool isDestroyWithRequirement = false;
+    public float ifNotRequireSpeedMultiplier = 0.75f;
+
+    [Header("VFX Parameters")]
+    [SerializeField] private string ID = "";
 
     [Space(10)]
 
@@ -55,14 +57,16 @@ public class CollidedPlayer : MonoBehaviour
         if (nudgeBars.nbState >= resistanceLevel + 1)
         {
             GettingDestroy();
+            InstantiateVFX();
         }
         else if (!isDestroyWithRequirement || nudgeBars.nbState >= resistanceLevel)
         {
             Vector3 storedVelocity = rb.velocity;
-            storedVelocity.x *= 0.5f;
-            storedVelocity.z *= 0.5f;
+            storedVelocity.x *= ifNotRequireSpeedMultiplier;
+            storedVelocity.z *= ifNotRequireSpeedMultiplier;
             rb.velocity = storedVelocity;
             GettingDestroy();
+            InstantiateVFX();
         }
 
         #region Debug
@@ -94,5 +98,15 @@ public class CollidedPlayer : MonoBehaviour
             Debug.Log(gameObject.name + " task executed");
         }
         #endregion
+    }
+
+    private void InstantiateVFX()
+    {
+        ObjectPool.Instance.GetFromPool(ID, transform);
+
+        Transform g = ObjectPool.Instance.GetFromPool(ID, transform).transform;
+        Transform player = FindObjectOfType<C_CharacterManager>().gameObject.transform;
+        Vector3 newRotationVector = player.rotation.eulerAngles;
+        g.rotation = Quaternion.Euler(newRotationVector);
     }
 }

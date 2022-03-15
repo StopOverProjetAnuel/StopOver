@@ -48,9 +48,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
-  droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 25
   resistanceLevel: 0
+  isDestroyWithRequirement: 0
+  ifNotRequireSpeedMultiplier: 0.75
+  ID: Plant
   showDebug: 0
 --- !u!65 &8924786821675200210
 BoxCollider:

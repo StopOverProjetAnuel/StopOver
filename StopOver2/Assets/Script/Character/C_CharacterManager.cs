@@ -89,8 +89,6 @@ public class C_CharacterManager : MonoBehaviour
 
     void Update()
     {
-        rb.centerOfMass = centerOfMass.transform.localPosition; //Place center of mass (need cause all the "mass" are at the back of the pivot)
-
         #region Get Input
         horizontalInput = Input.GetAxis("Horizontal"); //Get right & left Input
         verticalInput = Input.GetAxis("Vertical"); //Get forward & backward Input
@@ -106,10 +104,14 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2);
 
         _CharacterFX.TriggerContinuousFX(Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded());
+        _CharacterFX.HandleTrailPlayer(currentSpeed);
     }
 
     private void FixedUpdate()
     {
+        currentSpeed = rb.velocity.magnitude;
+        rb.centerOfMass = centerOfMass.transform.localPosition; //Place center of mass (need cause all the "mass" are at the back of the pivot)
+
         CheckGrounded();
 
         _CharacterControler.TriggerControl(verticalInput, CheckGrounded(), centerOfMass);

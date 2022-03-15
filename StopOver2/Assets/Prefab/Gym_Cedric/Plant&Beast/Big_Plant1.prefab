@@ -27,9 +27,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
-  droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 100
   resistanceLevel: 2
+  isDestroyWithRequirement: 0
+  ifNotRequireSpeedMultiplier: 0.75
+  ID: 
   showDebug: 0
 --- !u!1 &8979272754488225753
 GameObject:
@@ -62,7 +64,7 @@ Transform:
   m_Children:
   - {fileID: 3377919394811405756}
   - {fileID: 8078803435107324711}
-  - {fileID: 7114980665755972316}
+  - {fileID: 8705631624575873079}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79,9 +81,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
-  droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 50
   resistanceLevel: 2
+  isDestroyWithRequirement: 0
+  ifNotRequireSpeedMultiplier: 0.75
+  ID: Plant
   showDebug: 0
 --- !u!65 &1467039521948791335
 BoxCollider:
@@ -217,6 +221,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: plant_7_low
       objectReference: {fileID: 0}
+    - target: {fileID: 5651079459312625498, guid: e570c3e4b7ea3184cbc441144fea1d7b, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6053200955854136753, guid: e570c3e4b7ea3184cbc441144fea1d7b, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -263,9 +271,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e570c3e4b7ea3184cbc441144fea1d7b, type: 3}
---- !u!4 &7114980665755972316 stripped
+--- !u!4 &8705631624575873079 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 6053200955854136753, guid: e570c3e4b7ea3184cbc441144fea1d7b, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5651079459312625498, guid: e570c3e4b7ea3184cbc441144fea1d7b, type: 3}
   m_PrefabInstance: {fileID: 3944087869518616429}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8617380149232039116

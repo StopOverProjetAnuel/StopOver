@@ -25,7 +25,9 @@ public class C_CharacterFX : MonoBehaviour
     public Renderer reactorMat;
 
     [Header("Vehicle Parameters")]
-    public VisualEffect smokeShip;
+    [SerializeField] private VisualEffect smokeShip;
+    [SerializeField] private TrailRenderer[] trails = new TrailRenderer[4];
+    [SerializeField] private float trailSpeedThreshold = 45f;
 
     [Header("FuelTank Parameters")]
     [SerializeField] Renderer fluideShader;
@@ -203,5 +205,33 @@ public class C_CharacterFX : MonoBehaviour
     private void TriggerJoystickShake()
     {
 
+    }
+
+    public void HandleTrailPlayer(float currentSpeed)
+    {
+        Debug.LogWarning("current Speed : " + currentSpeed);
+        if (trailSpeedThreshold > currentSpeed)
+        {
+            for (int i = 0; i < trails.Length; i++)
+            {
+                if(trails[i].emitting)
+                {
+                    trails[i].emitting = false;
+                    Debug.LogWarning("Stopped Emitting");
+
+                }
+            }
+        }
+        else
+        {
+            for (int i = 0; i < trails.Length; i++)
+            {
+                if (!trails[i].emitting)
+                {
+                    Debug.LogWarning("Started Emitting");
+                    trails[i].emitting = true;
+                }
+            }
+        }
     }
 }

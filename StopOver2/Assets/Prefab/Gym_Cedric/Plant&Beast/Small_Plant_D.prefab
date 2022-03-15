@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 1413541656694344918}
   - {fileID: 7707327357334429317}
-  - {fileID: 1330989598940756595}
+  - {fileID: 5768925960872528393}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61,9 +61,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
-  droppedItem: {fileID: 3388286364565232487, guid: a17bad40fe7a3f149a6fc55f3d566f37, type: 3}
   resourceGive: 2
   resistanceLevel: 0
+  isDestroyWithRequirement: 0
+  ifNotRequireSpeedMultiplier: 0.75
+  ID: Plant
   showDebug: 0
 --- !u!1001 &1435087359328739959
 PrefabInstance:
@@ -328,6 +330,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7862259290605686096}
     m_Modifications:
+    - target: {fileID: 2856919520088407373, guid: c7e6efcc8c426eb45b66d6d1db32bf52, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7336954570426535223, guid: c7e6efcc8c426eb45b66d6d1db32bf52, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -378,8 +384,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7e6efcc8c426eb45b66d6d1db32bf52, type: 3}
---- !u!4 &1330989598940756595 stripped
+--- !u!4 &5768925960872528393 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 7336954570426535223, guid: c7e6efcc8c426eb45b66d6d1db32bf52, type: 3}
+  m_CorrespondingSourceObject: {fileID: 2856919520088407373, guid: c7e6efcc8c426eb45b66d6d1db32bf52, type: 3}
   m_PrefabInstance: {fileID: 8622852535950620484}
   m_PrefabAsset: {fileID: 0}
