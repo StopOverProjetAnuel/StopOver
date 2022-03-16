@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{74fbd91c-519a-41cf-9875-bb2c25ce1e02}">
+		<property name="name">
+			<value>TimeBoost</value>
+		</property>
+		<relationship name="folder">
+			<destination>{61f60062-de73-4678-88a2-563595d9509b}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{d65255eb-5b1b-4b46-9ef8-58e2f6ad6360}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{d65255eb-5b1b-4b46-9ef8-58e2f6ad6360}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
