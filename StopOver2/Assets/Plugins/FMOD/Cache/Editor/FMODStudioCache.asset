@@ -15,10 +15,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank
   Name: SFX_Character
   StudioPath: bank:/SFX_Character
-  lastModified: 637830414980801422
+  lastModified: 637830453955180617
   FileSizes:
   - Name: Desktop
-    Value: 447968
+    Value: 486816
   Exists: 1
 --- !u!114 &-4513295266577668103
 MonoBehaviour:
@@ -87,11 +87,38 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Environnement.bank
   Name: SFX_Environnement
   StudioPath: bank:/SFX_Environnement
-  lastModified: 637830414980821372
+  lastModified: 637830453955200573
   FileSizes:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &-1382095506879662264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Character_Surchauffe_Down
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Character_Surchauffe_Down
+  Guid:
+    Data1: 254905121
+    Data2: 1258160447
+    Data3: 436419210
+    Data4: -2093644336
+  Banks:
+  - {fileID: -6511476984359978222}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3531
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,12 +141,14 @@ MonoBehaviour:
   - {fileID: 8743603614007479141}
   - {fileID: 8916394868865434800}
   - {fileID: -4513295266577668103}
+  - {fileID: -1382095506879662264}
+  - {fileID: 5356847875712906812}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5353626155219953427}
   StringsBanks:
   - {fileID: 4225441368664998775}
-  cacheTime: 637830414980841313
+  cacheTime: 637830453955220494
   cacheVersion: 10
 --- !u!114 &4214645029175812768
 MonoBehaviour:
@@ -160,10 +189,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637830414980552095
+  lastModified: 637830453954243101
   FileSizes:
   - Name: Desktop
-    Value: 1116
+    Value: 1214
   Exists: 1
 --- !u!114 &4403562024516298513
 MonoBehaviour:
@@ -180,7 +209,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637830414980841313
+  lastModified: 637830453955220494
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -200,11 +229,38 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637830414980542414
+  lastModified: 637830453954223156
   FileSizes:
   - Name: Desktop
     Value: 1036
   Exists: 1
+--- !u!114 &5356847875712906812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Character_BoostReady
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Character_BoostReady
+  Guid:
+    Data1: -157934934
+    Data2: 1135544660
+    Data3: 1126808993
+    Data4: -4404129
+  Banks:
+  - {fileID: -6511476984359978222}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1423
 --- !u!114 &8743603614007479141
 MonoBehaviour:
   m_ObjectHideFlags: 0
