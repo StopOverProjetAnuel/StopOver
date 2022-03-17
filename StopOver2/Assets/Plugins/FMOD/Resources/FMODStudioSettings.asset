@@ -344,8 +344,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: 
-  sourceBankPath: 
+  sourceProjectPath: Assets/Fmod/Project-kK7FMO/Untitled.fspro
+  sourceBankPath: Assets/Fmod/Project-kK7FMO/Build
   SourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -367,8 +367,12 @@ MonoBehaviour:
   VirtualChannelSettings: []
   RealChannelSettings: []
   Plugins: []
-  MasterBanks: []
-  Banks: []
+  MasterBanks:
+  - Master
+  Banks:
+  - Music
+  - SFX_Character
+  - SFX_Environnement
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0
