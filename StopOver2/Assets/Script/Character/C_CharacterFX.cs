@@ -209,7 +209,6 @@ public class C_CharacterFX : MonoBehaviour
 
     public void HandleTrailPlayer(float currentSpeed)
     {
-        Debug.LogWarning("current Speed : " + currentSpeed);
         if (trailSpeedThreshold > currentSpeed)
         {
             for (int i = 0; i < trails.Length; i++)
@@ -217,8 +216,6 @@ public class C_CharacterFX : MonoBehaviour
                 if(trails[i].emitting)
                 {
                     trails[i].emitting = false;
-                    Debug.LogWarning("Stopped Emitting");
-
                 }
             }
         }
@@ -228,7 +225,6 @@ public class C_CharacterFX : MonoBehaviour
             {
                 if (!trails[i].emitting)
                 {
-                    Debug.LogWarning("Started Emitting");
                     trails[i].emitting = true;
                 }
             }

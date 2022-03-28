@@ -39,7 +39,7 @@ public class GMTimer : MonoBehaviour
 
     private void DecreaseTimer()
     {
-        currentTime = Mathf.Clamp(currentTime - Time.deltaTime, 0, maxTime);
+        currentTime = Mathf.Clamp(currentTime - Time.deltaTime, 0, maxTime * 2);
     }
 
     private void DisplayTimer()
