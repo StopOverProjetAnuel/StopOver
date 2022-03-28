@@ -80,10 +80,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
-  droppedItem: {fileID: 0}
   resourceGive: 0
   resistanceLevel: 2
   isDestroyWithRequirement: 1
+  ifNotRequireSpeedMultiplier: 0.75
+  ID: Rock
   showDebug: 0
 --- !u!64 &7302678122695100011
 MeshCollider:
