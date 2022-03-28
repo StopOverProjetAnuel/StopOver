@@ -17,8 +17,8 @@ public class DepositZoneTimer : MonoBehaviour
     [SerializeField] private static float waitDeposit = 1;
     [Tooltip("All velocity that superior will cancel the deposit")]
     [SerializeField] private static float minSpeed = 5f;
-    [Tooltip("Resources that's need to gain time")]
-    [SerializeField] private static float resourcesRequire = 250f;
+    //[Tooltip("Resources that's need to gain time")]
+    public static float resourcesRequire = 250f;
     [Tooltip("The greater the value is, the faster the deposit is")]
     [SerializeField] private static float resourcesTakenPerFrame = 1f;
     [Tooltip("How much time is added once the requirement(s) are done, metrix in second")]
