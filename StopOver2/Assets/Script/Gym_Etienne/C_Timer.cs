@@ -14,23 +14,15 @@ public class C_Timer : MonoBehaviour
 
     private bool writtingTime;
     private int x;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
     void Update()
     {
         timer += 1 * Time.deltaTime;
 
         textTimer.text = "Time = "+timer;
 
-        if (writtingTime)
-        {
-            WrittingTime();
-        }
+        if (writtingTime) WrittingTime();
     }
 
     private void OnTriggerEnter(Collider other)
