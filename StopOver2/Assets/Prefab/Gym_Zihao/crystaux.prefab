@@ -647,6 +647,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5676566493518051348}
+  - component: {fileID: 7842691820814080108}
+  - component: {fileID: 5873454295151246123}
   m_Layer: 0
   m_Name: crystaux
   m_TagString: Untagged
@@ -669,6 +671,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7842691820814080108
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589517237640783807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.564017, y: 5.545527, z: 5.472523}
+  m_Center: {x: 1.2820079, y: 2.2727635, z: 0.5835631}
+--- !u!65 &5873454295151246123
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6589517237640783807}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8, y: 5.545527, z: 8}
+  m_Center: {x: 1.2820079, y: 7.82, z: 0.5835631}
 --- !u!1 &7922121121025373184
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3302467642846022277}
   - component: {fileID: 1908228026533938464}
   - component: {fileID: 4440430546569458154}
+  - component: {fileID: 4308576280833888236}
   m_Layer: 0
   m_Name: cliff 6 cube
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4308576280833888236
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2783057987072118847}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4068373912626513877, guid: 4d3d9d28c6fa431498c5f3287dd79b6d, type: 3}

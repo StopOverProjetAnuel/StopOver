@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5547224341735199185}
   - component: {fileID: 8886843072995516020}
   - component: {fileID: 6679014140638997182}
+  - component: {fileID: 4849666630828780664}
   m_Layer: 0
   m_Name: Cliff 4 cylindre
   m_TagString: Untagged
@@ -81,3 +82,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4849666630828780664
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5165738214269815659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5076798556035486163, guid: d660d0dc7208f9041b3fc1ff29cf017e, type: 3}
