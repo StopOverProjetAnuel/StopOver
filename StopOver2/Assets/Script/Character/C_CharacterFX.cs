@@ -110,10 +110,9 @@ public class C_CharacterFX : MonoBehaviour
         currentColorSize = currentTimeAcc / halfTimeAcc;
         reactorMat.sharedMaterial.SetFloat("Color_Size", currentColorSize);
 
-        float lateHalftTimeAcc = maxTimeAcc - halfTimeAcc;
         if (currentTimeAcc >= halfTimeAcc)
         {
-            currentColorDensity = currentTimeAcc / lateHalftTimeAcc;
+            currentColorDensity = currentTimeAcc / maxTimeAcc;
             reactorMat.sharedMaterial.SetFloat("_ColorDensity", currentColorDensity);
         }
     }
@@ -130,12 +129,13 @@ public class C_CharacterFX : MonoBehaviour
 
     public void OverheatBoostDecres(float currentCooldownBoost, float maxCooldownBoost) 
     {
-        float a = currentCooldownBoost / maxCooldownBoost;
-        float b = Mathf.Lerp(0, currentColorSize, a);
-        reactorMat.sharedMaterial.SetFloat("Color_Size", b);
+        currentCooldownBoost = Mathf.Clamp(currentCooldownBoost, 0, maxCooldownBoost);
+        float cooldownRatio = currentCooldownBoost / maxCooldownBoost;
+        float colorSizeTime = Mathf.Lerp(0, 1.5f, cooldownRatio);
+        reactorMat.sharedMaterial.SetFloat("Color_Size", colorSizeTime);
 
-        float c = Mathf.Lerp(0, currentColorDensity, a);
-        reactorMat.sharedMaterial.SetFloat("_ColorDensity", c);
+        float colorDensityTime = Mathf.Lerp(0, 1f, cooldownRatio);
+        reactorMat.sharedMaterial.SetFloat("_ColorDensity", colorDensityTime);
     }
     #endregion
 
@@ -144,7 +144,7 @@ public class C_CharacterFX : MonoBehaviour
         if (!fluideShader.sharedMaterial) return;
 
         float a = ressourceManager.currentRessource / ressourceManager.maxRessource;
-        float b = Mathf.Lerp(-0.16f, 0.16f, a);
+        float b = Mathf.Lerp(-0.13f, 0.13f, a);
         fluideShader.sharedMaterial.SetFloat("_Remplissage", b);
     }
 

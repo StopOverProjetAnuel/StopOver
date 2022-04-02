@@ -51,13 +51,13 @@ public class C_CharacterBoost : MonoBehaviour
     {
         _CharacterFX.FovSpeed(rb.velocity.magnitude, (boostHeld && isAccelerating));
 
-        if (!CooldownHandler(Time.fixedDeltaTime))
+        if (!CooldownHandler(Time.fixedDeltaTime)) //Check if the boost is in cooldown, return if true
         {
             if (debug) Debug.Log("Cooldown : " + cooldownTimer);
             return;
         }
 
-        if (boostBegan && boostHeld)
+        if (boostBegan && boostHeld) //Check if the player push down the boost button
         {
             if (debug) Debug.Log("Boost Began");
             BeginBoost();
@@ -130,6 +130,8 @@ public class C_CharacterBoost : MonoBehaviour
         accelerationRatio = 0f;
         accelerationTimer = 0f;
 
+        _CharacterControler.currentSpeed = baseSpeed;
+
         _CharacterFX.DesactiveBoost();
     }
 
@@ -141,7 +143,7 @@ public class C_CharacterBoost : MonoBehaviour
         if (cooldownTimer > 0f)
         {
             cooldownTimer = Mathf.Clamp(cooldownTimer - delta, 0f, overheatCooldown);
-            _CharacterFX.OverheatBoostDecres(cooldownTimer, overheatCooldown);
+            _CharacterFX.OverheatBoostDecres(cooldownTimer, cooldownDurationMinMax.y);
             return false;
         }
         else
