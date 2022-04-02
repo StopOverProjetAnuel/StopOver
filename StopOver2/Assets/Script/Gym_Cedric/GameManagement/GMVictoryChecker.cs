@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class GMVictoryChecker : MonoBehaviour
 {
+    #region Handlers
     private GMMenu _GMMenu;
     private GMScoring _GMScoring;
+    #endregion
 
 
     public void InitiateGMVictoryChecker(GMMenu gMMenu, GMScoring gMScoring)
