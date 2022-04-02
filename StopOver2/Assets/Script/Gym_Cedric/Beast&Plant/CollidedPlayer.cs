@@ -102,9 +102,8 @@ public class CollidedPlayer : MonoBehaviour
 
     private void InstantiateVFX()
     {
-        ObjectPool.Instance.GetFromPool(ID, transform);
-
         Transform g = ObjectPool.Instance.GetFromPool(ID, transform).transform;
+        g.localScale = transform.localScale;
         Transform player = FindObjectOfType<C_CharacterManager>().gameObject.transform;
         Vector3 newRotationVector = player.rotation.eulerAngles;
         g.rotation = Quaternion.Euler(newRotationVector);

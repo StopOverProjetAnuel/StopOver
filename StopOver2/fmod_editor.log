@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000199CB2A9068 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000199C4636468 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -21,6 +21,214 @@
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 141)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 141)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000196220E4798 : node = 00000197F63E5A60
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000196220E4798
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000197F63E5B70
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000196220E4798
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001980E12C368)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019874D00D88)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000198757FDDF8)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001962E20D928 : node = 0000019622EE66A0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001962E20D928
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019622EE67B0
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001962E20D928
+[LOG] SoundI::release                          : SFX_Character_Parechoc (00000196220E4798)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019806745478)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000199CAF3EF38)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000198E6AC1928 : node = 000001983A473440
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000198E6AC1928
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001983A473550
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000198E6AC1928
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001962E20D928)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (000001962A27E548)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000196222CBBE8)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001981EDE0EA8 : node = 0000019875629C70
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001981EDE0EA8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019875629D80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001981EDE0EA8
+[LOG] SoundI::release                          : SFX_Character_Parechoc (00000198E6AC1928)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019A1D721D18)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019816C89288)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001981EDDB6E8 : node = 000001987562A670
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001981EDDB6E8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001987562A780
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001981EDDB6E8
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001981EDE0EA8)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019A19D88768)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000196222CBF48)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001981EDE0638 : node = 0000019875629C70
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001981EDE0638
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019875629D80
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001981EDE0638
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001981EDDB6E8)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (000001962A27E068)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000196222CC608)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001981EDDCB28 : node = 000001987562A670
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001981EDDCB28
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001987562A780
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001981EDDCB28
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001981EDE0638)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019A19D88768)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000196222CE978)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Environnement.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 00000199CAF3EF38 : node = 0000019622EE4620
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 00000199CAF3EF38
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Environnement.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 739808
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 4480
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019622EE4730
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Environnement_AmbianceGlobal', format=5, channels=2, frequency=48000, lengthbytes=693472, lengthpcm=2929460, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.058506.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 00000199CAF3EF38
+[LOG] SoundI::release                          : SFX_Environnement_AmbianceGlobal (000001980E12DCB8)
+[LOG] SoundI::release                          :     SFX_Environnement_AmbianceGlobal (0000019874D01DC8)
+[LOG] SoundI::release                          :     SFX_Environnement_AmbianceGlobal (00000198757FD738)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001981EDDE2C8 : node = 00000198756299F0
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001981EDDE2C8
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000019875629B00
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001981EDDE2C8
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001981EDDCB28)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019A3297A448)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000198D93AAC58)
+[LOG] SystemI::createSound                     : filename = Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000001981EDDEE98 : node = 000001987562A670
+[LOG] SystemI::createSound                     : add node to async list : head = 000001980388D618.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000001981EDDEE98
+[LOG] SystemI::createSoundInternal             :     Create name='Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 677856
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 11712
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000001987562A780
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='SFX_Character_Parechoc', format=5, channels=2, frequency=48000, lengthbytes=177024, lengthpcm=510758, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.213036.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000001981EDDEE98
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001981EDDE2C8)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (0000019A3297A928)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000198D93AAAA8)
+[LOG] SoundI::release                          : SFX_Environnement_AmbianceGlobal (00000199CAF3EF38)
+[LOG] SoundI::release                          :     SFX_Environnement_AmbianceGlobal (0000019874D01748)
+[LOG] SoundI::release                          :     SFX_Environnement_AmbianceGlobal (00000198757FDC48)
+[LOG] SoundI::release                          : SFX_Character_Parechoc (000001981EDDEE98)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (000001962A27E548)
+[LOG] SoundI::release                          :     SFX_Character_Parechoc (00000196222CB528)
+[LOG] SoundI::release                          :  (0000019A1A221098)
+[LOG] SoundI::release                          :     SX_Character_Moteur_01 (000001981F818858)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -28,3 +236,5 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.

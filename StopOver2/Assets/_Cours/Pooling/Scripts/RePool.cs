@@ -32,5 +32,7 @@ public class RePool : PoolableItem
         {
             r.velocity = Vector3.zero;
         }
+
+        transform.localScale = Vector3.one;
     }
 }
