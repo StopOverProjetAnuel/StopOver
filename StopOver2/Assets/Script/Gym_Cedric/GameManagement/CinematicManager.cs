@@ -3,6 +3,7 @@ using UnityEngine;
 public class CinematicManager : MonoBehaviour
 {
     [SerializeField] private GMVictoryChecker _GMVictoryChecker;
+    [SerializeField] private GameObject player;
 
     private Animator cinematicAnimator;
 
@@ -52,6 +53,7 @@ public class CinematicManager : MonoBehaviour
     private void StartGame()
     {
         cinematicAnimator.SetBool("StartCinematic", false);
+        player.GetComponent<Rigidbody>().isKinematic = false;
         DisableAnimator();
     }
 
