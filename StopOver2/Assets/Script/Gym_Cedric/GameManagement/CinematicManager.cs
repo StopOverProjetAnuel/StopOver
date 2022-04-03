@@ -5,21 +5,26 @@ public class CinematicManager : MonoBehaviour
 {
     [SerializeField] private GMVictoryChecker _GMVictoryChecker;
     [SerializeField] private GameObject player;
-    [SerializeField] private CinemachineVirtualCamera fcMainCamera;
+    private CameraGetFocus _CameraGetFocus;
 
     private Animator cinematicAnimator;
+    [SerializeField] private AnimationClip startCinematic;
+    [SerializeField] private AnimationClip endCinematic;
 
     private int skipCount = 0;
     private bool isSkip = false;
-    [SerializeField] private Transform camLookAt;
-    [SerializeField] private Transform camFollow;
 
 
 
     private void Awake()
     {
         cinematicAnimator = GetComponent<Animator>();
-        cinematicAnimator.SetBool("StartCinematic", true);
+        _CameraGetFocus = FindObjectOfType<CameraGetFocus>();
+    }
+
+    private void Start()
+    {
+        cinematicAnimator.Play(startCinematic.name);
     }
 
     private void Update()
@@ -72,9 +77,13 @@ public class CinematicManager : MonoBehaviour
 
 
 
-    private void GiveCameraFocus()
+    private void ClearFocusCamera()
     {
-        fcMainCamera.LookAt = camLookAt;
-        fcMainCamera.Follow = camFollow;
+        _CameraGetFocus.UnFocusCamera();
+    }
+
+    private void GiveFocusCamera()
+    {
+        _CameraGetFocus.GetFocusCamera();
     }
 }
