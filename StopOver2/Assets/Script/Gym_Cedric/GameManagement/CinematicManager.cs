@@ -1,15 +1,18 @@
 using UnityEngine;
+using Cinemachine;
 
 public class CinematicManager : MonoBehaviour
 {
     [SerializeField] private GMVictoryChecker _GMVictoryChecker;
     [SerializeField] private GameObject player;
+    [SerializeField] private CinemachineVirtualCamera fcMainCamera;
 
     private Animator cinematicAnimator;
 
     private int skipCount = 0;
-
     private bool isSkip = false;
+    [SerializeField] private Transform camLookAt;
+    [SerializeField] private Transform camFollow;
 
 
 
@@ -65,5 +68,13 @@ public class CinematicManager : MonoBehaviour
     private void EnableAnimator()
     {
         cinematicAnimator.enabled = true;
+    }
+
+
+
+    private void GiveCameraFocus()
+    {
+        fcMainCamera.LookAt = camLookAt;
+        fcMainCamera.Follow = camFollow;
     }
 }
