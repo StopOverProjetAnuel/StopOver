@@ -54,6 +54,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1423
+--- !u!114 &-6858673635916734290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX_Game.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Game.bank
+  Name: SFX_Game
+  StudioPath: bank:/SFX_Game
+  lastModified: 637848405735250877
+  FileSizes:
+  - Name: Desktop
+    Value: 678656
+  Exists: 1
 --- !u!114 &-6511476984359978222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +137,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637845294689916653
+  lastModified: 637848405710371877
   FileSizes:
   - Name: Desktop
     Value: 1778
@@ -184,10 +204,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637845294689926665
+  lastModified: 637848405710644684
   FileSizes:
   - Name: Desktop
-    Value: 1708
+    Value: 1862
   Exists: 1
 --- !u!114 &-5333143209977131556
 MonoBehaviour:
@@ -236,6 +256,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 10640
+--- !u!114 &-5038296024012684077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Game_OneMinute
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Game_OneMinute
+  Guid:
+    Data1: -1840383616
+    Data2: 1192039691
+    Data3: -17843063
+    Data4: 880623465
+  Banks:
+  - {fileID: -6858673635916734290}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 71000
 --- !u!114 &-4731397758834488462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,10 +353,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank
   Name: SFX_Character
   StudioPath: bank:/SFX_Character
-  lastModified: 637845294689976759
+  lastModified: 637848405716050723
   FileSizes:
   - Name: Desktop
-    Value: 689568
+    Value: 716000
   Exists: 1
 --- !u!114 &-3791706016866362947
 MonoBehaviour:
@@ -437,10 +484,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Environnement.bank
   Name: SFX_Environnement
   StudioPath: bank:/SFX_Environnement
-  lastModified: 637845294690026667
+  lastModified: 637848405718555518
   FileSizes:
   - Name: Desktop
-    Value: 744288
+    Value: 806464
   Exists: 1
 --- !u!114 &-1382095506879662264
 MonoBehaviour:
@@ -512,7 +559,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637845294689936667
+  lastModified: 637848405710674436
   FileSizes:
   - Name: Desktop
     Value: 494
@@ -590,6 +637,7 @@ MonoBehaviour:
   - {fileID: -112278465740194549}
   - {fileID: -4447067293582309571}
   - {fileID: -1493007029301155277}
+  - {fileID: -6858673635916734290}
   EditorEvents:
   - {fileID: 3331083865021840885}
   - {fileID: 6579582669478356715}
@@ -601,12 +649,15 @@ MonoBehaviour:
   - {fileID: 1372246042319754746}
   - {fileID: -7880976283295916503}
   - {fileID: -5433365513941870617}
+  - {fileID: 1320023868962357652}
+  - {fileID: 4850730235968594206}
+  - {fileID: -5038296024012684077}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5665230913735047756}
   StringsBanks:
   - {fileID: -5358663417245275237}
-  cacheTime: 637845294690026667
+  cacheTime: 637848405735250877
   cacheVersion: 10
 --- !u!114 &489184782750731488
 MonoBehaviour:
@@ -662,6 +713,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3531
+--- !u!114 &1320023868962357652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Character_Vmax
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Character_Vmax
+  Guid:
+    Data1: 481544305
+    Data2: 1304563105
+    Data3: -1951658363
+    Data4: -1746679697
+  Banks:
+  - {fileID: -4447067293582309571}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3262
 --- !u!114 &1372246042319754746
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -859,6 +937,33 @@ MonoBehaviour:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &4850730235968594206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Environnement_KumpoHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Environnement_KumpoHit
+  Guid:
+    Data1: 812903644
+    Data2: 1237178569
+    Data3: -27739760
+    Data4: -1088319262
+  Banks:
+  - {fileID: -1493007029301155277}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 6500
 --- !u!114 &5036335554905576423
 MonoBehaviour:
   m_ObjectHideFlags: 0
