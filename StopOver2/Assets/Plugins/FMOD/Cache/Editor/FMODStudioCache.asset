@@ -54,6 +54,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 61030
+--- !u!114 &-7640544653808693457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Intensity
+  m_EditorClassIdentifier: 
+  Name: Intensity
+  StudioPath: 
+  Min: 0
+  Max: 100
+  Default: 0
+  ID:
+    data1: 937982686
+    data2: 3398634636
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7415998148086579486
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +120,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Game.bank
   Name: SFX_Game
   StudioPath: bank:/SFX_Game
-  lastModified: 637864888356063012
+  lastModified: 637865801745640506
   FileSizes:
   - Name: Desktop
     Value: 765600
@@ -191,7 +215,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637864888355943096
+  lastModified: 637865801744660441
   FileSizes:
   - Name: Desktop
     Value: 1778
@@ -258,10 +282,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637864888355943096
+  lastModified: 637865801744660441
   FileSizes:
   - Name: Desktop
-    Value: 2310
+    Value: 2388
   Exists: 1
 --- !u!114 &-5333143209977131556
 MonoBehaviour:
@@ -407,7 +431,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank
   Name: SFX_Character
   StudioPath: bank:/SFX_Character
-  lastModified: 637864888355993233
+  lastModified: 637865801745540767
   FileSizes:
   - Name: Desktop
     Value: 772000
@@ -510,6 +534,30 @@ MonoBehaviour:
   - Name: Desktop
     Value: 494
   Exists: 1
+--- !u!114 &-2556874683919164136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Boost
+  m_EditorClassIdentifier: 
+  Name: Boost
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2998239863
+    data2: 446551647
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-2340420027639460507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,7 +613,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Environnement.bank
   Name: SFX_Environnement
   StudioPath: bank:/SFX_Environnement
-  lastModified: 637864888356023124
+  lastModified: 637865801745600613
   FileSizes:
   - Name: Desktop
     Value: 879584
@@ -667,10 +715,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637864888355953310
+  lastModified: 637865801745501175
   FileSizes:
   - Name: Desktop
-    Value: 494
+    Value: 12409024
   Exists: 1
 --- !u!114 &-108384168885522482
 MonoBehaviour:
@@ -767,12 +815,13 @@ MonoBehaviour:
   - {fileID: -3667666336013801507}
   - {fileID: -243794332934171221}
   - {fileID: 3459314649054392955}
+  - {fileID: 6523965475753035478}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5665230913735047756}
   StringsBanks:
   - {fileID: -5358663417245275237}
-  cacheTime: 637864888356063012
+  cacheTime: 637865801745640506
   cacheVersion: 10
 --- !u!114 &489184782750731488
 MonoBehaviour:
@@ -961,6 +1010,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7892
+--- !u!114 &3425258315686474396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Pause
+  m_EditorClassIdentifier: 
+  Name: Pause
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 3960591988
+    data2: 3103192457
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &3459314649054392955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1261,6 +1334,37 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7010
+--- !u!114 &6523965475753035478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music
+  m_EditorClassIdentifier: 
+  Path: event:/Music
+  Guid:
+    Data1: -334053805
+    Data2: 1259008714
+    Data3: 1410244532
+    Data4: 2037741289
+  Banks:
+  - {fileID: -112278465740194549}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -2556874683919164136}
+  - {fileID: -7640544653808693457}
+  - {fileID: 8276607261598189137}
+  - {fileID: 3425258315686474396}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 150855
 --- !u!114 &6579582669478356715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1363,6 +1467,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1423
+--- !u!114 &8276607261598189137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Music/Ressources
+  m_EditorClassIdentifier: 
+  Name: Ressources
+  StudioPath: 
+  Min: 0
+  Max: 2
+  Default: 0
+  ID:
+    data1: 1457364916
+    data2: 3601030079
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &8481329835822346067
 MonoBehaviour:
   m_ObjectHideFlags: 0
