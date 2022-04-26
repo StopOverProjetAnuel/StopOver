@@ -1,21 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class CollisionDrop : MonoBehaviour
+public class CollisionDropResources : MonoBehaviour
 {
     [Header("Parameters Require")]
-    [SerializeField] private Transform player;
-    private Rigidbody rb;
-    [SerializeField] private Collider colliderDropper;
-    [SerializeField] private GameObject prefabToSpawn;
     private RessourceManager ressourceManager;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private GameObject prefabToSpawn;
 
     [Header("Parameters")]
+    private float frontRadial;
     [SerializeField] private float minSpeedToLose = 15f;
     [SerializeField] private float maxSpeedToLose = 100f;
     [SerializeField] private float resourceMaxLoseInPercent = 50f;
-    [SerializeField] private float resourceCountPerPickUp = 10f;
-    private float frontRadial;
     private float resourceForceDivider = 1f;
+    [SerializeField] private float resourceCountPerPickUp = 10f;
 
     [Header("Drop Parameters")]
     [SerializeField] private float frontDegrees = 45f;
@@ -32,7 +32,7 @@ public class CollisionDrop : MonoBehaviour
     private void OnEnable()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
-        rb = player.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         frontRadial = frontDegrees / 90f; //convert "frontDegrees" into radial by dividing it by the max of the dot value in degrees (90°)
     }
 
@@ -40,8 +40,6 @@ public class CollisionDrop : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (colliderDropper.gameObject != collision.contacts[0].thisCollider.gameObject) return;
-
         Vector3 impactPoint = collision.GetContact(0).point; //take coordinate of the 1st impact
         Vector3 toCollisionPoint = impactPoint - transform.position; //give direction of the impact
         toCollisionPoint.y = 0f;
@@ -80,7 +78,7 @@ public class CollisionDrop : MonoBehaviour
                 Debug.Log("Drop item : " + e);
                 Debug.Log("Impact Force : " + collision.relativeVelocity.magnitude);
                 Debug.Log("Current resource lose(s) : " + resourcesDropped);
-                Debug.Log("Player lose " + Mathf.Round(currentDivider * 100) + "% of his current resource");
+                Debug.Log("Player lose " + (currentDivider * 100) + "% of his current resource");
             }
             #endregion
         }
@@ -109,10 +107,7 @@ public class CollisionDrop : MonoBehaviour
 
         if (rbItem)
         {
-            Vector3 dir = item.transform.position - transform.position;
-            Vector3 dirForce = dir * bumpForce;
-            dirForce.y *= bumpUpwardModifier;
-            rbItem.AddForce(dirForce, ForceMode.Impulse);
+            rbItem.AddExplosionForce(bumpForce, transform.position, spawnOffset, bumpUpwardModifier);
             #region Debug
             if (showDebug)
             {
@@ -135,7 +130,7 @@ public class CollisionDrop : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (showExplosionRadius)
         {

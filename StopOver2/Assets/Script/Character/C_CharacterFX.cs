@@ -35,12 +35,6 @@ public class C_CharacterFX : MonoBehaviour
     [Header("Camera Effects Parameters")]
     public float maxSpeedCamEffect = 60f;
 
-    [Header("Player Animation Parameters")]
-    public GameObject characterModel;
-    public float leanAngleZ = 25f;
-    public float leanAngleY = 15f;
-    public float leaningSpeed = 0.1f;
-
     [Space(10)]
 
     public bool showDebug = false;
@@ -61,10 +55,9 @@ public class C_CharacterFX : MonoBehaviour
         #endregion
     }
 
-    public void TriggerContinuousFX(float mouseX, bool isGrounded)
+    public void TriggerContinuousFX(bool isGrounded)
     {
         FuelTankAmount();
-        LeaningModel(mouseX);
         TriggerSmokeShip(isGrounded);
     }
 
@@ -170,20 +163,6 @@ public class C_CharacterFX : MonoBehaviour
             Debug.Log("Speed percent cam effects" + b * 100);
         }
         #endregion
-    }
-
-    float smoothMouseMovement = 0f;
-
-    private void LeaningModel(float mouseX)
-    {
-        smoothMouseMovement = Mathf.SmoothStep(smoothMouseMovement, mouseX, leaningSpeed);
-
-        float leaningAngleY = smoothMouseMovement * leanAngleY * Time.timeScale;
-        float leaningAngleZ = -smoothMouseMovement * leanAngleZ * Time.timeScale;
-
-        Vector3 leaningAngle = new Vector3(0, leaningAngleY, leaningAngleZ);
-
-        characterModel.transform.localRotation = Quaternion.Euler(leaningAngle);
     }
 
     private bool isSmokePlay = false;

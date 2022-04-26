@@ -26,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34207064452450934}
-  m_LocalRotation: {x: -0.018779093, y: -0.7788194, z: -0.023343597, w: 0.62653244}
-  m_LocalPosition: {x: -1682.8481, y: -21.07, z: 702.61316}
+  m_LocalRotation: {x: 0.055741854, y: -0.77608204, z: 0.06929064, w: 0.62433034}
+  m_LocalPosition: {x: -1682.8481, y: -35.07, z: 702.61316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6762903307038979526}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 16247
+    m_Bits: 15223
   m_IgnoreTag: Untagged
   m_TransparentLayers:
     serializedVersion: 2
@@ -862,8 +862,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759900033471374826}
-  m_LocalRotation: {x: -0.018779093, y: -0.7788194, z: -0.023343597, w: 0.62653244}
-  m_LocalPosition: {x: -1682.8481, y: -21.07, z: 702.61316}
+  m_LocalRotation: {x: 0.055741854, y: -0.77608204, z: 0.06929064, w: 0.62433034}
+  m_LocalPosition: {x: -1682.8481, y: -35.07, z: 702.61316}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4687885356422439242}
@@ -6063,7 +6063,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 109,2 fps
+  m_text: 22.2 fps
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9da001e3e0dafe2478ba8431fe485078, type: 2}
   m_sharedMaterial: {fileID: -3108687623733699273, guid: 9da001e3e0dafe2478ba8431fe485078, type: 2}
@@ -6148,6 +6148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TMP: {fileID: 3381867160628916261}
+  f: 0.1
 --- !u!1 &6546308116220530180
 GameObject:
   m_ObjectHideFlags: 0
@@ -6308,7 +6309,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 3
+  m_BindingMode: 2
   m_FollowOffset: {x: 0, y: 6, z: -15}
   m_XDamping: 0.2
   m_YDamping: 0.2

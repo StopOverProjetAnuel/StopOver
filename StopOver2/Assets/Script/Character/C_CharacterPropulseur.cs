@@ -61,16 +61,12 @@ public class C_CharacterPropulseur : MonoBehaviour
     {
         CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist, mask, speed);
         CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist, mask, speed);
-        //Debug.Log("propuls call");
     }
 
     void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist, LayerMask mask, float speed)
     {
-        //Debug.Log("Current Length : " + currentLength);
-        //Debug.Log("Current Str : " + currentStrength);
         foreach (GameObject propulsPoint in propulsors)
         {
-            //Debug.Log("Call propulsor");
             RaycastHit hit;
             Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
             if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength, mask.value))
@@ -79,15 +75,14 @@ public class C_CharacterPropulseur : MonoBehaviour
 
                 float lengthRatio = Mathf.Clamp(hit.distance / length, 0, 1);
                 float forceAmount = thrustersForceMultiplier.Evaluate(lengthRatio);
+                float currentThrustersForce = Mathf.Lerp(minThrustersForce, maxThrustersForce, forceAmount);
 
                 float forceMultiplier = Mathf.Clamp(rb.velocity.magnitude / thrustersForceSpeedRequire, 0, 1);
-                float currentThrustersForce = Mathf.Lerp(minThrustersForce, maxThrustersForce, forceMultiplier);
 
-                rb.AddForceAtPosition(transform.up * forceAmount * currentThrustersForce, propulsPoint.transform.position);
+                rb.AddForceAtPosition(transform.up * currentThrustersForce, propulsPoint.transform.position);
             }
             else
             {
-                //Debug.Log("Dont Hit Ground");
                 lastHitDist = currentLength;
             }
         }

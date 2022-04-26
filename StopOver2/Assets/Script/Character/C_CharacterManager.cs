@@ -79,6 +79,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterFX.InitiateFXValue(_CharacterBoost);
         _CharacterPropulseur.InitiatePropulsorValue(rb);
         _CharacterControler.InitiateControlValue(rb);
+        _CharacterCalculAngle.calculAngleGetProperties(rb);
         #endregion
     }
 
@@ -103,8 +104,10 @@ public class C_CharacterManager : MonoBehaviour
 
         _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2);
 
-        _CharacterFX.TriggerContinuousFX(Mathf.Clamp(mouseXInput, -1, 1), CheckGrounded());
+        _CharacterFX.TriggerContinuousFX(CheckGrounded());
         _CharacterFX.HandleTrailPlayer(currentSpeed);
+        float mouseXValue = Mathf.Clamp(mouseXInput, -1, 1);
+        _CharacterAnime.charaAnimCallEvents(mouseXValue);
     }
 
     private void FixedUpdate()
@@ -118,6 +121,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterPropulseur.Propulsing(layerGround, rb.velocity.magnitude);
         _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
+        _CharacterCalculAngle.calculAngleCallEvents();
     }
 
 
