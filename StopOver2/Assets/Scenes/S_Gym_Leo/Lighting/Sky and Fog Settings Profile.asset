@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
@@ -26,33 +26,33 @@ MonoBehaviour:
     min: 0.1
   nearFocusStart:
     m_OverrideState: 1
-    m_Value: 7.42
+    m_Value: 528.7
     min: 0
   nearFocusEnd:
     m_OverrideState: 1
-    m_Value: 90.12
+    m_Value: 0
     min: 0
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1000
     min: 0
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1500
     min: 0
   m_NearSampleCount:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 8
     min: 3
     max: 8
   m_NearMaxBlur:
-    m_OverrideState: 1
-    m_Value: 8
+    m_OverrideState: 0
+    m_Value: 0.33
     min: 0
     max: 8
   m_FarSampleCount:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 16
     min: 3
     max: 16
   m_FarMaxBlur:
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598e2d32e2c7b0c418e030c3236d663a, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
@@ -115,19 +115,19 @@ MonoBehaviour:
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   threshold:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 0.9
     min: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.179
+    m_Value: 0.4
     min: 0
     max: 1
   scatter:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.5
     min: 0
     max: 1
   tint:
@@ -151,7 +151,7 @@ MonoBehaviour:
     m_Value: 2
   m_HighQualityPrefiltering:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   m_HighQualityFiltering:
     m_OverrideState: 1
     m_Value: 1
@@ -385,12 +385,12 @@ MonoBehaviour:
     max: 4
   directLightingStrength:
     m_OverrideState: 1
-    m_Value: 0.728
+    m_Value: 0.75
     min: 0
     max: 1
   radius:
     m_OverrideState: 1
-    m_Value: 2.48
+    m_Value: 2.5
     min: 0.25
     max: 5
   spatialBilateralAggressiveness:
@@ -604,7 +604,7 @@ MonoBehaviour:
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.266
+    m_Value: 0.23
     min: 0
     max: 1
   smoothness:
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: -0.33
+    m_Value: -0.35
   contrast:
     m_OverrideState: 1
     m_Value: 20
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a6b00fcf518bb94a90b408492e07b44, type: 3}
   m_Name: FilmGrain
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   type:
     m_OverrideState: 1
@@ -947,7 +947,7 @@ MonoBehaviour:
     m_Value: 73.6
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 60.7
+    m_Value: 60
     min: 1
   enableVolumetricFog:
     m_OverrideState: 1
