@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: 5524098151138171977}
   - component: {fileID: 6409598642748881284}
+  - component: {fileID: 1778310131491256903}
   m_Layer: 14
   m_Name: Medium_Plant1
   m_TagString: Destructible
@@ -67,6 +68,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.583715, y: 4.975667, z: 2.0586185}
   m_Center: {x: -0.05675149, y: 1.987834, z: 0.24412152}
+--- !u!205 &1778310131491256903
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979272754488225753}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: -0.23280382, y: 5.2041903, z: 1.3827987}
+  m_Size: 10.711618
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.009549996
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 5236510281565453500}
+    - renderer: {fileID: 2776772542949249477}
+  m_Enabled: 1
 --- !u!1001 &1435087359328739959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -302,6 +323,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5280138541799117127, guid: 8ca3985df0c651b4c95e7a6a767e5147, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5484759444121718630, guid: 8ca3985df0c651b4c95e7a6a767e5147, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -355,5 +380,15 @@ PrefabInstance:
 --- !u!4 &6404398530047002579 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3976466723832923985, guid: 8ca3985df0c651b4c95e7a6a767e5147, type: 3}
+  m_PrefabInstance: {fileID: 8056871482850361474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5236510281565453500 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2838415339352947774, guid: 8ca3985df0c651b4c95e7a6a767e5147, type: 3}
+  m_PrefabInstance: {fileID: 8056871482850361474}
+  m_PrefabAsset: {fileID: 0}
+--- !u!73398921 &2776772542949249477 stripped
+VFXRenderer:
+  m_CorrespondingSourceObject: {fileID: 5280138541799117127, guid: 8ca3985df0c651b4c95e7a6a767e5147, type: 3}
   m_PrefabInstance: {fileID: 8056871482850361474}
   m_PrefabAsset: {fileID: 0}

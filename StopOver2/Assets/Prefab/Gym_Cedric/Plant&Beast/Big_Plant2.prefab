@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: 5079423368689199287}
   - component: {fileID: 6561861379987697297}
+  - component: {fileID: 4325336989439856247}
   m_Layer: 14
   m_Name: Big_Plant2
   m_TagString: Destructible
@@ -100,6 +101,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.493203, y: 10.690797, z: 3.4981172}
   m_Center: {x: -3.909782, y: 5.3903985, z: 0.03848183}
+--- !u!205 &4325336989439856247
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979272754488225753}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
+  m_Size: 1
+  m_FadeMode: 1
+  m_AnimateCrossFading: 1
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.010361246
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1001 &1938774868329559379
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,6 +126,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7862259290605686096}
     m_Modifications:
+    - target: {fileID: 4418211571714299998, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7099395990616618498, guid: c77d1048ea344244f9c57f3e373cfa87, type: 3}
       propertyPath: m_RootOrder
       value: 2
