@@ -118,7 +118,7 @@ public class C_CharacterManager : MonoBehaviour
         CheckGrounded();
 
         _CharacterControler.TriggerControl(verticalInput, CheckGrounded(), centerOfMass);
-        _CharacterPropulseur.Propulsing();
+        _CharacterPropulseur.Propulsing(layerGround, rb.velocity.magnitude);
         _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
         _CharacterCalculAngle.calculAngleCallEvents();
