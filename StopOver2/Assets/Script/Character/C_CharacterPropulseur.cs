@@ -2,114 +2,36 @@ using UnityEngine;
 
 public class C_CharacterPropulseur : MonoBehaviour
 {
-    private Rigidbody rb;
+    [Header("Requirements")]
+    [SerializeField] private ThrusterController[] thrusters = new ThrusterController[0];
 
-    [SerializeField] Vector2 zRotMinMax = new Vector2(-30f, 30f);
-    [SerializeField] Vector2 xRotMinMax = new Vector2(-30f, 30f);
+    [Header("Thruster Parameters")]
+    [SerializeField] private float minThrustersForce = 2.5f;
+    [SerializeField] private float maxThrustersForce = 50f;
+    [Tooltip("Change the current force from the min to max thruster force by the height of the entity compare to the ground")]
+    [SerializeField] private AnimationCurve ThrustersForceCurve;
 
-    public GameObject[] arrayPropulseurPointRight = new GameObject[0];
-    public GameObject[] arrayPropulseurPointLeft = new GameObject[0];
-
-    public float length;
-    public float strengthRight;
-    public float strengthLeft;
-
-    public float multiStrength;
-    public float divisionStrength;
-    public float multiLenght;
-
-    public float timeTransitionLean;
-
-    public float dampening;
-
-    private float lastHitDistRight;
-    private float currentStrengthRight;
-
-    private float lastHitDistLeft;
-    private float currentStrengthLeft;
-
-    private float currentDampening;
-    private float currentLenghtRight;
-    private float currentLenghtLeft;
-
-    [Header("Thrusters Force")]
-    public float minThrustersForce = 5f;
-    public float maxThrustersForce = 20f;
-    public AnimationCurve thrustersForceMultiplier;
-    public float thrustersForceSpeedRequire = 30f;
-    private float currentTimeTransitionLean;
-
-    private float lastHitDist;
+    [Header("Ground Check Parameters")]
+    [SerializeField] private float floatingHeight = 5f;
+    [SerializeField] private LayerMask floatingMask;
 
 
 
     public void InitiatePropulsorValue(Rigidbody PlayerRb)
     {
-        rb = PlayerRb;
-
-        currentTimeTransitionLean = 0;
-        currentLenghtRight = length;
-        currentLenghtLeft = length;
-        currentDampening = 0;
-        currentStrengthRight = strengthRight;
-        currentStrengthLeft = strengthLeft;
-
-        lastHitDist = 2;
-    }
-
-    public void Propulsing(LayerMask mask, float speed)
-    {
-        CheckPropulsors(arrayPropulseurPointLeft, currentLenghtLeft, currentStrengthLeft, ref lastHitDist, mask, speed);
-        CheckPropulsors(arrayPropulseurPointRight, currentLenghtRight, currentStrengthRight, ref lastHitDist, mask, speed);
-    }
-
-    void CheckPropulsors(GameObject[] propulsors, float currentLength, float currentStrength, ref float lastHitDist, LayerMask mask, float speed)
-    {
-        foreach (GameObject propulsPoint in propulsors)
+        foreach (ThrusterController thruster in thrusters)
         {
-            RaycastHit hit;
-            Vector3 rayDirection = propulsPoint.transform.position - Vector3.up;
-            if (Physics.Raycast(propulsPoint.transform.position, propulsPoint.transform.up * -1f, out hit, currentLength, mask.value))
-            {
-                lastHitDist = hit.distance;
-
-                float lengthRatio = Mathf.Clamp(hit.distance / length, 0, 1);
-                float forceAmount = thrustersForceMultiplier.Evaluate(lengthRatio);
-                float currentThrustersForce = Mathf.Lerp(minThrustersForce, maxThrustersForce, forceAmount);
-
-                float forceMultiplier = Mathf.Clamp(rb.velocity.magnitude / thrustersForceSpeedRequire, 0, 1);
-
-                rb.AddForceAtPosition(transform.up * currentThrustersForce, propulsPoint.transform.position);
-            }
-            else
-            {
-                lastHitDist = currentLength;
-            }
+            thruster.ThrusterGetProperties(PlayerRb, floatingMask);
         }
     }
 
-    void LockRotation()
+    public void Propulsing()
     {
-       float currentZRotation = transform.localEulerAngles.z;
+        float boostPrevension = (Input.GetButton("Boost") && Input.GetButton("Boost2")) ? 10 : 1;
 
-        currentZRotation = Mathf.Clamp(currentZRotation, zRotMinMax.x, zRotMinMax.y);
-
-       float currentXRotation = transform.localEulerAngles.x;
-       currentXRotation = Mathf.Clamp(currentXRotation, xRotMinMax.x, xRotMinMax.y);
-
-        Vector3 newRotation = new Vector3
-            (
-                currentXRotation,
-                transform.localEulerAngles.y,
-                currentZRotation
-            );
-        transform.localEulerAngles = newRotation;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(arrayPropulseurPointLeft[0].transform.position, arrayPropulseurPointLeft[0].transform.position - (Vector3.up * 4));
-        Gizmos.DrawLine(arrayPropulseurPointRight[0].transform.position, arrayPropulseurPointRight[0].transform.position - (Vector3.up * 4));
+        foreach (ThrusterController thruster in thrusters)
+        {
+            thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce * boostPrevension, ThrustersForceCurve, floatingHeight);
+        }
     }
 }

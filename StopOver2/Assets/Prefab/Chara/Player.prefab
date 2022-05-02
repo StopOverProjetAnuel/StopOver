@@ -288,6 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605674110436370}
+  - component: {fileID: 978316238}
   m_Layer: 15
   m_Name: Thruster_Left_Front
   m_TagString: Untagged
@@ -303,12 +304,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605674110436365}
   m_LocalRotation: {x: -0.12607868, y: 0.033782683, z: 0.25660488, w: 0.95766217}
-  m_LocalPosition: {x: 0.86998916, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605675150487350}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -15, y: 0, z: 30}
+--- !u!114 &978316238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605674110436365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605674136667077
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605674137843543}
+  - component: {fileID: 789527986}
   m_Layer: 15
   m_Name: Thruster_Left_Back
   m_TagString: Untagged
@@ -442,12 +469,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605674137843542}
   m_LocalRotation: {x: -0.12607868, y: -0.033782672, z: -0.2566048, w: 0.9576622}
-  m_LocalPosition: {x: -5.75, y: 0, z: 2}
+  m_LocalPosition: {x: -9, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605675150487350}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -15, y: 0, z: -30}
+--- !u!114 &789527986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605674137843542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605674238314222
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,6 +539,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605674277183385}
+  - component: {fileID: 649010852}
   m_Layer: 15
   m_Name: Thruster_Right_MiddleFront
   m_TagString: Untagged
@@ -502,12 +555,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605674277183384}
   m_LocalRotation: {x: 0.12940949, y: -0.017037077, z: 0.12940949, w: 0.98296297}
-  m_LocalPosition: {x: -1.7500004, y: 0.000031232834, z: -2.0001354}
+  m_LocalPosition: {x: -3, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605674530364514}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 15}
+--- !u!114 &649010852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605674277183384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605674295967014
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605674295967015}
+  - component: {fileID: 1692414080}
   m_Layer: 15
   m_Name: Thruster_Right_Front
   m_TagString: Untagged
@@ -532,12 +611,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605674295967014}
   m_LocalRotation: {x: 0.12607859, y: -0.03378266, z: 0.25660488, w: 0.9576622}
-  m_LocalPosition: {x: 0.8699955, y: 0.000019788742, z: -2.000183}
+  m_LocalPosition: {x: 0, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605674530364514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: 30}
+--- !u!114 &1692414080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605674295967014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605674297267789
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,53 +781,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b97926ba65aef84797459007ea1262a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zRotMinMax: {x: -50, y: 50}
-  xRotMinMax: {x: -50, y: 50}
-  arrayPropulseurPointRight:
-  - {fileID: 282605674277183384}
-  - {fileID: 282605675253180011}
-  - {fileID: 282605674742436169}
-  - {fileID: 282605674295967014}
-  arrayPropulseurPointLeft:
-  - {fileID: 282605675206763812}
-  - {fileID: 282605676173442686}
-  - {fileID: 282605674137843542}
-  - {fileID: 282605674110436365}
-  length: 5
-  strengthRight: 40
-  strengthLeft: 40
-  multiStrength: 1
-  divisionStrength: 1.25
-  multiLenght: 1.1
-  timeTransitionLean: 1.5
-  dampening: 0.2
-  minThrustersForce: 2.5
-  maxThrustersForce: 20
-  thrustersForceMultiplier:
+  thrusters:
+  - {fileID: 1692414080}
+  - {fileID: 649010852}
+  - {fileID: 1197281074}
+  - {fileID: 1357700900}
+  - {fileID: 978316238}
+  - {fileID: 462068701}
+  - {fileID: 841230561}
+  - {fileID: 789527986}
+  minThrustersForce: 10
+  maxThrustersForce: 100
+  ThrustersForceCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 10
-      inSlope: -30.566023
-      outSlope: -30.566023
+      value: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.033333335
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: -0.40431297
-      outSlope: -0.40431297
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.2625
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  thrustersForceSpeedRequire: 30
+  floatingHeight: 15
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &282605674362107390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1248,6 +1344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605674742436174}
+  - component: {fileID: 1357700900}
   m_Layer: 15
   m_Name: Thruster_Right_Back
   m_TagString: Untagged
@@ -1263,12 +1360,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605674742436169}
   m_LocalRotation: {x: 0.12607859, y: 0.03378265, z: -0.2566048, w: 0.9576622}
-  m_LocalPosition: {x: -5.750001, y: 0.000036478043, z: -2.0001545}
+  m_LocalPosition: {x: -9, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605674530364514}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: -30}
+--- !u!114 &1357700900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605674742436169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605674819495384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1611,6 +1733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605675206763813}
+  - component: {fileID: 462068701}
   m_Layer: 15
   m_Name: Thruster_Left_MiddleFront
   m_TagString: Untagged
@@ -1626,12 +1749,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605675206763812}
   m_LocalRotation: {x: -0.12940958, y: 0.017037088, z: 0.12940949, w: 0.98296297}
-  m_LocalPosition: {x: -1.75, y: 0, z: 2}
+  m_LocalPosition: {x: -3, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605675150487350}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -15, y: 0, z: 15}
+--- !u!114 &462068701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605675206763812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605675253180011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,6 +1789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605675253180008}
+  - component: {fileID: 1197281074}
   m_Layer: 15
   m_Name: Thruster_Right_MiddleBack
   m_TagString: Untagged
@@ -1656,12 +1805,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605675253180011}
   m_LocalRotation: {x: 0.12940949, y: 0.017037088, z: -0.12940958, w: 0.98296297}
-  m_LocalPosition: {x: -3.8999946, y: 0.000034570694, z: -2.000155}
+  m_LocalPosition: {x: -6, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605674530364514}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 15, y: 0, z: -15}
+--- !u!114 &1197281074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605675253180011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &282605675452499799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2058,6 +2232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 282605676173442687}
+  - component: {fileID: 841230561}
   m_Layer: 15
   m_Name: Thruster_Left_MiddleBack
   m_TagString: Untagged
@@ -2073,12 +2248,37 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282605676173442686}
   m_LocalRotation: {x: -0.12940958, y: -0.017037101, z: -0.12940958, w: 0.98296297}
-  m_LocalPosition: {x: -3.9, y: 0, z: 2}
+  m_LocalPosition: {x: -6, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605675150487350}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -15, y: 0, z: -15}
+--- !u!114 &841230561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282605676173442686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d36909a92b1ab640b243502d03e226f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minThrusterForce: 0
+  maxThrusterForce: 0
+  ThrusterForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  floatingHeight: 0
+  floatingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  useDebug: 0
 --- !u!1 &1305906639371691235
 GameObject:
   m_ObjectHideFlags: 0
@@ -3322,7 +3522,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+<<<<<<< Updated upstream
 --- !u!96 &6419763694529910033 stripped
+=======
+--- !u!96 &6419763694311323521 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 6555993438901097569, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+  m_PrefabInstance: {fileID: 282605674735461344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &6419763694986176837 stripped
+>>>>>>> Stashed changes
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 6555993439186089713, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
@@ -3332,9 +3541,9 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 6555993439083587646, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
---- !u!96 &6419763694903368818 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 6555993438552588178, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+--- !u!23 &2289775593494296618 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2029696920423488458, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
 --- !u!2083052967 &6419763694905929147 stripped
@@ -3347,6 +3556,7 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 6555993438498867877, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
 --- !u!23 &2289775593494296618 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2029696920423488458, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
@@ -3358,8 +3568,11 @@ Transform:
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
 --- !u!96 &6419763694311323521 stripped
+=======
+--- !u!96 &6419763695277690271 stripped
+>>>>>>> Stashed changes
 TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 6555993438901097569, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6555993439796997759, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
 --- !u!96 &6419763695277690271 stripped
@@ -3377,6 +3590,24 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 6555993439368172977, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< Updated upstream
+=======
+--- !u!96 &6419763694529910033 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 6555993439186089713, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+  m_PrefabInstance: {fileID: 282605674735461344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &6419763694359776222 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 6555993439083587646, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+  m_PrefabInstance: {fileID: 282605674735461344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &6419763694903368818 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 6555993438552588178, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+  m_PrefabInstance: {fileID: 282605674735461344}
+  m_PrefabAsset: {fileID: 0}
+>>>>>>> Stashed changes
 --- !u!1001 &282605674870926930
 PrefabInstance:
   m_ObjectHideFlags: 0
