@@ -50,18 +50,14 @@ LODGroup:
   m_AnimateCrossFading: 1
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.14570095
+  - screenRelativeHeight: 0.10374506
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 5356668890167921817}
-  - screenRelativeHeight: 0.10291405
+  - screenRelativeHeight: 0.06247275
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 884715019144929769}
-  - screenRelativeHeight: 0.048211694
-    fadeTransitionWidth: 0
-    renderers:
-    - renderer: {fileID: 8828265085472377594}
   - screenRelativeHeight: 0.015447952
     fadeTransitionWidth: 0
     renderers:
@@ -425,15 +421,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac50f3d780d451342abf356dea357f8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac50f3d780d451342abf356dea357f8f, type: 3}
 --- !u!4 &7696476453861290389 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac50f3d780d451342abf356dea357f8f, type: 3}
-  m_PrefabInstance: {fileID: 7873939164988839550}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &8828265085472377594 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: ac50f3d780d451342abf356dea357f8f, type: 3}
   m_PrefabInstance: {fileID: 7873939164988839550}
   m_PrefabAsset: {fileID: 0}
