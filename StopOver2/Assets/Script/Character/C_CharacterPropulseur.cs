@@ -21,7 +21,7 @@ public class C_CharacterPropulseur : MonoBehaviour
     {
         foreach (ThrusterController thruster in thrusters)
         {
-            //thruster.ThrusterGetProperties(PlayerRb, floatingMask);
+            thruster.ThrusterGetProperties(PlayerRb, floatingMask);
         }
     }
 
@@ -31,7 +31,7 @@ public class C_CharacterPropulseur : MonoBehaviour
 
         foreach (ThrusterController thruster in thrusters)
         {
-            //thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce * boostPrevension, ThrustersForceCurve, floatingHeight);
+            thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce * boostPrevension, ThrustersForceCurve, floatingHeight);
         }
     }
 }
