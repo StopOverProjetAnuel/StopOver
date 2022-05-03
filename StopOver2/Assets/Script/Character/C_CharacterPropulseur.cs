@@ -27,11 +27,9 @@ public class C_CharacterPropulseur : MonoBehaviour
 
     public void Propulsing()
     {
-        float boostPrevension = (Input.GetButton("Boost") && Input.GetButton("Boost2")) ? 10 : 1;
-
         foreach (ThrusterController thruster in thrusters)
         {
-            thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce * boostPrevension, ThrustersForceCurve, floatingHeight);
+            thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce, ThrustersForceCurve, floatingHeight);
         }
     }
 }

@@ -8,13 +8,19 @@ public class ThrusterController : MonoBehaviour
     private Rigidbody rb;
 
     //Thruster Parameters//
-    private float minThrustersForce = 2.5f;
-    private float maxThrustersForce = 50f;
+    private float minThrustersForce;
+    private float maxThrustersForce;
     private AnimationCurve ThrustersForceCurve; //Change the current force from the min to max thruster force by the height of the entity compare to the ground
 
     //Ground Check Parameters//
-    private float floatingHeight = 5f;
+    private float floatingHeight;
     private LayerMask floatingMask;
+    private RaycastHit hit;
+    private bool isGrounded;
+
+    [Header("Debug")]
+    [SerializeField] private bool showDebug = false;
+
 
 
     /// <summary>
@@ -37,11 +43,63 @@ public class ThrusterController : MonoBehaviour
     /// <param name="height"> The floating height </param>
     public void ThrusterCallEvents(float minForce, float maxForce, AnimationCurve forceCurve, float height)
     {
+        minThrustersForce = minForce;
+        maxThrustersForce = maxForce;
+        ThrustersForceCurve = forceCurve;
+        floatingHeight = height;
 
+        SphereGroundCheck();
+        SimulateFloating();
     }
 
-    private bool SphereGroundCheck()
+    /// <summary>
+    /// Check the ground inside a sphere radius by a layer
+    /// </summary>
+    /// <returns> will return true if it touch an object with the correct layer, and a hit </returns>
+    private void SphereGroundCheck()
     {
-        return true;
+        isGrounded = Physics.Raycast(transform.position, -transform.up, out hit, floatingHeight, floatingMask);
+        if (showDebug)
+        {
+            Debug.Log("dir : " + -transform.up);
+        }
+    }
+
+    /// <summary>
+    /// Function that simulate a floating physics
+    /// </summary>
+    private void SimulateFloating()
+    {
+        float currentThrusterForce = minThrustersForce;
+
+        if (!isGrounded) currentThrusterForce = 1f;
+        else
+        {
+            float heightRatio = Mathf.Clamp(hit.distance / floatingHeight, 0f, 1f);
+            float smoothHeightRatio = ThrustersForceCurve.Evaluate(heightRatio);
+            currentThrusterForce = Mathf.Lerp(maxThrustersForce, minThrustersForce, smoothHeightRatio);
+            if (showDebug)
+            {
+                Debug.Log("hit Distance : " + hit.distance);
+            }
+        }
+
+        rb.AddForceAtPosition(currentThrusterForce * transform.up, transform.position, ForceMode.Acceleration);
+        if (showDebug)
+        {
+            Debug.Log("touch ground : " + isGrounded);
+            Debug.Log("thruster Force : " + currentThrusterForce);
+        }
+    }
+
+
+
+
+    private void OnDrawGizmos()
+    {
+        //if (!showDebug) return; 
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position, -transform.up * floatingHeight);
     }
 }
