@@ -3,13 +3,13 @@ using UnityEngine;
 public class C_CharacterAnim : MonoBehaviour
 {
     [Header("Player Animation Parameters")]
-    [SerializeField] private GameObject characterModel;
+    [SerializeField] private Transform characterModel;
     [SerializeField] private float leanAngleZ = 25f;
     [SerializeField] private float leanAngleY = 15f;
     [SerializeField] private float leaningSpeed = 0.1f;
 
     [Header("Camera Focus Parameters")]
-    [SerializeField] private GameObject cameraFocus;
+    [SerializeField] private Transform cameraFocus;
     [SerializeField] private Vector3 offsetCamFocus = new Vector3(0f, 1.5f, 10f);
     [SerializeField] private float cameraMaxOffset = 12f;
     private float smoothMouseMovement = 0f;
@@ -36,13 +36,13 @@ public class C_CharacterAnim : MonoBehaviour
 
         Vector3 leaningAngle = new Vector3(0, leaningAngleY, leaningAngleZ);
 
-        characterModel.transform.localRotation = Quaternion.Euler(leaningAngle);
+        characterModel.localRotation = Quaternion.Euler(leaningAngle);
     }
 
     private void OffsetTurnVehicle()
     {
         float changeOffset = smoothMouseMovement * cameraMaxOffset;
         Vector3 newOffsetPos = Vector3.right * changeOffset + offsetCamFocus;
-        cameraFocus.transform.localPosition = newOffsetPos;
+        cameraFocus.localPosition = newOffsetPos;
     }
 }
