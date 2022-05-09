@@ -784,7 +784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c967f844ed042f46b78a7410717e84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPlayer: 350
+  speedPlayer: 400
   currentSpeed: 0
   speedBackwardMultiplier: 0.5
   speedAirMultiplier: 0.25
@@ -899,10 +899,6 @@ MonoBehaviour:
   - {fileID: 6419763694359776222}
   - {fileID: 6419763695719102033}
   - {fileID: 6419763695277690271}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   trailSpeedThreshold: 45
   fluideShader: {fileID: 2289775593494296618}
   maxSpeedCamEffect: 90
@@ -932,11 +928,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4190b3c2c7403c41b9ff6fd8bcf36bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterModel: {fileID: 8038904585720458881}
+  characterModel: {fileID: 7260996172570965051}
   leanAngleZ: 25
   leanAngleY: 15
   leaningSpeed: 0.25
-  cameraFocus: {fileID: 282605674819495384}
+  cameraFocus: {fileID: 282605674819495385}
   offsetCamFocus: {x: 0, y: 1.5, z: 10}
   cameraMaxOffset: 20
 --- !u!114 &1236028746
@@ -1628,8 +1624,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Player: {fileID: 282605674362107380}
   nbState: 0
-  nudgeBars_model: {fileID: 0}
-  nudgeBarsMaterials: []
+  nudgeBars_model: {fileID: 282605675162436062}
+  nudgeBarsMaterials:
+  - {fileID: 2100000, guid: 6ffbeafaf9116c04587b8cce0a913591, type: 2}
   min1stState: 70
   min2ndState: 100
   showDebug: 0
@@ -2813,7 +2810,7 @@ Transform:
   m_GameObject: {fileID: 8038904585720458881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2681152928558934370}
   - {fileID: 282605675452499796}
@@ -2845,7 +2842,7 @@ Transform:
   m_GameObject: {fileID: 8295897498029426890}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 7723795428856529723}
   - {fileID: 9011088271822593588}
