@@ -3,34 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class LoadingManager : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] private Image loadingBar;
-    private WaitForEndOfFrame wait = new WaitForEndOfFrame();
+    [SerializeField] private Slider loadingBar;
+    [SerializeField] private TextMeshProUGUI loadingText;
+    [SerializeField] private TextMeshProUGUI doingText;
 
 
 
-    private void OnEnable()
+    public void LunchSceneLoad()
     {
-        StartCoroutine(WaitToLoad());
-    }
-
-    private IEnumerator WaitToLoad()
-    {
-        yield return new WaitForSeconds(2f);
         StartCoroutine(LoadAsyncScene());
     }
 
+
     private IEnumerator LoadAsyncScene()
     {
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(2);
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(1);
 
-        while (gameLevel.progress < 1)
+        while (!gameLevel.isDone)
         {
-            loadingBar.fillAmount = gameLevel.progress;
-            yield return wait;
+            float progress = Mathf.Clamp01(gameLevel.progress / 0.9f);
+
+            loadingBar.value = progress;
+            loadingText.text = Mathf.Round(progress * 100f) + "%";
+
+            doingText.text = (gameLevel.progress > 0.9f) ? "Initiating" : "Loading";
+
+            yield return null;
         }
     }
 }

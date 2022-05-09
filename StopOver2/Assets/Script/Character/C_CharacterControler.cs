@@ -64,7 +64,7 @@ public class C_CharacterControler : MonoBehaviour
 
         if (Input.GetButtonDown("Vertical")) 
         {
-            rb.AddRelativeForce(0, 0, Input.GetAxisRaw("Vertical") * firstAccelerationForce * currentAirMultiplier, ForceMode.Impulse);
+            rb.AddRelativeForce(0, 0, Mathf.Floor(Input.GetAxis("Vertical")) * firstAccelerationForce * currentAirMultiplier, ForceMode.Impulse);
         }
 
         if(verticalInput > 0) //Move Forward
