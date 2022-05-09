@@ -14,6 +14,12 @@ public class LoadingManager : MonoBehaviour
 
     private void OnEnable()
     {
+        StartCoroutine(WaitToLoad());
+    }
+
+    private IEnumerator WaitToLoad()
+    {
+        yield return new WaitForSeconds(2f);
         StartCoroutine(LoadAsyncScene());
     }
 
