@@ -35,6 +35,10 @@ public class C_CharacterFX : MonoBehaviour
     [Header("Camera Effects Parameters")]
     public float maxSpeedCamEffect = 60f;
 
+    [Header("Collision Parameters")]
+    [SerializeField] private GameObject hitCollisionVFX;
+    [SerializeField] private VisualEffect leftCollisionVFX, rightCollisionVFX;
+
     [Space(10)]
 
     public bool showDebug = false;
@@ -208,5 +212,12 @@ public class C_CharacterFX : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void TriggerCollisionFX(float dot)
+    {
+        hitCollisionVFX.SetActive(true);
+
+        if (dot > 0) rightCollisionVFX.Play(); else leftCollisionVFX.Play();
     }
 }

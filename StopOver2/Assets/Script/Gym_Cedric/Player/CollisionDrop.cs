@@ -8,6 +8,7 @@ public class CollisionDrop : MonoBehaviour
     [SerializeField] private Collider colliderDropper;
     [SerializeField] private GameObject prefabToSpawn;
     private RessourceManager ressourceManager;
+    private C_CharacterFX _C_CharacterFX;
 
     [Header("Parameters")]
     [SerializeField] private float minSpeedToLose = 15f;
@@ -33,6 +34,7 @@ public class CollisionDrop : MonoBehaviour
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
         rb = player.GetComponent<Rigidbody>();
+        _C_CharacterFX = player.GetComponent<C_CharacterFX>();
         frontRadial = frontDegrees / 90f; //convert "frontDegrees" into radial by dividing it by the max of the dot value in degrees (90°)
     }
 
@@ -48,6 +50,9 @@ public class CollisionDrop : MonoBehaviour
         Vector3 forward = transform.forward;
         forward.y = 0f;
         float dot = Vector3.Dot(toCollisionPoint.normalized, forward); //convert degrees to radial
+        Vector3 right = transform.right;
+        right.y = 0f;
+        float dotFX = Vector3.Dot(toCollisionPoint.normalized, forward); //convert degrees to radial for FX
 
         if (dot < frontRadial && ressourceManager.currentRessource != 0 && collision.relativeVelocity.magnitude >= minSpeedToLose)
         {
@@ -73,6 +78,11 @@ public class CollisionDrop : MonoBehaviour
                 float realLastAmount = lastAmount * 10;
                 ressourceManager.currentRessource += realLastAmount;
             }
+
+
+            _C_CharacterFX.TriggerCollisionFX(dotFX);
+
+
             #region Debug
             if (showDebug)
             {
