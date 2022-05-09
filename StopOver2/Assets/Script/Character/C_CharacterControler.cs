@@ -102,11 +102,11 @@ public class C_CharacterControler : MonoBehaviour
         {
             rb.AddTorque(rotateValue * rSAirMultiplier, ForceMode.Acceleration);
 
-            AutoDive(airAngle);
+            AutoDive(airAngle, isGrounded);
         }
     }
 
-    private void AutoDive(Quaternion airAngle)
+    private void AutoDive(Quaternion airAngle, bool grounded)
     {
         if (fallTimer >= timeToFallPos && transform.localRotation.x < fallAngle)
         {
@@ -115,6 +115,7 @@ public class C_CharacterControler : MonoBehaviour
             float angleVelocityX = angleGap * autoDiveSpeedMul;
             rb.AddRelativeTorque(angleVelocityX, 0, 0, ForceMode.Acceleration);
         }
+        else if (fallTimer < timeToFallPos && !grounded) fallTimer += Time.fixedDeltaTime; 
 
         #region auto dive player with transform rotation (outdated & take priority)
         /*if (fallTimer <= timeToFallPos)
