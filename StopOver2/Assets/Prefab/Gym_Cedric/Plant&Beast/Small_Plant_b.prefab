@@ -330,6 +330,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7862259290605686096}
     m_Modifications:
+    - target: {fileID: 1450778539406060716, guid: f6ae0f4d8e212af4ca218f29e9636f01, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2546803643751096382, guid: f6ae0f4d8e212af4ca218f29e9636f01, type: 3}
       propertyPath: m_Name
       value: plant_6_low
@@ -397,6 +401,14 @@ PrefabInstance:
     - target: {fileID: 4193831485170041943, guid: f6ae0f4d8e212af4ca218f29e9636f01, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193053225949781294, guid: f6ae0f4d8e212af4ca218f29e9636f01, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6193053225949781294, guid: f6ae0f4d8e212af4ca218f29e9636f01, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6ae0f4d8e212af4ca218f29e9636f01, type: 3}
