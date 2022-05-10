@@ -8,51 +8,51 @@ using UnityEngine;
 [RequireComponent(typeof(C_CharacterAnim))]
 public class C_CharacterManager : MonoBehaviour
 {
+    #region Variables
     #region Script Used
-    C_CharacterControler _CharacterControler;
-    C_CharacterBoost _CharacterBoost;
-    C_CharacterPropulseur _CharacterPropulseur;
-    C_CharacterCalculAngle _CharacterCalculAngle;
-    C_CharacterFX _CharacterFX;
-    C_CharacterAnim _CharacterAnime;
+    private C_CharacterControler _CharacterControler;
+    private C_CharacterBoost _CharacterBoost;
+    private C_CharacterPropulseur _CharacterPropulseur;
+    private C_CharacterCalculAngle _CharacterCalculAngle;
+    private C_CharacterFX _CharacterFX;
+    private C_CharacterAnim _CharacterAnime;
     #endregion
 
     [Header("Object Require")]
-    public GameObject groundCheck;
-    public GameObject centerOfMass;
-    public Transform centerOfMassBack;
-
-
-    [HideInInspector] public Rigidbody rb;
-
-    [HideInInspector] public float horizontalInput = 0f;
-    [HideInInspector] public float verticalInput = 0f;
-    [HideInInspector] public float mouseXInput = 0f;
-    [HideInInspector] public bool boostInputHold = false;
-    [HideInInspector] public bool boostInputHold2 = false;
-    [HideInInspector] public bool boostInputDown = false;
-    [HideInInspector] public bool boostInputDown2 = false;
-    [HideInInspector] public bool boostInputUp = false;
-    [HideInInspector] public bool boostInputUp2 = false;
+    [SerializeField] private GameObject groundCheck;
+    [SerializeField] private GameObject centerOfMass;
+    [SerializeField] private Transform centerOfMassBack;
+    private Rigidbody rb;
 
     [Header("Input Parameters")]
-    public string boostInputName = "Boost";
-    public string boostInputName2 = "Boost2";
-    public float maxInputValue = 1f;
+    [SerializeField] private string boostInputName = "Boost";
+    [SerializeField] private string boostInputName2 = "Boost2";
+    [SerializeField] private float maxInputValue = 1f;
+    private float horizontalValue = 0f;
+    private float verticalValue = 0f;
+    private float mouseXValue = 0f;
+    private bool boostInputHold = false;
+    private bool boostInputHold2 = false;
+    private bool boostInputDown = false;
+    private bool boostInputDown2 = false;
+    private bool boostInputUp = false;
+    private bool boostInputUp2 = false;
 
 
-    [Header("Parameters")]
-    public LayerMask layerGround;
-    public float distanceGroundChara;
-    public float distanceNoControl;
-    public bool isOnAir;
-    [Space]
-    public float currentSpeed;
-    public float basseSpeed;
-    public float moyenSpeed;
-    public float hautSpeed;
+    [Header("Speed Parameters")]
+    [SerializeField] private float currentSpeed;
+    [SerializeField] private float basseSpeed;
+    [SerializeField] private float moyenSpeed;
+    [SerializeField] private float hautSpeed;
 
+    [Header("GroundChecker Parameters")]
+    [SerializeField] private LayerMask layerGround;
+    [SerializeField] private float distanceGroundChara;
+    [SerializeField] private float distanceNoControl;
+    [SerializeField] private bool isOnAir;
     private Quaternion airAngle = Quaternion.identity;
+    #endregion
+
 
 
     private void Awake()
@@ -88,12 +88,12 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterFX.SignBoost();
     }
 
-    void Update()
+    private void Update()
     {
         #region Get Input
-        horizontalInput = Input.GetAxis("Horizontal"); //Get right & left Input
-        verticalInput = Input.GetAxis("Vertical"); //Get forward & backward Input
-        mouseXInput = Mathf.Clamp(Input.GetAxis("Mouse X"), -maxInputValue, maxInputValue); //Get mouse horizontal movement
+        horizontalValue = Input.GetAxis("Horizontal"); //Get right & left Input
+        verticalValue = Input.GetAxis("Vertical"); //Get forward & backward Input
+        this.mouseXValue = Mathf.Clamp(Input.GetAxis("Mouse X"), -maxInputValue, maxInputValue); //Get mouse horizontal movement
         boostInputHold = Input.GetButton(boostInputName); //Get boost button hold
         boostInputHold2 = Input.GetButton(boostInputName2); //Get boost button hold
         boostInputDown = Input.GetButtonDown(boostInputName); //Get boost button when press
@@ -106,7 +106,7 @@ public class C_CharacterManager : MonoBehaviour
 
         _CharacterFX.TriggerContinuousFX(CheckGrounded());
         _CharacterFX.HandleTrailPlayer(currentSpeed);
-        float mouseXValue = Mathf.Clamp(mouseXInput, -1, 1);
+        float mouseXValue = Mathf.Clamp(this.mouseXValue, -1, 1);
         _CharacterAnime.charaAnimCallEvents(mouseXValue);
     }
 
@@ -117,9 +117,9 @@ public class C_CharacterManager : MonoBehaviour
 
         CheckGrounded();
 
-        _CharacterControler.TriggerControl(verticalInput, CheckGrounded(), centerOfMass);
+        _CharacterControler.TriggerControl(verticalValue, CheckGrounded(), centerOfMass);
         _CharacterPropulseur.Propulsing();
-        _CharacterControler.TriggerRotation(CheckGrounded(), verticalInput, mouseXInput, airAngle);
+        _CharacterControler.TriggerRotation(CheckGrounded(), verticalValue, mouseXValue, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(), rb);
         _CharacterCalculAngle.calculAngleCallEvents();
     }

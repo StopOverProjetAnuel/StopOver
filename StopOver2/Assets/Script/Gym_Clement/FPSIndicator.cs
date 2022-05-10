@@ -5,10 +5,10 @@ using TMPro;
     [ExecuteInEditMode]
 public class FPSIndicator : MonoBehaviour
 {
-    [HideInInspector]
-    public TextMeshPro TMP;
+    [HideInInspector] public TextMeshPro TMP;
     [SerializeField] private float f = 0.1f;
     private WaitForSeconds seconds;
+
     private void Start()
     {
         seconds = new WaitForSeconds(f);

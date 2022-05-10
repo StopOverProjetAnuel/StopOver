@@ -1,21 +1,22 @@
 using UnityEngine;
-using UnityEngine.VFX;
-using TMPro;
 
 public class RessourceManager : MonoBehaviour
 {
-    [Header("Objects Need")]
-    public GameObject fluidScored;
+    [Header("Requirement")]
+    [SerializeField] private GameObject fluidScored;
     private Renderer fluidMat;
+
     [Header("RealTime Resources")]
     public float currentRessource;
-    public float resourceGoal = 25000f;
-    public float currentResourceScored;
-    [Header("Parameters")]
-    public float maxRessource = 100;
-    public float minRessource = 0;
+    [SerializeField] private float resourceGoal = 25000f;
+    [SerializeField] private float currentResourceScored;
 
-    public bool showDebug = false;
+    [Header("Parameters")]
+    [SerializeField] private float maxRessource = 100;
+    [SerializeField] private float minRessource = 0;
+
+    [Header("Debug Parameters")]
+    [SerializeField] private bool showDebug = false;
 
 
     private void Awake()

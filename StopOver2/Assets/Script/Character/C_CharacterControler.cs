@@ -3,52 +3,49 @@ using UnityEngine;
 public class C_CharacterControler : MonoBehaviour
 {
     #region Varibles
-    C_CharacterBoost _CharacterBoost;
+    private C_CharacterBoost _CharacterBoost;
+    private Rigidbody rb;
 
     [Header("Speed Parameters")]
     public float speedPlayer;
-    [HideInInspector]
-    public float currentSpeed;
-    public float speedBackwardMultiplier = 0.5f;
-    public float speedAirMultiplier = 0.25f;
+    [SerializeField] private float speedBackwardMultiplier = 0.5f;
+    [Tooltip("multiple the speed to ")]
+    [SerializeField] private float strafeSpeedMultiplier = 0.5f;
+    [SerializeField] private float speedAirMultiplier = 0.25f;
+    [SerializeField] private float firstAccelerationForce = 50f;
+    [HideInInspector] public float currentSpeed;
     private float currentAirMultiplier = 1f;
-    public float firstAccelerationForce = 50f;
-
-    public float airControlSpeedForward;
 
     [Header("Rotation Parameters")]
-    public float maxRotateSpeed = 1440f;
-    public float minRotateSpeed = 720f;
-    public float maxSpeedForMinRspeed = 60f;
-    public float rSAirMultiplier; //rotate speed
-
-    public float comFowardPos = 0.95f;
-
+    [SerializeField] private float maxRotateSpeed = 1440f;
+    [SerializeField] private float minRotateSpeed = 720f;
+    [SerializeField] private float maxSpeedForMinRspeed = 60f;
+    [SerializeField] private float rSAirMultiplier; //rotate speed
+    [SerializeField] private float comFowardPos = 0.95f;
 
     [Header("Fall Parameters")]
-    public float maxFallAcceleration = 110f;
-    public float minFallAcceleration = 50f;
-    [SerializeField]
-    private float currentFallAcceleration = 50f;
-    public AnimationCurve curveFallAcceleration;
-    public float dragAirForce;
-    public float dragGroundForce;
-    [Space]
-    public float fallAngle = 15f;
-    public float timeToFallPos = 1f;
-    private float fallTimer;
-    private Rigidbody rb;
-    public float autoDiveSpeedMul = 1f;
+    [SerializeField] private float maxFallAcceleration = 110f;
+    [SerializeField] private float minFallAcceleration = 50f;
+    [SerializeField] private float currentFallAcceleration = 50f;
+    [SerializeField] private AnimationCurve curveFallAcceleration;
+    [SerializeField] private float dragAirForce;
+    [SerializeField] private float dragGroundForce;
 
-    [Space(10)]
+    [Header("Dive Parameters")]
+    [SerializeField] private float diveAngle = 15f;
+    [SerializeField] private float timeToDiveAngle = 1f;
+    [SerializeField] private float autoDiveSpeedMul = 1f;
+    private float fallTimer;
+
+    [Header("Debug Parameters")]
     public bool showDebug = false;
     #endregion
 
-    public void InitiateControlValue(Rigidbody pRb)
+    public void InitiateControlValue(Rigidbody rigidbody)
     {
         _CharacterBoost = GetComponent<C_CharacterBoost>();
         currentSpeed = speedPlayer;
-        rb = pRb;
+        rb = rigidbody;
     }
 
     public void TriggerControl(float verticalInput, bool isGrounded, GameObject centerOfMass)
@@ -112,14 +109,14 @@ public class C_CharacterControler : MonoBehaviour
 
     private void AutoDive(Quaternion airAngle, bool grounded)
     {
-        if (fallTimer >= timeToFallPos && transform.localRotation.x < fallAngle)
+        if (fallTimer >= timeToDiveAngle && transform.localRotation.x < diveAngle)
         {
-            float angleGap = fallAngle + transform.localRotation.x;
+            float angleGap = diveAngle + transform.localRotation.x;
 
             float angleVelocityX = angleGap * autoDiveSpeedMul;
             rb.AddRelativeTorque(angleVelocityX, 0, 0, ForceMode.Acceleration);
         }
-        else if (fallTimer < timeToFallPos && !grounded) fallTimer += Time.fixedDeltaTime; 
+        else if (fallTimer < timeToDiveAngle && !grounded) fallTimer += Time.fixedDeltaTime; 
 
         #region auto dive player with transform rotation (outdated & take priority)
         /*if (fallTimer <= timeToFallPos)

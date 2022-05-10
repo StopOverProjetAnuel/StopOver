@@ -18,12 +18,12 @@ public class GMScoring : MonoBehaviour
     [Header("Display Score")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI playerName;
-    private int scorePosSaveName;
     [SerializeField] private string prefixScore = "You earned ";
     [SerializeField] private string suffixScore = " points !";
     [SerializeField] private List<ScoreData> _ScoreData = new List<ScoreData>(3);
-    [SerializeField] TextMeshProUGUI[] EndMenuLeaderboardNames;
-    [SerializeField] TextMeshProUGUI[] EndMenuLeaderboardScores;
+    [SerializeField] private TextMeshProUGUI[] EndMenuLeaderboardNames;
+    [SerializeField] private TextMeshProUGUI[] EndMenuLeaderboardScores;
+    private int scorePosSaveName;
 
     public void InitiateGMScoring(GMTimer gMTimer, GMMenu gMMenu)
     {
