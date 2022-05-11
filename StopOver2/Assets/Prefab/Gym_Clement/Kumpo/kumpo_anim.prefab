@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 771831136596688111}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_shoulder_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4763356074783836666}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7837428146381844863}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_knee_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3208937795030325887}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_horn_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2518603555232458580}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joit_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -166,7 +166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2511596074670356982}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_clavicle_1_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5074439629384956427}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_clavicle_1_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,7 +228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3898133312756448043}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_hips_2_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5078355693016296688}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_elbow_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4860493650115646585}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_spine2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 6111126148018507794}
   - component: {fileID: 2322253055985209649}
   - component: {fileID: 335256179060436739}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: kumpo_anim
   m_TagString: Destructible
   m_Icon: {fileID: 0}
@@ -376,7 +376,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007358714685043234}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 4.2546244, y: 6.3148236, z: 10.35965}
@@ -452,7 +452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6292722012574655302}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 220391199036345478}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tail_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8106443057865092396}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_3_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -547,7 +547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4468872848626604242}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_horn_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3101273311637190672}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_paw_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -608,7 +608,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7713793707826875517}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_wrist_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1717443580246497916}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_elbow_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4876047405997045873}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_2_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6433737068252158681}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_5_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -732,7 +732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554798011360223454}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_spint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7022081929039496723}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -794,7 +794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2891169894322748376}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_shoulder_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -825,7 +825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8921615002897796985}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_6_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6512848435482869966}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_clavicle_2_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,7 +886,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3332435495024158901}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_2_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -917,7 +917,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1382498281422183678}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_4_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -948,7 +948,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6013240350834827295}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_horn_5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -978,7 +978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 542870396451580916}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_5_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1009,7 +1009,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3626013118457152580}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_paw_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1039,7 +1039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4669530709681188395}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_1_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1070,7 +1070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1691300042525482484}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_knee_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1101,7 +1101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3335639906267426853}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_1_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1132,7 +1132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6837459655798161820}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_hips_1_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1163,7 +1163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7803765452766397506}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_3_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1194,7 +1194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3136140825138211345}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tail_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1224,7 +1224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1364409135389071688}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joit_foot 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1254,7 +1254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2945805610273178394}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_horn_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1285,7 +1285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3806933061782312539}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_spine1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1316,7 +1316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4105715268577234179}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tail_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1348,7 +1348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1815545973684525313}
   - component: {fileID: 6611255940614119664}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: koumpo_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1480,7 +1480,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3563815022384861091}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_clavicle_2_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1511,7 +1511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6102644040106115852}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_hips_1_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1542,7 +1542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9133942241731812866}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tail_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1573,7 +1573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8966942901585222603}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_heel_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1604,7 +1604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5445999247743158769}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_heel_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1635,7 +1635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8243097149595402897}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_horn_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1666,7 +1666,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1522191812833892828}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_hips_2_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1697,7 +1697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616210304301572542}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_4_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1728,7 +1728,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4789277745012778467}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_tantacle_6_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1758,7 +1758,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7410734589199000108}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_spine3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1791,7 +1791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1923733751174523224}
-  m_Layer: 7
+  m_Layer: 14
   m_Name: joint_wrist_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
