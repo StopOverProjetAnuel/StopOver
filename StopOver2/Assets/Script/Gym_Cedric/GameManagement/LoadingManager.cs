@@ -8,9 +8,9 @@ using TMPro;
 public class LoadingManager : MonoBehaviour
 {
     [Header("Parameters")]
-    [SerializeField] private Slider loadingBar;
-    [SerializeField] private TextMeshProUGUI loadingText;
     [SerializeField] private TextMeshProUGUI doingText;
+    [SerializeField] private Slider loadingBar;
+    [SerializeField] private TextMeshProUGUI loadingProgressText;
 
 
 
@@ -29,7 +29,7 @@ public class LoadingManager : MonoBehaviour
             float progress = Mathf.Clamp01(gameLevel.progress / 0.9f);
 
             loadingBar.value = progress;
-            loadingText.text = Mathf.Round(progress * 100f) + "%";
+            loadingProgressText.text = Mathf.Round(progress * 100f) + "%";
 
             doingText.text = (gameLevel.progress > 0.9f) ? "Initiating" : "Loading";
 

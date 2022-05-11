@@ -8,11 +8,16 @@ public class C_CharacterControler : MonoBehaviour
 
     [Header("Speed Parameters")]
     public float speedPlayer;
+    [Tooltip("Multiple speed for backward movement")]
     [SerializeField] private float speedBackwardMultiplier = 0.5f;
-    [Tooltip("multiple the speed to ")]
+    [Tooltip("Multiple speed for strafe movement")]
     [SerializeField] private float strafeSpeedMultiplier = 0.5f;
+    [Tooltip("Multiple speed in all direction when the player is flying")]
     [SerializeField] private float speedAirMultiplier = 0.25f;
-    [SerializeField] private float firstAccelerationForce = 50f;
+    [Tooltip("Force impulse when the player accelerate at low speed")]
+    [SerializeField] private float firstImpulseForce = 50f;
+    [Tooltip("Player have to be lower than this value to use the first Impulse")]
+    [SerializeField] private float maxSpeedRequireFirstImpulse = 25f;
     [HideInInspector] public float currentSpeed;
     private float currentAirMultiplier = 1f;
 
@@ -59,9 +64,9 @@ public class C_CharacterControler : MonoBehaviour
             currentAirMultiplier = speedAirMultiplier;
         }
 
-        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0) 
+        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0 && rb.velocity.magnitude <= 10f) 
         {
-            rb.AddRelativeForce(0, 0, firstAccelerationForce * currentAirMultiplier, ForceMode.Impulse);
+            rb.AddRelativeForce(0, 0, firstImpulseForce * currentAirMultiplier, ForceMode.Impulse);
         }
 
         if(verticalInput > 0) //Move Forward
