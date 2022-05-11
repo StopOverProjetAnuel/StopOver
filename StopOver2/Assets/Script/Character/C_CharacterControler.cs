@@ -59,9 +59,9 @@ public class C_CharacterControler : MonoBehaviour
             currentAirMultiplier = speedAirMultiplier;
         }
 
-        if (Input.GetButtonDown("Vertical")) 
+        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0) 
         {
-            rb.AddRelativeForce(0, 0, Mathf.Floor(Input.GetAxis("Vertical")) * firstAccelerationForce * currentAirMultiplier, ForceMode.Impulse);
+            rb.AddRelativeForce(0, 0, firstAccelerationForce * currentAirMultiplier, ForceMode.Impulse);
         }
 
         if(verticalInput > 0) //Move Forward
