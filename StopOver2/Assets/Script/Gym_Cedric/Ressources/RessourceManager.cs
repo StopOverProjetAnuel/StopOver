@@ -12,7 +12,7 @@ public class RessourceManager : MonoBehaviour
     [SerializeField] private float currentResourceScored;
 
     [Header("Parameters")]
-    [SerializeField] private float maxRessource = 100;
+    public float maxRessource = 100;
     [SerializeField] private float minRessource = 0;
 
     [Header("Debug Parameters")]
