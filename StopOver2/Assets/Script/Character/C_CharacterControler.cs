@@ -26,6 +26,7 @@ public class C_CharacterControler : MonoBehaviour
     [SerializeField] private float minRotateSpeed = 720f;
     [SerializeField] private float maxSpeedForMinRspeed = 60f;
     [SerializeField] private float rSAirMultiplier; //rotate speed
+    [Tooltip("Offset of the center of mass when the player move forward")]
     [SerializeField] private float comFowardPos = 0.95f;
 
     [Header("Fall Parameters")]
@@ -49,40 +50,23 @@ public class C_CharacterControler : MonoBehaviour
     public void InitiateControlValue(Rigidbody rigidbody)
     {
         _CharacterBoost = GetComponent<C_CharacterBoost>();
-        currentSpeed = speedPlayer;
         rb = rigidbody;
     }
 
-    public void TriggerControl(float verticalInput, bool isGrounded, GameObject centerOfMass)
+    public void TriggerControl(float verticalInput, float horizontalInput, bool isGrounded, GameObject centerOfMass)
     {
-        if (isGrounded && currentAirMultiplier != 1f)
-        {
-            currentAirMultiplier = 1f;
-        }
-        else if (currentAirMultiplier != speedAirMultiplier)
-        {
-            currentAirMultiplier = speedAirMultiplier;
-        }
+        currentAirMultiplier = (isGrounded) ? 1f : speedAirMultiplier;
 
-        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0 && rb.velocity.magnitude <= 10f) 
-        {
-            rb.AddRelativeForce(0, 0, firstImpulseForce * currentAirMultiplier, ForceMode.Impulse);
-        }
+        if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0 && rb.velocity.magnitude <= 10f) rb.AddRelativeForce(0, 0, firstImpulseForce * currentAirMultiplier, ForceMode.Impulse);
 
-        if(verticalInput > 0) //Move Forward
+        if (horizontalInput != 0f || verticalInput != 0f) //Move
         {
-            rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * currentAirMultiplier, ForceMode.Acceleration);
-            #region Debug
-                if (showDebug)
-                {
-                    Debug.Log("Player Forward");
-                }
-                #endregion
-        }
+            float currentBackwardMultiplier = (verticalInput < 0) ? speedBackwardMultiplier : 1f;
 
-        if (verticalInput < 0) //Move Backward
-        {
-            rb.AddRelativeForce(0, 0, verticalInput * currentSpeed * speedBackwardMultiplier * currentAirMultiplier, ForceMode.Acceleration);
+            Vector3 normInputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
+            currentSpeed = speedPlayer * currentBackwardMultiplier * currentAirMultiplier;
+            Vector3 forceDir = normInputDir * currentSpeed;
+            rb.AddRelativeForce(forceDir, ForceMode.Acceleration);
         }
 
         Vector3 newComPos = new Vector3(0, 1, comFowardPos * Input.GetAxisRaw("Vertical"));

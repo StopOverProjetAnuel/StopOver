@@ -698,29 +698,19 @@ MonoBehaviour:
   groundCheck: {fileID: 282605674584322999}
   centerOfMass: {fileID: 282605675472437146}
   centerOfMassBack: {fileID: 0}
-  rb: {fileID: 0}
-  horizontalInput: 0
-  verticalInput: 0
-  mouseXInput: 0
-  boostInputHold: 0
-  boostInputHold2: 0
-  boostInputDown: 0
-  boostInputDown2: 0
-  boostInputUp: 0
-  boostInputUp2: 0
   boostInputName: Boost
   boostInputName2: Boost2
   maxInputValue: 1
+  currentSpeed: 0
+  basseSpeed: 20
+  moyenSpeed: 30
+  hautSpeed: 50
   layerGround:
     serializedVersion: 2
     m_Bits: 64
   distanceGroundChara: 15
   distanceNoControl: 4.5
   isOnAir: 0
-  currentSpeed: 0
-  basseSpeed: 20
-  moyenSpeed: 30
-  hautSpeed: 50
 --- !u!114 &282605674362107386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,18 +774,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c967f844ed042f46b78a7410717e84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPlayer: 400
-  currentSpeed: 0
+  speedPlayer: 350
   speedBackwardMultiplier: 0.5
+  strafeSpeedMultiplier: 0.5
   speedAirMultiplier: 0.25
-  firstAccelerationForce: 25
-  airControlSpeedForward: 150
-  maxRotateSpeed: 1500
-  minRotateSpeed: 1500
+  firstImpulseForce: 300
+  maxSpeedRequireFirstImpulse: 25
+  currentSpeed: 0
+  maxRotateSpeed: 1800
+  minRotateSpeed: 900
   maxSpeedForMinRspeed: 60
   rSAirMultiplier: 0.75
   comFowardPos: 0.95
-  maxFallAcceleration: 110
+  maxFallAcceleration: 100
   minFallAcceleration: 50
   currentFallAcceleration: 50
   curveFallAcceleration:
@@ -822,11 +813,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  dragAirForce: 1.5
+  dragAirForce: 1.8
   dragGroundForce: 2
-  fallAngle: 4
-  timeToFallPos: 0.5
-  autoDiveSpeedMul: 1
+  diveAngle: 4
+  timeToDiveAngle: 1
+  autoDiveSpeedMul: 0.7
   showDebug: 0
 --- !u!114 &282605674362107391
 MonoBehaviour:
@@ -841,9 +832,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  baseSpeed: 350
   boostSpeed: 600
-  accelerationInitialImpulse: 120
+  accelerationInitialImpulse: 75
   cooldownDurationMinMax: {x: 1, y: 2.5}
   overheatCooldown: 10
   accelerationDuration: 1.75

@@ -11,12 +11,12 @@ public class C_CharacterBoost : MonoBehaviour
 
     Rigidbody rb;
 
-    [Header("Speed")]
-    [SerializeField] float baseSpeed = 5f;
-    [SerializeField] float boostSpeed = 15f;
-    [SerializeField] float accelerationInitialImpulse = 10f;
+    [Header("Speed Parameters")]
+    [SerializeField] private float boostSpeed = 15f;
+    [SerializeField] private float accelerationInitialImpulse = 10f;
+    private float baseSpeed = 5f;
 
-    [Header("Surchauffe")]
+    [Header("Overheat Parameters")]
     [SerializeField] Vector2 cooldownDurationMinMax = new Vector2(1f, 2.5f);
     [SerializeField] float overheatCooldown = 10f;
 
