@@ -10,23 +10,25 @@ public class IAKumpo : MonoBehaviour
     
     [Space(10)][Header("Reminder : Check Nav Mesh Agent for Speed")]
 
-    public IAKStates state;
+    [Tooltip("Comportement Actuel")]public IAKStates state;
 
-    [Space(20)] [SerializeField] private int Leadership = 0; //aléatoire permet d'être chef de meute______voir ElectAlpha()
+    [Tooltip("aléatoire permet d'être chef de meute")][Space(20)] [SerializeField] private int Leadership = 0;
 
-    [Space(10)] [SerializeField] private IAKumpo Alpha; // le chef de meute qui dirige le groupe_____voir FollowAlpha()
+    [Tooltip("le chef de meute qui dirige le groupe")] [Space(10)] [SerializeField] private IAKumpo Alpha;
 
-    [Space(10)] [SerializeField] private float roamingRange = 100; // la distance maximale où l'alpha peut potentiellment aller____voir Alpha_GoAway()
+    [Tooltip("la distance maximale où l'alpha peut potentiellment aller")] [Space(10)] [SerializeField] private float roamingRange = 100; 
 
-    [Space(10)] [SerializeField] private float escapeSpeed = 30; // vitesse pour échapper au joueur_____voir Escape_Player()
+    [Tooltip("vitesse pour échapper au joueur")] [Space(10)] [SerializeField] private float escapeSpeed = 30;
 
-    [Space(10)] [SerializeField] private float normalSpeed = 3.5f; // vitesse de marche normale_____voir Escape_Player()
+    [Tooltip("vitesse de marche normale")] [Space(10)] [SerializeField] private float normalSpeed = 3.5f;
 
-    [Space(10)] [SerializeField] private float radiusPal = 20; // détecte ses copains pour les éviter____voir Distance_Pal()
+    [Tooltip("détecte ses copains pour les éviter")] [Space(10)] [SerializeField] private float radiusPal = 20;
 
-    [Space(10)] [SerializeField] private float radiusAlpha = 50; // si trouve un autre koumpo il découvre si il est le nouveau chef_____voir ElectAlpha
-    
-    [Space(10)] [SerializeField] private float radiusPlayer = 50; // détecte le joueur pour le fuir_____voir Escape_Player()
+    [Tooltip("si trouve un autre koumpo il découvre si il est le nouveau chef")] [Space(10)] [SerializeField] private float radiusAlpha = 50;
+
+    [Tooltip("détecte le joueur pour le fuir")] [Space(10)] [SerializeField] private float radiusPlayer = 50; // à revoir mieux vaux que ce soit le joueur qui les fasse fuir
+
+    [Tooltip("vitesse animation")] [Space(10)] [SerializeField] private float AnimSpeed = 1.5f;
     
     private GameObject player;
     private IAKumpo him;
@@ -66,46 +68,47 @@ public class IAKumpo : MonoBehaviour
 
         currentSpeed = nav.velocity.magnitude / nav.speed;
         anim.SetFloat("Speed", currentSpeed);
-        anim.SetFloat("SpeedAnim", 1 + (currentSpeed * 1.5f));
+        anim.SetFloat("SpeedAnim", 1 + (currentSpeed * AnimSpeed));
 
     } // check V
     void Check_State()
     {
         // active the right behavior per frame
-        if (state == IAKStates.Alpha)
+        switch (state)
         {
-            ElectAlpha();
-            Escape_Player();
-            Alpha_GoAway();
-            Debug.Log(Destination);
+            case IAKStates.Alpha:
 
-        }
-        else if (state == IAKStates.Follower)
-        {
-            ElectAlpha();
-            Distance_Pal();
-            Escape_Player();
-            Follow_Alpha();
-        }
-        else if (state == IAKStates.Escape)
-        {
-            Escape_Player();
-            Distance_Pal();
-        }
+                ElectAlpha();
+                Escape_Player();
+                Alpha_GoAway();
+                Debug.Log(Destination);
 
-        
-        
+            break;
+
+            case IAKStates.Follower:
+
+                ElectAlpha();
+                Distance_Pal();
+                Escape_Player();
+                Follow_Alpha();
+
+            break;
+
+            case IAKStates.Escape:
+
+                Escape_Player();
+                Distance_Pal();
+
+            break;
+        }     
     } // check V
     #endregion
 
-    // /!\ Layers
     #region Fonctions
     void Alpha_GoAway()
     {
         nav.SetDestination(Destination);
         path = nav.path;
-        Debug.Log("KOUMPO" + nav.CalculatePath(Destination,path));
-        //Debug.Log("KOUMPO" + Destination);
 
         if (Vector3.Distance(transform.position,Destination) < 5 || !nav.CalculatePath(Destination,path))
         {
@@ -132,10 +135,10 @@ public class IAKumpo : MonoBehaviour
             nav.speed = normalSpeed;
             state = IAKStates.Alpha;
         }
-    }  
+    }  // activé par le joueur
     void Distance_Pal()
     {
-        pals = Physics.OverlapSphere(transform.position,radiusPal,1<<7); // /!\ Layer
+        pals = Physics.OverlapSphere(transform.position,radiusPal,1<<7);
 
         float nearestDist = radiusPal;
         int nearestIndex = 0;
@@ -151,15 +154,15 @@ public class IAKumpo : MonoBehaviour
             }
         }
 
-        Vector3 LeavePal = ((transform.position) + (transform.position - pals[nearestIndex].transform.position));
+        Vector3 LeavePal = (nearestIndex != 0) ? ((transform.position) + (transform.position - pals[nearestIndex].transform.position)) : Vector3.one;
 
         Destination = Vector3.Lerp(LeavePal, AlphaPos.position, nearestDist / radiusPal);
 
 
-    }  // /!\ Layer
+    }  // occupe une place prédéfinie dans le groupe
     void ElectAlpha()
     {
-        Kumpos = Physics.OverlapSphere(transform.position, radiusAlpha, 1<<7);// /!\ Layer
+        Kumpos = Physics.OverlapSphere(transform.position, radiusAlpha, 1<<7);
 
         foreach(Collider c in Kumpos)
         {
@@ -174,7 +177,11 @@ public class IAKumpo : MonoBehaviour
         AlphaPos = Alpha.transform;
 
 
-    } // /!\ Layer
+    }  // + de conditions
+    // quand alpha meurs
+    // au début
+    // fin échapatoire
+    // quand alpha trouve un autre koumpo (sonar)
     #endregion
 
     private void OnDrawGizmosSelected()
