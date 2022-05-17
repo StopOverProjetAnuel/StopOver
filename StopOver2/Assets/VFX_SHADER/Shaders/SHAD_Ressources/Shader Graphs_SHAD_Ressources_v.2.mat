@@ -7,16 +7,15 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_Shield
-  m_Shader: {fileID: -6465566751694194690, guid: 5774fea82bfab264b92631aac1793ec2, type: 3}
-  m_ShaderKeywords: _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT _SURFACE_TYPE_TRANSPARENT
+  m_Name: Shader Graphs_SHAD_Ressources_v.2
+  m_Shader: {fileID: -6465566751694194690, guid: af23ace19de26a047b59cc1ca45d60ca, type: 3}
+  m_ShaderKeywords: _DISABLE_SSR_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 3000
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2225
   stringTagMap:
     MotionVector: User
-    RenderType: Transparent
   disabledShaderPasses:
   - MOTIONVECTORS
   - TransparentDepthPrepass
@@ -39,27 +38,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_16c76bad18984d69a02ffb5d57a638dc: -0.8
-    - Vector1_4a22b07e305e4c3ba45220267d182867: 1
-    - Vector1_4d8d6de78f83495b96d6db52fc8cab51: 1
-    - Vector1_7c96a9fed98e413280ffdcea70a02567: 6.6
-    - Vector1_bf20b520167049cf84109e98aa20d784: -1.54
-    - Vector1_d4ae45d70fd544b286ada68f441068b0: 0.24
-    - Vector1_d84ac2790e2949d7816f7ca436462a73: -1.99
-    - Vector1_ebab6462d09e41989e792692c512a5d0: 1
+    - Vector1_085d6fac17f94fc0990d308470753713: 0
+    - Vector1_625d6f3817f44f33b7072b56088b3d00: 0.03
+    - Vector1_7abc2ced404f44279cd7ec73334a38f3: 0.8
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
-    - _AlphaDstBlend: 10
+    - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _CullMode: 0
-    - _CullModeForward: 0
+    - _CullMode: 2
+    - _CullModeForward: 2
     - _DepthOffsetEnable: 0
-    - _DoubleSidedEnable: 1
+    - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
-    - _DstBlend: 10
+    - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
@@ -67,21 +61,21 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _RenderQueueType: 4
+    - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 0
+    - _StencilRefDepth: 8
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 2
-    - _StencilRefMV: 32
+    - _StencilRefGBuffer: 10
+    - _StencilRefMV: 40
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
     - _StencilWriteMaskGBuffer: 14
     - _StencilWriteMaskMV: 40
     - _SupportDecals: 1
-    - _SurfaceType: 1
+    - _SurfaceType: 0
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -90,19 +84,20 @@ Material:
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
     - _UseShadowThreshold: 0
-    - _ZTestDepthEqualForOpaque: 4
+    - _ZTestDepthEqualForOpaque: 3
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
-    - _ZWrite: 0
+    - _ZWrite: 1
     m_Colors:
-    - Color_baa039909ab94de093c5a2d13d7419cf: {r: 22.780083, g: 24.721567, b: 0, a: 0}
-    - Color_c77b481223a641f2b1cda37fb077e0fb: {r: 0, g: 5.922071, b: 13.928808, a: 0}
-    - Vector2_69ce0139aa594bc28a81eb7a44f9be6f: {r: 20, g: 20, b: 0, a: 0}
-    - Vector2_7cb2754f4cf340d6b3b9a0ab70cbf282: {r: 1, g: 0, b: 0, a: 0}
+    - Color_4334b862c9614fc0940eda6d26f6c008: {r: 1.319508, g: 0.018396113, b: 0, a: 0}
+    - Color_d53e4d8b1d804bc8855e4065de58b520: {r: 0, g: 9.482043, b: 12.844469, a: 0}
+    - Vector2_22cb3337ab454cacac14fd0426a94f21: {r: -0.2, g: 1.5, b: 0, a: 0}
+    - Vector2_5c4f76d9ba2545b19d315d256b6c01da: {r: 0.2, g: 0.5, b: 0, a: 0}
+    - Vector2_9635ebbba1d34397aaa1cafb97ee197f: {r: 0, g: 0.5, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &2632867203257245448
+--- !u!114 &5355309343242997405
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
