@@ -23,7 +23,7 @@ public class RessourceManager : MonoBehaviour
     {
         currentResourceScored = 0f;
         currentRessource = 0f;
-        fluidMat = fluidScored.GetComponent<Renderer>();
+        fluidMat = (fluidScored.TryGetComponent<Renderer>(out Renderer render)) ? render : null;
 
         TriggerScore(0);
     }
@@ -38,7 +38,7 @@ public class RessourceManager : MonoBehaviour
         currentResourceScored += currentRTaken;
         currentRessource -= currentRTaken;
         float a = Mathf.Clamp(currentResourceScored / resourceGoal, 0, 1);
-        fluidMat.sharedMaterial.SetFloat("_Remplissage", a);
+        if(fluidMat) fluidMat.sharedMaterial.SetFloat("_Remplissage", a);
 
         #region Debug
         if (showDebug)

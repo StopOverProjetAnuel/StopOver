@@ -111,7 +111,7 @@ public class C_CharacterBoost : MonoBehaviour
             SetCooldown(overheat, accelerationRatio);
             accelerationTimer = 0f;
 
-            _CharacterControler.currentSpeed = baseSpeed;
+            _CharacterControler.speedPlayer = baseSpeed;
 
             _CharacterFX.DesactiveBoost();
             _CharacterFX.DesactiveBoostOverheat();
