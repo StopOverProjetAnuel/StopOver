@@ -47,9 +47,9 @@ public class C_CharacterManager : MonoBehaviour
 
     [Header("GroundChecker Parameters")]
     [SerializeField] private LayerMask layerGround;
-    [SerializeField] private float distanceGroundChara;
     [SerializeField] private float distanceNoControl;
-    [SerializeField] private bool isOnAir;
+    private float distanceGroundChara;
+    private bool isOnAir;
     private Quaternion airAngle = Quaternion.identity;
     #endregion
 

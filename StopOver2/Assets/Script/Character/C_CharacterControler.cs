@@ -66,6 +66,7 @@ public class C_CharacterControler : MonoBehaviour
             Vector3 normInputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
             currentSpeed = speedPlayer * currentBackwardMultiplier * currentAirMultiplier;
             Vector3 forceDir = normInputDir * currentSpeed;
+            forceDir.x *= strafeSpeedMultiplier;
             rb.AddRelativeForce(forceDir, ForceMode.Acceleration);
         }
 
@@ -96,16 +97,19 @@ public class C_CharacterControler : MonoBehaviour
         }
     }
 
+    private float timerAngle;
     private void AutoDive(Quaternion airAngle, bool grounded)
     {
-        if (fallTimer >= timeToDiveAngle && transform.localRotation.x < diveAngle)
+        if (fallTimer >= timeToDiveAngle)
         {
-            float angleGap = diveAngle + transform.localRotation.x;
-
-            float angleVelocityX = angleGap * autoDiveSpeedMul;
-            rb.AddRelativeTorque(angleVelocityX, 0, 0, ForceMode.Acceleration);
+            float timer = Mathf.Clamp01(Time.time - timerAngle + 1);
+            Quaternion angleDiveV3 = Quaternion.Euler(diveAngle, rb.transform.rotation.eulerAngles.y, 0f);
+            Quaternion newAngleDive = Quaternion.Lerp(transform.rotation, angleDiveV3, timer);
+            rb.MoveRotation(newAngleDive);
         }
-        else if (fallTimer < timeToDiveAngle && !grounded) fallTimer += Time.fixedDeltaTime; 
+        else if (fallTimer < timeToDiveAngle && !grounded) fallTimer += Time.fixedDeltaTime; timerAngle = Time.time + timeToDiveAngle;
+
+        Debug.Log(rb.transform.rotation.eulerAngles.y);
 
         #region auto dive player with transform rotation (outdated & take priority)
         /*if (fallTimer <= timeToFallPos)

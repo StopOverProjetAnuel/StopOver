@@ -424,6 +424,7 @@ MonoBehaviour:
   radiusPal: 20
   radiusAlpha: 50
   radiusPlayer: 50
+  AnimSpeed: 1.5
 --- !u!114 &335256179060436739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,8 +438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
-  resourceGive: 200
-  resistanceLevel: 0
+  resourceGive: 100
+  resistanceLevel: 2
   isDestroyWithRequirement: 1
   ifNotRequireSpeedMultiplier: 0.75
   ID: Animal
