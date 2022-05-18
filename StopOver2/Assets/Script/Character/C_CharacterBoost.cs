@@ -51,16 +51,14 @@ public class C_CharacterBoost : MonoBehaviour
     {
         _CharacterFX.FovSpeed(rb.velocity.magnitude, (boostHeld && isAccelerating));
 
-        if (!CooldownHandler(Time.fixedDeltaTime) || !isGrounded) //Check if the boost is in cooldown, return if true
+        if (!CooldownHandler(Time.fixedDeltaTime)) //Check if the boost is in cooldown, return if true
         {
             if (debug) Debug.Log("Cooldown : " + cooldownTimer);
-
-            ReleaseBoost();
 
             return;
         }
 
-        if (boostBegan && boostHeld) //Check if the player push down the boost button
+        if (boostBegan && boostHeld && isGrounded) //Check if the player push down the boost button
         {
             if (debug) Debug.Log("Boost Began");
             BeginBoost();
