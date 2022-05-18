@@ -44,7 +44,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4068373912626513877, guid: 02f73e1989b77fc43852b785689ffbb5, type: 3}
+  m_Mesh: {fileID: 4068373912626513877, guid: e424e7cf54720934db6bbd235d4101d7, type: 3}
 --- !u!1 &325513379
 GameObject:
   m_ObjectHideFlags: 0
@@ -708,9 +708,7 @@ MonoBehaviour:
   layerGround:
     serializedVersion: 2
     m_Bits: 64
-  distanceGroundChara: 15
-  distanceNoControl: 4.5
-  isOnAir: 0
+  distanceNoControl: 10
 --- !u!114 &282605674362107386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +756,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  floatingHeight: 10
+  floatingHeight: 8
   floatingMask:
     serializedVersion: 2
     m_Bits: 64
@@ -774,20 +772,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c967f844ed042f46b78a7410717e84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedPlayer: 350
+  speedPlayer: 200
   speedBackwardMultiplier: 0.5
-  strafeSpeedMultiplier: 0.5
+  strafeSpeedMultiplier: 0.1
   speedAirMultiplier: 0.25
-  firstImpulseForce: 300
-  maxSpeedRequireFirstImpulse: 25
+  firstImpulseForce: 250
+  maxSpeedRequireFirstImpulse: 15
   currentSpeed: 0
   maxRotateSpeed: 1800
   minRotateSpeed: 900
   maxSpeedForMinRspeed: 60
   rSAirMultiplier: 0.75
   comFowardPos: 0.95
-  maxFallAcceleration: 100
-  minFallAcceleration: 50
+  maxFallAcceleration: 350
+  minFallAcceleration: 25
   currentFallAcceleration: 50
   curveFallAcceleration:
     serializedVersion: 2
@@ -815,10 +813,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   dragAirForce: 1.8
   dragGroundForce: 2
-  diveAngle: 4
+  diveAngle: 3
   timeToDiveAngle: 1
   autoDiveSpeedMul: 0.7
-  showDebug: 0
+  showDebug: 1
 --- !u!114 &282605674362107391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,11 +830,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  boostSpeed: 600
-  accelerationInitialImpulse: 75
-  cooldownDurationMinMax: {x: 1, y: 2.5}
-  overheatCooldown: 10
-  accelerationDuration: 1.75
+  boostSpeed: 1000
+  accelerationInitialImpulse: 200
+  cooldownDurationMinMax: {x: 0.5, y: 2.5}
+  overheatCooldown: 4
+  accelerationDuration: 3.5
   accelerationCurve:
     serializedVersion: 2
     m_Curve:
@@ -882,7 +880,7 @@ MonoBehaviour:
   - {fileID: 282605674923715020}
   - {fileID: 282605675861148902}
   - {fileID: 282605674136667077}
-  reactorMat: {fileID: 5984865515097100615}
+  reactorMat: {fileID: 0}
   smokeShip: {fileID: 6419763694905929147}
   trails:
   - {fileID: 6419763694903368818}
@@ -2249,7 +2247,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30
-  m_Mesh: {fileID: 4068373912626513877, guid: 02f73e1989b77fc43852b785689ffbb5, type: 3}
+  m_Mesh: {fileID: 4068373912626513877, guid: e424e7cf54720934db6bbd235d4101d7, type: 3}
 --- !u!1 &3741414529203390343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,9 +2473,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2345799323531785838}
-  - component: {fileID: 2516937984765403134}
-  - component: {fileID: 5984865515097100615}
-  - component: {fileID: 6819179705344479369}
   m_Layer: 0
   m_Name: Reactor
   m_TagString: Untagged
@@ -2499,69 +2494,6 @@ Transform:
   m_Father: {fileID: 282605675087933269}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2516937984765403134
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6819179705344479368}
-  m_Mesh: {fileID: 4585570200442098102, guid: 688f6bfffe957b940ad424e58cd2c41e, type: 3}
---- !u!23 &5984865515097100615
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6819179705344479368}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 257
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: b8f1bf3ab65734746a01bc1a470c81fe, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6819179705344479369
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6819179705344479368}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4585570200442098102, guid: 688f6bfffe957b940ad424e58cd2c41e, type: 3}
 --- !u!1 &7204660463461626867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3451,11 +3383,6 @@ TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 6555993439083587646, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
---- !u!96 &6419763695277690271 stripped
-TrailRenderer:
-  m_CorrespondingSourceObject: {fileID: 6555993439796997759, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
-  m_PrefabInstance: {fileID: 282605674735461344}
-  m_PrefabAsset: {fileID: 0}
 --- !u!96 &6419763695719102033 stripped
 TrailRenderer:
   m_CorrespondingSourceObject: {fileID: 6555993439368172977, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
@@ -3479,6 +3406,11 @@ MeshRenderer:
 --- !u!4 &7723795428856529723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7556032300536455387, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
+  m_PrefabInstance: {fileID: 282605674735461344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!96 &6419763695277690271 stripped
+TrailRenderer:
+  m_CorrespondingSourceObject: {fileID: 6555993439796997759, guid: 9601a678755c49f4ea36836b01a1ca8d, type: 3}
   m_PrefabInstance: {fileID: 282605674735461344}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &282605674870926930
@@ -3566,14 +3498,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38a9996ed79360640833171f269de1e8, type: 3}
---- !u!23 &1453978770465780438 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 38a9996ed79360640833171f269de1e8, type: 3}
-  m_PrefabInstance: {fileID: 282605674870926930}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &317148770264254905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 38a9996ed79360640833171f269de1e8, type: 3}
+  m_PrefabInstance: {fileID: 282605674870926930}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1453978770465780438 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 38a9996ed79360640833171f269de1e8, type: 3}
   m_PrefabInstance: {fileID: 282605674870926930}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &282605676058260322
@@ -3661,14 +3593,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 944996decacb90a44832d4cd3ea3daa5, type: 3}
---- !u!23 &1453978769018892262 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 944996decacb90a44832d4cd3ea3daa5, type: 3}
-  m_PrefabInstance: {fileID: 282605676058260322}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &317148769085510793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 944996decacb90a44832d4cd3ea3daa5, type: 3}
+  m_PrefabInstance: {fileID: 282605676058260322}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1453978769018892262 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 944996decacb90a44832d4cd3ea3daa5, type: 3}
   m_PrefabInstance: {fileID: 282605676058260322}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3459571574874824973
@@ -3732,14 +3664,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cd2162fd7d0332428dae2e9b71c3a2b, type: 3}
---- !u!4 &4642262274958145729 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8101552374551697868, guid: 4cd2162fd7d0332428dae2e9b71c3a2b, type: 3}
-  m_PrefabInstance: {fileID: 3459571574874824973}
-  m_PrefabAsset: {fileID: 0}
 --- !u!2083052967 &1000053180790734691 stripped
 VisualEffect:
   m_CorrespondingSourceObject: {fileID: 4459189344731930222, guid: 4cd2162fd7d0332428dae2e9b71c3a2b, type: 3}
+  m_PrefabInstance: {fileID: 3459571574874824973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4642262274958145729 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8101552374551697868, guid: 4cd2162fd7d0332428dae2e9b71c3a2b, type: 3}
   m_PrefabInstance: {fileID: 3459571574874824973}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5857980714458206935

@@ -102,7 +102,7 @@ public class C_CharacterManager : MonoBehaviour
         boostInputUp2 = Input.GetButtonUp(boostInputName2); //Get boost button when press
         #endregion
 
-        _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2);
+        _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2, CheckGrounded());
 
         _CharacterFX.TriggerContinuousFX(CheckGrounded());
         _CharacterFX.HandleTrailPlayer(currentSpeed);

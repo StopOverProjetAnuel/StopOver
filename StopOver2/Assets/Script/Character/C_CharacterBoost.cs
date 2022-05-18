@@ -40,20 +40,23 @@ public class C_CharacterBoost : MonoBehaviour
         baseSpeed = _CharacterControler.speedPlayer;
     }
 
-    public void TriggerBoost(bool boostBegan, bool boostHeld, bool boostEnd)
+    public void TriggerBoost(bool boostBegan, bool boostHeld, bool boostEnd, bool isGrounded)
     {
-        BoostHandler(boostBegan, boostHeld, boostEnd);
+        BoostHandler(boostBegan, boostHeld, boostEnd, isGrounded);
     }
 
 
 
-    public void BoostHandler(bool boostBegan, bool boostHeld, bool boostEnd)
+    public void BoostHandler(bool boostBegan, bool boostHeld, bool boostEnd, bool isGrounded)
     {
         _CharacterFX.FovSpeed(rb.velocity.magnitude, (boostHeld && isAccelerating));
 
-        if (!CooldownHandler(Time.fixedDeltaTime)) //Check if the boost is in cooldown, return if true
+        if (!CooldownHandler(Time.fixedDeltaTime) || !isGrounded) //Check if the boost is in cooldown, return if true
         {
             if (debug) Debug.Log("Cooldown : " + cooldownTimer);
+
+            ReleaseBoost();
+
             return;
         }
 
