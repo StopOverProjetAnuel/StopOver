@@ -120,38 +120,11 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Game.bank
   Name: SFX_Game
   StudioPath: bank:/SFX_Game
-  lastModified: 637884958810605600
+  lastModified: 637889204704158393
   FileSizes:
   - Name: Desktop
     Value: 765600
   Exists: 1
---- !u!114 &-6709054857102125649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SX_Character_Turn
-  m_EditorClassIdentifier: 
-  Path: event:/SX_Character_Turn
-  Guid:
-    Data1: -424011805
-    Data2: 1308568220
-    Data3: 739844782
-    Data4: -1088517513
-  Banks:
-  - {fileID: -4447067293582309571}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 4486
 --- !u!114 &-6511476984359978222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,34 +145,6 @@ MonoBehaviour:
   - Name: Desktop
     Value: 511360
   Exists: 1
---- !u!114 &-5683648230464424961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX_Character_Bosst
-  m_EditorClassIdentifier: 
-  Path: event:/SFX_Character_Bosst
-  Guid:
-    Data1: -1977750226
-    Data2: 1127239693
-    Data3: -1721023098
-    Data4: 1895956868
-  Banks:
-  - {fileID: -4447067293582309571}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters:
-  - {fileID: 7419965652836067564}
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 10000
 --- !u!114 &-5665230913735047756
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +160,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637884958809144998
+  lastModified: 637889204700413588
   FileSizes:
   - Name: Desktop
     Value: 2372
@@ -282,10 +227,10 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637884958809169815
+  lastModified: 637889204700438392
   FileSizes:
   - Name: Desktop
-    Value: 2424
+    Value: 2396
   Exists: 1
 --- !u!114 &-5333143209977131556
 MonoBehaviour:
@@ -431,7 +376,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Character.bank
   Name: SFX_Character
   StudioPath: bank:/SFX_Character
-  lastModified: 637884958810461750
+  lastModified: 637889204702883673
   FileSizes:
   - Name: Desktop
     Value: 772128
@@ -613,7 +558,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/SFX_Environnement.bank
   Name: SFX_Environnement
   StudioPath: bank:/SFX_Environnement
-  lastModified: 637884958810526508
+  lastModified: 637889204703711999
   FileSizes:
   - Name: Desktop
     Value: 879584
@@ -715,7 +660,7 @@ MonoBehaviour:
   Path: Assets/Fmod/Project-kK7FMO/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637884958810380290
+  lastModified: 637889204702268634
   FileSizes:
   - Name: Desktop
     Value: 12408928
@@ -799,7 +744,6 @@ MonoBehaviour:
   - {fileID: 6579582669478356715}
   - {fileID: -4731397758834488462}
   - {fileID: 1131321230921574278}
-  - {fileID: -5683648230464424961}
   - {fileID: -2678609072989343609}
   - {fileID: -7415998148086579486}
   - {fileID: 1372246042319754746}
@@ -808,7 +752,6 @@ MonoBehaviour:
   - {fileID: 1320023868962357652}
   - {fileID: 4850730235968594206}
   - {fileID: -5038296024012684077}
-  - {fileID: -6709054857102125649}
   - {fileID: -9017119712100184581}
   - {fileID: 6274372334187584884}
   - {fileID: 5792864668015871985}
@@ -816,12 +759,14 @@ MonoBehaviour:
   - {fileID: -243794332934171221}
   - {fileID: 3459314649054392955}
   - {fileID: 6523965475753035478}
+  - {fileID: 6000076844413429215}
+  - {fileID: 5678397801462493151}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5665230913735047756}
   StringsBanks:
   - {fileID: -5358663417245275237}
-  cacheTime: 637884958810605600
+  cacheTime: 637889204704158393
   cacheVersion: 10
 --- !u!114 &489184782750731488
 MonoBehaviour:
@@ -1280,6 +1225,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1423
+--- !u!114 &5678397801462493151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Character_Turn
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Character_Turn
+  Guid:
+    Data1: -424011805
+    Data2: 1308568220
+    Data3: 739844782
+    Data4: -1088517513
+  Banks:
+  - {fileID: -4447067293582309571}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 4486
 --- !u!114 &5792864668015871985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1307,6 +1279,34 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 3473
+--- !u!114 &6000076844413429215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX_Character_Boost
+  m_EditorClassIdentifier: 
+  Path: event:/SFX_Character_Boost
+  Guid:
+    Data1: -1977750226
+    Data2: 1127239693
+    Data3: -1721023098
+    Data4: 1895956868
+  Banks:
+  - {fileID: -4447067293582309571}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: 6459156162331931716}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 10000
 --- !u!114 &6274372334187584884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1334,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7010
+--- !u!114 &6459156162331931716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/SFX_Character_Boost/TimeBoost
+  m_EditorClassIdentifier: 
+  Name: TimeBoost
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2439404964
+    data2: 1399517425
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &6523965475753035478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,30 +1417,6 @@ MonoBehaviour:
   MaxDistance: 20
   Length: 2143
 --- !u!114 &6693356877788932418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/SFX_Character_Bosst/TimeBoost
-  m_EditorClassIdentifier: 
-  Name: TimeBoost
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2439404964
-    data2: 1399517425
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
---- !u!114 &7419965652836067564
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
