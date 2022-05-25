@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Orientation : MonoBehaviour
 {
-
+    public bool showDebug;
     public GameObject[] porte;
     public GameObject aiguille;
 
@@ -15,7 +15,11 @@ public class Orientation : MonoBehaviour
     {
         currentPorte = porte[0];
         oldPorte = 0;
-        Debug.Log("old porte =" + oldPorte);
+        if (showDebug)
+        {
+            Debug.Log("old porte =" + oldPorte);
+
+        }
     }
 
     private void FixedUpdate()
@@ -27,10 +31,15 @@ public class Orientation : MonoBehaviour
 
     public void NextPorte()
     {
-        currentPorte = porte[oldPorte + 1];
         oldPorte = oldPorte + 1;
-        Debug.Log("NextPorte");
-        Debug.Log(currentPorte);
-        Debug.Log("oldporte =" + oldPorte);
+        currentPorte = porte[oldPorte];
+
+        if (showDebug)
+        {
+            Debug.Log("NextPorte");
+            Debug.Log(currentPorte);
+            Debug.Log("oldporte =" + oldPorte);
+
+        }
     }
 }

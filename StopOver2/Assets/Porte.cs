@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Porte : MonoBehaviour
 {
-
+    public bool showDebug;
     public Orientation orientation;
 
 
@@ -12,8 +12,14 @@ public class Porte : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("characterhit");
+
             orientation.NextPorte();
+            if (showDebug)
+            {
+                Debug.Log("characterhit");
+
+            }
+            this.gameObject.SetActive(false);
         }
     }
 }
