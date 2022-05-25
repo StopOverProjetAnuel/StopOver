@@ -2931,7 +2931,7 @@ GameObject:
   - component: {fileID: 7265819064864167871}
   - component: {fileID: 7295472899870034148}
   m_Layer: 0
-  m_Name: Point Light (2)
+  m_Name: LightReactor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2945,7 +2945,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3999241053291932423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.026, y: 2.226, z: -8.179}
+  m_LocalPosition: {x: 0.026, y: 2.208, z: -7.749}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 282605674362107385}
@@ -2962,9 +2962,9 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.39488173, g: 0, b: 1, a: 1}
-  m_Intensity: 98.02241
-  m_Range: 5
+  m_Color: {r: 0.6766723, g: 0.5896226, b: 1, a: 1}
+  m_Intensity: 135.2817
+  m_Range: 15
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -3033,7 +3033,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 1231.7859
+  m_Intensity: 1700
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
