@@ -10,6 +10,7 @@ public class ThrusterController : MonoBehaviour
     //Thruster Parameters//
     private float minThrustersForce;
     private float maxThrustersForce;
+    private float thrustersForceMultiplier;
     private AnimationCurve ThrustersForceCurve; //Change the current force from the min to max thruster force by the height of the entity compare to the ground
 
     //Ground Check Parameters//
@@ -41,10 +42,11 @@ public class ThrusterController : MonoBehaviour
     /// <param name="maxForce"> Maximal thruster force </param>
     /// <param name="forceCurve"> Use a curve to smooth between the min and max thruster force by using the floating height </param>
     /// <param name="height"> The floating height </param>
-    public void ThrusterCallEvents(float minForce, float maxForce, AnimationCurve forceCurve, float height)
+    public void ThrusterCallEvents(float minForce, float maxForce, float forceMultiplier, AnimationCurve forceCurve, float height)
     {
         minThrustersForce = minForce;
         maxThrustersForce = maxForce;
+        thrustersForceMultiplier = forceMultiplier;
         ThrustersForceCurve = forceCurve;
         floatingHeight = height;
 

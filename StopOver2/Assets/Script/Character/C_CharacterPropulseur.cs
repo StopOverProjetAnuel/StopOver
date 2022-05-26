@@ -8,11 +8,12 @@ public class C_CharacterPropulseur : MonoBehaviour
     [Header("Thruster Parameters")]
     [SerializeField] private float minThrustersForce = 2.5f;
     [SerializeField] private float maxThrustersForce = 50f;
+    public float thrustersForceMultiplier = 1f;
     [Tooltip("Change the current force from the min to max thruster force by the height of the entity compare to the ground")]
     [SerializeField] private AnimationCurve ThrustersForceCurve;
 
     [Header("Ground Check Parameters")]
-    [SerializeField] private float floatingHeight = 5f;
+    public float floatingHeight = 5f;
     [SerializeField] private LayerMask floatingMask;
 
 
@@ -29,7 +30,7 @@ public class C_CharacterPropulseur : MonoBehaviour
     {
         foreach (ThrusterController thruster in thrusters)
         {
-            thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce, ThrustersForceCurve, floatingHeight);
+            thruster.ThrusterCallEvents(minThrustersForce, maxThrustersForce, thrustersForceMultiplier, ThrustersForceCurve, floatingHeight);
         }
     }
 }

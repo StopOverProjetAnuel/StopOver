@@ -7,6 +7,7 @@ public class C_CharacterBoost : MonoBehaviour
     #region Scripts Used
     private C_CharacterControler _CharacterControler;
     private C_CharacterFX _CharacterFX;
+    private C_CharacterPropulseur _CharacterPropulseur;
     private Fmod_MusicManager musicManager;
     #endregion
 
@@ -32,10 +33,11 @@ public class C_CharacterBoost : MonoBehaviour
     private float accelerationRatio = 0f;
     private bool isAccelerating = false;
 
-    public void IniatiateBoostValue(C_CharacterControler characterControler, C_CharacterFX characterFX, Rigidbody _rb, Fmod_MusicManager mManager) //Work with awake
+    public void IniatiateBoostValue(C_CharacterControler characterControler, C_CharacterFX characterFX, C_CharacterPropulseur characterPropulseur, Rigidbody _rb, Fmod_MusicManager mManager) //Work with awake
     {
         _CharacterControler = characterControler;
         _CharacterFX = characterFX;
+        _CharacterPropulseur = characterPropulseur;
         rb = _rb;
 
         baseSpeed = _CharacterControler.speedPlayer;
@@ -98,16 +100,17 @@ public class C_CharacterBoost : MonoBehaviour
     /// </summary>
     public void HeldBoost()
     {
-        accelerationTimer = Mathf.Clamp(accelerationTimer + Time.fixedDeltaTime / 2, 0f, accelerationDuration);
+        accelerationTimer = Mathf.Clamp(accelerationTimer + Time.fixedDeltaTime, 0f, accelerationDuration);
         accelerationRatio = accelerationTimer / accelerationDuration;
 
         float curveValue = accelerationCurve.Evaluate(accelerationRatio);
-        _CharacterControler.currentSpeed = Mathf.Lerp(baseSpeed, boostSpeed, curveValue);
+        _CharacterControler.speedPlayer = Mathf.Lerp(baseSpeed, boostSpeed, curveValue);
 
         _CharacterFX.ActiveBoost();
         _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
 
         musicManager.boost = 1;
+        _CharacterPropulseur.thrustersForceMultiplier = 1f;
 
         // Si on dépasse la durée d'acceleration
         if (accelerationTimer >= accelerationDuration)
@@ -123,6 +126,7 @@ public class C_CharacterBoost : MonoBehaviour
             _CharacterFX.DesactiveBoostOverheat();
 
             musicManager.boost = 0;
+            _CharacterPropulseur.thrustersForceMultiplier = 1f;
         }
     }
 
@@ -138,11 +142,12 @@ public class C_CharacterBoost : MonoBehaviour
         accelerationRatio = 0f;
         accelerationTimer = 0f;
 
-        _CharacterControler.currentSpeed = baseSpeed;
+        _CharacterControler.speedPlayer = baseSpeed;
 
         _CharacterFX.DesactiveBoost();
 
         musicManager.boost = 0;
+        _CharacterPropulseur.thrustersForceMultiplier = 1f;
     }
 
     /// <summary>

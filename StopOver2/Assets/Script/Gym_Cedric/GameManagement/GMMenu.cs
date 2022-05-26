@@ -71,6 +71,7 @@ public class GMMenu : MonoBehaviour
             gameIsPaused = !gameIsPaused;
         }
 
+        SwapMouseVisible(false);
         CloseOptionMenu();
     }
 
@@ -78,6 +79,7 @@ public class GMMenu : MonoBehaviour
     {
         Time.timeScale = 0f;
         objectMenu.SetActive(true);
+        SwapMouseVisible(true);
     }
     #endregion
 
@@ -132,9 +134,15 @@ public class GMMenu : MonoBehaviour
 
     public void Retry()
     {
+        musicManager.StopMusic();
+        SwapMouseVisible(false);
         Scene currentActiveScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentActiveScene.name);
-        musicManager.StopMusic();
+    }
+
+    private void SwapMouseVisible(bool isVisible)
+    {
+        Cursor.visible = isVisible;
     }
 
 
@@ -145,6 +153,7 @@ public class GMMenu : MonoBehaviour
         if (isWin)
         {
             EndMenuTitle.text = victoryText;
+            SwapMouseVisible(true);
         }
         else
         {
@@ -160,6 +169,7 @@ public class GMMenu : MonoBehaviour
     public void OpenEndMenuButton()
     {
         EndMenuButton.SetActive(true);
+        SwapMouseVisible(true);
     }
 
     public void TriggerEndMenuSave()
@@ -167,6 +177,7 @@ public class GMMenu : MonoBehaviour
         if (!EndMenuSave.activeSelf)
         {
             EndMenuSave.SetActive(true);
+            SwapMouseVisible(true);
         }
         else
         {
@@ -179,6 +190,7 @@ public class GMMenu : MonoBehaviour
         if (!EndMenuLeaderboard.activeSelf)
         {
             EndMenuLeaderboard.SetActive(true);
+            SwapMouseVisible(true);
         }
         else
         {

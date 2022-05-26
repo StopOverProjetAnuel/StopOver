@@ -39,8 +39,9 @@ public class C_CharacterControler : MonoBehaviour
 
     [Header("Dive Parameters")]
     [SerializeField] private float diveAngle = 15f;
+    [SerializeField] private float timeWaitDive = 0.5f;
     [SerializeField] private float timeToDiveAngle = 1f;
-    [SerializeField] private float autoDiveSpeedMul = 1f;
+    [SerializeField] private AnimationCurve smoothDive;
     private float fallTimer;
 
     [Header("Debug Parameters")]
@@ -74,11 +75,12 @@ public class C_CharacterControler : MonoBehaviour
         centerOfMass.transform.localPosition = newComPos;
     }
 
-    public void TriggerRotation(bool isGrounded, float verticalInput, float mouseXInput, Quaternion airAngle)
+    public void TriggerRotation(bool isGrounded, bool isGroundedThrusters, float verticalInput, float mouseXInput, Quaternion airAngle)
     {
         float normSpeed = Mathf.Clamp(rb.velocity.magnitude / maxSpeedForMinRspeed, 0, 1);
         float currentRotateSpeed = Mathf.Lerp(maxRotateSpeed, minRotateSpeed, normSpeed);
         Vector3 rotateValue = Vector3.up * currentRotateSpeed * mouseXInput * Time.fixedDeltaTime;
+        AutoDive(airAngle, isGroundedThrusters);
 
         if (isGrounded)
         {
@@ -89,27 +91,26 @@ public class C_CharacterControler : MonoBehaviour
                 fallTimer = 0f;
             }
         }
-        else
-        {
-            rb.AddTorque(rotateValue * rSAirMultiplier, ForceMode.Acceleration);
-
-            AutoDive(airAngle, isGrounded);
-        }
+        else rb.AddTorque(rotateValue * rSAirMultiplier, ForceMode.Acceleration);
     }
 
     private float timerAngle;
     private void AutoDive(Quaternion airAngle, bool grounded)
     {
-        if (fallTimer >= timeToDiveAngle)
+        if (fallTimer >= timeWaitDive)
         {
-            float timer = Mathf.Clamp01(Time.time - timerAngle + 1);
+            float timer = Mathf.Clamp01((Time.time - timerAngle + timeToDiveAngle) / 2);
+            float smoothTimer = smoothDive.Evaluate(timer);
             Quaternion angleDiveV3 = Quaternion.Euler(diveAngle, rb.transform.rotation.eulerAngles.y, 0f);
-            Quaternion newAngleDive = Quaternion.Lerp(transform.rotation, angleDiveV3, timer);
+
+            Quaternion newAngleDive = Quaternion.Lerp(transform.rotation, angleDiveV3, smoothTimer);
             rb.MoveRotation(newAngleDive);
         }
-        else if (fallTimer < timeToDiveAngle && !grounded) fallTimer += Time.fixedDeltaTime; timerAngle = Time.time + timeToDiveAngle;
-
-        Debug.Log(rb.transform.rotation.eulerAngles.y);
+        else if (fallTimer < timeWaitDive && !grounded)
+        {
+            fallTimer += Time.fixedDeltaTime;
+            timerAngle = Time.time + timeToDiveAngle;
+        }
 
         #region auto dive player with transform rotation (outdated & take priority)
         /*if (fallTimer <= timeToFallPos)

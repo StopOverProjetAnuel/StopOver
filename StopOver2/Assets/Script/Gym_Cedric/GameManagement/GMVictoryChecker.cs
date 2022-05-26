@@ -30,6 +30,7 @@ public class GMVictoryChecker : MonoBehaviour
         {
             Time.timeScale = 0f;
             _GMMenu.OpenEndMenu(false);
+            _GMMenu.OpenEndMenuButton();
         }
     }
 }

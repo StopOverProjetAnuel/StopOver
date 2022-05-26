@@ -81,7 +81,7 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
 
         #region Initiate Module Script Value
-        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, rb, musicManager);
+        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, _CharacterPropulseur, rb, musicManager);
         _CharacterFX.InitiateFXValue(_CharacterBoost);
         _CharacterPropulseur.InitiatePropulsorValue(rb);
         _CharacterControler.InitiateControlValue(rb);
@@ -108,9 +108,9 @@ public class C_CharacterManager : MonoBehaviour
         boostInputUp2 = Input.GetButtonUp(boostInputName2); //Get boost button when press
         #endregion
 
-        _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2, CheckGrounded());
+        _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2, CheckGrounded(distanceNoControl));
 
-        _CharacterFX.TriggerContinuousFX(CheckGrounded());
+        _CharacterFX.TriggerContinuousFX(CheckGrounded(distanceNoControl));
         _CharacterFX.HandleTrailPlayer(currentSpeed);
         float mouseXValue = Mathf.Clamp(this.mouseXValue, -1, 1);
         _CharacterAnime.charaAnimCallEvents(mouseXValue);
@@ -125,20 +125,20 @@ public class C_CharacterManager : MonoBehaviour
     {
         rb.centerOfMass = centerOfMass.transform.localPosition; //Place center of mass (need cause all the "mass" are at the back of the pivot)
 
-        CheckGrounded();
+        CheckGrounded(distanceNoControl);
 
-        _CharacterControler.TriggerControl(verticalValue, horizontalValue, CheckGrounded(), centerOfMass);
+        _CharacterControler.TriggerControl(verticalValue, horizontalValue, CheckGrounded(distanceNoControl), centerOfMass);
         _CharacterPropulseur.Propulsing();
-        _CharacterControler.TriggerRotation(CheckGrounded(), verticalValue, mouseXValue, airAngle);
-        _CharacterControler.GravityFall(CheckGrounded(), rb);
+        _CharacterControler.TriggerRotation(CheckGrounded(distanceNoControl), CheckGrounded(_CharacterPropulseur.floatingHeight), verticalValue, mouseXValue, airAngle);
+        _CharacterControler.GravityFall(CheckGrounded(distanceNoControl), rb);
         _CharacterCalculAngle.calculAngleCallEvents();
     }
 
 
-    public bool CheckGrounded()
+    public bool CheckGrounded(float rangeCheck)
     {
         RaycastHit groundHit;
-        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, distanceNoControl, layerGround.value))
+        if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, rangeCheck, layerGround.value))
         {
             distanceGroundChara = groundHit.distance;
             LastAirAngleChara();
