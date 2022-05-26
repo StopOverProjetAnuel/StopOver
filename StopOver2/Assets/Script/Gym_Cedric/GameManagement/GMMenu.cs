@@ -5,10 +5,12 @@ using TMPro;
 
 public class GMMenu : MonoBehaviour
 {
+    private Fmod_MusicManager musicManager;
+
     [Header("Pause & Option Menu")]
-    static bool gameIsPaused = false;
     [SerializeField] GameObject objectMenu;
-    static bool objectOptionMenuIsOpen = false;
+    private static bool gameIsPaused = false;
+    private static bool objectOptionMenuIsOpen = false;
     [SerializeField] GameObject objectOptionMenu;
     [SerializeField] GameObject[] objectOptionMenuPanels;
 
@@ -29,6 +31,7 @@ public class GMMenu : MonoBehaviour
     public void InitiateGMMenu()
     {
         ResumeGame();
+        musicManager = FindObjectOfType<Fmod_MusicManager>();
     }
 
     public void TriggerGMMenu()
@@ -49,10 +52,12 @@ public class GMMenu : MonoBehaviour
             if (gameIsPaused)
             {
                 PauseGame();
+                musicManager.pause = 1;
             }
             else
             {
                 ResumeGame();
+                musicManager.pause = 0;
             }
         }
     }
@@ -122,12 +127,14 @@ public class GMMenu : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+        musicManager.StopMusic();
     }
 
     public void Retry()
     {
         Scene currentActiveScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentActiveScene.name);
+        musicManager.StopMusic();
     }
 
 

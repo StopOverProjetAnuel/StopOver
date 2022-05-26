@@ -2,14 +2,15 @@ using UnityEngine;
 
 public class C_CharacterBoost : MonoBehaviour
 {
-    [SerializeField] bool debug = true;
+    [SerializeField] private bool debug = true;
 
     #region Scripts Used
-    C_CharacterControler _CharacterControler;
-    C_CharacterFX _CharacterFX;
+    private C_CharacterControler _CharacterControler;
+    private C_CharacterFX _CharacterFX;
+    private Fmod_MusicManager musicManager;
     #endregion
 
-    Rigidbody rb;
+    private Rigidbody rb;
 
     [Header("Speed Parameters")]
     [SerializeField] private float boostSpeed = 15f;
@@ -17,27 +18,29 @@ public class C_CharacterBoost : MonoBehaviour
     private float baseSpeed = 5f;
 
     [Header("Overheat Parameters")]
-    [SerializeField] Vector2 cooldownDurationMinMax = new Vector2(1f, 2.5f);
-    [SerializeField] float overheatCooldown = 10f;
+    [SerializeField] private Vector2 cooldownDurationMinMax = new Vector2(1f, 2.5f);
+    [SerializeField] private float overheatCooldown = 10f;
 
-    [SerializeField] float accelerationDuration = 1.75f;
+    [SerializeField] private float accelerationDuration = 1.75f;
 
-    [SerializeField] AnimationCurve accelerationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+    [SerializeField] private AnimationCurve accelerationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
-    float accelerationTimer = 0f;
-    float cooldownTimer = 0f;
-    bool overheat = false;
+    private float accelerationTimer = 0f;
+    private float cooldownTimer = 0f;
+    private bool overheat = false;
 
-    float accelerationRatio = 0f;
-    bool isAccelerating = false;
+    private float accelerationRatio = 0f;
+    private bool isAccelerating = false;
 
-    public void IniatiateBoostValue(C_CharacterControler characterControler, C_CharacterFX characterFX, Rigidbody _rb) //Work with awake
+    public void IniatiateBoostValue(C_CharacterControler characterControler, C_CharacterFX characterFX, Rigidbody _rb, Fmod_MusicManager mManager) //Work with awake
     {
         _CharacterControler = characterControler;
         _CharacterFX = characterFX;
         rb = _rb;
 
         baseSpeed = _CharacterControler.speedPlayer;
+
+        musicManager = mManager;
     }
 
     public void TriggerBoost(bool boostBegan, bool boostHeld, bool boostEnd, bool isGrounded)
@@ -104,6 +107,8 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX.ActiveBoost();
         _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
 
+        musicManager.boost = 1;
+
         // Si on dépasse la durée d'acceleration
         if (accelerationTimer >= accelerationDuration)
         {
@@ -116,6 +121,8 @@ public class C_CharacterBoost : MonoBehaviour
 
             _CharacterFX.DesactiveBoost();
             _CharacterFX.DesactiveBoostOverheat();
+
+            musicManager.boost = 0;
         }
     }
 
@@ -134,6 +141,8 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterControler.currentSpeed = baseSpeed;
 
         _CharacterFX.DesactiveBoost();
+
+        musicManager.boost = 0;
     }
 
     /// <summary>

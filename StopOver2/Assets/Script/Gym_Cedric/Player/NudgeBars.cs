@@ -1,11 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NudgeBars : MonoBehaviour
 {
+    private Fmod_MusicManager musicManager;
+
     [Header("Player Information")]
-    public GameObject m_Player;
+    [SerializeField] private GameObject m_Player;
     private Rigidbody rb;
 
     [HideInInspector] public int nbState;
@@ -20,16 +20,18 @@ public class NudgeBars : MonoBehaviour
     private CollidedPlayer collidedPlayer;
 
     [Header("Debug Option")]
-    public bool showDebug = false;
+    private bool showDebug = false;
 
     private void Awake()
     {
         rb = m_Player.GetComponent<Rigidbody>();
+        musicManager = FindObjectOfType<Fmod_MusicManager>();
     }
 
     private void Update()
     {
         NudgeBarsState();
+        musicManager.isCollecting = false;
     }
 
     private void NudgeBarsState()
@@ -67,6 +69,7 @@ public class NudgeBars : MonoBehaviour
             if (parent.CompareTag("Destructible"))
             {
                 collidedPlayer.TriggerCollisionPlayer(rb);
+                musicManager.isCollecting = true;
                 #region Debug
                 if (showDebug)
                 {
@@ -81,6 +84,7 @@ public class NudgeBars : MonoBehaviour
             {
                 collidedPlayer = other.GetComponent<CollidedPlayer>();
                 collidedPlayer.TriggerCollisionPlayer(rb);
+                musicManager.isCollecting = true;
                 #region Debug
                 if (showDebug)
                 {

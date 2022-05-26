@@ -16,6 +16,7 @@ public class C_CharacterManager : MonoBehaviour
     private C_CharacterCalculAngle _CharacterCalculAngle;
     private C_CharacterFX _CharacterFX;
     private C_CharacterAnim _CharacterAnime;
+    private Fmod_MusicManager musicManager;
     #endregion
 
     [Header("Object Require")]
@@ -51,6 +52,10 @@ public class C_CharacterManager : MonoBehaviour
     private float distanceGroundChara;
     private bool isOnAir;
     private Quaternion airAngle = Quaternion.identity;
+
+    [Header("Music Parameters")]
+    [Tooltip("When the player hit that value with his speed (velocity) will trigger the max music intensity")]
+    [SerializeField] private float maxMusicSpeed = 110f;
     #endregion
 
 
@@ -64,6 +69,7 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterCalculAngle = GetComponent<C_CharacterCalculAngle>();
         _CharacterFX = GetComponent<C_CharacterFX>();
         _CharacterAnime = GetComponent<C_CharacterAnim>();
+        musicManager = FindObjectOfType<Fmod_MusicManager>();
         #endregion
 
         #region Get Object
@@ -75,7 +81,7 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
 
         #region Initiate Module Script Value
-        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, rb);
+        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, rb, musicManager);
         _CharacterFX.InitiateFXValue(_CharacterBoost);
         _CharacterPropulseur.InitiatePropulsorValue(rb);
         _CharacterControler.InitiateControlValue(rb);
@@ -108,11 +114,15 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterFX.HandleTrailPlayer(currentSpeed);
         float mouseXValue = Mathf.Clamp(this.mouseXValue, -1, 1);
         _CharacterAnime.charaAnimCallEvents(mouseXValue);
+
+        currentSpeed = rb.velocity.magnitude;
+
+        float currentMusicIntensity = Mathf.Clamp01(currentSpeed / maxMusicSpeed) * 40;
+        musicManager.intensity = currentMusicIntensity;
     }
 
     private void FixedUpdate()
     {
-        currentSpeed = rb.velocity.magnitude;
         rb.centerOfMass = centerOfMass.transform.localPosition; //Place center of mass (need cause all the "mass" are at the back of the pivot)
 
         CheckGrounded();
