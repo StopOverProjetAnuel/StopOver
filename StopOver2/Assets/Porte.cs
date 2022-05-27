@@ -6,6 +6,8 @@ public class Porte : MonoBehaviour
 {
     public bool showDebug;
     public Orientation orientation;
+    public bool secretPorte;
+    public int nbPorteBetweenNextPorte;
 
 
     private void OnTriggerEnter(Collider other)
@@ -13,7 +15,15 @@ public class Porte : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            orientation.NextPorte();
+            if (secretPorte)
+            {
+                orientation.NextPorteSecret(nbPorteBetweenNextPorte);
+            }
+            else
+            {
+                orientation.NextPorte();
+
+            }
             if (showDebug)
             {
                 Debug.Log("characterhit");

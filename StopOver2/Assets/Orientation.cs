@@ -42,4 +42,10 @@ public class Orientation : MonoBehaviour
 
         }
     }
+
+    public void NextPorteSecret(int nbPorteBetweenNextPorte)
+    {
+        oldPorte = oldPorte + nbPorteBetweenNextPorte;
+        currentPorte = porte[oldPorte];
+    }
 }

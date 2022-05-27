@@ -81,7 +81,7 @@ public class IAKumpo : MonoBehaviour
                 ElectAlpha();
                 Escape_Player();
                 Alpha_GoAway();
-                Debug.Log(Destination);
+                //Debug.Log(Destination);
 
             break;
 
