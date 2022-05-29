@@ -11,6 +11,7 @@ public class CollidedPlayer : MonoBehaviour
     private NudgeBars nudgeBars;
 
     [Header("Parameters")]
+    public GameObject roche;
     public bool isDropOnDestroy = false;
     public static GameObject droppedItem;
     public float resourceGive;
@@ -65,8 +66,8 @@ public class CollidedPlayer : MonoBehaviour
             storedVelocity.x *= ifNotRequireSpeedMultiplier;
             storedVelocity.z *= ifNotRequireSpeedMultiplier;
             rb.velocity = storedVelocity;
-            GettingDestroy();
             InstantiateVFX();
+            GettingDestroy();
         }
 
         #region Debug
@@ -90,7 +91,7 @@ public class CollidedPlayer : MonoBehaviour
             item.GetComponent<PickUp>().ressourceGive = resourceGive;
         }
 
-        gameObject.SetActive(false);
+        roche.SetActive(false);
 
         #region Debug
         if (showDebug)
