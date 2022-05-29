@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4109240326927110087}
   - component: {fileID: 2921416400383561679}
   - component: {fileID: 7859155144981216189}
+  - component: {fileID: 4106190744798382721}
   m_Layer: 14
   m_Name: Roche3
   m_TagString: Destructible
@@ -82,6 +83,19 @@ MonoBehaviour:
   ifNotRequireSpeedMultiplier: 0.75
   ID: Rock
   showDebug: 0
+--- !u!65 &4106190744798382721
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2979772805992218356}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12.508592, y: 10.805478, z: 13.298613}
+  m_Center: {x: -0.07149649, y: 4.6026673, z: 0.51321125}
 --- !u!64 &7302678122695100011
 MeshCollider:
   m_ObjectHideFlags: 0
