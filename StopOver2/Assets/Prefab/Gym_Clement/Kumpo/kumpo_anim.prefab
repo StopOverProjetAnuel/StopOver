@@ -326,6 +326,7 @@ GameObject:
   - component: {fileID: 6111126148018507794}
   - component: {fileID: 2322253055985209649}
   - component: {fileID: 335256179060436739}
+  - component: {fileID: 6042108396454471258}
   m_Layer: 14
   m_Name: kumpo_anim
   m_TagString: Destructible
@@ -439,11 +440,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDropOnDestroy: 0
   resourceGive: 100
-  resistanceLevel: 2
+  resistanceLevel: 1
   isDestroyWithRequirement: 1
   ifNotRequireSpeedMultiplier: 0.75
   ID: Animal
   showDebug: 0
+--- !u!64 &6042108396454471258
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007358714685043234}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &2121866637256346623
 GameObject:
   m_ObjectHideFlags: 0
