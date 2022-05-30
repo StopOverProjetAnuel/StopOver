@@ -4,6 +4,7 @@ public class C_CharacterControler : MonoBehaviour
 {
     #region Varibles
     private C_CharacterBoost _CharacterBoost;
+    private C_CharacterPropulseur _CharacterPropulseur;
     private Rigidbody rb;
 
     [Header("Speed Parameters")]
@@ -32,7 +33,12 @@ public class C_CharacterControler : MonoBehaviour
     [Header("Fall Parameters")]
     [SerializeField] private float maxFallAcceleration = 110f;
     [SerializeField] private float minFallAcceleration = 50f;
-    [SerializeField] private float currentFallAcceleration = 50f;
+    [Tooltip("When the player hit the max height acceleration, the current fall acceleration can hit the max fall acceleration")]
+    [SerializeField] private float maxHeightAcceleration = 20f;
+    private float currentMaxFallAcceleration = 50f;
+    private float currentFallAcceleration = 50f;
+    private float accelerationFallTimer = 0f;
+    private float playerHeight = 0f;
     [SerializeField] private AnimationCurve curveFallAcceleration;
     [SerializeField] private float dragAirForce;
     [SerializeField] private float dragGroundForce;
@@ -51,12 +57,15 @@ public class C_CharacterControler : MonoBehaviour
     public void InitiateControlValue(Rigidbody rigidbody)
     {
         _CharacterBoost = GetComponent<C_CharacterBoost>();
+        _CharacterPropulseur = GetComponent<C_CharacterPropulseur>();
         rb = rigidbody;
     }
 
-    public void TriggerControl(float verticalInput, float horizontalInput, bool isGrounded, GameObject centerOfMass)
+    public void TriggerControl(float verticalInput, float horizontalInput, float currentHeight, bool isGrounded, GameObject centerOfMass)
     {
         currentAirMultiplier = (isGrounded) ? 1f : speedAirMultiplier;
+
+        playerHeight = currentHeight;
 
         if (Input.GetButtonDown("Vertical") && Input.GetAxis("Vertical") > 0 && rb.velocity.magnitude <= 10f) rb.AddRelativeForce(0, 0, firstImpulseForce * currentAirMultiplier, ForceMode.Impulse);
 
@@ -151,6 +160,9 @@ public class C_CharacterControler : MonoBehaviour
             rb.drag = dragAirForce;
             rb.AddForce(Vector3.down * currentFallAcceleration, ForceMode.Force);
 
+            float heightRatio = Mathf.Clamp01(playerHeight - _CharacterPropulseur.floatingHeight / maxHeightAcceleration - _CharacterPropulseur.floatingHeight);
+            currentMaxFallAcceleration = Mathf.Lerp(minFallAcceleration, maxFallAcceleration, heightRatio);
+
             if (currentFallAcceleration != maxFallAcceleration)
             {
                 IncreesFallAcceleration();
@@ -158,11 +170,10 @@ public class C_CharacterControler : MonoBehaviour
         }
     }
 
-    float accelerationFallTimer = 0f;
     private void IncreesFallAcceleration()
     {
         accelerationFallTimer = Mathf.Clamp(accelerationFallTimer + Time.fixedDeltaTime / 2, 0, 1);
         float a = curveFallAcceleration.Evaluate(accelerationFallTimer);
-        currentFallAcceleration = Mathf.Lerp(minFallAcceleration, maxFallAcceleration, a);
+        currentFallAcceleration = Mathf.Lerp(minFallAcceleration, currentMaxFallAcceleration, a);
     }
 }

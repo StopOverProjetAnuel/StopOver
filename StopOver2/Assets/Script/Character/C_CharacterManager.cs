@@ -42,9 +42,9 @@ public class C_CharacterManager : MonoBehaviour
 
     [Header("Speed Parameters")]
     [SerializeField] private float currentSpeed;
-    [SerializeField] private float basseSpeed;
-    [SerializeField] private float moyenSpeed;
-    [SerializeField] private float hautSpeed;
+    [SerializeField] private float lowSpeed;
+    [SerializeField] private float midSpeed;
+    [SerializeField] private float highSpeed;
 
     [Header("GroundChecker Parameters")]
     [SerializeField] private LayerMask layerGround;
@@ -127,7 +127,7 @@ public class C_CharacterManager : MonoBehaviour
 
         CheckGrounded(distanceNoControl);
 
-        _CharacterControler.TriggerControl(verticalValue, horizontalValue, CheckGrounded(distanceNoControl), centerOfMass);
+        _CharacterControler.TriggerControl(verticalValue, horizontalValue, distanceGroundChara, CheckGrounded(distanceNoControl), centerOfMass);
         _CharacterPropulseur.Propulsing();
         _CharacterControler.TriggerRotation(CheckGrounded(distanceNoControl), CheckGrounded(_CharacterPropulseur.floatingHeight), verticalValue, mouseXValue, airAngle);
         _CharacterControler.GravityFall(CheckGrounded(distanceNoControl), rb);
