@@ -21,6 +21,7 @@ public class C_CharacterControler : MonoBehaviour
     [SerializeField] private float maxSpeedRequireFirstImpulse = 25f;
     [HideInInspector] public float currentSpeed;
     private float currentAirMultiplier = 1f;
+    [HideInInspector] public float boostMultiplier = 1f;
 
     [Header("Rotation Parameters")]
     [SerializeField] private float maxRotateSpeed = 1440f;
@@ -76,7 +77,7 @@ public class C_CharacterControler : MonoBehaviour
             Vector3 normInputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
             currentSpeed = speedPlayer * currentBackwardMultiplier * currentAirMultiplier;
             Vector3 forceDir = normInputDir * currentSpeed;
-            forceDir.x *= strafeSpeedMultiplier;
+            forceDir.x *= strafeSpeedMultiplier * boostMultiplier;
             rb.AddRelativeForce(forceDir, ForceMode.Acceleration);
         }
 

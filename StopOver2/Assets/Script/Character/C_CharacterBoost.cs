@@ -110,6 +110,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
 
         musicManager.boost = 1;
+        _CharacterControler.boostMultiplier = 0f;
         _CharacterPropulseur.thrustersForceMultiplier = 1f;
 
         // Si on dépasse la durée d'acceleration
@@ -126,6 +127,7 @@ public class C_CharacterBoost : MonoBehaviour
             _CharacterFX.DesactiveBoostOverheat();
 
             musicManager.boost = 0;
+            _CharacterControler.boostMultiplier = 1f;
             _CharacterPropulseur.thrustersForceMultiplier = 1f;
         }
     }
@@ -147,6 +149,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX.DesactiveBoost();
 
         musicManager.boost = 0;
+        _CharacterControler.boostMultiplier = 1f;
         _CharacterPropulseur.thrustersForceMultiplier = 1f;
     }
 
