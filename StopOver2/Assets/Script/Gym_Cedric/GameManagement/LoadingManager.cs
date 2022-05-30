@@ -9,7 +9,7 @@ public class LoadingManager : MonoBehaviour
 {
     [Header("Parameters")]
     [SerializeField] private TextMeshProUGUI doingText;
-    [SerializeField] private Slider loadingBar;
+    [SerializeField] private Image loadingBar;
     [SerializeField] private TextMeshProUGUI loadingProgressText;
 
 
@@ -28,7 +28,7 @@ public class LoadingManager : MonoBehaviour
         {
             float progress = Mathf.Clamp01(gameLevel.progress / 0.9f);
 
-            loadingBar.value = progress;
+            loadingBar.fillAmount = progress;
             loadingProgressText.text = Mathf.Round(progress * 100f) + "%";
 
             doingText.text = (gameLevel.progress > 0.9f) ? "Initiating" : "Loading";
