@@ -1390,9 +1390,7 @@ MonoBehaviour:
   m_Label: Spawn system
   m_Data: {fileID: 8926484042661614722}
   m_InputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661614718}
-      slotIndex: 0
+  - link: []
   - link: []
   m_OutputFlowSlot:
   - link:
@@ -5146,9 +5144,7 @@ MonoBehaviour:
   m_InputFlowSlot:
   - link: []
   m_OutputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661614596}
-      slotIndex: 0
+  - link: []
   eventName: BoostReady
 --- !u!114 &8926484042661614719
 MonoBehaviour:

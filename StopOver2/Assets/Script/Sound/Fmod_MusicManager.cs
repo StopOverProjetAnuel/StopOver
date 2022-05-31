@@ -59,7 +59,6 @@ public class Fmod_MusicManager : MonoBehaviour
         continueCollecting = (continueTime > 0f) ? true : false; //Will "say" the player continue collecting if he collect thing in less than 1sec
 
         waitResources = (continueCollecting) ? Mathf.Clamp(waitResources + Time.deltaTime, 0f, currentTimeActive) : Mathf.Clamp(waitResources - Time.deltaTime, 0f, currentTimeActive); //Increase and decrease a timer to play or stop the bank
-        Debug.Log("waitResources = " + waitResources);
 
         if (waitResources >= timeBeforeActiveResources)
         {

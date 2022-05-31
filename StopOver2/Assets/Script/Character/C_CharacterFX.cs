@@ -13,7 +13,7 @@ public class C_CharacterFX : MonoBehaviour
     [Header("Boost Parameters")]
     public Renderer flameIntShader;
     public Renderer flameExtShader;
-    public VisualEffect boostReadyVFX;
+    public GameObject boostReadyVFX;
     public VisualEffect distorsionVFX;
     public GameObject[] overheatingObjects = new GameObject[4];
     #region OverheatingVFX
@@ -76,24 +76,27 @@ public class C_CharacterFX : MonoBehaviour
         flameIntShader.sharedMaterial.SetFloat("_Top_Flame_Gradient__Stop_flame_", 0f);
         flameIntShader.sharedMaterial.SetFloat("_BoostFlame", 0.675f);
         distorsionVFX.SendEvent("BoostOFF");
+        boostReadyVFX.SetActive(true);
 
         sparkEngineVFX.SendEvent("BoostOFF");
         smokeEngineVFX.SendEvent("SmokeEngineOFF");
         overheatingDistortionVFX.SendEvent("OverheatingOFF");
     }
 
-    public void ActiveBoost()
+    public void EnableBoost()
     {
         flameIntShader.sharedMaterial.SetFloat("_BoostFlame", 1f);
         flameExtShader.sharedMaterial.SetFloat("_BoostFlame", 1f);
         distorsionVFX.SendEvent("BoostON");
+        boostReadyVFX.SetActive(true);
     }
 
-    public void DesactiveBoost()
+    public void DisableBoost()
     {
         flameIntShader.sharedMaterial.SetFloat("_Top_Flame_Gradient__Stop_flame_", 1f);
         flameExtShader.sharedMaterial.SetFloat("_BoostFlame", 0f);
         distorsionVFX.SendEvent("BoostOFF");
+        boostReadyVFX.SetActive(false);
     }
 
     /////////////////////////////
