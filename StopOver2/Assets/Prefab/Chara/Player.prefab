@@ -1009,20 +1009,29 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2.8429244
+      outSlope: 2.8429244
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.034013607
+    - serializedVersion: 3
+      time: 0.6
+      value: 0.9210273
+      inSlope: 0.29486734
+      outSlope: 0.29486734
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.14965983
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.88518673
+      outSlope: 0.88518673
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.159864
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -1155,6 +1164,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  timePreventionUngrounded: 2
 --- !u!114 &282605674362107388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1169,7 +1179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flameIntShader: {fileID: 1453978769018892262}
   flameExtShader: {fileID: 1453978770465780438}
-  boostReadyVFX: {fileID: 282605674510240052}
+  boostReadyVFX: {fileID: 282605674510240049}
   distorsionVFX: {fileID: 282605674607355286}
   overheatingObjects:
   - {fileID: 282605675881684217}
