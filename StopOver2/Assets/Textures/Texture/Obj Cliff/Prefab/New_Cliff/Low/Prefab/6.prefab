@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2317304208815313983
 Transform:
@@ -89,6 +89,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 98d9772ff9bc5794980ea2d70757b7d3, type: 3}
       propertyPath: m_Name
       value: Cliff_6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 98d9772ff9bc5794980ea2d70757b7d3, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98d9772ff9bc5794980ea2d70757b7d3, type: 3}
