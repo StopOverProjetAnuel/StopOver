@@ -20,7 +20,7 @@ MonoBehaviour:
     x: -2794
     y: -743
     width: 4171
-    height: 3602
+    height: 3582
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,14 +120,10 @@ MonoBehaviour:
   m_InputSlots: []
   m_OutputSlots: []
   m_Label: Spawn system
-  m_Data: {fileID: 8926484042661615111}
+  m_Data: {fileID: 0}
   m_InputFlowSlot:
-  - link:
-    - context: {fileID: 8926484042661615110}
-      slotIndex: 0
-  - link:
-    - context: {fileID: 8926484042661615112}
-      slotIndex: 0
+  - link: []
+  - link: []
   m_OutputFlowSlot:
   - link:
     - context: {fileID: 8926484042661614558}
@@ -11344,8 +11340,6 @@ MonoBehaviour:
   - link:
     - context: {fileID: 8926484042661614935}
       slotIndex: 0
-    - context: {fileID: 8926484042661614555}
-      slotIndex: 0
   eventName: SmokeOn
 --- !u!114 &8926484042661615111
 MonoBehaviour:
@@ -11368,7 +11362,6 @@ MonoBehaviour:
   title: 
   m_Owners:
   - {fileID: 8926484042661615110}
-  - {fileID: 8926484042661614555}
 --- !u!114 &8926484042661615112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11396,8 +11389,6 @@ MonoBehaviour:
   m_OutputFlowSlot:
   - link:
     - context: {fileID: 8926484042661614935}
-      slotIndex: 1
-    - context: {fileID: 8926484042661614555}
       slotIndex: 1
   eventName: SmokeOff
 --- !u!114 &8926484042661615113

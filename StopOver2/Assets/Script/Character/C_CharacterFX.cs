@@ -27,8 +27,10 @@ public class C_CharacterFX : MonoBehaviour
 
     [Header("Vehicle Parameters")]
     [SerializeField] private VisualEffect smokeShip;
-    [SerializeField] private TrailRenderer[] trails = new TrailRenderer[4];
-    [SerializeField] private float trailSpeedThreshold = 45f;
+    [SerializeField] private VisualEffect waterShip;
+    [SerializeField] private VisualEffect splashWaterShip;
+    [SerializeField] private TrailRenderer[] trails;
+    public float newTimeTrail = 0f;
 
     [Header("FuelTank Parameters")]
     [SerializeField] Renderer fluideShader;
@@ -60,10 +62,11 @@ public class C_CharacterFX : MonoBehaviour
         #endregion
     }
 
-    public void TriggerContinuousFX(bool isGrounded)
+    public void TriggerContinuousFX(bool isGrounded, string groundTag)
     {
         FuelTankAmount();
-        TriggerSmokeShip(isGrounded);
+
+        TriggerSmokeShip(isGrounded, groundTag);
     }
 
     public void TriggerEnterCollision()
@@ -103,6 +106,18 @@ public class C_CharacterFX : MonoBehaviour
     public void SupersonicBoom()
     {
         SupersonicBoomVFX.SendEvent("SuperSonicStart");
+    }
+
+    float timeTrail = 0f;
+    float refTrail;
+    public void TrailsBoosted()
+    {
+        timeTrail = Mathf.SmoothDamp(timeTrail, newTimeTrail, ref refTrail, 1f);
+
+        for (int i = 0; i < trails.Length; i++)
+        {
+            trails[i].time = timeTrail;
+        }
     }
 
     /////////////////////////////
@@ -178,19 +193,28 @@ public class C_CharacterFX : MonoBehaviour
         #endregion
     }
 
-    private bool isSmokePlay = false;
-
-    private void TriggerSmokeShip(bool isGrounded)
+    private void TriggerSmokeShip(bool isGrounded, string groundTag)
     {
-        if (isGrounded && !isSmokePlay)
+        if (isGrounded)
         {
-            smokeShip.SendEvent("SmokeOn");
-            isSmokePlay = true;
+            if (groundTag == "Water")
+            {
+                smokeShip.enabled = false;
+                waterShip.enabled = true;
+                splashWaterShip.enabled = true;
+            }
+            else
+            {
+                smokeShip.enabled = true;
+                waterShip.enabled = false;
+                splashWaterShip.enabled = false;
+            }
         }
         else
         {
-            smokeShip.SendEvent("SmokeOff");
-            isSmokePlay = false;
+            smokeShip.enabled = false;
+            waterShip.enabled = false;
+            splashWaterShip.enabled = false;
         }
     }
 
@@ -199,29 +223,6 @@ public class C_CharacterFX : MonoBehaviour
 
     }
 
-    public void HandleTrailPlayer(float currentSpeed)
-    {
-        if (trailSpeedThreshold > currentSpeed)
-        {
-            for (int i = 0; i < trails.Length; i++)
-            {
-                if(trails[i].emitting)
-                {
-                    trails[i].emitting = false;
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < trails.Length; i++)
-            {
-                if (!trails[i].emitting)
-                {
-                    trails[i].emitting = true;
-                }
-            }
-        }
-    }
 
     public void TriggerCollisionFX(float dot)
     {

@@ -50,6 +50,7 @@ public class C_CharacterManager : MonoBehaviour
     [SerializeField] private LayerMask layerGround;
     [SerializeField] private float distanceNoControl;
     private float distanceGroundChara;
+    private string groundTag;
     private bool isOnAir;
     private Quaternion airAngle = Quaternion.identity;
 
@@ -110,8 +111,7 @@ public class C_CharacterManager : MonoBehaviour
 
         _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2, CheckGrounded(distanceNoControl));
 
-        _CharacterFX.TriggerContinuousFX(CheckGrounded(distanceNoControl));
-        _CharacterFX.HandleTrailPlayer(currentSpeed);
+        _CharacterFX.TriggerContinuousFX(CheckGrounded(distanceNoControl), groundTag);
         float mouseXValue = Mathf.Clamp(this.mouseXValue, -1, 1);
         _CharacterAnime.charaAnimCallEvents(mouseXValue);
 
@@ -141,6 +141,7 @@ public class C_CharacterManager : MonoBehaviour
         if (Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, rangeCheck, layerGround.value))
         {
             distanceGroundChara = groundHit.distance;
+            groundTag = groundHit.transform.tag;
             LastAirAngleChara();
             return true;
         }

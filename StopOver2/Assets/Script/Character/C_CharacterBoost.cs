@@ -56,6 +56,7 @@ public class C_CharacterBoost : MonoBehaviour
     {
         CheckBoostGrounded(isGrounded);
         BoostHandler(boostBegan, boostHeld, boostEnd);
+        _CharacterFX.TrailsBoosted();
     }
 
     /// <summary>
@@ -136,6 +137,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterControler.speedPlayer = Mathf.Lerp(baseSpeed, boostSpeed, curveValue);
 
         _CharacterFX.EnableBoost();
+        _CharacterFX.newTimeTrail = 1f;
         _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
 
         musicManager.boost = 1;
@@ -153,6 +155,7 @@ public class C_CharacterBoost : MonoBehaviour
             _CharacterControler.speedPlayer = baseSpeed;
 
             _CharacterFX.DisableBoost();
+            _CharacterFX.newTimeTrail = 0f;
             _CharacterFX.DesactiveBoostOverheat();
 
             musicManager.boost = 0;
@@ -176,6 +179,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterControler.speedPlayer = baseSpeed;
 
         _CharacterFX.DisableBoost();
+        _CharacterFX.newTimeTrail = 0f;
 
         musicManager.boost = 0;
         _CharacterControler.boostMultiplier = 1f;
