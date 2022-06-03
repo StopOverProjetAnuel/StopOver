@@ -13,12 +13,18 @@ MonoBehaviour:
   m_Name: VfxToPool
   m_EditorClassIdentifier: 
   objectPool:
-  - ID: Plant
-    prefab: {fileID: 5408972969370430797, guid: 23368979caa69a34aa4e0e3cc513d166, type: 3}
+  - ID: PlantShort
+    prefab: {fileID: 5619063903603666813, guid: 28d1a68fb6979fb4689796be8750f4e9, type: 3}
     initialQuantity: 15
+  - ID: PlantMedium
+    prefab: {fileID: 5619063903603666813, guid: b083c2cf3cef02143bdaf8ff3b247385, type: 3}
+    initialQuantity: 10
+  - ID: PlantBig
+    prefab: {fileID: 5619063903603666813, guid: 5bca25712e6d5b9409ae96f9af9403eb, type: 3}
+    initialQuantity: 5
   - ID: Rock
     prefab: {fileID: 6615753602837956203, guid: d2c961ef6ede04f44bde045acec87a64, type: 3}
-    initialQuantity: 10
+    initialQuantity: 5
   - ID: Animal
     prefab: {fileID: 3266797160051220057, guid: e9a8a0767ff76f14d89e8c028a534ff0, type: 3}
     initialQuantity: 5
