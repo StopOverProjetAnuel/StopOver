@@ -1136,8 +1136,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  boostSpeed: 750
-  accelerationInitialImpulse: 100
+  boostSpeed: 650
+  accelerationInitialImpulse: 125
   cooldownDurationMinMax: {x: 0.7, y: 2.5}
   overheatCooldown: 4
   accelerationDuration: 4
@@ -1147,25 +1147,25 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.88569593
+      outSlope: 0.88569593
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.06545454
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 3.2193391
-      outSlope: 3.2193391
+      inSlope: 2.597064
+      outSlope: 2.597064
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.028571427
+      inWeight: 0.0418182
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  timePreventionUngrounded: 2
+  timePreventionUngrounded: 1
 --- !u!114 &282605674362107388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1182,6 +1182,7 @@ MonoBehaviour:
   flameExtShader: {fileID: 1453978770465780438}
   boostReadyVFX: {fileID: 282605674510240049}
   distorsionVFX: {fileID: 282605674607355286}
+  SupersonicBoomVFX: {fileID: 1958413150138213809}
   overheatingObjects:
   - {fileID: 282605675881684217}
   - {fileID: 282605674923715020}

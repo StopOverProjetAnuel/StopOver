@@ -119,6 +119,7 @@ public class C_CharacterBoost : MonoBehaviour
     {
         rb.AddRelativeForce(0, 0, accelerationInitialImpulse, ForceMode.Impulse);
         _CharacterFX.EnableBoost();
+        _CharacterFX.SupersonicBoom();
 
         isAccelerating = true;
     }

@@ -15,6 +15,7 @@ public class C_CharacterFX : MonoBehaviour
     public Renderer flameExtShader;
     public GameObject boostReadyVFX;
     public VisualEffect distorsionVFX;
+    [SerializeField] private VisualEffect SupersonicBoomVFX;
     public GameObject[] overheatingObjects = new GameObject[4];
     #region OverheatingVFX
     private VisualEffect sparkEngineVFX;
@@ -97,6 +98,11 @@ public class C_CharacterFX : MonoBehaviour
         flameExtShader.sharedMaterial.SetFloat("_BoostFlame", 0f);
         distorsionVFX.SendEvent("BoostOFF");
         boostReadyVFX.SetActive(false);
+    }
+
+    public void SupersonicBoom()
+    {
+        SupersonicBoomVFX.SendEvent("SuperSonicStart");
     }
 
     /////////////////////////////
