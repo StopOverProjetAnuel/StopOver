@@ -48,12 +48,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roche: {fileID: 8979272754488225753}
   isDropOnDestroy: 0
   resourceGive: 25
   resistanceLevel: 1
   isDestroyWithRequirement: 0
   ifNotRequireSpeedMultiplier: 0.75
-  ID: Plant
+  ID: PlantMedium
   showDebug: 0
 --- !u!65 &6409598642748881284
 BoxCollider:
