@@ -52,7 +52,7 @@ public class CollisionDrop : MonoBehaviour
         float dot = Vector3.Dot(toCollisionPoint.normalized, forward); //convert degrees to radial
         Vector3 right = transform.right;
         right.y = 0f;
-        float dotFX = Vector3.Dot(toCollisionPoint.normalized, forward); //convert degrees to radial for FX
+        float dotFX = Vector3.Dot(toCollisionPoint.normalized, right); //convert degrees to radial for FX
 
         if (dot < frontRadial && ressourceManager.currentRessource != 0 && collision.relativeVelocity.magnitude >= minSpeedToLose)
         {

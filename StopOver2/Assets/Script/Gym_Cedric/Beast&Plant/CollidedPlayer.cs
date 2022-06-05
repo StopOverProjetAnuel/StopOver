@@ -21,6 +21,8 @@ public class CollidedPlayer : MonoBehaviour
 
     [Header("VFX Parameters")]
     [SerializeField] private string ID = "";
+    [SerializeField] private bool useVarScale = false;
+    [SerializeField] private Vector3 vfxScale = Vector3.one;
 
     [Space(10)]
 
@@ -104,7 +106,7 @@ public class CollidedPlayer : MonoBehaviour
     private void InstantiateVFX()
     {
         Transform g = ObjectPool.Instance.GetFromPool(ID, transform).transform;
-        g.localScale = transform.localScale;
+        g.localScale = (useVarScale) ? vfxScale : transform.localScale;
         Transform player = FindObjectOfType<C_CharacterManager>().gameObject.transform;
         Vector3 newRotationVector = player.rotation.eulerAngles;
         g.rotation = Quaternion.Euler(newRotationVector);
