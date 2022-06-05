@@ -96,6 +96,8 @@ MonoBehaviour:
   isDestroyWithRequirement: 1
   ifNotRequireSpeedMultiplier: 0.75
   ID: Rock
+  useVarScale: 1
+  vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
 --- !u!64 &1797953202144169618
 MeshCollider:
