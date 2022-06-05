@@ -11,14 +11,21 @@ public class C_CharacterControler : MonoBehaviour
     public float speedPlayer;
     [Tooltip("Multiple speed for backward movement")]
     [SerializeField] private float speedBackwardMultiplier = 0.5f;
-    [Tooltip("Multiple speed for strafe movement")]
-    [SerializeField] private float strafeSpeedMultiplier = 0.5f;
+
+    [Tooltip("Multiple speed for strafe movement at minimal speed")]
+    [SerializeField] private float maxStrafeSpeedMultiplier = 0.5f;
+    [Tooltip("Multiple speed for strafe movement at maximal speed")]
+    [SerializeField] private float minStrafeSpeedMultiplier = 0.1f;
+    [SerializeField] private float maxSpeedForMinSpeedStrafe = 90f;
+
     [Tooltip("Multiple speed in all direction when the player is flying")]
     [SerializeField] private float speedAirMultiplier = 0.25f;
+
     [Tooltip("Force impulse when the player accelerate at low speed")]
     [SerializeField] private float firstImpulseForce = 50f;
     [Tooltip("Player have to be lower than this value to use the first Impulse")]
     [SerializeField] private float maxSpeedRequireFirstImpulse = 25f;
+
     [HideInInspector] public float currentSpeed;
     private float currentAirMultiplier = 1f;
     [HideInInspector] public float boostMultiplier = 1f;
@@ -26,6 +33,7 @@ public class C_CharacterControler : MonoBehaviour
     [Header("Rotation Parameters")]
     [SerializeField] private float maxRotateSpeed = 1440f;
     [SerializeField] private float minRotateSpeed = 720f;
+    [Tooltip("When the player reach the above maximal speed, the rotation speed will be set up at the minimal")]
     [SerializeField] private float maxSpeedForMinRspeed = 60f;
     [SerializeField] private float rSAirMultiplier; //rotate speed
     [Tooltip("Offset of the center of mass when the player move forward")]
@@ -77,7 +85,11 @@ public class C_CharacterControler : MonoBehaviour
             Vector3 normInputDir = new Vector3(horizontalInput, 0f, verticalInput).normalized;
             currentSpeed = speedPlayer * currentBackwardMultiplier * currentAirMultiplier;
             Vector3 forceDir = normInputDir * currentSpeed;
-            forceDir.x *= strafeSpeedMultiplier * boostMultiplier;
+
+            float ratioSpeedStrafe = Mathf.Clamp01(currentSpeed / maxSpeedForMinSpeedStrafe);
+            float currentStrafeSpeedMultiplier = Mathf.Lerp(minStrafeSpeedMultiplier, maxStrafeSpeedMultiplier, ratioSpeedStrafe);
+            forceDir.x *= maxStrafeSpeedMultiplier * boostMultiplier;
+
             rb.AddRelativeForce(forceDir, ForceMode.Acceleration);
         }
 
