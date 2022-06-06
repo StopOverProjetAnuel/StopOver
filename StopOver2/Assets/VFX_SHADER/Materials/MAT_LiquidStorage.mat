@@ -40,8 +40,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_02ff3738d3744bd79951d63625b3c437: 0.8
-    - Vector1_22e5a636fceb4cecb27d95ea96f238aa: 4
-    - Vector1_999cc4942ecb4e16a2548e857a017bbc: 0
+    - Vector1_22e5a636fceb4cecb27d95ea96f238aa: 6
+    - Vector1_999cc4942ecb4e16a2548e857a017bbc: 0.5
+    - Vector1_a34d42de0e704913aa932ae90135ffe1: 0.01
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 1
     - _AlphaDstBlend: 0
@@ -62,7 +63,7 @@ Material:
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
     - _RefractionModel: 0
-    - _Remplissage: 0.227
+    - _Remplissage: 1
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
     - _SrcBlend: 1
@@ -95,10 +96,10 @@ Material:
     - Color_1708bb84f85c41e4ae833611ff1c40b2: {r: 0.11894324, g: 0.08605203, b: 0.404, a: 0}
     - Color_58e92717f8484cc0af7851830a5f2ecf: {r: 11.984314, g: 5.2078433, b: 6.7764707, a: 0}
     - Color_79dcc82223dc47e29c4dd99245dbad4c: {r: 11.984314, g: 5.2078433, b: 6.7764707, a: 0}
-    - Vector2_0bc7a178e2644f929d46de6f4876cd67: {r: 1, g: 3, b: 0, a: 0}
+    - Vector2_0bc7a178e2644f929d46de6f4876cd67: {r: 2, g: 6, b: 0, a: 0}
     - Vector2_71c76e28e7f64ad5baca3de5b1ccc119: {r: 0.1, g: -0.1, b: 0, a: 0}
     - Vector2_c85f3527c2c347b1b14d242142f1d56f: {r: 0.2, g: 0.05, b: 0, a: 0}
-    - Vector2_d1cb35a461334f28b97965f827e4eef5: {r: 1, g: 3, b: 0, a: 0}
+    - Vector2_d1cb35a461334f28b97965f827e4eef5: {r: 2, g: 6, b: 0, a: 0}
     - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
