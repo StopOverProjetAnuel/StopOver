@@ -81,6 +81,7 @@ public class C_CharacterBoost : MonoBehaviour
         }
     }
 
+    private bool notRepeat = false;
     public void BoostHandler(bool boostBegan, bool boostHeld, bool boostEnd)
     {
         _CharacterFX.FovSpeed(rb.velocity.magnitude, (boostHeld && isAccelerating));
@@ -92,10 +93,15 @@ public class C_CharacterBoost : MonoBehaviour
             return;
         }
 
-        if (currentBoostPrevention)
+        if (currentBoostPrevention && !notRepeat)
         {
             _CharacterFX.SignBoost();
             _CharacterSound.BoostReadyTrigger();
+            notRepeat = true;
+        }
+        else if (notRepeat)
+        {
+            notRepeat = false;
         }
 
         if (boostBegan && boostHeld && currentBoostPrevention) //Check if the player push down the boost button
@@ -127,6 +133,7 @@ public class C_CharacterBoost : MonoBehaviour
         rb.AddRelativeForce(0, 0, accelerationInitialImpulse, ForceMode.Impulse);
         _CharacterFX.EnableBoost();
         _CharacterFX.SupersonicBoom();
+        _CharacterSound.BoostNOverheatStart();
 
         isAccelerating = true;
     }
@@ -147,7 +154,6 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
 
         musicManager.boost = 1;
-        _CharacterSound.BoostNOverheatStart();
         _CharacterControler.boostMultiplier = 0f;
         _CharacterPropulseur.thrustersForceMultiplier = 1f;
 
