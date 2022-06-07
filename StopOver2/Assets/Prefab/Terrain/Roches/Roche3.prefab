@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SoundCaller: {fileID: 0}
   roche: {fileID: 5860952821040934220}
   isDropOnDestroy: 0
   resourceGive: 0
@@ -113,6 +114,25 @@ MonoBehaviour:
   useVarScale: 1
   vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
+--- !u!114 &6155699343782530121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7953412203264226604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d280c3621e1e10a4b8db64f3c19db001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -1029128910
+      Data2: 1198476810
+      Data3: 1551385535
+      Data4: -967679366
+    Path: event:/SFX_Environnement_RockDestroy
 --- !u!1001 &1983473065609444717
 PrefabInstance:
   m_ObjectHideFlags: 0

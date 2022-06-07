@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 1111132380883698630}
   - component: {fileID: -825429920631627264}
   - component: {fileID: 1500964784}
+  - component: {fileID: 4921035334891801567}
+  - component: {fileID: 2702973967300332136}
   m_Layer: 14
   m_Name: Koumpo
   m_TagString: Destructible
@@ -58,12 +60,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SoundCaller: {fileID: 0}
+  roche: {fileID: 0}
   isDropOnDestroy: 0
   resourceGive: 200
   resistanceLevel: 2
   isDestroyWithRequirement: 1
   ifNotRequireSpeedMultiplier: 0.75
   ID: Animal
+  useVarScale: 0
+  vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
 --- !u!65 &1500964784
 BoxCollider:
@@ -78,6 +84,55 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 9, z: 16}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &4921035334891801567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111132380883698631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d280c3621e1e10a4b8db64f3c19db001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: 812903644
+      Data2: 1237178569
+      Data3: -27739760
+      Data4: -1088319262
+    Path: event:/SFX_Environnement_KumpoHit
+--- !u!114 &2702973967300332136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111132380883698631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -901613643
+      Data2: 1085512440
+      Data3: 1213688225
+      Data4: -1066167255
+    Path: event:/SFX_Environnement_KumpoSound
+  Event: 
+  PlayEvent: 1
+  StopEvent: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1001 &2495100560744729025
 PrefabInstance:
   m_ObjectHideFlags: 0

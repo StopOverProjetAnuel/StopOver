@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: 5524098151138171977}
   - component: {fileID: 8924786821675200210}
+  - component: {fileID: 2402684030288992467}
   m_Layer: 14
   m_Name: Medium_Plant3
   m_TagString: Destructible
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SoundCaller: {fileID: 0}
   roche: {fileID: 8979272754488225753}
   isDropOnDestroy: 0
   resourceGive: 25
@@ -54,6 +56,8 @@ MonoBehaviour:
   isDestroyWithRequirement: 0
   ifNotRequireSpeedMultiplier: 0.75
   ID: PlantMedium
+  useVarScale: 0
+  vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
 --- !u!65 &8924786821675200210
 BoxCollider:
@@ -68,6 +72,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3403354, y: 4.9297795, z: 2.4376848}
   m_Center: {x: 0.017000854, y: 1.8648899, z: 0.2811576}
+--- !u!114 &2402684030288992467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979272754488225753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d280c3621e1e10a4b8db64f3c19db001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -1544234581
+      Data2: 1139667445
+      Data3: -1030057556
+      Data4: 2087545339
+    Path: event:/SFX_Environnement_PlantDestroy
 --- !u!1001 &1435087359328739959
 PrefabInstance:
   m_ObjectHideFlags: 0
