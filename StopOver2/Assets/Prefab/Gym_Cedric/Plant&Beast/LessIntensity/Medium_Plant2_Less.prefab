@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: 5524098151138171977}
   - component: {fileID: 2760164561237336817}
-  - component: {fileID: -8917789416196418226}
   m_Layer: 14
   m_Name: Medium_Plant2_Less
   m_TagString: Destructible
@@ -55,7 +54,7 @@ MonoBehaviour:
   resistanceLevel: 0
   isDestroyWithRequirement: 0
   ifNotRequireSpeedMultiplier: 0.75
-  ID: Plant
+  ID: PlantShort
   useVarScale: 0
   vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
@@ -72,25 +71,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.081417, y: 3.282126, z: 2.005064}
   m_Center: {x: 0.05823019, y: 0.76106334, z: -0.11071992}
---- !u!114 &-8917789416196418226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8979272754488225753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d280c3621e1e10a4b8db64f3c19db001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  soundEvent:
-    Guid:
-      Data1: -1544234581
-      Data2: 1139667445
-      Data3: -1030057556
-      Data4: 2087545339
-    Path: event:/SFX_Environnement_PlantDestroy
 --- !u!1001 &1435087359328739959
 PrefabInstance:
   m_ObjectHideFlags: 0
