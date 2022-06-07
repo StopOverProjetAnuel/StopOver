@@ -91,29 +91,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2058950673606193305, guid: e0eb65b94cf7e6c46a3ef95b0f1a286e, type: 3}
---- !u!114 &6028591255363055981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3435901947046861258}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _SoundCaller: {fileID: 0}
-  roche: {fileID: 3406744743511209184}
-  isDropOnDestroy: 0
-  resourceGive: 0
-  resistanceLevel: 2
-  isDestroyWithRequirement: 1
-  ifNotRequireSpeedMultiplier: 0.75
-  ID: Rock
-  useVarScale: 1
-  vfxScale: {x: 1, y: 1, z: 1}
-  showDebug: 0
 --- !u!114 &4334196252091034611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +110,29 @@ MonoBehaviour:
       Data3: 1551385535
       Data4: -967679366
     Path: event:/SFX_Environnement_RockDestroy
+--- !u!114 &6028591255363055981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3435901947046861258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SoundCaller: {fileID: 4334196252091034611}
+  roche: {fileID: 3406744743511209184}
+  isDropOnDestroy: 0
+  resourceGive: 0
+  resistanceLevel: 2
+  isDestroyWithRequirement: 1
+  ifNotRequireSpeedMultiplier: 0.75
+  ID: Rock
+  useVarScale: 1
+  vfxScale: {x: 1, y: 1, z: 1}
+  showDebug: 0
 --- !u!1001 &27749336093195255
 PrefabInstance:
   m_ObjectHideFlags: 0

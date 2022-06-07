@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class C_PlantBallon : MonoBehaviour
 {
+    [SerializeField] private FMOD_SoundCaller soundCaller;
 
     public float speedUpBallon;
     public float timeBefforDestruc;
@@ -17,6 +18,8 @@ public class C_PlantBallon : MonoBehaviour
     void Start()
     {
         rbBallon = this.GetComponent<Rigidbody>();
+        FMOD_SoundCaller soundCall;
+        soundCaller = (TryGetComponent<FMOD_SoundCaller>(out soundCall)) ? soundCaller = soundCall : null;
     }
 
     private void Update()
@@ -33,6 +36,7 @@ public class C_PlantBallon : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            soundCaller.SoundStart();
             Destroy(tige);
             StartCoroutine(BallonGoUp());
 

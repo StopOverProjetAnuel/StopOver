@@ -127,6 +127,7 @@ GameObject:
   - component: {fileID: 3372013736446824139}
   - component: {fileID: 7058463776648837822}
   - component: {fileID: 196365491709981751}
+  - component: {fileID: 5257185322990715308}
   m_Layer: 0
   m_Name: head_ballon_low
   m_TagString: Untagged
@@ -209,6 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82a292cc0a2d93a4783e0e0e61fd4f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soundCaller: {fileID: 5257185322990715308}
   speedUpBallon: 12
   timeBefforDestruc: 10
   tige: {fileID: 5460014321296043004}
@@ -242,3 +244,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 5.5, z: 1}
   m_Center: {x: 0, y: 2.8204103, z: -0.007144928}
+--- !u!114 &5257185322990715308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8723076323810732356}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d280c3621e1e10a4b8db64f3c19db001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -656403906
+      Data2: 1141398143
+      Data3: 1680313278
+      Data4: 1308329394
+    Path: event:/SFX_Environnement_PlantsBallon
