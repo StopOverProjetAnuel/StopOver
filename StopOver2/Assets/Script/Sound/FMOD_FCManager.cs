@@ -1,13 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMODUnity;
+using FMOD.Studio;
 
-public class Fmod_MusicManager : MonoBehaviour
+public class FMOD_FCManager : MonoBehaviour
 {
-    FMOD.Studio.EventInstance musicIntance;
+    #region Event Instance
+    EventInstance musicIntance;
+    EventInstance chronoStartInstance;
+    EventInstance lastMinuteInstance;
+    #endregion
 
-    [Tooltip("Sound bank from fmod")]
-    public FMODUnity.EventReference musicEvent;
+    [Header("BANKS")]
+    public EventReference musicEvent;
+    public EventReference chronoStartEvent;
+    public EventReference lastMinuteEvent;
 
     [Header("Parameters from the music bank")]
     [Range(0f, 100f)] public float intensity = 0f; //Called in C_CharacterManager.cs
@@ -15,9 +23,9 @@ public class Fmod_MusicManager : MonoBehaviour
     [SerializeField] [Range(0, 1)] private int ressources = 0;
     [Range(0, 1)] public int pause = 0; //Call in GMMenu.cs
 
-    [Header("Parameters")]
     [SerializeField] private float timeBeforeActiveResources = 1f;
     [SerializeField] private float timeMaxBeforeUnactiveResources = 3f;
+
     private float currentTimeActive;
     [HideInInspector] public bool isCollecting = false; //Called in NudgeBars.cs
     private float continueTime = 0f;
@@ -28,9 +36,12 @@ public class Fmod_MusicManager : MonoBehaviour
 
     private void Start()
     {
-        musicIntance = FMODUnity.RuntimeManager.CreateInstance(musicEvent);
+        musicIntance = RuntimeManager.CreateInstance(musicEvent);
         musicIntance.start();
         currentTimeActive = timeBeforeActiveResources;
+
+        chronoStartInstance = RuntimeManager.CreateInstance(chronoStartEvent);
+        lastMinuteInstance = RuntimeManager.CreateInstance(lastMinuteEvent);
     }
 
     private void Update()
@@ -42,6 +53,7 @@ public class Fmod_MusicManager : MonoBehaviour
         IntansityLevel();
     }
 
+    #region MUSIC
     private void IntansityLevel()
     {
         if (pause == 1)
@@ -78,4 +90,18 @@ public class Fmod_MusicManager : MonoBehaviour
     {
         musicIntance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
     }
+    #endregion
+
+    #region CHRONO
+    public void CallChrono()
+    {
+        chronoStartInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        chronoStartInstance.start();
+    }
+    public void CallLastMinute()
+    {
+        lastMinuteInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        lastMinuteInstance.start();
+    }
+    #endregion
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(C_CharacterPropulseur))]
 [RequireComponent(typeof(C_CharacterCalculAngle))]
 [RequireComponent(typeof(C_CharacterFX))]
+[RequireComponent(typeof(C_CharacterSound))]
 [RequireComponent(typeof(C_CharacterAnim))]
 public class C_CharacterManager : MonoBehaviour
 {
@@ -15,8 +16,9 @@ public class C_CharacterManager : MonoBehaviour
     private C_CharacterPropulseur _CharacterPropulseur;
     private C_CharacterCalculAngle _CharacterCalculAngle;
     private C_CharacterFX _CharacterFX;
+    private C_CharacterSound _CharacterSound;
     private C_CharacterAnim _CharacterAnime;
-    private Fmod_MusicManager musicManager;
+    private FMOD_FCManager musicManager;
     #endregion
 
     [Header("Object Require")]
@@ -57,6 +59,8 @@ public class C_CharacterManager : MonoBehaviour
     [Header("Music Parameters")]
     [Tooltip("When the player hit that value with his speed (velocity) will trigger the max music intensity")]
     [SerializeField] private float maxMusicSpeed = 110f;
+    private bool notRepeted = false;
+    private bool notRepetedStrafe = false;
     #endregion
 
 
@@ -69,8 +73,9 @@ public class C_CharacterManager : MonoBehaviour
         _CharacterPropulseur = GetComponent<C_CharacterPropulseur>();
         _CharacterCalculAngle = GetComponent<C_CharacterCalculAngle>();
         _CharacterFX = GetComponent<C_CharacterFX>();
+        _CharacterSound = GetComponent<C_CharacterSound>();
         _CharacterAnime = GetComponent<C_CharacterAnim>();
-        musicManager = FindObjectOfType<Fmod_MusicManager>();
+        musicManager = FindObjectOfType<FMOD_FCManager>();
         #endregion
 
         #region Get Object
@@ -82,8 +87,9 @@ public class C_CharacterManager : MonoBehaviour
         #endregion
 
         #region Initiate Module Script Value
-        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, _CharacterPropulseur, rb, musicManager);
+        _CharacterBoost.IniatiateBoostValue(_CharacterControler, _CharacterFX, _CharacterPropulseur, _CharacterSound, rb, musicManager);
         _CharacterFX.InitiateFXValue(_CharacterBoost);
+        _CharacterSound.InitiateSoundValue();
         _CharacterPropulseur.InitiatePropulsorValue(rb);
         _CharacterControler.InitiateControlValue(rb);
         _CharacterCalculAngle.calculAngleGetProperties(rb);
@@ -109,16 +115,46 @@ public class C_CharacterManager : MonoBehaviour
         boostInputUp2 = Input.GetButtonUp(boostInputName2); //Get boost button when press
         #endregion
 
+        currentSpeed = rb.velocity.magnitude;
+
         _CharacterBoost.TriggerBoost(boostInputDown || boostInputDown2, boostInputHold && boostInputHold2, boostInputUp || boostInputUp2, CheckGrounded(distanceNoControl));
 
         _CharacterFX.TriggerContinuousFX(CheckGrounded(distanceNoControl), groundTag);
+
         float mouseXValue = Mathf.Clamp(this.mouseXValue, -1, 1);
         _CharacterAnime.charaAnimCallEvents(mouseXValue);
 
-        currentSpeed = rb.velocity.magnitude;
+        MusicCharacterUpdate();
+    }
+
+    private void MusicCharacterUpdate()
+    {
+        _CharacterSound.TriggerSound();
 
         float currentMusicIntensity = Mathf.Clamp01(currentSpeed / maxMusicSpeed) * 40;
         musicManager.intensity = currentMusicIntensity;
+
+        float currentEngineIntensity = Mathf.Clamp01(currentSpeed / maxMusicSpeed) * 135;
+        _CharacterSound.engineIntensity = currentEngineIntensity;
+
+        float ratioMaxSpeed = Mathf.Clamp01(currentSpeed / maxMusicSpeed);
+        if (ratioMaxSpeed >= 1 && notRepeted)
+        {
+            _CharacterSound.maxSpeedTrigger();
+            notRepeted = false;
+        }
+        else if (ratioMaxSpeed != 1 && !notRepeted) notRepeted = true;
+
+        if (horizontalValue != 0 && notRepetedStrafe)
+        {
+            _CharacterSound.StrafeSoundStart();
+            notRepetedStrafe = false;
+        }
+        else if (!notRepetedStrafe)
+        {
+            _CharacterSound.StrafeSoundStop();
+            notRepetedStrafe = true;
+        }
     }
 
     private void FixedUpdate()

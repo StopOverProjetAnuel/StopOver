@@ -8,7 +8,8 @@ public class C_CharacterBoost : MonoBehaviour
     private C_CharacterControler _CharacterControler;
     private C_CharacterFX _CharacterFX;
     private C_CharacterPropulseur _CharacterPropulseur;
-    private Fmod_MusicManager musicManager;
+    private C_CharacterSound _CharacterSound;
+    private FMOD_FCManager musicManager;
     #endregion
 
     private Rigidbody rb;
@@ -40,11 +41,12 @@ public class C_CharacterBoost : MonoBehaviour
 
 
 
-    public void IniatiateBoostValue(C_CharacterControler characterControler, C_CharacterFX characterFX, C_CharacterPropulseur characterPropulseur, Rigidbody _rb, Fmod_MusicManager mManager) //Work with awake
+    public void IniatiateBoostValue(C_CharacterControler characterControler, C_CharacterFX characterFX, C_CharacterPropulseur characterPropulseur, C_CharacterSound characterSound, Rigidbody _rb, FMOD_FCManager mManager) //Work with awake
     {
         _CharacterControler = characterControler;
         _CharacterFX = characterFX;
         _CharacterPropulseur = characterPropulseur;
+        _CharacterSound = characterSound;
         rb = _rb;
 
         baseSpeed = _CharacterControler.speedPlayer;
@@ -90,7 +92,11 @@ public class C_CharacterBoost : MonoBehaviour
             return;
         }
 
-        if (currentBoostPrevention) _CharacterFX.SignBoost();
+        if (currentBoostPrevention)
+        {
+            _CharacterFX.SignBoost();
+            _CharacterSound.BoostReadyTrigger();
+        }
 
         if (boostBegan && boostHeld && currentBoostPrevention) //Check if the player push down the boost button
         {
@@ -141,6 +147,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX.OverheatBoost(accelerationTimer, accelerationDuration);
 
         musicManager.boost = 1;
+        _CharacterSound.BoostNOverheatStart();
         _CharacterControler.boostMultiplier = 0f;
         _CharacterPropulseur.thrustersForceMultiplier = 1f;
 
@@ -159,6 +166,7 @@ public class C_CharacterBoost : MonoBehaviour
             _CharacterFX.DesactiveBoostOverheat();
 
             musicManager.boost = 0;
+            _CharacterSound.BoostNOverheatStop();
             _CharacterControler.boostMultiplier = 1f;
             _CharacterPropulseur.thrustersForceMultiplier = 1f;
         }
@@ -182,6 +190,7 @@ public class C_CharacterBoost : MonoBehaviour
         _CharacterFX.newTimeTrail = 0f;
 
         musicManager.boost = 0;
+        _CharacterSound.BoostNOverheatStop();
         _CharacterControler.boostMultiplier = 1f;
         _CharacterPropulseur.thrustersForceMultiplier = 1f;
     }
@@ -195,11 +204,13 @@ public class C_CharacterBoost : MonoBehaviour
         {
             cooldownTimer = Mathf.Clamp(cooldownTimer - delta, 0f, overheatCooldown);
             _CharacterFX.OverheatBoostDecres(cooldownTimer, cooldownDurationMinMax.y);
+            _CharacterSound.OverheatDownStart();
             return false;
         }
         else 
         {
             overheat = false;
+            _CharacterSound.OverheatDownStop();
             return true;
         }
     }

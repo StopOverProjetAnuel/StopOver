@@ -9,6 +9,7 @@ public class CollisionDrop : MonoBehaviour
     [SerializeField] private GameObject prefabToSpawn;
     private RessourceManager ressourceManager;
     private C_CharacterFX _C_CharacterFX;
+    private C_CharacterSound _CharacterSound;
 
     [Header("Parameters")]
     [SerializeField] private float minSpeedToLose = 15f;
@@ -35,6 +36,7 @@ public class CollisionDrop : MonoBehaviour
         ressourceManager = FindObjectOfType<RessourceManager>();
         rb = player.GetComponent<Rigidbody>();
         _C_CharacterFX = player.GetComponent<C_CharacterFX>();
+        _CharacterSound = player.GetComponent<C_CharacterSound>();
         frontRadial = frontDegrees / 90f; //convert "frontDegrees" into radial by dividing it by the max of the dot value in degrees (90°)
     }
 
@@ -81,6 +83,7 @@ public class CollisionDrop : MonoBehaviour
 
 
             _C_CharacterFX.TriggerCollisionFX(dotFX);
+            _CharacterSound.hitTrigger();
 
 
             #region Debug

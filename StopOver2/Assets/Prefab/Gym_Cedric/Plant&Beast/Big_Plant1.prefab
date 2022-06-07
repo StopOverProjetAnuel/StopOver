@@ -26,6 +26,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SoundCallerSingle: {fileID: 0}
   roche: {fileID: 0}
   isDropOnDestroy: 0
   resourceGive: 100
@@ -33,6 +34,8 @@ MonoBehaviour:
   isDestroyWithRequirement: 0
   ifNotRequireSpeedMultiplier: 0.75
   ID: 
+  useVarScale: 0
+  vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
 --- !u!1 &8979272754488225753
 GameObject:
@@ -44,6 +47,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7862259290605686096}
   - component: {fileID: -2261850581312048457}
+  - component: {fileID: 8947403147203871983}
   - component: {fileID: 1467039521948791335}
   - component: {fileID: 3057665786689992600}
   m_Layer: 14
@@ -82,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fffbf614219acbf43bc7da7d1e9193a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _SoundCallerSingle: {fileID: 8947403147203871983}
   roche: {fileID: 8979272754488225753}
   isDropOnDestroy: 0
   resourceGive: 50
@@ -89,7 +94,28 @@ MonoBehaviour:
   isDestroyWithRequirement: 0
   ifNotRequireSpeedMultiplier: 0.75
   ID: PlantBig
+  useVarScale: 0
+  vfxScale: {x: 1, y: 1, z: 1}
   showDebug: 0
+--- !u!114 &8947403147203871983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979272754488225753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d280c3621e1e10a4b8db64f3c19db001, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEvent:
+    Guid:
+      Data1: -1544234581
+      Data2: 1139667445
+      Data3: -1030057556
+      Data4: 2087545339
+    Path: event:/SFX_Environnement_PlantDestroy
 --- !u!65 &1467039521948791335
 BoxCollider:
   m_ObjectHideFlags: 0

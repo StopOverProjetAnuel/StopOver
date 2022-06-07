@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class NudgeBars : MonoBehaviour
 {
-    private Fmod_MusicManager musicManager;
+    private FMOD_FCManager musicManager;
+    private C_CharacterSound _CharacterSound;
 
     [Header("Player Information")]
     [SerializeField] private GameObject m_Player;
@@ -25,7 +26,8 @@ public class NudgeBars : MonoBehaviour
     private void Awake()
     {
         rb = m_Player.GetComponent<Rigidbody>();
-        musicManager = FindObjectOfType<Fmod_MusicManager>();
+        musicManager = FindObjectOfType<FMOD_FCManager>();
+        _CharacterSound = FindObjectOfType<C_CharacterSound>();
     }
 
     private void Update()
@@ -70,6 +72,7 @@ public class NudgeBars : MonoBehaviour
             {
                 collidedPlayer.TriggerCollisionPlayer(rb);
                 musicManager.isCollecting = true;
+                _CharacterSound.GetBiomassTrigger();
                 #region Debug
                 if (showDebug)
                 {
@@ -85,6 +88,7 @@ public class NudgeBars : MonoBehaviour
                 collidedPlayer = other.GetComponent<CollidedPlayer>();
                 collidedPlayer.TriggerCollisionPlayer(rb);
                 musicManager.isCollecting = true;
+                _CharacterSound.GetBiomassTrigger();
                 #region Debug
                 if (showDebug)
                 {

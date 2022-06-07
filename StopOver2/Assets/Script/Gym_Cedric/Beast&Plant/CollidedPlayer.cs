@@ -7,6 +7,7 @@ public class CollidedPlayer : MonoBehaviour
 {
     [Header("Require Information")]
     private RessourceManager ressourceManager;
+    [SerializeField]private FMOD_SoundCaller _SoundCaller;
 
     private NudgeBars nudgeBars;
 
@@ -28,10 +29,11 @@ public class CollidedPlayer : MonoBehaviour
 
     [SerializeField] private bool showDebug = false;
 
-
     private void Awake()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
+        FMOD_SoundCaller soundCall;
+        _SoundCaller = (TryGetComponent<FMOD_SoundCaller>(out soundCall) && !_SoundCaller) ? _SoundCaller = soundCall : null;
         nudgeBars = FindObjectOfType<NudgeBars>();
     }
 
@@ -60,7 +62,6 @@ public class CollidedPlayer : MonoBehaviour
         if (nudgeBars.nbState >= resistanceLevel + 1)
         {
             GettingDestroy();
-            InstantiateVFX();
         }
         else if (!isDestroyWithRequirement || nudgeBars.nbState >= resistanceLevel)
         {
@@ -68,7 +69,6 @@ public class CollidedPlayer : MonoBehaviour
             storedVelocity.x *= ifNotRequireSpeedMultiplier;
             storedVelocity.z *= ifNotRequireSpeedMultiplier;
             rb.velocity = storedVelocity;
-            InstantiateVFX();
             GettingDestroy();
         }
 
@@ -82,7 +82,6 @@ public class CollidedPlayer : MonoBehaviour
 
     private void GettingDestroy()
     {
-
         if (ressourceManager.currentRessource != ressourceManager.maxRessource)
         {
             ressourceManager.TriggerRessourceCount(resourceGive);
@@ -92,6 +91,9 @@ public class CollidedPlayer : MonoBehaviour
             GameObject item = Instantiate(droppedItem, this.transform.position, Quaternion.identity);
             item.GetComponent<PickUp>().ressourceGive = resourceGive;
         }
+
+        InstantiateVFX();
+        if(_SoundCaller) _SoundCaller.SoundStart();
 
         roche.SetActive(false);
 
@@ -110,5 +112,10 @@ public class CollidedPlayer : MonoBehaviour
         Transform player = FindObjectOfType<C_CharacterManager>().gameObject.transform;
         Vector3 newRotationVector = player.rotation.eulerAngles;
         g.rotation = Quaternion.Euler(newRotationVector);
+    }
+
+    private void OnDisable()
+    {
+        if (_SoundCaller) _SoundCaller.SoundStop();
     }
 }

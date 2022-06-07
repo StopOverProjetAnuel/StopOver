@@ -5,7 +5,7 @@ using TMPro;
 
 public class GMMenu : MonoBehaviour
 {
-    private Fmod_MusicManager musicManager;
+    private FMOD_FCManager musicManager;
 
     [Header("Pause & Option Menu")]
     [SerializeField] GameObject objectMenu;
@@ -31,7 +31,7 @@ public class GMMenu : MonoBehaviour
     public void InitiateGMMenu()
     {
         ResumeGame();
-        musicManager = FindObjectOfType<Fmod_MusicManager>();
+        musicManager = FindObjectOfType<FMOD_FCManager>();
     }
 
     public void TriggerGMMenu()
