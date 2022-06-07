@@ -65,6 +65,9 @@ public class NudgeBars : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        PickUp nanRef;
+        bool isPickUp = other.TryGetComponent<PickUp>(out nanRef);
+
         Transform parent = other.transform.parent;
         if (parent.TryGetComponent<CollidedPlayer>(out collidedPlayer))
         {
@@ -72,7 +75,7 @@ public class NudgeBars : MonoBehaviour
             {
                 collidedPlayer.TriggerCollisionPlayer(rb);
                 musicManager.isCollecting = true;
-                _CharacterSound.GetBiomassTrigger();
+                if (isPickUp) _CharacterSound.GetBiomassTrigger();
                 #region Debug
                 if (showDebug)
                 {
@@ -88,7 +91,7 @@ public class NudgeBars : MonoBehaviour
                 collidedPlayer = other.GetComponent<CollidedPlayer>();
                 collidedPlayer.TriggerCollisionPlayer(rb);
                 musicManager.isCollecting = true;
-                _CharacterSound.GetBiomassTrigger();
+                if (isPickUp) _CharacterSound.GetBiomassTrigger();
                 #region Debug
                 if (showDebug)
                 {
