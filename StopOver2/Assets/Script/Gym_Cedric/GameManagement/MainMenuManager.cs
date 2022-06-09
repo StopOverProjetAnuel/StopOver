@@ -3,25 +3,25 @@ using UnityEngine.EventSystems;
 
 public class MainMenuManager : MonoBehaviour
 {
-    [Header("Requirement")]
-    [SerializeField] private GameObject loadingScreen;
-    [SerializeField] private GameObject[] allButton;
+    [SerializeField] private GameObject SplashScreen;
+    [SerializeField] private GameObject MainScreen;
 
-
-
-    private void Update()
+    public void EnableMenu(GameObject g)
     {
-        SelectButton();
+        g.SetActive(true);
     }
 
-    private void SelectButton()
+    public void DisableMenu(GameObject g)
     {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(allButton[0]);
+        g.SetActive(false);
     }
 
-    public void LoadScene()
+    public void DisableSplashScreen()
     {
-        loadingScreen.SetActive(true);
+        SplashScreen.SetActive(false);
+    }
+    public void EnableMainScreen()
+    {
+        MainScreen.SetActive(true);
     }
 }
