@@ -101,7 +101,7 @@ public class GMMenu : MonoBehaviour
 
     private void OpenOptionMenu()
     {
-        objectOptionMenu.SetActive(true);
+        objectOptionMenu.SetActive(true); 
         objectMenu.SetActive(false);
         TriggerOptionMenuPanels(0);
     }

@@ -24,4 +24,8 @@ public class MainMenuManager : MonoBehaviour
     {
         MainScreen.SetActive(true);
     }
+    public void ApplicationQuit()
+    {
+        Application.Quit();
+    }
 }
