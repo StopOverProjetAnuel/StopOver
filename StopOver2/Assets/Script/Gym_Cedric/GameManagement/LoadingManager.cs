@@ -31,7 +31,7 @@ public class LoadingManager : MonoBehaviour
             loadingBar.fillAmount = progress;
             loadingProgressText.text = Mathf.Round(progress * 100f) + "%";
 
-            doingText.text = (gameLevel.progress > 0.9f) ? "Initiating" : "Loading";
+            doingText.text = (gameLevel.progress > 0.9f) ? "INITIATING" : "LOADING";
 
             yield return null;
         }

@@ -3,10 +3,10 @@ using TMPro;
 
 public class GMTimer : MonoBehaviour
 {
+    [Header("Require")]
+    [SerializeField] private TextMeshProUGUI timerText;
     private GMVictoryChecker _GMVictoryChecker;
-
-    [SerializeField]
-    private TextMeshProUGUI timerText;
+    private TimerDifficultySet timerDifficultySet;
 
     [Header("Timer parameters")]
     public float maxTime = 240f;
@@ -18,6 +18,8 @@ public class GMTimer : MonoBehaviour
 
     public void InitiateGMTimer(GMVictoryChecker gMVictoryChecker)
     {
+        timerDifficultySet = GetComponent<TimerDifficultySet>();
+        maxTime = timerDifficultySet.ReturnTimer();
         _GMVictoryChecker = gMVictoryChecker;
 
         currentTime = maxTime;

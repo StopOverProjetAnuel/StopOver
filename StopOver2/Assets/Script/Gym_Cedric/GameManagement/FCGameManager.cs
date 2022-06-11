@@ -12,7 +12,7 @@ public class FCGameManager : MonoBehaviour
     private GMScoring _GMScoring;
 
 
-    private void Awake()
+    private void Start()
     {
         #region Get Scripts
         _GMTimer = GetComponent<GMTimer>();
