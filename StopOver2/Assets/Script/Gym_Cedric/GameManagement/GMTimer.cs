@@ -5,6 +5,7 @@ public class GMTimer : MonoBehaviour
 {
     [Header("Require")]
     [SerializeField] private TextMeshProUGUI timerText;
+    private FMOD_SoundCaller soundCaller;
     private GMVictoryChecker _GMVictoryChecker;
     private TimerDifficultySet timerDifficultySet;
 
@@ -21,6 +22,7 @@ public class GMTimer : MonoBehaviour
         timerDifficultySet = GetComponent<TimerDifficultySet>();
         maxTime = timerDifficultySet.ReturnTimer();
         _GMVictoryChecker = gMVictoryChecker;
+        soundCaller = TryGetComponent<FMOD_SoundCaller>(out FMOD_SoundCaller sound) ? sound : null;
 
         currentTime = maxTime;
         DisplayTimer();
@@ -36,6 +38,22 @@ public class GMTimer : MonoBehaviour
         else if (currentTime == 0f)
         {
             _GMVictoryChecker.TriggerDefeat();
+        }
+
+        TriggerLastMinute();
+    }
+
+    private bool getTrigger = false;
+    private void TriggerLastMinute()
+    {
+        if (!getTrigger && currentTime <= 60f)
+        {
+            getTrigger = true;
+            soundCaller.SoundStart();
+        }
+        else if (getTrigger && currentTime > 60f)
+        {
+            getTrigger = false;
         }
     }
 

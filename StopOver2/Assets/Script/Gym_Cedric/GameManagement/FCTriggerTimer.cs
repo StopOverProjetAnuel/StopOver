@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class FCTriggerTimer : MonoBehaviour
 {
+    private FMOD_SoundCaller soundCaller;
     private GMTimer _GMTimer;
     [SerializeField] private Animator cinematicAnimator;
 
@@ -13,6 +14,7 @@ public class FCTriggerTimer : MonoBehaviour
     private void Awake()
     {
         _GMTimer = FindObjectOfType<GMTimer>();
+        soundCaller = TryGetComponent<FMOD_SoundCaller>(out FMOD_SoundCaller sound) ? soundCaller = sound : null;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +24,7 @@ public class FCTriggerTimer : MonoBehaviour
             if (triggerAtEnter)
             {
                 _GMTimer.playTimer = true;
+                if (soundCaller) soundCaller.SoundStart();
             }
             else
             {

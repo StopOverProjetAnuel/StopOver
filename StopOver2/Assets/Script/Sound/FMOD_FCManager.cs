@@ -8,14 +8,10 @@ public class FMOD_FCManager : MonoBehaviour
 {
     #region Event Instance
     EventInstance musicIntance;
-    EventInstance chronoStartInstance;
-    EventInstance lastMinuteInstance;
     #endregion
 
     [Header("BANKS")]
     public EventReference musicEvent;
-    public EventReference chronoStartEvent;
-    public EventReference lastMinuteEvent;
 
     [Header("Parameters from the music bank")]
     [Range(0f, 100f)] public float intensity = 0f; //Called in C_CharacterManager.cs
@@ -39,9 +35,6 @@ public class FMOD_FCManager : MonoBehaviour
         musicIntance = RuntimeManager.CreateInstance(musicEvent);
         musicIntance.start();
         currentTimeActive = timeBeforeActiveResources;
-
-        chronoStartInstance = RuntimeManager.CreateInstance(chronoStartEvent);
-        lastMinuteInstance = RuntimeManager.CreateInstance(lastMinuteEvent);
     }
 
     private void Update()
@@ -89,19 +82,6 @@ public class FMOD_FCManager : MonoBehaviour
     public void StopMusic()
     {
         musicIntance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-    }
-    #endregion
-
-    #region CHRONO
-    public void CallChrono()
-    {
-        chronoStartInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        chronoStartInstance.start();
-    }
-    public void CallLastMinute()
-    {
-        lastMinuteInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
-        lastMinuteInstance.start();
     }
     #endregion
 }
