@@ -183,6 +183,8 @@ public class C_CharacterManager : MonoBehaviour
         }
         else
         {
+            Physics.Raycast(groundCheck.transform.position, transform.TransformDirection(Vector3.down), out groundHit, Mathf.Infinity, layerGround.value);
+            distanceGroundChara = groundHit.distance;
             return false;
         }
     }
