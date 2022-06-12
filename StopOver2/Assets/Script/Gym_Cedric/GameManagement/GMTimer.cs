@@ -20,7 +20,7 @@ public class GMTimer : MonoBehaviour
     public void InitiateGMTimer(GMVictoryChecker gMVictoryChecker)
     {
         timerDifficultySet = GetComponent<TimerDifficultySet>();
-        maxTime = timerDifficultySet.ReturnTimer();
+        maxTime = (timerDifficultySet.ReturnTimer() != 0) ? timerDifficultySet.ReturnTimer() : 240f;
         _GMVictoryChecker = gMVictoryChecker;
         soundCaller = TryGetComponent<FMOD_SoundCaller>(out FMOD_SoundCaller sound) ? sound : null;
 
