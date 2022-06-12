@@ -68,11 +68,11 @@ public class ParametersManager : MonoBehaviour
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create(Application.persistentDataPath + "/Profile/Setting.fc");
             Profile blank = new Profile();
-            blank.masterVolume = 100f;
-            blank.musicVolume = 100f;
-            blank.systemVolume = 100f;
-            blank.characterVolume = 100f;
-            blank.environnementVolume = 100f;
+            blank.masterVolume = 1f;
+            blank.musicVolume = 1f;
+            blank.systemVolume = 1f;
+            blank.characterVolume = 1f;
+            blank.environnementVolume = 1f;
             string json = JsonUtility.ToJson(blank);
             bf.Serialize(file, json);
             file.Close();
