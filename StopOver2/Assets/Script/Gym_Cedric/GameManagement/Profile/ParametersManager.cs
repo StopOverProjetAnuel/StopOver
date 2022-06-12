@@ -12,15 +12,21 @@ public class ParametersManager : MonoBehaviour
     private Bus master;
     private Bus music;
     private Bus system;
-    private Bus[] character;
-    private Bus[] environnement;
+    private Bus characterBoucle;
+    private Bus characterFeedback;
+    private Bus characterSign;
+    private Bus environnementAmbiance;
+    private Bus environnementFeedback;
 
     [Header("maxLevelBus")]
     private static float masterMaxLevel = 100f;
     private static float musicMaxLevel = 100f;
     private static float systemMaxLevel = 100f;
-    private static float[] characterMaxLevel = {100f, 100f, 100f};
-    private static float[] environnementMaxLevel = {100f, 100f};
+    private static float characterBoucleMaxLevel = 100f;
+    private static float characterFeedbackMaxLevel = 100f;
+    private static float characterSignMaxLevel = 100f;
+    private static float environnementAmbianceMaxLevel = 100f;
+    private static float environnementFeedbackMaxLevel = 100f;
 
     [Header("Requires")]
     [SerializeField] private Slider masterSlider;
@@ -28,21 +34,21 @@ public class ParametersManager : MonoBehaviour
     [SerializeField] private Slider systemSlider;
     [SerializeField] private Slider characterSlider;
     [SerializeField] private Slider environnementSlider;
-    private Profile currentProfile;
+    private Profile currentProfile = new Profile();
 
 
 
     private void Awake()
     {
         #region Get Bus
-        master = RuntimeManager.GetBus("bus:/Master Bus");
-        music = RuntimeManager.GetBus("bus:/Master Bus/Musique");
-        system = RuntimeManager.GetBus("bus:/Master Bus/SFX_Game");
-        character[0] = RuntimeManager.GetBus("bus:/Master Bus/SFX_Character_Boucle");
-        character[1] = RuntimeManager.GetBus("bus:/Master Bus/SFX_Character_Feedback");
-        character[2] = RuntimeManager.GetBus("bus:/Master Bus/SFX_Character_Sign");
-        environnement[0] = RuntimeManager.GetBus("bus:/Master Bus/SFX_Environemment_Ambiance");
-        environnement[1] = RuntimeManager.GetBus("bus:/Master Bus/SFX_Environemment_Feedback");
+        master = RuntimeManager.GetBus("bus:/");
+        music = RuntimeManager.GetBus("bus:/Musique");
+        system = RuntimeManager.GetBus("bus:/SFX_Game");
+        characterBoucle = RuntimeManager.GetBus("bus:/SFX_Character_Boucle");
+        characterFeedback = RuntimeManager.GetBus("bus:/SFX_Character_Feedback");
+        characterSign = RuntimeManager.GetBus("bus:/SFX_Character_Sign");
+        environnementAmbiance = RuntimeManager.GetBus("bus:/SFX_Environnement_Ambiance");
+        environnementFeedback = RuntimeManager.GetBus("bus:/SFX_Environnement_Feedback");
         #endregion
 
         CreateFolderAndProfile();
@@ -128,21 +134,26 @@ public class ParametersManager : MonoBehaviour
     {
         float currentVolumeLevel = slider.value;
         currentProfile.characterVolume = currentVolumeLevel;
-        for (int i = 0; i < character.Length; i++)
-        {
-            float ratioVolume = currentVolumeLevel / characterMaxLevel[i] * 100;
-            character[i].setVolume(ratioVolume);
-        }
+
+        float ratioVolume = currentVolumeLevel / characterBoucleMaxLevel * 100;
+        characterBoucle.setVolume(ratioVolume);
+
+        ratioVolume = currentVolumeLevel / characterFeedbackMaxLevel * 100;
+        characterFeedback.setVolume(ratioVolume);
+
+        ratioVolume = currentVolumeLevel / characterSignMaxLevel * 100;
+        characterSign.setVolume(ratioVolume);
     }
 
     public void ChangeEnvironnementLevel(Slider slider) 
     {
         float currentVolumeLevel = slider.value;
         currentProfile.environnementVolume = currentVolumeLevel;
-        for (int i = 0; i < environnement.Length; i++)
-        {
-            float ratioVolume = currentVolumeLevel / environnementMaxLevel[i] * 100;
-            environnement[i].setVolume(ratioVolume);
-        }
+
+        float ratioVolume = currentVolumeLevel / environnementAmbianceMaxLevel * 100;
+        environnementAmbiance.setVolume(ratioVolume);
+
+        ratioVolume = currentVolumeLevel / environnementFeedbackMaxLevel * 100;
+        environnementFeedback.setVolume(ratioVolume);
     }
 }
