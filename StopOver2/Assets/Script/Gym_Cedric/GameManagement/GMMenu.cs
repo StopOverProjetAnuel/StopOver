@@ -30,20 +30,20 @@ public class GMMenu : MonoBehaviour
 
     public void InitiateGMMenu()
     {
-        ResumeGame();
+        //ResumeGame();
         musicManager = FindObjectOfType<FMOD_FCManager>();
     }
 
     public void TriggerGMMenu()
     {
-        if (objectMenu != null)
+        /*if (objectMenu != null)
         {
             TriggerMenu();
-        }
+        }*/
     }
 
     #region Pause Menu Action
-    private void TriggerMenu()
+    /*private void TriggerMenu()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -80,10 +80,11 @@ public class GMMenu : MonoBehaviour
         Time.timeScale = 0f;
         objectMenu.SetActive(true);
         SwapMouseVisible(true);
-    }
+    }*/
     #endregion
 
     #region Option Menu Action
+    /*
     public void TriggerOptionMenu()
     {
         objectOptionMenuIsOpen = !objectOptionMenuIsOpen;
@@ -123,7 +124,7 @@ public class GMMenu : MonoBehaviour
         }
 
         objectOptionMenuPanels[currentPanel].SetActive(true);
-    }
+    }*/
     #endregion
 
     public void QuitGame()

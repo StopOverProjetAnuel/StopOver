@@ -7,25 +7,37 @@ using UnityEngine.UI;
 
 public class pause : MonoBehaviour
 {
+    private LoadingManager loadingManager;
+    private FMOD_FCManager musicManager;
     private Animator anim;
-    [SerializeField]private KeyCode key;
+
+    [Header("Parameters")]
+    [SerializeField]private KeyCode[] keyPause;
     [SerializeField]private GameObject MenuPause;
     [SerializeField]private Button firstButton;
     [SerializeField]private GameObject leaderboard;
     [SerializeField]private GameObject option;
+    [SerializeField]private GameObject loadingScreen;
     private bool b = false;
+
+
+
     private void Start()
     {
+        musicManager = FindObjectOfType<FMOD_FCManager>();
         anim = GetComponent<Animator>();
+        loadingManager = GetComponent<LoadingManager>();
     }
+
     private void Update()
     {
-        if (Input.GetKeyDown(key))
+        if (Input.GetKeyDown(keyPause[0]) || Input.GetKeyDown(keyPause[1]))
         {
             Time.timeScale = 1;
             anim.SetTrigger("Input Menu");
         }
     }
+
     public void OpenMenus(GameObject g)
     {
         g.SetActive(true);
@@ -35,31 +47,38 @@ public class pause : MonoBehaviour
     {
         g.SetActive(false);
     }
+
     public void StopTime()
     {
         Time.timeScale = 0;
-    
     }
+
     public void resetTime()
     {
         Time.timeScale = 1;
-       
     }
+
     public void RetryButton()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        loadingScreen.SetActive(true);
+        musicManager.StopMusic();
+        loadingManager.LunchSceneLoad(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void MainMenuButton()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene(0);
+        musicManager.StopMusic();
+        loadingManager.LunchSceneLoad(0);
     }
+
     public void ActivePanel()
     {
         MenuPause.SetActive(true);
         firstButton.Select();
     }
+
     public void DisactivePanel()
     {
         MenuPause.SetActive(false);

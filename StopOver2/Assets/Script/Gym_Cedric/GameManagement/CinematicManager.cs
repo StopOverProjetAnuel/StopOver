@@ -35,7 +35,7 @@ public class CinematicManager : MonoBehaviour
 
     private void SkipPointAdd()
     {
-        if (Input.GetButtonDown("Fire1") || Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
+        if (Input.GetButtonDown("Fire1"))
         {
             skipCount += 1;
         }

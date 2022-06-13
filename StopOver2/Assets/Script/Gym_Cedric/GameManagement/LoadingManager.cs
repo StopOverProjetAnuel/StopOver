@@ -14,15 +14,15 @@ public class LoadingManager : MonoBehaviour
 
 
 
-    public void LunchSceneLoad()
+    public void LunchSceneLoad(int indexSceneToLoad)
     {
-        StartCoroutine(LoadAsyncScene());
+        StartCoroutine(LoadAsyncScene(indexSceneToLoad));
     }
 
 
-    private IEnumerator LoadAsyncScene()
+    private IEnumerator LoadAsyncScene(int indexSceneToLoad)
     {
-        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(1);
+        AsyncOperation gameLevel = SceneManager.LoadSceneAsync(indexSceneToLoad);
 
         while (!gameLevel.isDone)
         {
