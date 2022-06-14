@@ -3,34 +3,28 @@ using UnityEngine;
 public class GMVictoryChecker : MonoBehaviour
 {
     #region Handlers
-    private GMMenu _GMMenu;
+    private pause menuPause;
     private GMScoring _GMScoring;
     #endregion
 
 
-    public void InitiateGMVictoryChecker(GMMenu gMMenu, GMScoring gMScoring)
+    public void InitiateGMVictoryChecker(GMScoring gMScoring)
     {
-        _GMMenu = gMMenu;
+        menuPause = FindObjectOfType<pause>();
         _GMScoring = gMScoring;
     }
 
     public void TriggerVictory()
     {
-        if (Time.timeScale != 0f)
-        {
-            Time.timeScale = 0f;
-            _GMMenu.OpenEndMenu(true);
-            _GMScoring.CalculateFinalScore();
-        }
+        if (Time.timeScale != 0f) Time.timeScale = 0f;
+
+        _GMScoring.CalculateFinalScore();
     }
 
     public void TriggerDefeat()
     {
-        if (Time.timeScale != 0f)
-        {
-            Time.timeScale = 0f;
-            _GMMenu.OpenEndMenu(false);
-            _GMMenu.OpenEndMenuButton();
-        }
+        if (Time.timeScale != 0f) Time.timeScale = 0f;
+        
+        Time.timeScale = 0f;
     }
 }

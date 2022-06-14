@@ -24,9 +24,9 @@ public class FCGameManager : MonoBehaviour
         Time.timeScale = 1f;
 
         _GMTimer.InitiateGMTimer(_GMVictoryChecker);
-        _GMVictoryChecker.InitiateGMVictoryChecker(_GMMenu, _GMScoring);
+        _GMVictoryChecker.InitiateGMVictoryChecker(_GMScoring);
         _GMMenu.InitiateGMMenu();
-        _GMScoring.InitiateGMScoring(_GMTimer, _GMMenu);
+        _GMScoring.InitiateGMScoring(_GMTimer);
     }
 
     private void Update()

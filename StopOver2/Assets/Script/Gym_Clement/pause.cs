@@ -7,11 +7,12 @@ using UnityEngine.UI;
 
 public class pause : MonoBehaviour
 {
+    private GMScoring _GMScoring;
     private LoadingManager loadingManager;
     private FMOD_FCManager musicManager;
     private Animator anim;
 
-    [Header("Parameters")]
+    [Header("Global Parameters")]
     [SerializeField]private KeyCode[] keyPause;
     [SerializeField]private GameObject MenuPause;
     [SerializeField]private Button firstButton;
@@ -20,11 +21,14 @@ public class pause : MonoBehaviour
     [SerializeField]private GameObject loadingScreen;
     [SerializeField]private CinemachineVirtualCamera Cmvcam;
 
+    [Header("Victory And Defeat Parameters")]
+
 
 
 
     private void Start()
     {
+        _GMScoring = FindObjectOfType<GMScoring>();
         musicManager = FindObjectOfType<FMOD_FCManager>();
         anim = GetComponent<Animator>();
         loadingManager = GetComponent<LoadingManager>();
@@ -39,6 +43,7 @@ public class pause : MonoBehaviour
         }
     }
 
+    #region Menus
     public void OpenMenus(GameObject g)
     {
         g.SetActive(true);
@@ -48,7 +53,9 @@ public class pause : MonoBehaviour
     {
         g.SetActive(false);
     }
+    #endregion
 
+    #region TimeScale
     public void StopTime()
     {
         Time.timeScale = 0;
@@ -58,7 +65,9 @@ public class pause : MonoBehaviour
     {
         Time.timeScale = 1;
     }
+    #endregion
 
+    #region Buttons
     public void RetryButton()
     {
         Time.timeScale = 1;
@@ -87,8 +96,32 @@ public class pause : MonoBehaviour
         CloseMenu(leaderboard);
         CloseMenu(option);
     }
+    #endregion
+
     public void TriggerAnimMenu()
     {
         anim.SetTrigger("Input Menu");
     }
+
+    #region Victory And Defeat
+    public void TriggerVictory()
+    {
+        _GMScoring.CalculateFinalScore();
+    }
+
+    public void TriggerNoRecord()
+    {
+
+    }
+
+    public void TriggerNewRecord()
+    {
+
+    }
+
+    public void TriggerDefeat()
+    {
+
+    }
+    #endregion
 }

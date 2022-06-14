@@ -7,35 +7,27 @@ using TMPro;
 [RequireComponent(typeof(LeaderboardSaveNLoad))]
 public class GMScoring : MonoBehaviour
 {
+    private DifficultySet point;
     private LeaderboardSaveNLoad leaderboardSaveNLoad;
     private GMTimer _GMTimer;
     private RessourceManager _RessourceManager;
-    private GMMenu _GMMenu;
 
     [Header("Parameters")]
     [SerializeField] private float pointPerTime = 2f;
     [SerializeField] private float pointPerResource = 1f;
     private float finalScore = 0f;
 
-    [Header("Display Score")]
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI playerName;
-    [SerializeField] private string prefixScore = "You earned ";
-    [SerializeField] private string suffixScore = " points !";
-    [SerializeField] private List<ScoreData> _ScoreData = new List<ScoreData>(3);
-    [SerializeField] private TextMeshProUGUI[] EndMenuLeaderboardNames;
-    [SerializeField] private TextMeshProUGUI[] EndMenuLeaderboardScores;
-    private int scorePosSaveName;
 
-    public void InitiateGMScoring(GMTimer gMTimer, GMMenu gMMenu)
+
+    public void InitiateGMScoring(GMTimer gMTimer)
     {
         _GMTimer = gMTimer;
         _RessourceManager = FindObjectOfType<RessourceManager>();
         leaderboardSaveNLoad = GetComponent<LeaderboardSaveNLoad>();
-        _GMMenu = gMMenu;
-
-
         leaderboardSaveNLoad.LeaderboardAwake();
+        
+        point = GetComponent<DifficultySet>();
+        pointPerTime = point.ReturnPointPerTimer();
     }
 
     public void CalculateFinalScore()
