@@ -18,7 +18,8 @@ public class pause : MonoBehaviour
     [SerializeField]private GameObject leaderboard;
     [SerializeField]private GameObject option;
     [SerializeField]private GameObject loadingScreen;
-    private bool b = false;
+    [SerializeField]private CinemachineVirtualCamera Cmvcam;
+
 
 
 
@@ -75,6 +76,7 @@ public class pause : MonoBehaviour
 
     public void ActivePanel()
     {
+        Cmvcam.m_Lens.FieldOfView = 60f;
         MenuPause.SetActive(true);
         firstButton.Select();
     }
