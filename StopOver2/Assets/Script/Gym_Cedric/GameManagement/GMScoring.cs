@@ -4,8 +4,10 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using TMPro;
 
+[RequireComponent(typeof(LeaderboardSaveNLoad))]
 public class GMScoring : MonoBehaviour
 {
+    private LeaderboardSaveNLoad leaderboardSaveNLoad;
     private GMTimer _GMTimer;
     private RessourceManager _RessourceManager;
     private GMMenu _GMMenu;
@@ -29,31 +31,11 @@ public class GMScoring : MonoBehaviour
     {
         _GMTimer = gMTimer;
         _RessourceManager = FindObjectOfType<RessourceManager>();
+        leaderboardSaveNLoad = GetComponent<LeaderboardSaveNLoad>();
         _GMMenu = gMMenu;
 
 
-        if (_ScoreData.Count != 3) _ScoreData.AddRange(new List<ScoreData>(3)); 
-
-        #region Create Folder and saves text
-        if (!Directory.Exists(Application.persistentDataPath + "/score_saves"))
-        {
-            Directory.CreateDirectory(Application.persistentDataPath + "/score_saves");
-        }
-
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            _ScoreData[i].name = "none";
-            _ScoreData[i].scoreValue = 0f;
-            if (!File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc"))
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc");
-                string json = JsonUtility.ToJson(_ScoreData[i]);
-                bf.Serialize(file, json);
-                file.Close();
-            }
-        }
-        #endregion
+        leaderboardSaveNLoad.LeaderboardAwake();
     }
 
     public void CalculateFinalScore()
@@ -64,105 +46,6 @@ public class GMScoring : MonoBehaviour
         finalScore = timerPoints + resourcePoints;
         finalScore = Mathf.Round(finalScore);
         Debug.Log("score : " + finalScore);
-        DisplayFinalScore();
+        leaderboardSaveNLoad.DisplayFinalScore(finalScore);
     }
-
-    private void DisplayFinalScore()
-    {
-        #region Load score
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            LoadScoreData(_ScoreData[i], i.ToString());
-        }
-        #endregion
-
-        #region Display & save score
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            if (finalScore >= _ScoreData[i].scoreValue)
-            {
-                scoreText.text = "New Record ! " + finalScore + " Points !!!";
-                scorePosSaveName = i;
-                SorteScore(scorePosSaveName);
-                _GMMenu.TriggerEndMenuSave();
-                break;
-            }
-            else
-            {
-                scoreText.text = prefixScore + finalScore + suffixScore;
-                _GMMenu.OpenEndMenuButton();
-            }
-        }
-        #endregion
-
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
-            EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
-        }
-    }
-
-    private void SorteScore(int scoringPos)
-    {
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            if (finalScore >= _ScoreData[i].scoreValue)
-            {
-                ScoreData newScore = new ScoreData()
-                {
-                    name = "none",
-                    scoreValue = finalScore
-                };
-
-                _ScoreData.Insert(i, newScore);
-                break;
-            }
-        }
-
-        _ScoreData.RemoveAt(3);
-    }
-
-
-
-    public void SaveScoreData()
-    {
-        _ScoreData[scorePosSaveName].name = playerName.text;
-
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc");
-            string json = JsonUtility.ToJson(_ScoreData[i]);
-            bf.Serialize(file, json);
-            file.Close();
-        }
-
-        for (int i = 0; i < _ScoreData.Count; i++)
-        {
-            EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
-            EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
-        }
-
-        _GMMenu.TriggerEndMenuSave();
-        _GMMenu.OpenEndMenuButton();
-    }
-
-    private void LoadScoreData(ScoreData scoreDataToLoad, string scorePosition)
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        if (File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc"))
-        {
-            FileStream file = File.Open(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc", FileMode.Open);
-            JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), scoreDataToLoad);
-            file.Close();
-        }
-    }
-}
-
-
-[System.Serializable]
-public class ScoreData
-{
-    public string name;
-    public float scoreValue;
 }

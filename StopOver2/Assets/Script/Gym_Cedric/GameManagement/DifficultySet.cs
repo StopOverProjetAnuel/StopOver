@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerDifficultySet : MonoBehaviour
+public class DifficultySet : MonoBehaviour
 {
     private static float difficultyTimer;
+    private static float pointPerTime;
 
     public void SetDifficultyTimer(float time)
     {
@@ -14,5 +15,15 @@ public class TimerDifficultySet : MonoBehaviour
     public float ReturnTimer()
     {
         return difficultyTimer;
+    }
+
+    public void SetPointPerTime(float point)
+    {
+        pointPerTime = point;
+    }
+
+    public float ReturnPointPerTimer()
+    {
+        return pointPerTime;
     }
 }

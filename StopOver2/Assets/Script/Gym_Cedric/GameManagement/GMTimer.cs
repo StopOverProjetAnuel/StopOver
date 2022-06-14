@@ -7,7 +7,7 @@ public class GMTimer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timerText;
     private FMOD_SoundCaller soundCaller;
     private GMVictoryChecker _GMVictoryChecker;
-    private TimerDifficultySet timerDifficultySet;
+    private DifficultySet timerDifficultySet;
 
     [Header("Timer parameters")]
     public float maxTime = 240f;
@@ -19,7 +19,7 @@ public class GMTimer : MonoBehaviour
 
     public void InitiateGMTimer(GMVictoryChecker gMVictoryChecker)
     {
-        timerDifficultySet = GetComponent<TimerDifficultySet>();
+        timerDifficultySet = GetComponent<DifficultySet>();
         maxTime = (timerDifficultySet.ReturnTimer() != 0) ? timerDifficultySet.ReturnTimer() : 240f;
         _GMVictoryChecker = gMVictoryChecker;
         soundCaller = TryGetComponent<FMOD_SoundCaller>(out FMOD_SoundCaller sound) ? sound : null;
