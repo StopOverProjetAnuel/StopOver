@@ -85,4 +85,8 @@ public class pause : MonoBehaviour
         CloseMenu(leaderboard);
         CloseMenu(option);
     }
+    public void TriggerAnimMenu()
+    {
+        anim.SetTrigger("Input Menu");
+    }
 }
