@@ -3,6 +3,7 @@ using UnityEngine;
 public class DebugManager : MonoBehaviour
 {
     private RessourceManager ressourceManager;
+    private GMTimer _GMTimer;
     [SerializeField] private float ressourceGiveNRemove = 10f;
 
     [Header("Teleportation")]
@@ -11,10 +12,12 @@ public class DebugManager : MonoBehaviour
     [SerializeField] private Transform startPos;
     [SerializeField] private KeyCode endPosInput;
     [SerializeField] private Transform endPos;
+    [SerializeField] private KeyCode stopResumeTimeInput;
 
     private void Awake()
     {
         ressourceManager = FindObjectOfType<RessourceManager>();
+        _GMTimer = FindObjectOfType<GMTimer>();
         playerPos = FindObjectOfType<C_CharacterManager>().transform;
     }
 
@@ -23,6 +26,7 @@ public class DebugManager : MonoBehaviour
         GiveRessources();
         RemoveRessources();
         StartEndTp();
+        switchTimeStopResume();
     }
 
     #region ResourceManagement
@@ -47,5 +51,12 @@ public class DebugManager : MonoBehaviour
     {
         playerPos.position = Input.GetKeyDown(startPosInput) ? startPos.position : playerPos.position;
         playerPos.position = Input.GetKeyDown(endPosInput) ? endPos.position : playerPos.position;
+    }
+
+    private void switchTimeStopResume()
+    {
+        if (!Input.GetKeyDown(stopResumeTimeInput)) return;
+
+        _GMTimer.playTimer = !_GMTimer.playTimer;
     }
 }

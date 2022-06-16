@@ -26,5 +26,6 @@ public class GMVictoryChecker : MonoBehaviour
         if (Time.timeScale != 0f) Time.timeScale = 0f;
         
         Time.timeScale = 0f;
+        menuPause.TriggerDefeat();
     }
 }
