@@ -3,8 +3,15 @@ using UnityEngine.EventSystems;
 
 public class MainMenuManager : MonoBehaviour
 {
+    private LeaderboardSaveNLoad leaderboard;
     [SerializeField] private GameObject SplashScreen;
     [SerializeField] private GameObject MainScreen;
+
+    private void Awake()
+    {
+        leaderboard = FindObjectOfType<LeaderboardSaveNLoad>();
+        leaderboard.LoadAllLeaderboard();
+    }
 
     public void EnableMenu(GameObject g)
     {

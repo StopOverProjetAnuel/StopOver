@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class pause : MonoBehaviour
 {
@@ -11,17 +12,24 @@ public class pause : MonoBehaviour
     private LoadingManager loadingManager;
     private FMOD_FCManager musicManager;
     private Animator anim;
+    private DifficultySet difficultySet;
 
     [Header("Global Parameters")]
-    [SerializeField]private KeyCode[] keyPause;
-    [SerializeField]private GameObject MenuPause;
-    [SerializeField]private Button firstButton;
-    [SerializeField]private GameObject leaderboard;
-    [SerializeField]private GameObject option;
-    [SerializeField]private GameObject loadingScreen;
-    [SerializeField]private CinemachineVirtualCamera Cmvcam;
+    [SerializeField] private KeyCode[] keyPause;
+    [SerializeField] private GameObject MenuPause;
+    [SerializeField] private Button firstButton;
+    [SerializeField] private GameObject leaderboard;
+    [SerializeField] private GameObject option;
+    [SerializeField] private GameObject loadingScreen;
+    [SerializeField] private CinemachineVirtualCamera Cmvcam;
 
     [Header("Victory And Defeat Parameters")]
+    [SerializeField] private GameObject defeatScreen;
+    [SerializeField] private GameObject victoryNoRecordScreen;
+    [SerializeField] private TextMeshProUGUI victoryNoRecordScoreText;
+    [SerializeField] private GameObject victoryNewRecordScreen;
+    [SerializeField] private TextMeshProUGUI victoryNewRecordScoreText;
+    [SerializeField] private GameObject[] leaderboardDifficulty;
 
 
 
@@ -32,6 +40,7 @@ public class pause : MonoBehaviour
         musicManager = FindObjectOfType<FMOD_FCManager>();
         anim = GetComponent<Animator>();
         loadingManager = GetComponent<LoadingManager>();
+        difficultySet = FindObjectOfType<DifficultySet>();
     }
 
     private void Update()
@@ -96,6 +105,10 @@ public class pause : MonoBehaviour
         CloseMenu(leaderboard);
         CloseMenu(option);
     }
+    public void ApplicationQuit()
+    {
+        Application.Quit();
+    }
     #endregion
 
     public void TriggerAnimMenu()
@@ -109,19 +122,32 @@ public class pause : MonoBehaviour
         _GMScoring.CalculateFinalScore();
     }
 
-    public void TriggerNoRecord()
+    public void TriggerNoRecord(string currentScore)
     {
-
+        victoryNoRecordScreen.SetActive(true);
+        victoryNoRecordScoreText.text = currentScore;
     }
 
-    public void TriggerNewRecord()
+    public void TriggerNewRecord(string currentScore)
     {
+        victoryNewRecordScreen.SetActive(true);
+        victoryNewRecordScoreText.text = currentScore;
 
+        TriggerLeaderboardDifficulty(difficultySet.ReturnDifficulty());
+    }
+
+    /// <summary>
+    /// Trigger the visual diffiuclty leaderboard
+    /// </summary>
+    /// <param name="pos"> 0 = easy | 1 = normal | 2 = hard | 3 = impossible </param>
+    private void TriggerLeaderboardDifficulty(int pos)
+    {
+        leaderboardDifficulty[pos].SetActive(true);
     }
 
     public void TriggerDefeat()
     {
-
+        defeatScreen.SetActive(true);
     }
     #endregion
 }

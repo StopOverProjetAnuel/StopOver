@@ -89,10 +89,15 @@ public class ParametersManager : MonoBehaviour
         file.Close();
 
         masterSlider.value = currentProfile.masterVolume;
+        SetMasterLevel(currentProfile.masterVolume);
         musicSlider.value = currentProfile.musicVolume;
+        SetMusicLevel(currentProfile.musicVolume);
         systemSlider.value = currentProfile.systemVolume;
+        SetSystemLevel(currentProfile.systemVolume);
         characterSlider.value = currentProfile.characterVolume;
+        SetCharacterLevel(currentProfile.characterVolume);
         environnementSlider.value = currentProfile.environnementVolume;
+        SetEnvironnementLevel(currentProfile.environnementVolume);
     }
 
     public void SaveProfile()
@@ -110,6 +115,11 @@ public class ParametersManager : MonoBehaviour
     {
         float currentVolumeLevel = slider.value;
         currentProfile.masterVolume = currentVolumeLevel;
+        SetMasterLevel(currentVolumeLevel);
+    }
+
+    private void SetMasterLevel(float currentVolumeLevel)
+    {
         float ratioVolume = currentVolumeLevel / masterMaxLevel * 100;
         master.setVolume(ratioVolume);
     }
@@ -118,6 +128,11 @@ public class ParametersManager : MonoBehaviour
     {
         float currentVolumeLevel = slider.value;
         currentProfile.musicVolume = currentVolumeLevel;
+        SetMusicLevel(currentVolumeLevel);
+    }
+
+    private void SetMusicLevel(float currentVolumeLevel)
+    {
         float ratioVolume = currentVolumeLevel / musicMaxLevel * 100;
         music.setVolume(ratioVolume);
     }
@@ -126,6 +141,11 @@ public class ParametersManager : MonoBehaviour
     {
         float currentVolumeLevel = slider.value;
         currentProfile.systemVolume = currentVolumeLevel;
+        SetSystemLevel(currentVolumeLevel);
+    }
+
+    private void SetSystemLevel(float currentVolumeLevel)
+    {
         float ratioVolume = currentVolumeLevel / systemMaxLevel * 100;
         system.setVolume(ratioVolume);
     }
@@ -134,7 +154,11 @@ public class ParametersManager : MonoBehaviour
     {
         float currentVolumeLevel = slider.value;
         currentProfile.characterVolume = currentVolumeLevel;
+        SetCharacterLevel(currentVolumeLevel);
+    }
 
+    private void SetCharacterLevel(float currentVolumeLevel)
+    {
         float ratioVolume = currentVolumeLevel / characterBoucleMaxLevel * 100;
         characterBoucle.setVolume(ratioVolume);
 
@@ -149,7 +173,11 @@ public class ParametersManager : MonoBehaviour
     {
         float currentVolumeLevel = slider.value;
         currentProfile.environnementVolume = currentVolumeLevel;
+        SetEnvironnementLevel(currentVolumeLevel);
+    }
 
+    private void SetEnvironnementLevel(float currentVolumeLevel)
+    {
         float ratioVolume = currentVolumeLevel / environnementAmbianceMaxLevel * 100;
         environnementAmbiance.setVolume(ratioVolume);
 

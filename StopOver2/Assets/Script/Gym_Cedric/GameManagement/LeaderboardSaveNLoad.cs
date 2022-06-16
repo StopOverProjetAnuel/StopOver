@@ -6,39 +6,49 @@ using TMPro;
 
 public class LeaderboardSaveNLoad : MonoBehaviour
 {
+    private pause thePause;
+    private DifficultySet difficultySet;
+
     [Header("Display Score")]
-    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI playerName;
-    [SerializeField] private string prefixScore = "You earned ";
-    [SerializeField] private string suffixScore = " points !";
     [SerializeField] private List<ScoreData> _ScoreData = new List<ScoreData>(3);
-    [SerializeField] private TextMeshProUGUI[] EndMenuLeaderboardNames;
-    [SerializeField] private TextMeshProUGUI[] EndMenuLeaderboardScores;
+    [SerializeField] private LeaderboardComposition[] allDifficultyLeaderboard;
     private int scorePosSaveName;
 
 
 
     public void LeaderboardAwake()
     {
+        thePause = FindObjectOfType<pause>();
+        difficultySet = FindObjectOfType<DifficultySet>();
+
         if (_ScoreData.Count != 3) _ScoreData.AddRange(new List<ScoreData>(3));
 
         #region Create Folder and saves text
-        if (!Directory.Exists(Application.persistentDataPath + "/score_saves"))
+        if (!Directory.Exists(Application.persistentDataPath + "/Scores"))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/score_saves");
+            Directory.CreateDirectory(Application.persistentDataPath + "/Scores");
         }
 
-        for (int i = 0; i < _ScoreData.Count; i++)
+        foreach (LeaderboardComposition leaderboardComp in allDifficultyLeaderboard)
         {
-            _ScoreData[i].name = "none";
-            _ScoreData[i].scoreValue = 0f;
-            if (!File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc"))
+            if (!Directory.Exists(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName))
             {
-                BinaryFormatter bf = new BinaryFormatter();
-                FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc");
-                string json = JsonUtility.ToJson(_ScoreData[i]);
-                bf.Serialize(file, json);
-                file.Close();
+                Directory.CreateDirectory(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName);
+            }
+
+            for (int a = 0; a < _ScoreData.Count; a++)
+            {
+                _ScoreData[a].name = "none";
+                _ScoreData[a].scoreValue = 0f;
+                if (!File.Exists(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName + "/score_n°" + a.ToString() + "_" + leaderboardComp.difficultyName + ".fc"))
+                {
+                    BinaryFormatter bf = new BinaryFormatter();
+                    FileStream file = File.Create(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName + "/score_n°" + a.ToString() + "_" + leaderboardComp.difficultyName + ".fc");
+                    string json = JsonUtility.ToJson(_ScoreData[a]);
+                    bf.Serialize(file, json);
+                    file.Close();
+                }
             }
         }
         #endregion
@@ -46,10 +56,30 @@ public class LeaderboardSaveNLoad : MonoBehaviour
 
     public void DisplayFinalScore(float finalScore)
     {
+        LeaderboardComposition leaderboardComp;
+        switch (difficultySet.ReturnDifficulty())
+        {
+            case 0:
+                leaderboardComp = allDifficultyLeaderboard[0];
+                break;
+            case 1:
+                leaderboardComp = allDifficultyLeaderboard[1];
+                break;
+            case 2:
+                leaderboardComp = allDifficultyLeaderboard[2];
+                break;
+            case 3:
+                leaderboardComp = allDifficultyLeaderboard[3];
+                break;
+            default:
+                leaderboardComp = allDifficultyLeaderboard[0];
+                break;
+        }
+
         #region Load score
         for (int i = 0; i < _ScoreData.Count; i++)
         {
-            LoadScoreData(_ScoreData[i], i.ToString());
+            LoadScoreData(_ScoreData[i], i.ToString(), leaderboardComp);
         }
         #endregion
 
@@ -58,22 +88,22 @@ public class LeaderboardSaveNLoad : MonoBehaviour
         {
             if (finalScore >= _ScoreData[i].scoreValue)
             {
-                scoreText.text = "New Record ! " + finalScore + " Points !!!";
                 scorePosSaveName = i;
                 SorteScore(scorePosSaveName, finalScore);
+                thePause.TriggerNewRecord(finalScore.ToString());
                 break;
             }
             else
             {
-                scoreText.text = prefixScore + finalScore + suffixScore;
+                thePause.TriggerNoRecord(finalScore.ToString());
             }
         }
         #endregion
 
         for (int i = 0; i < _ScoreData.Count; i++)
         {
-            EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
-            EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
+            leaderboardComp.EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
+            leaderboardComp.EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
         }
     }
 
@@ -99,12 +129,32 @@ public class LeaderboardSaveNLoad : MonoBehaviour
 
     public void SaveScoreData()
     {
+        LeaderboardComposition leaderboardComp;
+        switch (difficultySet.ReturnDifficulty())
+        {
+            case 0:
+                leaderboardComp = allDifficultyLeaderboard[0];
+                break;
+            case 1:
+                leaderboardComp = allDifficultyLeaderboard[1];
+                break;
+            case 2:
+                leaderboardComp = allDifficultyLeaderboard[2];
+                break;
+            case 3:
+                leaderboardComp = allDifficultyLeaderboard[3];
+                break;
+            default:
+                leaderboardComp = allDifficultyLeaderboard[0];
+                break;
+        }
+
         _ScoreData[scorePosSaveName].name = playerName.text;
 
         for (int i = 0; i < _ScoreData.Count; i++)
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create(Application.persistentDataPath + "/score_saves/score_n°" + i.ToString() + ".fc");
+            FileStream file = File.Create(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName + "/score_n°" + i.ToString() + "_" + leaderboardComp.difficultyName + ".fc");
             string json = JsonUtility.ToJson(_ScoreData[i]);
             bf.Serialize(file, json);
             file.Close();
@@ -112,19 +162,46 @@ public class LeaderboardSaveNLoad : MonoBehaviour
 
         for (int i = 0; i < _ScoreData.Count; i++)
         {
-            EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
-            EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
+            leaderboardComp.EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
+            leaderboardComp.EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
         }
     }
 
-    public void LoadScoreData(ScoreData scoreDataToLoad, string scorePosition)
+    public void LoadScoreData(ScoreData scoreDataToLoad, string scorePosition, LeaderboardComposition leaderboardComp)
     {
         BinaryFormatter bf = new BinaryFormatter();
-        if (File.Exists(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc"))
+        if (File.Exists(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName + "/score_n°" + scorePosition + "_" + leaderboardComp.difficultyName + ".fc"))
         {
-            FileStream file = File.Open(Application.persistentDataPath + "/score_saves/score_n°" + scorePosition + ".fc", FileMode.Open);
+            FileStream file = File.Open(Application.persistentDataPath + "/Scores/" + leaderboardComp.difficultyName + "/score_n°" + scorePosition + "_" + leaderboardComp.difficultyName + ".fc", FileMode.Open);
             JsonUtility.FromJsonOverwrite((string)bf.Deserialize(file), scoreDataToLoad);
             file.Close();
         }
     }
+
+    public void LoadAllLeaderboard()
+    {
+        foreach (LeaderboardComposition leaderboardComp in allDifficultyLeaderboard)
+        {
+            #region Load score
+            for (int i = 0; i < _ScoreData.Count; i++)
+            {
+                LoadScoreData(_ScoreData[i], i.ToString(), leaderboardComp);
+            }
+            #endregion
+
+            for (int i = 0; i < _ScoreData.Count; i++)
+            {
+                leaderboardComp.EndMenuLeaderboardNames[i].text = _ScoreData[i].name;
+                leaderboardComp.EndMenuLeaderboardScores[i].text = _ScoreData[i].scoreValue.ToString();
+            }
+        }
+    }
+}
+
+[System.Serializable]
+public class LeaderboardComposition
+{
+    public string difficultyName;
+    public TextMeshProUGUI[] EndMenuLeaderboardNames;
+    public TextMeshProUGUI[] EndMenuLeaderboardScores;
 }
